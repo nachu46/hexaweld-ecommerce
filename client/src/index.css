@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#F8FAFC] text-[#0F172A] font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight text-[#0F172A];
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-orange-400/60 rounded-full;
+  }
+}
+
+@layer components {
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-white border border-[#E2E8F0] rounded-xl shadow-sm;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-orange-200;
+  }
+
+  /* ── Glass Button Base ── */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 active:scale-95;
+    backdrop-filter: blur(12px);
+  }
+
+  /* ── Primary Glass Button ── */
+  .btn-primary {
+    @apply btn-base text-white relative overflow-hidden;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.85), rgba(234, 88, 12, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.95), rgba(234, 88, 12, 1));
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* ── Outline Glass Button ── */
+  .btn-outline {
+    @apply btn-base text-[#F97316];
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-outline:hover {
+    background: rgba(249, 115, 22, 0.05);
+    border-color: rgba(249, 115, 22, 0.6);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.1);
+  }
+
+  /* ── Ghost Glass Button ── */
+  .btn-ghost {
+    @apply btn-base text-[#64748B] px-5 py-2.5;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .btn-ghost:hover {
+    background: rgba(249, 115, 22, 0.05);
+    color: #F97316;
+    transform: translateY(-1px);
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    @apply text-[#F97316] text-xs font-bold uppercase tracking-[0.12em];
+  }
+
+  /* ── Sidebar link ── */
+  .sidebar-link {
+    @apply flex items-center gap-2 w-full px-4 py-2.5 text-sm font-medium text-[#64748B] rounded-lg hover:bg-orange-50 hover:text-[#F97316] transition-all duration-200;
+  }
+
+  .sidebar-link.active {
+    @apply bg-orange-50 text-[#F97316] font-semibold;
+  }
+
+  /* ── Input ── */
+  .input {
+    @apply w-full px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-lg text-[#0F172A] placeholder-[#94A3B8] text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/30 focus:border-orange-400 transition-all duration-200;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    @apply border-t border-[#E2E8F0];
+  }
+
+  /* ── Badge ── */
+  .badge-orange {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-700;
+  }
+}
+
+@layer utilities {
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-[#F97316] to-[#FB923C] bg-clip-text text-transparent;
+  }
+}
+
+/* ── Skeleton shimmer ── */
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e8eef4 50%, #f1f5f9 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+/* ── Float animation ── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ── Fade-in-up (toast) ── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.25s ease-out forwards;
+}
