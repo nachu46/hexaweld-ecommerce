@@ -18,8 +18,8 @@ const Section = ({ icon: Icon, title, children, defaultOpen = true }) => {
                 className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition"
             >
                 <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center">
-                        <Icon className="w-4 h-4 text-hex-orange" />
+                    <span className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-brand-primary" />
                     </span>
                     <span className="font-semibold text-gray-800">{title}</span>
                 </div>
@@ -41,7 +41,7 @@ const Field = ({ label, hint, children }) => (
     </div>
 );
 
-const inputCls = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-hex-orange transition";
+const inputCls = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-brand-primary transition";
 const textareaCls = `${inputCls} resize-none`;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -265,7 +265,7 @@ const ProductEdit = () => {
                         type="button"
                         onClick={submitHandler}
                         disabled={saving}
-                        className="bg-hex-orange hover:bg-orange-600 text-white font-semibold py-2.5 px-6 rounded-xl transition flex items-center gap-2 shadow-sm disabled:opacity-60"
+                        className="bg-brand-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl transition flex items-center gap-2 shadow-sm disabled:opacity-60"
                     >
                         {saving ? 'Saving...' : (isEditMode ? 'Update Product' : 'Save Product')}
                     </button>
@@ -315,18 +315,18 @@ const ProductEdit = () => {
                     <Section icon={ImageIcon} title="Images">
                         {/* Drop zone */}
                         <div
-                            className={`mt-2 border-2 border-dashed rounded-xl p-6 text-center transition cursor-pointer ${dragOver ? 'border-hex-orange bg-orange-50' : 'border-gray-300 hover:border-orange-400 hover:bg-gray-50'}`}
+                            className={`mt-2 border-2 border-dashed rounded-xl p-6 text-center transition cursor-pointer ${dragOver ? 'border-brand-primary bg-slate-50' : 'border-gray-300 hover:border-blue-500 hover:bg-gray-50'}`}
                             onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                             onDragLeave={() => setDragOver(false)}
                             onDrop={handleDrop}
                             onClick={() => document.getElementById('multi-img-input').click()}
                         >
                             <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                            <p className="text-sm font-medium text-gray-600">Drag & drop images or <span className="text-hex-orange">browse</span></p>
+                            <p className="text-sm font-medium text-gray-600">Drag & drop images or <span className="text-brand-primary">browse</span></p>
                             <p className="text-xs text-gray-400 mt-1">JPG, PNG, WebP — up to 10 images</p>
                             <input id="multi-img-input" type="file" className="hidden" multiple accept="image/*" onChange={handleFilePick} />
                         </div>
-                        {uploading && <p className="text-sm text-orange-500 mt-2 animate-pulse">Uploading images...</p>}
+                        {uploading && <p className="text-sm text-slate-500 mt-2 animate-pulse">Uploading images...</p>}
 
                         {/* Image grid */}
                         {images.length > 0 && (
@@ -335,7 +335,7 @@ const ProductEdit = () => {
                                     <div key={idx} className="relative group aspect-square rounded-lg overflow-hidden border border-gray-200 bg-gray-100">
                                         <img src={url} alt={`img-${idx}`} className="w-full h-full object-cover" />
                                         {idx === 0 && (
-                                            <span className="absolute bottom-0 left-0 right-0 bg-hex-orange text-white text-[10px] font-bold text-center py-0.5">MAIN</span>
+                                            <span className="absolute bottom-0 left-0 right-0 bg-brand-primary text-white text-[10px] font-bold text-center py-0.5">MAIN</span>
                                         )}
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-1">
                                             {idx > 0 && (
@@ -380,7 +380,7 @@ const ProductEdit = () => {
                             </Field>
                         </div>
                         {comparePrice && price && Number(comparePrice) > Number(price) && (
-                            <p className="text-xs text-green-600 mt-2">
+                            <p className="text-xs text-emerald-600 mt-2">
                                 💰 Margin: {Math.round(((comparePrice - price) / comparePrice) * 100)}% off compare price
                             </p>
                         )}
@@ -396,7 +396,7 @@ const ProductEdit = () => {
                                 <label className="flex items-center gap-3 mt-2 cursor-pointer">
                                     <div
                                         onClick={() => setTrackInventory(v => !v)}
-                                        className={`relative w-11 h-6 rounded-full transition-colors ${trackInventory ? 'bg-hex-orange' : 'bg-gray-300'}`}
+                                        className={`relative w-11 h-6 rounded-full transition-colors ${trackInventory ? 'bg-brand-primary' : 'bg-gray-300'}`}
                                     >
                                         <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${trackInventory ? 'translate-x-5' : ''}`} />
                                     </div>
@@ -454,7 +454,7 @@ const ProductEdit = () => {
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addVariant} className="mt-3 flex items-center gap-1.5 text-sm text-hex-orange hover:text-orange-600 font-medium transition">
+                        <button type="button" onClick={addVariant} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Variant
                         </button>
                     </Section>
@@ -478,7 +478,7 @@ const ProductEdit = () => {
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addFeature} className="mt-3 flex items-center gap-1.5 text-sm text-hex-orange hover:text-orange-600 font-medium transition">
+                        <button type="button" onClick={addFeature} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Feature
                         </button>
                     </Section>
@@ -509,7 +509,7 @@ const ProductEdit = () => {
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addSpec} className="mt-3 flex items-center gap-1.5 text-sm text-hex-orange hover:text-orange-600 font-medium transition">
+                        <button type="button" onClick={addSpec} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Specification
                         </button>
                     </Section>
@@ -519,7 +519,7 @@ const ProductEdit = () => {
                         <p className="text-xs text-gray-500 mb-3 mt-2">Press Enter or comma to add a tag. Used for search and related products.</p>
                         <div className="flex flex-wrap gap-2 mb-3">
                             {tags.map(t => (
-                                <span key={t} className="flex items-center gap-1 bg-orange-50 border border-orange-200 text-orange-700 text-sm px-3 py-1 rounded-full">
+                                <span key={t} className="flex items-center gap-1 bg-slate-50 border border-slate-200 text-slate-800 text-sm px-3 py-1 rounded-full">
                                     {t}
                                     <button type="button" onClick={() => removeTag(t)} className="hover:text-red-500 transition">
                                         <X className="w-3 h-3" />
@@ -553,7 +553,7 @@ const ProductEdit = () => {
                                     <input type="text" className={inputCls} value={seoKeywords} onChange={e => setSeoKeywords(e.target.value)} placeholder="welding machine, MIG, industrial" />
                                 </Field>
                                 <Field label="URL Slug">
-                                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-orange-300 focus-within:border-hex-orange transition">
+                                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-slate-300 focus-within:border-brand-primary transition">
                                         <span className="px-3 py-2 bg-gray-50 text-gray-400 text-sm border-r border-gray-300">/product/</span>
                                         <input type="text" className="flex-1 px-3 py-2 text-sm focus:outline-none" value={slug} onChange={e => setSlug(e.target.value)} />
                                     </div>
@@ -565,7 +565,7 @@ const ProductEdit = () => {
                             <div className="mt-4 border border-gray-200 rounded-xl p-4 bg-gray-50">
                                 <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">Search Preview</p>
                                 <p className="text-blue-700 text-base font-medium hover:underline cursor-pointer">{seoTitle || name}</p>
-                                <p className="text-green-700 text-xs mt-0.5">hexaweld.com/product/{slug}</p>
+                                <p className="text-emerald-700 text-xs mt-0.5">hexaweld.com/product/{slug}</p>
                                 <p className="text-gray-600 text-sm mt-1 line-clamp-2">{seoDescription || description}</p>
                             </div>
                         )}
@@ -576,7 +576,7 @@ const ProductEdit = () => {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="bg-hex-orange hover:bg-orange-600 text-white font-semibold py-3 px-10 rounded-xl transition shadow-md hover:shadow-lg disabled:opacity-60 text-base"
+                            className="bg-brand-primary hover:bg-blue-700 text-white font-semibold py-3 px-10 rounded-xl transition shadow-md hover:shadow-lg disabled:opacity-60 text-base"
                         >
                             {saving ? 'Saving...' : (isEditMode ? 'Update Product' : 'Create Product')}
                         </button>

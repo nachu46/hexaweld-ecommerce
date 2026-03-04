@@ -2,9 +2,9 @@ import { Shield, PenTool, Users, Target, Lightbulb, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const values = [
-    { icon: Shield, title: 'Safety First', desc: 'All equipment carries top-tier safety certifications and ISO approvals.', color: 'text-orange-500', bg: 'bg-orange-50 border-orange-100' },
+    { icon: Shield, title: 'Safety First', desc: 'All equipment carries top-tier safety certifications and ISO approvals.', color: 'text-slate-500', bg: 'bg-slate-50 border-slate-100' },
     { icon: PenTool, title: 'Premium Quality', desc: 'Only products from manufacturers known for engineering excellence.', color: 'text-blue-500', bg: 'bg-blue-50 border-blue-100' },
-    { icon: Users, title: 'Expert Support', desc: 'Welding specialists guide you to the perfect product for your application.', color: 'text-green-500', bg: 'bg-green-50 border-green-100' },
+    { icon: Users, title: 'Expert Support', desc: 'Welding specialists guide you to the perfect product for your application.', color: 'text-emerald-500', bg: 'bg-emerald-50 border-emerald-100' },
     { icon: Target, title: 'Precision', desc: 'Every specification matters — tools engineered to exacting tolerances.', color: 'text-purple-500', bg: 'bg-purple-50 border-purple-100' },
     { icon: Lightbulb, title: 'Innovation', desc: 'Continuously evolving catalogue with the latest welding technology.', color: 'text-yellow-600', bg: 'bg-yellow-50 border-yellow-100' },
     { icon: Globe, title: 'Reliability', desc: 'Trusted by 2,000+ clients from small workshops to large manufacturers.', color: 'text-cyan-600', bg: 'bg-cyan-50 border-cyan-100' },
@@ -17,14 +17,14 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 const About = () => (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen">
 
         {/* ── Page Header ── */}
-        <div className="bg-white border-b border-[#E2E8F0]">
+        <div className="border-b border-white/40 relative z-10 glass-navbar">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-100 text-orange-700 text-xs font-bold rounded-full uppercase tracking-wider mb-5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" /> Our Story
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 text-slate-800 text-xs font-bold rounded-full uppercase tracking-wider mb-5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-pulse" /> Our Story
                     </span>
                     <h1 className="text-4xl md:text-5xl font-black text-[#0F172A] mb-3">
                         About <span className="text-gradient-orange">Hexaweld</span>
@@ -37,7 +37,7 @@ const About = () => (
         </div>
 
         {/* ── Story Section ── */}
-        <section className="py-16 bg-white">
+        <section className="py-16 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
                     <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -52,8 +52,8 @@ const About = () => (
                                     <p className="font-bold text-[#0F172A]">12+ Years</p>
                                     <p className="text-[#64748B] text-sm">of industrial excellence</p>
                                 </div>
-                                <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
-                                    <Shield className="w-5 h-5 text-orange-500" />
+                                <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center">
+                                    <Shield className="w-5 h-5 text-slate-500" />
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ const About = () => (
         </section>
 
         {/* ── Values Grid ── */}
-        <section className="py-16 bg-[#F8FAFC]">
+        <section className="py-16 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-10">
                     <p className="section-label mb-1">Our Values</p>
@@ -87,7 +87,7 @@ const About = () => (
                             variants={fadeUp}
                             whileHover={{ y: -4 }}
                             transition={{ duration: 0.2 }}
-                            className={`p-6 rounded-xl border flex flex-col gap-3 ${v.bg} hover:shadow-card-lg transition-all duration-300`}
+                            className="card card-hover p-6 flex flex-col gap-3"
                         >
                             <div className="w-11 h-11 rounded-xl bg-white shadow-sm flex items-center justify-center">
                                 <v.icon className={`w-5 h-5 ${v.color}`} />

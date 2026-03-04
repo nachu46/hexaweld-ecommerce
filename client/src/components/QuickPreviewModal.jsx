@@ -113,11 +113,11 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 {/* Price or contact for price */}
                                 {showPrice ? (
                                     <div className="flex items-baseline gap-2 mb-3">
-                                        <span className="text-[#F97316] font-bold text-lg">₹{product.price.toLocaleString()}</span>
+                                        <span className="text-[#007AFF] font-bold text-lg">₹{product.price.toLocaleString()}</span>
                                         {hasDiscount && (
                                             <>
                                                 <span className="text-[#94A3B8] line-through text-sm">₹{product.comparePrice.toLocaleString()}</span>
-                                                <span className="text-xs font-bold bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">{discountPct}% OFF</span>
+                                                <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">{discountPct}% OFF</span>
                                             </>
                                         )}
                                     </div>
@@ -137,7 +137,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 {product.tags?.length > 0 && (
                                     <div className="flex flex-wrap gap-1 mb-3">
                                         {product.tags.slice(0, 4).map(t => (
-                                            <span key={t} className="inline-flex items-center gap-0.5 text-[10px] bg-orange-50 border border-orange-100 text-orange-600 px-1.5 py-0.5 rounded-full">
+                                            <span key={t} className="inline-flex items-center gap-0.5 text-[10px] bg-slate-50 border border-slate-100 text-blue-700 px-1.5 py-0.5 rounded-full">
                                                 <Tag className="w-2 h-2" />{t}
                                             </span>
                                         ))}
@@ -165,7 +165,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                         <ul className="space-y-1">
                                             {specsEntries.map(([k, v], i) => (
                                                 <li key={i} className="flex items-start gap-2">
-                                                    <Check className="w-3.5 h-3.5 text-green-500 mt-0.5 flex-shrink-0" />
+                                                    <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
                                                     <span className="text-[#64748B] text-xs"><span className="font-medium text-[#0F172A]">{k}:</span> {v}</span>
                                                 </li>
                                             ))}
@@ -185,7 +185,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                     <Link
                                         to={`/product/${product._id}`}
                                         onClick={onClose}
-                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-[#E2E8F0] hover:border-[#F97316] text-[#64748B] hover:text-[#F97316] text-sm font-semibold rounded-xl transition-all duration-200"
+                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-[#E2E8F0] hover:border-[#007AFF] text-[#64748B] hover:text-[#007AFF] text-sm font-semibold rounded-xl transition-all duration-200"
                                     >
                                         View Full Details <ExternalLink className="w-3.5 h-3.5" />
                                     </Link>

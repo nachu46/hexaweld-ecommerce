@@ -99,7 +99,7 @@ const CategoryList = () => {
 
             {/* Alerts */}
             {error && <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>}
-            {success && <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">{success}</div>}
+            {success && <div className="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-lg text-sm">{success}</div>}
 
             {/* ── Add Category Form ── */}
             <div className="card rounded-xl shadow-card-lg p-6 mb-8">
@@ -145,7 +145,7 @@ const CategoryList = () => {
                                     type="button"
                                     onClick={() => fileRef.current.click()}
                                     disabled={uploading}
-                                    className="flex items-center gap-2 px-4 py-2.5 border-2 border-[#E2E8F0] hover:border-[#F97316] text-[#64748B] hover:text-[#F97316] text-sm font-semibold rounded-lg transition-all duration-200"
+                                    className="flex items-center gap-2 px-4 py-2.5 border-2 border-[#E2E8F0] hover:border-[#007AFF] text-[#64748B] hover:text-[#007AFF] text-sm font-semibold rounded-lg transition-all duration-200"
                                 >
                                     {uploading
                                         ? <><Loader2 className="w-4 h-4 animate-spin" /> Uploading…</>
@@ -213,7 +213,7 @@ const CategoryList = () => {
                                                 type="button"
                                                 onClick={() => editFileRef.current.click()}
                                                 disabled={editUploading}
-                                                className="flex items-center gap-1 text-[10px] font-semibold text-[#F97316] hover:underline"
+                                                className="flex items-center gap-1 text-[10px] font-semibold text-[#007AFF] hover:underline"
                                             >
                                                 {editUploading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
                                                 {editUploading ? 'Uploading…' : 'Change image'}
@@ -257,7 +257,7 @@ const CategoryList = () => {
                                             <>
                                                 <button
                                                     onClick={() => saveEdit(cat._id)}
-                                                    className="flex items-center gap-1 px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-xs font-semibold rounded-lg transition-all"
+                                                    className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold rounded-lg transition-all"
                                                 >
                                                     <Check className="w-3.5 h-3.5" /> Save
                                                 </button>
@@ -272,7 +272,7 @@ const CategoryList = () => {
                                             <>
                                                 <button
                                                     onClick={() => startEdit(cat)}
-                                                    className="p-1.5 text-[#64748B] hover:text-[#F97316] hover:bg-orange-50 rounded-lg transition-all"
+                                                    className="p-1.5 text-[#64748B] hover:text-[#007AFF] hover:bg-slate-50 rounded-lg transition-all"
                                                     title="Edit"
                                                 >
                                                     <Edit2 className="w-4 h-4" />

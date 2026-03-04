@@ -23,9 +23,11 @@ app.use('/api/categories', require('./routes/categoryRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/enquiries', require('./routes/enquiryRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/banners', require('./routes/bannerRoutes'));
+app.use('/api/announcement', require('./routes/announcementRoutes'));
 
 // New Enterprise Routes
-app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
 // Global error handler

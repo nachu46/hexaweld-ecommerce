@@ -7,16 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'hex-orange': '#F97316',
-        'hex-hover': '#FB923C',
+        'brand-primary': '#007AFF', // Apple Blue
+        'brand-hover': '#005BB5',
+        'brand-dark': '#1D1D1F',
+        'brand-text': '#86868B',
+        'brand-border': '#D2D2D7',
+        'brand-bg': '#F5F5F7',
         'hex-dark': '#0F172A',
         'hex-text': '#64748B',
-        'hex-border': '#E2E8F0',
-        'hex-bg': '#F8FAFC',
-        'hex-navy': '#1E293B',
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'sans-serif'],
       },
       boxShadow: {
         'card': '0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05)',

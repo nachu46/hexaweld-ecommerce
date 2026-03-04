@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { MessageCircle, ArrowLeft, Check, Tag, ChevronRight, Star, Zap, Package, Send, Phone, Mail, User, X } from 'lucide-react';
+import { MessageCircle, ArrowLeft, Check, Tag, ChevronRight, Star, Zap, Package, Send, Phone, Mail, User, X, ArrowRight, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ImageGallery from '../components/ImageGallery';
 import { SkeletonDetail } from '../components/Skeletons';
+import ProductCard from '../components/ProductCard';
 
 const WHATSAPP_NUMBER = '919061627236';
 const SITE_URL = window.location.origin;
@@ -22,6 +23,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedVariant, setSelectedVariant] = useState(null);
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     // Quote form
     const [showQuoteForm, setShowQuoteForm] = useState(false);
@@ -29,10 +31,24 @@ const ProductDetails = () => {
     const [quoteStatus, setQuoteStatus] = useState('idle'); // idle | sending | sent | error
 
     useEffect(() => {
+        setLoading(true);
+        setRelatedProducts([]);
         axios.get(`/api/products/${id}`)
             .then(({ data }) => {
                 setProduct(data);
                 if (data.variants?.length > 0) setSelectedVariant(data.variants[0]);
+                // Fetch related products from same category
+                if (data.category?._id || data.category) {
+                    const catId = data.category?._id || data.category;
+                    axios.get('/api/products')
+                        .then(({ data: allProducts }) => {
+                            const related = allProducts
+                                .filter(p => (p.category?._id || p.category) === catId && p._id !== id)
+                                .slice(0, 6);
+                            setRelatedProducts(related);
+                        })
+                        .catch(() => { });
+                }
             })
             .catch(console.error)
             .finally(() => setLoading(false));
@@ -43,7 +59,7 @@ const ProductDetails = () => {
         <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center">
             <div className="text-center">
                 <p className="text-[#64748B] text-xl mb-4">Product not found</p>
-                <Link to="/products" className="text-[#F97316] hover:underline">← Back to Products</Link>
+                <Link to="/products" className="text-[#007AFF] hover:underline">← Back to Products</Link>
             </div>
         </div>
     );
@@ -111,23 +127,23 @@ const ProductDetails = () => {
             <div className="min-h-screen bg-[#F8FAFC]">
                 {/* Breadcrumb */}
                 <div className="bg-white border-b border-[#E2E8F0]">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-[#64748B]">
-                        <Link to="/" className="hover:text-[#F97316] transition-colors">Home</Link>
-                        <ChevronRight className="w-3 h-3" />
-                        <Link to="/products" className="hover:text-[#F97316] transition-colors">Products</Link>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-1.5 text-xs sm:text-sm text-[#64748B] overflow-x-auto scrollbar-hide">
+                        <Link to="/" className="hover:text-[#007AFF] transition-colors shrink-0">Home</Link>
+                        <ChevronRight className="w-3 h-3 shrink-0" />
+                        <Link to="/products" className="hover:text-[#007AFF] transition-colors shrink-0">Products</Link>
                         {product.category?.name && (
                             <>
-                                <ChevronRight className="w-3 h-3" />
-                                <span>{product.category.name}</span>
+                                <ChevronRight className="w-3 h-3 shrink-0" />
+                                <span className="shrink-0">{product.category.name}</span>
                             </>
                         )}
-                        <ChevronRight className="w-3 h-3" />
+                        <ChevronRight className="w-3 h-3 shrink-0" />
                         <span className="text-[#0F172A] font-medium line-clamp-1">{product.name}</span>
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                    <Link to="/products" className="inline-flex items-center gap-1.5 text-[#64748B] hover:text-[#F97316] text-sm mb-6 transition-colors group">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+                    <Link to="/products" className="inline-flex items-center gap-1.5 text-[#64748B] hover:text-[#007AFF] text-sm mb-6 transition-colors group">
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
                         Back to Products
                     </Link>
@@ -169,11 +185,11 @@ const ProductDetails = () => {
                             {/* Price / Contact for Price */}
                             {showPrice ? (
                                 <div className="flex items-baseline gap-3 mb-4">
-                                    <span className="text-2xl font-bold text-[#F97316]">₹{product.price.toLocaleString()}</span>
+                                    <span className="text-2xl font-bold text-[#007AFF]">₹{product.price.toLocaleString()}</span>
                                     {hasDiscount && (
                                         <>
                                             <span className="text-base text-[#94A3B8] line-through">₹{product.comparePrice.toLocaleString()}</span>
-                                            <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">{discountPct}% OFF</span>
+                                            <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">{discountPct}% OFF</span>
                                         </>
                                     )}
                                 </div>
@@ -193,7 +209,7 @@ const ProductDetails = () => {
                             {product.tags?.length > 0 && (
                                 <div className="flex flex-wrap gap-1.5 mb-5">
                                     {product.tags.map(t => (
-                                        <span key={t} className="inline-flex items-center gap-1 text-xs bg-orange-50 border border-orange-200 text-orange-600 px-2.5 py-1 rounded-full">
+                                        <span key={t} className="inline-flex items-center gap-1 text-xs bg-slate-50 border border-slate-200 text-blue-700 px-2.5 py-1 rounded-full">
                                             <Tag className="w-2.5 h-2.5" />{t}
                                         </span>
                                     ))}
@@ -212,8 +228,8 @@ const ProductDetails = () => {
                                                 key={i}
                                                 onClick={() => setSelectedVariant(v)}
                                                 className={`px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all duration-200 ${selectedVariant?.value === v.value
-                                                    ? 'border-[#F97316] bg-orange-50 text-[#F97316]'
-                                                    : 'border-[#E2E8F0] bg-white text-[#64748B] hover:border-orange-300 hover:text-[#F97316]'
+                                                    ? 'border-[#007AFF] bg-slate-50 text-[#007AFF]'
+                                                    : 'border-[#E2E8F0] bg-white text-[#64748B] hover:border-slate-300 hover:text-[#007AFF]'
                                                     }`}
                                             >
                                                 {v.value}
@@ -228,7 +244,7 @@ const ProductDetails = () => {
                                 {/* Primary: WhatsApp */}
                                 <button
                                     onClick={handleWhatsApp}
-                                    className="w-full flex items-center justify-center gap-3 py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-green-200"
+                                    className="w-full flex items-center justify-center gap-3 py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-emerald-200"
                                 >
                                     <WaIcon size={6} />
                                     Enquire on WhatsApp
@@ -237,7 +253,7 @@ const ProductDetails = () => {
                                 {/* Secondary: Request Quote */}
                                 <button
                                     onClick={() => setShowQuoteForm(true)}
-                                    className="w-full flex items-center justify-center gap-3 py-3 px-6 bg-white border-2 border-[#F97316] text-[#F97316] text-base font-bold rounded-xl transition-all duration-200 hover:bg-orange-50"
+                                    className="w-full flex items-center justify-center gap-3 py-3 px-6 bg-white border-2 border-[#007AFF] text-[#007AFF] text-base font-bold rounded-xl transition-all duration-200 hover:bg-slate-50"
                                 >
                                     <Send className="w-4 h-4" />
                                     Request Quote
@@ -261,16 +277,16 @@ const ProductDetails = () => {
                             {product.features?.length > 0 && (
                                 <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
                                     <h2 className="font-bold text-[#0F172A] text-lg mb-4 flex items-center gap-2">
-                                        <span className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center">
-                                            <Zap className="w-4 h-4 text-[#F97316]" />
+                                        <span className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+                                            <Zap className="w-4 h-4 text-[#007AFF]" />
                                         </span>
                                         Key Features
                                     </h2>
                                     <ul className="space-y-3">
                                         {product.features.map((f, i) => (
                                             <li key={i} className="flex items-start gap-3">
-                                                <span className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                                    <Check className="w-3 h-3 text-green-600" />
+                                                <span className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                    <Check className="w-3 h-3 text-emerald-600" />
                                                 </span>
                                                 <span className="text-[#64748B] text-sm leading-relaxed">{f}</span>
                                             </li>
@@ -302,45 +318,78 @@ const ProductDetails = () => {
                         </motion.div>
                     )}
 
-                    {/* Related Products */}
-                    {product.relatedProducts?.length > 0 && (
+                    {/* ── You May Also Like ── */}
+                    {relatedProducts.length > 0 && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="mt-14"
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                            className="mt-16"
                         >
-                            <h2 className="text-xl font-bold text-[#0F172A] mb-6 flex items-center gap-2">
-                                <Star className="w-5 h-5 text-[#F97316]" />
-                                Related Products
-                            </h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                                {product.relatedProducts.map((rel) => (
+                            {/* Section header */}
+                            <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-[#007AFF]/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-1 h-8 bg-[#007AFF] rounded-full" />
+                                    <div>
+                                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.15em]">Based on this product</p>
+                                        <h2 className="text-xl font-black text-[#0F172A]">You May Also Like</h2>
+                                    </div>
+                                </div>
+                                {product.category?._id && (
                                     <Link
-                                        key={rel._id}
-                                        to={`/product/${rel._id}`}
-                                        className="group bg-white rounded-xl border border-[#E2E8F0] overflow-hidden hover:shadow-md hover:border-orange-200 transition-all duration-200"
+                                        to={`/products?category=${product.category._id}`}
+                                        className="hidden sm:flex items-center gap-1 text-sm font-bold text-slate-500 hover:underline"
                                     >
-                                        <div className="aspect-square bg-gray-100 overflow-hidden">
-                                            {(rel.image || rel.images?.[0]) ? (
-                                                <img
-                                                    src={rel.image || rel.images[0]}
-                                                    alt={rel.name}
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center">
-                                                    <Package className="w-8 h-8 text-gray-300" />
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="p-3">
-                                            <p className="text-xs font-semibold text-[#0F172A] line-clamp-2 leading-snug group-hover:text-[#F97316] transition-colors">
-                                                {rel.name}
-                                            </p>
-                                            <p className="text-xs text-blue-600 font-semibold mt-1">Enquire</p>
-                                        </div>
+                                        View category <ChevronRight className="w-4 h-4" />
                                     </Link>
+                                )}
+                            </div>
+
+                            {/* Product scroll grid */}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                                {relatedProducts.map((rel, i) => (
+                                    <motion.div
+                                        key={rel._id}
+                                        initial={{ opacity: 0, y: 16 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                                    >
+                                        <Link
+                                            to={`/product/${rel._id}`}
+                                            className="group flex flex-col bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg hover:border-slate-200 hover:-translate-y-1 transition-all duration-300"
+                                        >
+                                            <div className="aspect-square bg-gradient-to-br from-slate-50 to-slate-50/30 overflow-hidden">
+                                                {(rel.image || rel.images?.[0]) ? (
+                                                    <img
+                                                        src={rel.image || rel.images[0]}
+                                                        alt={rel.name}
+                                                        className="w-full h-full object-contain p-3 group-hover:scale-110 transition-transform duration-500"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-2xl">
+                                                        🔧
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="p-3 flex flex-col gap-1.5">
+                                                <p className="text-xs font-bold text-[#0F172A] line-clamp-2 leading-snug group-hover:text-[#007AFF] transition-colors">
+                                                    {rel.name}
+                                                </p>
+                                                {rel.price > 0 && !rel.enquiryOnly ? (
+                                                    <p className="text-sm font-black text-slate-500">₹{rel.price.toLocaleString()}</p>
+                                                ) : (
+                                                    <p className="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
+                                                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> Price on Request
+                                                    </p>
+                                                )}
+                                                <span className="text-[10px] font-bold text-slate-500 group-hover:underline flex items-center gap-0.5">
+                                                    View Details <ChevronRight className="w-3 h-3" />
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
                                 ))}
                             </div>
                         </motion.div>
@@ -378,8 +427,8 @@ const ProductDetails = () => {
 
                             {quoteStatus === 'sent' ? (
                                 <div className="p-10 text-center">
-                                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                                        <Check className="w-8 h-8 text-green-600" />
+                                    <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+                                        <Check className="w-8 h-8 text-emerald-600" />
                                     </div>
                                     <p className="font-bold text-[#0F172A] text-lg mb-2">Quote Request Sent!</p>
                                     <p className="text-[#64748B] text-sm">Our team will contact you within 24 hours.</p>
@@ -435,7 +484,7 @@ const ProductDetails = () => {
                                     <button
                                         type="submit"
                                         disabled={quoteStatus === 'sending'}
-                                        className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all duration-200 disabled:opacity-60"
+                                        className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[#007AFF] hover:bg-[#005bb5] text-white font-bold rounded-xl transition-all duration-200 disabled:opacity-60"
                                     >
                                         <Send className="w-4 h-4" />
                                         {quoteStatus === 'sending' ? 'Sending...' : 'Send Request'}

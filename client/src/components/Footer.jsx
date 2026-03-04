@@ -1,41 +1,67 @@
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
     const navLinks = [
         { to: '/', label: 'Home' },
-        { to: '/products', label: 'Products' },
+        { to: '/products', label: 'All Products' },
         { to: '/about', label: 'About Us' },
         { to: '/contact', label: 'Contact' },
     ];
+    const productLinks = ['Welding Machines', 'Electrodes', 'Safety Gear', 'Welding Tools', 'Accessories'];
     const socials = [
-        { Icon: Facebook, href: '#' },
-        { Icon: Instagram, href: '#' },
-        { Icon: Twitter, href: '#' },
-        { Icon: Linkedin, href: '#' },
+        { Icon: Facebook, href: '#', label: 'Facebook' },
+        { Icon: Instagram, href: '#', label: 'Instagram' },
+        { Icon: Twitter, href: '#', label: 'Twitter' },
+        { Icon: Linkedin, href: '#', label: 'LinkedIn' },
     ];
 
     return (
-        <footer className="bg-[#1E293B] text-slate-300">
+        <footer className="bg-[#0F172A] text-slate-400">
+            {/* Trust Bar */}
+            <div className="border-b border-slate-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {[
+                            { icon: Shield, label: 'ISO Certified Products', sub: 'Certified by ISO & ESMA' },
+                            { icon: Award, label: 'Expert Vetted', sub: 'Tested by professionals' },
+                            { icon: Phone, label: 'UAE-Wide Delivery', sub: 'All major emirates covered' },
+                            { icon: Mail, label: '24/7 Support', sub: 'Always available to help' },
+                        ].map(({ icon: Icon, label, sub }) => (
+                            <div key={label} className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-xl bg-slate-500/10 flex items-center justify-center shrink-0">
+                                    <Icon className="w-4 h-4 text-blue-500" />
+                                </div>
+                                <div>
+                                    <p className="text-white text-xs font-bold">{label}</p>
+                                    <p className="text-slate-500 text-[10px]">{sub}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Main Footer */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
                     {/* Brand */}
-                    <div>
-                        <div className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#F97316] to-[#ea580c] flex items-center justify-center">
-                                <span className="text-white font-black text-sm">H</span>
-                            </div>
-                            <span className="text-xl font-black text-white">
-                                Hexa<span className="text-[#F97316]">Weld</span>
-                            </span>
-                        </div>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                            Your trusted partner in premium welding solutions since 2012.
+                    <div className="lg:col-span-1">
+                        <Link to="/" className="flex items-center mb-4 group">
+                            <img
+                                src={logo}
+                                alt="HexaWeld Industrial Store"
+                                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </Link>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                            Your trusted partner in premium welding solutions since 2012. Serving 2,000+ professionals across the UAE with certified, industrial-grade equipment.
                         </p>
-                        <div className="flex gap-3">
-                            {socials.map(({ Icon, href }, i) => (
-                                <a key={i} href={href} className="w-8 h-8 bg-slate-700 hover:bg-[#F97316] rounded-lg flex items-center justify-center transition-all duration-200">
+                        <div className="flex gap-2.5">
+                            {socials.map(({ Icon, href, label }) => (
+                                <a key={label} href={href} aria-label={label} className="w-9 h-9 bg-slate-800 hover:bg-[#007AFF] rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110">
                                     <Icon className="w-4 h-4 text-white" />
                                 </a>
                             ))}
@@ -44,11 +70,11 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Navigation</h4>
-                        <ul className="space-y-2.5">
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.15em] mb-5">Navigate</h4>
+                        <ul className="space-y-3">
                             {navLinks.map(({ to, label }) => (
                                 <li key={to}>
-                                    <Link to={to} className="text-slate-400 hover:text-[#F97316] text-sm transition-colors">{label}</Link>
+                                    <Link to={to} className="text-slate-400 hover:text-white text-sm transition-colors hover:translate-x-1 inline-block transform duration-200">{label}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -56,11 +82,11 @@ const Footer = () => {
 
                     {/* Products */}
                     <div>
-                        <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Products</h4>
-                        <ul className="space-y-2.5">
-                            {['Welding Machines', 'Electrodes', 'Safety Gear', 'Welding Tools', 'Accessories'].map((item) => (
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.15em] mb-5">Products</h4>
+                        <ul className="space-y-3">
+                            {productLinks.map((item) => (
                                 <li key={item}>
-                                    <Link to="/products" className="text-slate-400 hover:text-[#F97316] text-sm transition-colors">{item}</Link>
+                                    <Link to="/products" className="text-slate-400 hover:text-white text-sm transition-colors hover:translate-x-1 inline-block transform duration-200">{item}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -68,18 +94,24 @@ const Footer = () => {
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Contact</h4>
-                        <ul className="space-y-3.5">
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.15em] mb-5">Contact Us</h4>
+                        <ul className="space-y-4">
                             <li className="flex items-start gap-3">
-                                <MapPin className="w-4 h-4 text-[#F97316] mt-0.5 flex-shrink-0" />
-                                <span className="text-slate-400 text-sm">123 Industrial Area, Welding Zone, Metal City — 67890</span>
+                                <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 mt-0.5">
+                                    <MapPin className="w-3.5 h-3.5 text-blue-500" />
+                                </div>
+                                <span className="text-slate-400 text-sm leading-relaxed">123 Industrial Area, Welding Zone, Metal City — 67890</span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Phone className="w-4 h-4 text-[#F97316] flex-shrink-0" />
+                                <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                                    <Phone className="w-3.5 h-3.5 text-blue-500" />
+                                </div>
                                 <a href="tel:+919061627236" className="text-slate-400 hover:text-white text-sm transition-colors">+91 90616 27236</a>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Mail className="w-4 h-4 text-[#F97316] flex-shrink-0" />
+                                <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                                    <Mail className="w-3.5 h-3.5 text-blue-500" />
+                                </div>
                                 <a href="mailto:info@hexaweld.com" className="text-slate-400 hover:text-white text-sm transition-colors">info@hexaweld.com</a>
                             </li>
                         </ul>
@@ -87,9 +119,12 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="border-t border-slate-700 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Hexaweld. All rights reserved.</p>
-                    <p className="text-slate-600 text-xs">Professional Welding Solutions Since 2012</p>
+                <div className="border-t border-slate-800 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Hexaweld Industrial. All rights reserved.</p>
+                    <div className="flex items-center gap-4">
+                        <a href="#" className="text-slate-600 hover:text-slate-400 text-xs transition-colors">Privacy Policy</a>
+                        <a href="#" className="text-slate-600 hover:text-slate-400 text-xs transition-colors">Terms of Service</a>
+                    </div>
                 </div>
             </div>
         </footer>

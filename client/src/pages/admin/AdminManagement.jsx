@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const ROLE_COLORS = {
     superadmin: 'bg-purple-500/20 text-purple-300 border border-purple-500/30',
-    admin: 'bg-orange-500/20 text-orange-300 border border-orange-500/30',
+    admin: 'bg-slate-500/20 text-slate-300 border border-slate-500/30',
     editor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
 };
 
@@ -64,7 +64,7 @@ const AdminManagement = () => {
             <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-                        <ShieldCheck className="w-8 h-8 text-orange-400" />
+                        <ShieldCheck className="w-8 h-8 text-blue-500" />
                         Admin Management
                     </h1>
                     <p className="text-gray-400 mt-1">Manage admin users and their roles</p>
@@ -77,10 +77,10 @@ const AdminManagement = () => {
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8"
                 >
                     <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                        <UserPlus className="w-5 h-5 text-orange-400" /> Create New Admin
+                        <UserPlus className="w-5 h-5 text-blue-500" /> Create New Admin
                     </h2>
                     {error && <p className="text-red-400 text-sm mb-4 bg-red-500/10 px-4 py-2 rounded-lg">{error}</p>}
-                    {success && <p className="text-green-400 text-sm mb-4 bg-green-500/10 px-4 py-2 rounded-lg">{success}</p>}
+                    {success && <p className="text-emerald-400 text-sm mb-4 bg-emerald-500/10 px-4 py-2 rounded-lg">{success}</p>}
                     <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
                             { label: 'Full Name', key: 'name', type: 'text', placeholder: 'John Doe' },
@@ -95,7 +95,7 @@ const AdminManagement = () => {
                                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                                     placeholder={placeholder}
                                     required
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500/50"
                                 />
                             </div>
                         ))}
@@ -104,7 +104,7 @@ const AdminManagement = () => {
                             <select
                                 value={form.role}
                                 onChange={(e) => setForm({ ...form, role: e.target.value })}
-                                className="w-full bg-gray-800 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                                className="w-full bg-gray-800 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-slate-500/50"
                             >
                                 <option value="editor">Editor</option>
                                 <option value="admin">Admin</option>
@@ -114,7 +114,7 @@ const AdminManagement = () => {
                         <div className="md:col-span-2 flex justify-end">
                             <button
                                 type="submit"
-                                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors duration-200"
+                                className="px-6 py-2.5 bg-slate-500 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
                             >
                                 Create Admin
                             </button>

@@ -2,9 +2,9 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, ChevronRight } from 'lucide-
 import { motion } from 'framer-motion';
 
 const contactItems = [
-    { icon: MapPin, label: 'Our Location', value: '123 Industrial Area, Welding Zone\nMetal City, 67890', color: 'text-orange-500', bg: 'bg-orange-50' },
+    { icon: MapPin, label: 'Our Location', value: '123 Industrial Area, Welding Zone\nMetal City, 67890', color: 'text-slate-500', bg: 'bg-slate-50' },
     { icon: Phone, label: 'Phone Number', value: '+91 90616 27236', sub: 'Mon–Sat  9am – 6pm', color: 'text-blue-500', bg: 'bg-blue-50' },
-    { icon: Mail, label: 'Email Address', value: 'info@hexaweld.com', color: 'text-green-500', bg: 'bg-green-50' },
+    { icon: Mail, label: 'Email Address', value: 'info@hexaweld.com', color: 'text-emerald-500', bg: 'bg-emerald-50' },
     { icon: Clock, label: 'Working Hours', value: 'Mon–Sat: 9:00 AM – 6:00 PM', sub: 'Sunday: Closed', color: 'text-purple-500', bg: 'bg-purple-50' },
 ];
 
@@ -15,18 +15,18 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 const Contact = () => (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen">
         {/* ── Breadcrumb ── */}
-        <div className="bg-white border-b border-[#E2E8F0]">
+        <div className="border-b border-white/40 glass-navbar relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-[#64748B]">
                 <span>Home</span>
                 <ChevronRight className="w-3 h-3" />
-                <span className="text-[#F97316] font-medium">Contact</span>
+                <span className="text-[#007AFF] font-medium">Contact</span>
             </div>
         </div>
 
         {/* ── Page Header ── */}
-        <div className="bg-white border-b border-[#E2E8F0] py-12">
+        <div className="py-12 border-b border-white/40 relative z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                     <p className="section-label mb-2">Contact Us</p>
@@ -119,7 +119,7 @@ const Contact = () => (
                             </div>
                             <div className="flex-1">
                                 <p className="text-white font-bold">Direct WhatsApp Support</p>
-                                <p className="text-green-100 text-sm">Instant response — chat with our team now</p>
+                                <p className="text-emerald-100 text-sm">Instant response — chat with our team now</p>
                             </div>
                             <ChevronRight className="w-5 h-5 text-white/70 group-hover:translate-x-1 transition-transform" />
                         </motion.a>

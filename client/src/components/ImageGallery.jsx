@@ -76,7 +76,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                             key={i}
                             onClick={() => setCurrent(i)}
                             className={`flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 ${i === current
-                                    ? 'border-orange-500 opacity-100'
+                                    ? 'border-slate-500 opacity-100'
                                     : 'border-white/10 opacity-50 hover:opacity-80'
                                 }`}
                         >

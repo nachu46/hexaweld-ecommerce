@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ArrowRight, ChevronRight, Shield, Award, Zap, Headphones, CheckCircle } from 'lucide-react';
+import { ArrowRight, ChevronRight, Shield, Award, Zap, Headphones, CheckCircle, Star, Package, Clock, Truck, ChevronLeft, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
 
 const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
-const stagger = { show: { transition: { staggerChildren: 0.1 } } };
+const stagger = { show: { transition: { staggerChildren: 0.07 } } };
 
 const features = [
-    { icon: Shield, title: 'Safety First', desc: 'All products meet ISO & BIS safety certifications', color: 'text-orange-500', bg: 'bg-orange-50 border-orange-200' },
-    { icon: Award, title: 'Expert Vetted', desc: 'Tested by industry professionals before listing', color: 'text-blue-500', bg: 'bg-blue-50 border-blue-200' },
-    { icon: Zap, title: 'Fast Enquiry', desc: 'Connect directly on WhatsApp — instant response', color: 'text-green-500', bg: 'bg-green-50 border-green-200' },
-    { icon: Headphones, title: 'Expert Support', desc: 'Technical guidance from welding specialists', color: 'text-purple-500', bg: 'bg-purple-50 border-purple-200' },
+    { icon: Shield, title: 'Safety Certified', desc: 'ISO & ESMA certified products', color: 'text-slate-500' },
+    { icon: Truck, title: 'UAE-Wide Delivery', desc: 'All major emirates covered', color: 'text-blue-500' },
+    { icon: Zap, title: 'Instant Enquiry', desc: 'Quick quotes via WhatsApp', color: 'text-emerald-500' },
+    { icon: Headphones, title: '24/7 Support', desc: 'Expert technical guidance', color: 'text-purple-500' },
 ];
 
-const STATS = [
-    { value: '500+', label: 'Products' },
-    { value: '12+', label: 'Yrs Experience' },
-    { value: '2K+', label: 'Happy Clients' },
-    { value: '24/7', label: 'Support' },
+const FALLBACK_BANNERS = [
+    { label: 'INDUSTRIAL DEAL', title: 'Premium Welding Machines', subtitle: 'Industry-grade equipment for professionals', buttonText: 'Shop Now', buttonLink: '/products', bgGradient: 'from-[#0F172A] to-[#1E3A5F]', accentColor: '#007AFF', image: '' },
+    { label: 'NEW ARRIVALS', title: 'Safety Gear Collection', subtitle: 'Protect your crew with certified safety equipment', buttonText: 'Explore', buttonLink: '/products', bgGradient: 'from-[#1a1a2e] to-[#16213e]', accentColor: '#22C55E', image: '' },
+    { label: 'TOP RATED', title: 'Electrodes & Consumables', subtitle: 'Trusted by 2,000+ welding professionals', buttonText: 'View Range', buttonLink: '/products', bgGradient: 'from-[#2D1B69] to-[#1a0a3e]', accentColor: '#A78BFA', image: '' },
 ];
 
 const Home = () => {
@@ -31,164 +30,184 @@ const Home = () => {
     const [categories, setCategories] = useState([]);
     const [catLoading, setCatLoading] = useState(true);
     const [prodLoading, setProdLoading] = useState(true);
+    const [banners, setBanners] = useState([]);
+    const [bannerLoading, setBannerLoading] = useState(true);
+    const [bannerIndex, setBannerIndex] = useState(0);
 
     useEffect(() => {
-        axios.get('/api/categories')
-            .then(({ data }) => setCategories(data))
-            .catch(console.error)
-            .finally(() => setCatLoading(false));
-
-        axios.get('/api/products')
-            .then(({ data }) => setProducts(data.slice(0, 8)))
-            .catch(console.error)
-            .finally(() => setProdLoading(false));
+        axios.get('/api/categories').then(({ data }) => setCategories(data)).finally(() => setCatLoading(false));
+        axios.get('/api/products').then(({ data }) => setProducts(data)).finally(() => setProdLoading(false));
+        // Fetch banners from backend, fall back to defaults if none
+        axios.get('/api/banners')
+            .then(({ data }) => setBanners(data.length > 0 ? data : FALLBACK_BANNERS))
+            .catch(() => setBanners(FALLBACK_BANNERS))
+            .finally(() => setBannerLoading(false));
     }, []);
 
+    // Auto-rotate hero banner
+    useEffect(() => {
+        if (banners.length === 0) return;
+        const t = setInterval(() => setBannerIndex(i => (i + 1) % banners.length), 5000);
+        return () => clearInterval(t);
+    }, [banners.length]);
+
+    const activeBanner = banners[bannerIndex] || FALLBACK_BANNERS[0];
+    const featuredProducts = products.slice(0, 8);
+    const newArrivals = products.slice(0, 4);
+
+    // Map API banner fields to display fields
+    const banner = {
+        label: activeBanner.label || '',
+        title: activeBanner.title || '',
+        sub: activeBanner.subtitle || '',
+        btn: activeBanner.buttonText || 'Shop Now',
+        link: activeBanner.buttonLink || '/products',
+        color: activeBanner.bgGradient || 'from-[#0F172A] to-[#1E3A5F]',
+        accent: activeBanner.accentColor || '#007AFF',
+        image: activeBanner.image || '',
+    };
+
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col bg-[#F5F5F7]">
 
-            {/* ══ HERO ══════════════════════════════════════════════ */}
-            <section className="bg-gradient-to-br from-[#F8FAFC] to-[#EFF6FF] border-b border-[#E2E8F0]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* ══ HERO BANNER (Amazon-style with auto-rotate) ════════ */}
+            <section className="relative overflow-hidden" style={{ minHeight: '320px' }}>
+                <motion.div
+                    key={bannerIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.7 }}
+                    className={`bg-gradient-to-r ${banner.color} min-h-[320px] sm:min-h-[420px] relative overflow-hidden flex items-center`}
+                >
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 75% 50%, rgba(255,255,255,0.5) 0%, transparent 60%)' }} />
+                    <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
+                    {/* Banner image overlay if set */}
+                    {banner.image && (
+                        <div className="absolute inset-0">
+                            <img src={banner.image} alt={banner.title} className="w-full h-full object-cover opacity-25" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+                        </div>
+                    )}
 
-                        {/* Left text */}
-                        <motion.div
-                            variants={stagger} initial="hidden" animate="show"
-                            className="space-y-6"
-                        >
-                            <motion.div variants={fadeUp}>
-                                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-100 text-orange-700 text-xs font-bold rounded-full uppercase tracking-wider">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                                    Industrial Grade Welding Solutions
-                                </span>
-                            </motion.div>
-
-                            <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] text-[#0F172A]">
-                                Premium Welding
-                                <span className="text-gradient-orange block">Equipment</span>
-                                for Every Industry
-                            </motion.h1>
-
-                            <motion.p variants={fadeUp} className="text-[#64748B] text-lg leading-relaxed max-w-lg">
-                                Trusted by 2,000+ professionals. Browse our industrial-grade welding machines, safety gear, and accessories — all backed by expert support.
-                            </motion.p>
-
-                            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                                <Link to="/products" className="btn-primary">
-                                    Browse Products <ArrowRight className="w-4 h-4" />
-                                </Link>
-                                <Link to="/contact" className="btn-outline">
-                                    Get a Quote
-                                </Link>
-                            </motion.div>
-
-                            {/* Trust icons */}
-                            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 pt-2">
-                                {['ISO Certified', 'BIS Approved', 'Expert Support'].map((t) => (
-                                    <span key={t} className="flex items-center gap-1.5 text-sm text-[#64748B]">
-                                        <CheckCircle className="w-4 h-4 text-green-500" /> {t}
-                                    </span>
-                                ))}
-                            </motion.div>
-                        </motion.div>
-
-                        {/* Right image card */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.7, delay: 0.2 }}
-                            className="relative hidden lg:block"
-                        >
-                            <div className="relative card shadow-card-lg rounded-2xl overflow-hidden animate-float">
-                                <img
-                                    src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                    alt="Welding Professional"
-                                    className="w-full h-80 object-cover"
-                                />
-                                <div className="p-5 border-t border-[#E2E8F0] bg-white flex items-center justify-between">
-                                    <div>
-                                        <p className="font-bold text-[#0F172A]">Enterprise Grade</p>
-                                        <p className="text-[#64748B] text-sm">ISO Certified Equipment</p>
-                                    </div>
-                                    <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
-                                        <Shield className="w-5 h-5 text-orange-500" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Floating stat card */}
-                            <div className="absolute -bottom-4 -left-6 card shadow-card-lg rounded-xl px-5 py-3 flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                                    <CheckCircle className="w-5 h-5 text-green-600" />
-                                </div>
-                                <div>
-                                    <p className="font-bold text-[#0F172A] text-sm">2,000+ Clients</p>
-                                    <p className="text-[#64748B] text-xs">Across industries</p>
-                                </div>
-                            </div>
-                        </motion.div>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full py-10 sm:py-16">
+                        <div className="max-w-lg">
+                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5"
+                                style={{ color: banner.accent, borderColor: `${banner.accent}40`, background: `${banner.accent}15` }}>
+                                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: banner.accent }} />
+                                {banner.label}
+                            </span>
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4">{banner.title}</h1>
+                            <p className="text-slate-300 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md">{banner.sub}</p>
+                            <Link to={banner.link}
+                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                                style={{ background: banner.accent, color: '#fff', boxShadow: `0 8px 20px -4px ${banner.accent}60` }}>
+                                {banner.btn} <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
                     </div>
+                </motion.div>
 
-                    {/* Stats strip */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
-                        className="grid grid-cols-4 gap-4 mt-14 pt-10 border-t border-[#E2E8F0]"
-                    >
-                        {STATS.map((s) => (
-                            <div key={s.label} className="text-center">
-                                <p className="text-2xl font-black text-[#F97316]">{s.value}</p>
-                                <p className="text-xs text-[#64748B] mt-0.5">{s.label}</p>
-                            </div>
-                        ))}
-                    </motion.div>
+                {/* Slide indicators */}
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    {banners.map((_, i) => (
+                        <button key={i} onClick={() => setBannerIndex(i)}
+                            className="h-1.5 rounded-full transition-all duration-300"
+                            style={{ width: i === bannerIndex ? '28px' : '8px', background: i === bannerIndex ? banner.accent : 'rgba(255,255,255,0.4)' }}
+                        />
+                    ))}
                 </div>
+
+                {/* Arrow nav */}
+                <button onClick={() => setBannerIndex(i => (i - 1 + banners.length) % banners.length)}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all">
+                    <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button onClick={() => setBannerIndex(i => (i + 1) % banners.length)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all">
+                    <ChevronRight className="w-5 h-5" />
+                </button>
             </section>
 
-
-            {/* ══ CATEGORY GRID ═════════════════════════════════════ */}
-            <section className="py-14 bg-white border-b border-[#E2E8F0]">
+            {/* ══ TRUST STRIP (Flipkart/Amazon style) ══════════════ */}
+            <div className="bg-white border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex flex-col sm:flex-row items-center justify-around gap-0 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+                        {features.map(({ icon: Icon, title, desc, color }) => (
+                            <div key={title} className="flex items-center gap-3 py-4 px-6 flex-1">
+                                <div className={`w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0`}>
+                                    <Icon className={`w-5 h-5 ${color}`} />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-[#0F172A]">{title}</p>
+                                    <p className="text-xs text-slate-500">{desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* ══ CATEGORY GRID — Full-width immersive ═══════════════ */}
+            <section className="py-10 bg-[#F5F5F7]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between mb-6">
                         <div>
-                            <p className="section-label mb-1">Browse by Category</p>
-                            <h2 className="text-2xl font-black text-[#0F172A]">Shop by Product Category</h2>
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Browse</span>
+                            <h2 className="text-2xl font-black text-[#0F172A]">Shop by Category</h2>
                         </div>
-                        <Link to="/products" className="btn-ghost text-sm">
+                        <Link to="/products" className="text-sm font-bold text-slate-500 hover:underline flex items-center gap-1">
                             View all <ChevronRight className="w-4 h-4" />
                         </Link>
                     </div>
 
                     {catLoading ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                            {Array.from({ length: 6 }).map((_, i) => <SkeletonCategory key={i} />)}
+                        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 lg:grid lg:grid-cols-5">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                                <div key={i} className="min-w-[75vw] sm:min-w-[45vw] lg:min-w-0 snap-center h-48 rounded-2xl shimmer shrink-0 lg:shrink" />
+                            ))}
                         </div>
                     ) : (
                         <motion.div
-                            variants={stagger}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
+                            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
+                            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 pb-6 lg:grid lg:grid-cols-5 -mx-4 px-4 lg:mx-0 lg:px-0"
                         >
+                            {/* "All Products" card */}
+                            <motion.div variants={fadeUp} className="min-w-[75vw] sm:min-w-[40vw] lg:min-w-0 snap-center shrink-0 lg:shrink">
+                                <Link to="/products" className="group relative flex flex-col justify-end overflow-hidden h-48 sm:h-52 card card-hover">
+                                    <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                                        <img src="https://images.unsplash.com/photo-1534398079543-7ae6d016b8bf?q=80&w=800&auto=format&fit=crop" alt="All Products Catalog" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D1F]/90 via-[#1D1D1F]/40 to-transparent" />
+                                    </div>
+                                    <div className="relative p-5 z-10 w-full backdrop-blur-sm">
+                                        <p className="text-white font-black text-lg leading-tight">All Products</p>
+                                        <p className="text-[#D2D2D7] text-xs font-semibold mt-1 flex items-center gap-1 group-hover:text-white transition-colors">Complete Catalog <ArrowRight className="w-3 h-3" /></p>
+                                    </div>
+                                </Link>
+                            </motion.div>
+
                             {categories.map((cat) => (
-                                <motion.div key={cat._id} variants={fadeUp}>
+                                <motion.div key={cat._id} variants={fadeUp} className="min-w-[75vw] sm:min-w-[40vw] lg:min-w-0 snap-center shrink-0 lg:shrink">
                                     <Link
                                         to={`/products?category=${cat._id}`}
-                                        className="group card card-hover rounded-xl overflow-hidden flex flex-col items-center p-4 text-center block transition-all duration-300"
+                                        className="group relative flex flex-col justify-end overflow-hidden h-48 sm:h-52 card card-hover"
                                     >
-                                        <div className="w-16 h-16 rounded-xl bg-orange-50 flex items-center justify-center mb-3 group-hover:bg-orange-100 transition-colors">
+                                        {/* Big image filling card */}
+                                        <div className="absolute inset-0 flex items-center justify-center p-6 z-0">
                                             {cat.image ? (
-                                                <img src={cat.image} alt={cat.name} className="w-10 h-10 object-contain" />
+                                                <img
+                                                    src={cat.image}
+                                                    alt={cat.name}
+                                                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
+                                                />
                                             ) : (
-                                                <span className="text-2xl">🔧</span>
+                                                <span className="text-7xl group-hover:scale-110 transition-transform duration-300">🔧</span>
                                             )}
                                         </div>
-                                        <p className="text-[#0F172A] font-semibold text-sm leading-tight group-hover:text-[#F97316] transition-colors">
-                                            {cat.name}
-                                        </p>
+                                        {/* Name bar at bottom with glass */}
+                                        <div className="relative p-4 bg-white/60 backdrop-blur-lg border-t border-white/40 z-10">
+                                            <p className="text-[#1D1D1F] font-bold text-sm leading-tight group-hover:text-[#007AFF] transition-colors">{cat.name}</p>
+                                            <p className="text-[#86868B] text-xs font-medium mt-0.5">Shop now →</p>
+                                        </div>
                                     </Link>
                                 </motion.div>
                             ))}
@@ -197,98 +216,128 @@ const Home = () => {
                 </div>
             </section>
 
-
-            {/* ══ FEATURED PRODUCTS ═════════════════════════════════ */}
-            <section className="py-14 bg-[#F8FAFC]">
+            {/* ══ FEATURED PRODUCTS (Amazon "Deals" style) ══════════ */}
+            <section className="py-10 bg-[#F5F5F7]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between mb-8">
+                    {/* Section header */}
+                    <div className="flex items-center justify-between mb-6">
                         <div>
-                            <p className="section-label mb-1">Top Picks</p>
-                            <h2 className="text-2xl font-black text-[#0F172A]">Featured Products</h2>
+                            <span className="section-label text-xs">Top Picks</span>
+                            <h2 className="text-2xl font-black text-[#0F172A] -mt-1">Featured Products</h2>
                         </div>
-                        <Link to="/products" className="btn-ghost text-sm">
-                            View all <ChevronRight className="w-4 h-4" />
+                        <Link to="/products" className="hidden sm:flex items-center gap-1 text-sm font-bold text-slate-500 hover:underline">
+                            See all <ChevronRight className="w-4 h-4" />
                         </Link>
                     </div>
 
                     {prodLoading ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                            {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
                         </div>
                     ) : (
-                        <motion.div
-                            variants={stagger}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-                        >
-                            {products.map((p) => (
-                                <motion.div key={p._id} variants={fadeUp}>
-                                    <ProductCard product={p} />
-                                </motion.div>
+                        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
+                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {featuredProducts.map(p => (
+                                <motion.div key={p._id} variants={fadeUp}><ProductCard product={p} onQuickView={() => { }} /></motion.div>
                             ))}
                         </motion.div>
                     )}
-                </div>
-            </section>
 
-
-            {/* ══ FEATURE CARDS ═════════════════════════════════════ */}
-            <section className="py-14 bg-white border-t border-[#E2E8F0]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-10">
-                        <p className="section-label mb-1">Why Hexaweld</p>
-                        <h2 className="text-2xl font-black text-[#0F172A]">Built for <span className="text-gradient-orange">professionals</span></h2>
+                    <div className="text-center mt-8">
+                        <Link to="/products" className="btn-dark !px-8 !py-3.5 !rounded-full">
+                            View All Products <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
-                    <motion.div
-                        variants={stagger}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-                    >
-                        {features.map((f) => (
-                            <motion.div
-                                key={f.title}
-                                variants={fadeUp}
-                                whileHover={{ y: -4 }}
-                                transition={{ duration: 0.25 }}
-                                className={`card rounded-xl p-6 border flex flex-col gap-3 ${f.bg} hover:shadow-card-lg transition-all duration-300`}
-                            >
-                                <div className={`w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm`}>
-                                    <f.icon className={`w-5 h-5 ${f.color}`} />
-                                </div>
-                                <h3 className="text-[#0F172A] font-bold">{f.title}</h3>
-                                <p className="text-[#64748B] text-sm leading-relaxed">{f.desc}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
                 </div>
             </section>
 
-
-            {/* ══ CTA BANNER ════════════════════════════════════════ */}
-            <section className="py-16 bg-[#1E293B]">
-                <div className="max-w-5xl mx-auto px-4 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <p className="section-label mb-3 text-orange-400">Get Started</p>
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                            Need a Custom Solution?
-                        </h2>
-                        <p className="text-slate-400 text-lg mb-8 max-w-lg mx-auto">
-                            Bulk orders, specialised equipment, or technical consultation — contact our team today.
-                        </p>
-                        <div className="flex flex-wrap gap-4 justify-center">
-                            <Link to="/contact" className="btn-primary">
-                                Contact Us <ArrowRight className="w-4 h-4" />
+            {/* ══ PROMO BAND (Mid-page Flipkart-style Banner) ═══════ */}
+            <section className="py-4 px-4">
+                <div className="max-w-7xl mx-auto">
+                    <div className="card !rounded-[24px] overflow-hidden p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-5 relative bg-gradient-to-b from-[#F5F5F7]/90 to-[#FFFFFF]/90">
+                        <div className="text-[#1D1D1F] max-w-xl text-center md:text-left z-10">
+                            <span className="inline-flex items-center gap-1.5 text-[#007AFF] text-xs font-bold uppercase tracking-widest mb-2">
+                                <Zap className="w-3.5 h-3.5" /> Special Assistance
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl font-black leading-tight mb-2">Need Expert Advice?</h2>
+                            <p className="text-[#86868B] text-sm sm:text-base">Talk to our welding specialists — get a custom recommendation for your exact requirements within the hour.</p>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto z-10">
+                            <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer"
+                                className="btn-outline !rounded-xl px-6 py-3.5 text-sm font-bold flex items-center justify-center gap-2">
+                                <span className="text-lg">💬</span> WhatsApp Now
+                            </a>
+                            <Link to="/contact" className="btn-outline !rounded-xl">
+                                Request Quote
                             </Link>
-                            <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white/20 text-white hover:bg-white/10 font-semibold rounded-lg transition-all duration-200">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ NEW ARRIVALS Row ══════════════════════════════════ */}
+            {newArrivals.length > 0 && (
+                <section className="py-10 bg-white border-t border-slate-200">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-center justify-between mb-6">
+                            <div>
+                                <span className="section-label text-xs">Just Added</span>
+                                <h2 className="text-2xl font-black text-[#0F172A] -mt-1">New Arrivals</h2>
+                            </div>
+                            <Link to="/products" className="text-sm font-bold text-slate-500 hover:underline flex items-center gap-1">See all <ChevronRight className="w-4 h-4" /></Link>
+                        </div>
+                        {prodLoading ? (
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+                            </div>
+                        ) : (
+                            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
+                                className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {newArrivals.map(p => (
+                                    <motion.div key={p._id} variants={fadeUp}><ProductCard product={p} /></motion.div>
+                                ))}
+                            </motion.div>
+                        )}
+                    </div>
+                </section>
+            )}
+
+            {/* ══ WHY HEXAWELD (Feature cards) ══════════════════════ */}
+            <section className="py-12 bg-[#F5F5F7] border-t border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-8">
+                        <span className="section-label text-xs">Our Promise</span>
+                        <h2 className="text-2xl font-black text-[#1D1D1F]">Why Choose HexaWeld</h2>
+                    </div>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[
+                            { icon: Shield, title: 'ISO Certified', desc: 'Every product certified for industrial use', color: 'text-slate-500' },
+                            { icon: Award, title: 'Verified Brands', desc: 'Only top-tier manufacturer partnerships', color: 'text-blue-500' },
+                            { icon: Truck, title: 'Fast Delivery', desc: 'UAE-wide shipping to all emirates', color: 'text-emerald-500' },
+                            { icon: Headphones, title: 'Tech Support', desc: 'Dedicated post-purchase assistance', color: 'text-purple-500' },
+                        ].map(({ icon: Icon, title, desc, color }) => (
+                            <div key={title} className="card card-hover p-6">
+                                <Icon className={`w-7 h-7 ${color} mb-3`} />
+                                <h3 className="font-bold text-[#1D1D1F] mb-1">{title}</h3>
+                                <p className="text-[#86868B] text-xs leading-relaxed">{desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ CTA FOOTER BANNER ══════════════════════════════════ */}
+            <section className="py-16 bg-[#0F172A]">
+                <div className="max-w-4xl mx-auto px-4 text-center">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                        <p className="text-blue-500 text-xs font-black uppercase tracking-[0.2em] mb-3">Bulk Orders Welcome</p>
+                        <h2 className="text-4xl font-black text-white mb-4">Need a Custom Industrial Solution?</h2>
+                        <p className="text-slate-400 text-lg mb-8">Bulk orders, specialised equipment, or technical consultation — our team responds within the hour.</p>
+                        <div className="flex flex-wrap gap-4 justify-center">
+                            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#007AFF] text-white font-black hover:bg-blue-500 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-slate-500/30">
+                                Contact Us <ArrowRight className="w-5 h-5" />
+                            </Link>
+                            <Link to="/products" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/20 text-white hover:bg-white/10 font-bold rounded-full transition-all">
                                 Browse Catalogue
                             </Link>
                         </div>

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 
 const Toast = ({ message, type, onClose }) => (
-    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-xl text-white text-sm font-medium animate-fade-in-up ${type === 'success' ? 'bg-green-600' : 'bg-red-600'}`}>
+    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-xl text-white text-sm font-medium animate-fade-in-up ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
         {type === 'success' ? <CheckCircle className="w-5 h-5 flex-shrink-0" /> : <AlertCircle className="w-5 h-5 flex-shrink-0" />}
         <span>{message}</span>
         <button onClick={onClose} className="ml-2 hover:opacity-70 transition"><X className="w-4 h-4" /></button>
@@ -115,7 +115,7 @@ const ProductList = () => {
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                            <Package className="w-6 h-6 text-hex-orange" />
+                            <Package className="w-6 h-6 text-brand-primary" />
                             Products
                             <span className="text-sm font-normal text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                                 {products.length}
@@ -151,7 +151,7 @@ const ProductList = () => {
                         {/* Add Product */}
                         <Link
                             to="/admin/product/create"
-                            className="flex items-center gap-2 px-4 py-2 bg-hex-orange hover:bg-orange-600 text-white rounded-lg text-sm font-semibold transition shadow-sm"
+                            className="flex items-center gap-2 px-4 py-2 bg-brand-primary hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition shadow-sm"
                         >
                             <Plus className="w-4 h-4" /> Add Product
                         </Link>
@@ -164,7 +164,7 @@ const ProductList = () => {
                     <input
                         type="text"
                         placeholder="Search by name or SKU..."
-                        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-hex-orange bg-white"
+                        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-brand-primary bg-white"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
@@ -182,7 +182,7 @@ const ProductList = () => {
                 <div className="bg-white shadow-sm rounded-xl border border-gray-200 overflow-hidden">
                     {loading ? (
                         <div className="p-12 text-center">
-                            <div className="w-8 h-8 border-4 border-hex-orange border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                            <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
                             <p className="text-gray-500 text-sm">Loading products...</p>
                         </div>
                     ) : filtered.length === 0 ? (
@@ -233,7 +233,7 @@ const ProductList = () => {
                                         </td>
                                         <td className="px-5 py-3.5 whitespace-nowrap">
                                             {product.category?.name ? (
-                                                <span className="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-50 text-hex-orange">
+                                                <span className="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-50 text-brand-primary">
                                                     {product.category.name}
                                                 </span>
                                             ) : '—'}
@@ -252,7 +252,7 @@ const ProductList = () => {
                                         </td>
                                         <td className="px-5 py-3.5 whitespace-nowrap text-sm">
                                             {product.trackInventory ? (
-                                                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'}`}>
+                                                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'}`}>
                                                     {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
                                                 </span>
                                             ) : (

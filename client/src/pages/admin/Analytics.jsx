@@ -43,7 +43,7 @@ const Analytics = () => {
 
     if (loading) return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500" />
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-slate-500" />
         </div>
     );
 
@@ -73,16 +73,16 @@ const Analytics = () => {
 
                 {/* Stat Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-                    <StatCard title="Total Products" value={data?.totals?.products} icon={Package} color="bg-orange-500" />
+                    <StatCard title="Total Products" value={data?.totals?.products} icon={Package} color="bg-slate-500" />
                     <StatCard title="Total Categories" value={data?.totals?.categories} icon={Tag} color="bg-blue-500" />
-                    <StatCard title="Total Enquiries" value={data?.totals?.enquiries} icon={MessageCircle} color="bg-green-500" />
+                    <StatCard title="Total Enquiries" value={data?.totals?.enquiries} icon={MessageCircle} color="bg-emerald-500" />
                 </div>
 
                 {/* Charts */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                         <div className="flex items-center gap-2 mb-6">
-                            <TrendingUp className="w-5 h-5 text-orange-400" />
+                            <TrendingUp className="w-5 h-5 text-blue-500" />
                             <h2 className="text-lg font-semibold text-white">Most Viewed Products</h2>
                         </div>
                         {viewsData.length > 0 ? (
@@ -92,7 +92,7 @@ const Analytics = () => {
                                     <XAxis dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
                                     <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} />
                                     <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
-                                    <Bar dataKey="views" fill="#F97316" radius={[4, 4, 0, 0]} />
+                                    <Bar dataKey="views" fill="#007AFF" radius={[4, 4, 0, 0]} />
                                 </BarChart>
                             </ResponsiveContainer>
                         ) : <p className="text-gray-500 text-center py-10">No view data yet</p>}
@@ -100,7 +100,7 @@ const Analytics = () => {
 
                     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                         <div className="flex items-center gap-2 mb-6">
-                            <MessageCircle className="w-5 h-5 text-green-400" />
+                            <MessageCircle className="w-5 h-5 text-emerald-400" />
                             <h2 className="text-lg font-semibold text-white">Most Enquired Products</h2>
                         </div>
                         {enquiriesData.length > 0 ? (
