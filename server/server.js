@@ -13,7 +13,19 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: "https://hexaweld-ecommerce.vercel.app",
+    origin: function (origin, callback) {
+        const allowed = [
+            'https://hexaweld-ecommerce.vercel.app',
+            'https://hexaweld-commerce.vercel.app',
+            process.env.CLIENT_URL,
+        ].filter(Boolean);
+        // Allow requests with no origin (mobile apps, curl, Postman)
+        if (!origin || allowed.some(o => origin.startsWith(o))) {
+            callback(null, true);
+        } else {
+            callback(new Error('CORS: origin not allowed — ' + origin));
+        }
+    },
     credentials: true
 }));
 
