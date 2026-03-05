@@ -178,7 +178,7 @@ const CategoryList = () => {
             </div>
 
             {/* ── Categories Table ── */}
-            <div className="card rounded-xl shadow-card overflow-hidden">
+            <div className="card rounded-xl shadow-card overflow-x-auto">
                 <table className="min-w-full">
                     <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0]">
                         <tr>

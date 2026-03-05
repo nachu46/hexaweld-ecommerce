@@ -303,16 +303,18 @@ const ProductDetails = () => {
                                         </span>
                                         Specifications
                                     </h2>
-                                    <table className="w-full text-sm">
-                                        <tbody>
-                                            {specsEntries.map(([key, val], i) => (
-                                                <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                                                    <td className="px-3 py-2.5 font-medium text-[#0F172A] rounded-l-lg w-1/2">{key}</td>
-                                                    <td className="px-3 py-2.5 text-[#64748B] rounded-r-lg">{val}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                    <div className="overflow-x-auto">
+                                        <table className="min-w-full text-sm">
+                                            <tbody>
+                                                {specsEntries.map(([key, val], i) => (
+                                                    <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                                                        <td className="px-3 py-2.5 font-medium text-[#0F172A] rounded-l-lg w-1/2">{key}</td>
+                                                        <td className="px-3 py-2.5 text-[#64748B] rounded-r-lg">{val}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             )}
                         </motion.div>

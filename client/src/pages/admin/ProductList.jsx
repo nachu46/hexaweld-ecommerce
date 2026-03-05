@@ -179,7 +179,7 @@ const ProductList = () => {
                 </div>
 
                 {/* Table */}
-                <div className="bg-white shadow-sm rounded-xl border border-gray-200 overflow-hidden">
+                <div className="bg-white shadow-sm rounded-xl border border-gray-200 overflow-x-auto">
                     {loading ? (
                         <div className="p-12 text-center">
                             <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />

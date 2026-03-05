@@ -123,8 +123,8 @@ const AdminManagement = () => {
                 </motion.div>
 
                 {/* Admins Table */}
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-                    <table className="w-full">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-x-auto">
+                    <table className="min-w-full">
                         <thead>
                             <tr className="border-b border-white/10">
                                 <th className="text-left px-6 py-4 text-sm font-semibold text-gray-400">Name</th>
