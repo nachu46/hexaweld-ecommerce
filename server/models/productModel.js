@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema({
     },
 
     // ── SKU / Barcode ────────────────────────────────────────────────────────
-    SKU: { type: String, unique: true, sparse: true, default: null },
+    SKU: { type: String, unique: true, sparse: true },
     barcode: { type: String, default: '' },
 
     // ── Images ───────────────────────────────────────────────────────────────
