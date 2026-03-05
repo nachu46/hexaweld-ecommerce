@@ -12,7 +12,10 @@ connectDB();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://hexaweld-commerce.vercel.app",
+    credentials: true
+}));
 
 // Serve static files (uploads)
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
