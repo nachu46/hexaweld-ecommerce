@@ -7,8 +7,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Configure axios base URL
-    axios.defaults.baseURL = 'http://localhost:5000';
+    // Configure axios base URL — uses env var for prod (Render), falls back to local
+    axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));

@@ -114,7 +114,7 @@ const AdminBanners = () => {
         setUploading(true);
         try {
             const { data } = await axios.post('/api/upload', fd);
-            setForm(f => ({ ...f, image: `http://localhost:5000${data}` }));
+            setForm(f => ({ ...f, image: `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${data}` }));
         } catch {
             flash('error', 'Image upload failed.');
         } finally {
@@ -287,8 +287,8 @@ const AdminBanners = () => {
                                         <button key={id} type="button"
                                             onClick={() => setLinkTab(id)}
                                             className={`flex items-center gap-1 flex-1 justify-center py-1.5 rounded-md text-xs font-bold transition-all ${linkTab === id
-                                                    ? 'bg-white shadow text-[#007AFF]'
-                                                    : 'text-slate-500 hover:text-slate-700'
+                                                ? 'bg-white shadow text-[#007AFF]'
+                                                : 'text-slate-500 hover:text-slate-700'
                                                 }`}>
                                             <Icon className="w-3 h-3" />{label}
                                         </button>
@@ -302,8 +302,8 @@ const AdminBanners = () => {
                                         <button type="button"
                                             onClick={() => field('buttonLink', '/products')}
                                             className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-left text-xs font-semibold transition-all ${form.buttonLink === '/products'
-                                                    ? 'border-blue-500 bg-slate-50 text-slate-800'
-                                                    : 'border-slate-200 hover:border-slate-400 text-slate-700'
+                                                ? 'border-blue-500 bg-slate-50 text-slate-800'
+                                                : 'border-slate-200 hover:border-slate-400 text-slate-700'
                                                 }`}>
                                             <Tag className="w-3.5 h-3.5 shrink-0" />
                                             All Products
@@ -318,8 +318,8 @@ const AdminBanners = () => {
                                                 <button key={cat._id} type="button"
                                                     onClick={() => field('buttonLink', href)}
                                                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-left text-xs font-semibold transition-all ${form.buttonLink === href
-                                                            ? 'border-blue-500 bg-slate-50 text-slate-800'
-                                                            : 'border-slate-200 hover:border-slate-400 text-slate-700'
+                                                        ? 'border-blue-500 bg-slate-50 text-slate-800'
+                                                        : 'border-slate-200 hover:border-slate-400 text-slate-700'
                                                         }`}>
                                                     {cat.image
                                                         ? <img src={cat.image} alt={cat.name} className="w-5 h-5 rounded object-contain shrink-0" />
@@ -345,8 +345,8 @@ const AdminBanners = () => {
                                                 <button key={prod._id} type="button"
                                                     onClick={() => field('buttonLink', href)}
                                                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-left text-xs font-semibold transition-all ${form.buttonLink === href
-                                                            ? 'border-blue-500 bg-slate-50 text-slate-800'
-                                                            : 'border-slate-200 hover:border-slate-400 text-slate-700'
+                                                        ? 'border-blue-500 bg-slate-50 text-slate-800'
+                                                        : 'border-slate-200 hover:border-slate-400 text-slate-700'
                                                         }`}>
                                                     {prod.images?.[0]
                                                         ? <img src={prod.images[0]} alt={prod.name} className="w-6 h-6 rounded object-contain shrink-0" />

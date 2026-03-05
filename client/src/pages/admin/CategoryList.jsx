@@ -40,7 +40,7 @@ const CategoryList = () => {
         setLoading(true);
         try {
             const { data } = await axios.post('/api/upload', formData);
-            setImg(`http://localhost:5000${data}`);
+            setImg(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${data}`);
         } catch {
             flash('error', 'Image upload failed. Please try again.');
         } finally {
