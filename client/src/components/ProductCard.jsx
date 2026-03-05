@@ -150,7 +150,7 @@ const ProductCard = ({ product, onQuickView }) => {
                         onClick={handleWhatsApp}
                         className="flex-1 btn-outline !py-2.5 !px-3 !text-xs !rounded-xl flex items-center justify-center gap-1.5"
                     >
-                        <div className="text-[#25D366]"><WaIcon /></div> <span className="text-[#1D1D1F]">WhatsApp</span>
+                        <div className="text-[#25D366] w-5 h-5"><WaIcon /></div>
                     </button>
                     <Link
                         to={`/product/${product._id}`}

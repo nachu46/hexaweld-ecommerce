@@ -179,8 +179,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                         onClick={handleWhatsApp}
                                         className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:shadow-md"
                                     >
-                                        <WaIcon />
-                                        Enquire on WhatsApp
+                                        <div className="w-5 h-5"><WaIcon /></div>
                                     </button>
                                     <Link
                                         to={`/product/${product._id}`}
