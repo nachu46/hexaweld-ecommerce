@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
 
+// Add API base URL
+const API_URL = import.meta.env.VITE_API_URL;
+
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
@@ -35,10 +38,16 @@ const Home = () => {
     const [bannerIndex, setBannerIndex] = useState(0);
 
     useEffect(() => {
-        axios.get('/api/categories').then(({ data }) => setCategories(data)).finally(() => setCatLoading(false));
-        axios.get('/api/products').then(({ data }) => setProducts(data)).finally(() => setProdLoading(false));
-        // Fetch banners from backend, fall back to defaults if none
-        axios.get('/api/banners')
+        // Updated axios calls with API_URL
+        axios.get(`${API_URL}/api/categories`)
+            .then(({ data }) => setCategories(data))
+            .finally(() => setCatLoading(false));
+
+        axios.get(`${API_URL}/api/products`)
+            .then(({ data }) => setProducts(data))
+            .finally(() => setProdLoading(false));
+
+        axios.get(`${API_URL}/api/banners`)
             .then(({ data }) => setBanners(data.length > 0 ? data : FALLBACK_BANNERS))
             .catch(() => setBanners(FALLBACK_BANNERS))
             .finally(() => setBannerLoading(false));
