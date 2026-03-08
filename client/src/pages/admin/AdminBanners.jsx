@@ -47,17 +47,17 @@ const BannerPreview = ({ form }) => (
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
             </div>
         )}
-        <div className="relative">
+        <div className="relative z-10">
             {form.label && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border mb-3"
-                    style={{ color: form.accentColor, borderColor: `${form.accentColor}40`, background: `${form.accentColor}15` }}>
-                    <span className="w-1 h-1 rounded-full" style={{ background: form.accentColor }} />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border mb-3 backdrop-blur-sm"
+                    style={{ color: form.accentColor, borderColor: `${form.accentColor}50`, background: `${form.accentColor}20` }}>
+                    <span className="w-1 h-1 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: form.accentColor }} />
                     {form.label || 'BADGE'}
                 </span>
             )}
-            <h3 className="text-xl font-black text-white mb-1">{form.title || 'Banner Title'}</h3>
-            <p className="text-slate-300 text-xs mb-3">{form.subtitle || 'Subtitle goes here…'}</p>
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg">
+            <h3 className="text-xl font-black text-white mb-1 drop-shadow-md">{form.title || 'Banner Title'}</h3>
+            <p className="text-slate-100 text-xs mb-3 drop-shadow">{form.subtitle || 'Subtitle goes here…'}</p>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white/10 backdrop-blur-xl border border-white/30 text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]">
                 {form.buttonText || 'Shop Now'} <ArrowRight className="w-3 h-3" />
             </span>
         </div>

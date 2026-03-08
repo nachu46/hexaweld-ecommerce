@@ -91,23 +91,23 @@ const Home = () => {
                     <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 75% 50%, rgba(255,255,255,0.5) 0%, transparent 60%)' }} />
                     {/* Banner image overlay if set */}
                     {banner.image && (
-                        <div className="absolute inset-0">
+                        <div className="absolute inset-0 z-0">
                             <img src={banner.image} alt={banner.title} className="w-full h-full object-cover opacity-25" />
                             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
                         </div>
                     )}
 
-                    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full py-10 sm:py-16">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full py-10 sm:py-16 relative z-10">
                         <div className="max-w-lg">
-                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5"
-                                style={{ color: banner.accent, borderColor: `${banner.accent}40`, background: `${banner.accent}15` }}>
-                                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: banner.accent }} />
+                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5 backdrop-blur-sm"
+                                style={{ color: banner.accent, borderColor: `${banner.accent}50`, background: `${banner.accent}20` }}>
+                                <span className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: banner.accent }} />
                                 {banner.label}
                             </span>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4">{banner.title}</h1>
-                            <p className="text-slate-300 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md">{banner.sub}</p>
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4 drop-shadow-md">{banner.title}</h1>
+                            <p className="text-slate-100 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md drop-shadow">{banner.sub}</p>
                             <Link to={banner.link}
-                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 shadow-lg">
+                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-xl border border-white/30 text-white hover:bg-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]">
                                 {banner.btn} <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
