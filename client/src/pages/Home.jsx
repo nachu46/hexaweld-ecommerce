@@ -66,6 +66,11 @@ const Home = () => {
     const featuredProducts = products.slice(0, 8);
     const newArrivals = products.slice(0, 4);
 
+    // Extract "All Products" pseudo-category to use its image, and remove it from standard list
+    const allProductsCategory = categories.find(c => c.name.toLowerCase() === 'all products');
+    const displayCategories = categories.filter(c => c.name.toLowerCase() !== 'all products');
+    const allProductsImage = allProductsCategory?.image || "https://images.unsplash.com/photo-1534398079543-7ae6d016b8bf?q=80&w=800&auto=format&fit=crop";
+
     // Map API banner fields to display fields
     const banner = {
         label: activeBanner.label || '',
@@ -167,7 +172,7 @@ const Home = () => {
                             <motion.div variants={fadeUp} className="min-w-[75vw] sm:min-w-[40vw] lg:min-w-0 snap-center shrink-0 lg:shrink">
                                 <Link to="/products" className="group relative flex flex-col justify-end overflow-hidden h-48 sm:h-52 card card-hover">
                                     <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                                        <img src="https://images.unsplash.com/photo-1534398079543-7ae6d016b8bf?q=80&w=800&auto=format&fit=crop" alt="All Products Catalog" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img src={allProductsImage} alt="All Products Catalog" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D1F]/90 via-[#1D1D1F]/40 to-transparent" />
                                     </div>
                                     <div className="relative p-5 z-10 w-full backdrop-blur-sm">
@@ -177,7 +182,7 @@ const Home = () => {
                                 </Link>
                             </motion.div>
 
-                            {categories.map((cat) => (
+                            {displayCategories.map((cat) => (
                                 <motion.div key={cat._id} variants={fadeUp} className="min-w-[75vw] sm:min-w-[40vw] lg:min-w-0 snap-center shrink-0 lg:shrink">
                                     <Link
                                         to={`/products?category=${cat._id}`}

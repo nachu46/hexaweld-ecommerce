@@ -59,7 +59,7 @@ const Header = () => {
             {/* Top Promotion Bar with 3s Slider */}
             {activeAnn && (
                 <div
-                    className="text-white text-xs font-medium py-2 px-4 text-center overflow-hidden relative min-h-[36px]"
+                    className="w-full text-white text-xs font-medium py-2 px-4 relative flex min-h-[36px] items-center justify-center overflow-hidden"
                     style={{ backgroundColor: activeAnn.bgColor, color: activeAnn.textColor }}
                 >
                     <AnimatePresence mode="wait">
@@ -69,13 +69,13 @@ const Header = () => {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute inset-0 flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis px-4"
+                            className="w-full px-2 text-center whitespace-normal"
                         >
-                            <span>
+                            <span className="leading-normal inline-block">
                                 <span className="font-bold mr-1" style={{ color: activeAnn.accentColor }}>{activeAnn.badge}:</span>
                                 {activeAnn.message}
                                 {activeAnn.linkText && (
-                                    <Link to={activeAnn.linkUrl} className="underline ml-1.5 transition-colors font-semibold" style={{ color: activeAnn.accentColor }}>
+                                    <Link to={activeAnn.linkUrl} className="underline ml-1.5 transition-colors font-semibold inline-block whitespace-nowrap" style={{ color: activeAnn.accentColor }}>
                                         {activeAnn.linkText}
                                     </Link>
                                 )}
@@ -95,7 +95,7 @@ const Header = () => {
                             <img
                                 src={logo}
                                 alt="HexaWeld Industrial Store"
-                                className="h-28 sm:h-[120px] w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                className="h-20 sm:h-[120px] w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                             />
                         </Link>
 
