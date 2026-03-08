@@ -53,7 +53,7 @@ const Products = () => {
                 onClick={() => handleCategoryClick('')}
                 className={`sidebar-link w-full text-left ${!selectedCategory ? 'active' : ''}`}
             >
-                <Package className="w-4 h-4 shrink-0" />
+                <img src="/placeholder-category.png" alt="All Products" className="w-5 h-5 object-cover rounded shrink-0 bg-slate-100" />
                 <span className="flex-1">All Products</span>
                 {!selectedCategory && <span className="text-[10px] font-bold bg-slate-500 text-white px-2 py-0.5 rounded-full">{products.length}</span>}
             </button>

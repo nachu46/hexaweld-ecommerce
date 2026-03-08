@@ -89,7 +89,6 @@ const Home = () => {
                     className={`bg-gradient-to-r ${banner.color} min-h-[320px] sm:min-h-[420px] relative overflow-hidden flex items-center`}
                 >
                     <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 75% 50%, rgba(255,255,255,0.5) 0%, transparent 60%)' }} />
-                    <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
                     {/* Banner image overlay if set */}
                     {banner.image && (
                         <div className="absolute inset-0">
@@ -108,8 +107,7 @@ const Home = () => {
                             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4">{banner.title}</h1>
                             <p className="text-slate-300 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md">{banner.sub}</p>
                             <Link to={banner.link}
-                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                                style={{ background: banner.accent, color: '#fff', boxShadow: `0 8px 20px -4px ${banner.accent}60` }}>
+                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 shadow-lg">
                                 {banner.btn} <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>

@@ -41,9 +41,6 @@ const BannerPreview = ({ form }) => (
         className={`bg-gradient-to-r ${form.bgGradient} rounded-xl p-6 relative overflow-hidden`}
         style={{ minHeight: '140px' }}
     >
-        <div className="absolute inset-0 opacity-5"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M20 20h20v20H20zM0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E")` }}
-        />
         {form.image && (
             <div className="absolute inset-0">
                 <img src={form.image} alt="" className="w-full h-full object-cover opacity-20" />
@@ -60,8 +57,7 @@ const BannerPreview = ({ form }) => (
             )}
             <h3 className="text-xl font-black text-white mb-1">{form.title || 'Banner Title'}</h3>
             <p className="text-slate-300 text-xs mb-3">{form.subtitle || 'Subtitle goes here…'}</p>
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold"
-                style={{ background: form.accentColor, color: '#fff' }}>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg">
                 {form.buttonText || 'Shop Now'} <ArrowRight className="w-3 h-3" />
             </span>
         </div>
@@ -305,7 +301,7 @@ const AdminBanners = () => {
                                                 ? 'border-blue-500 bg-slate-50 text-slate-800'
                                                 : 'border-slate-200 hover:border-slate-400 text-slate-700'
                                                 }`}>
-                                            <Tag className="w-3.5 h-3.5 shrink-0" />
+                                            <img src="/placeholder-category.png" alt="All Products" className="w-5 h-5 rounded object-cover shrink-0 bg-slate-100" />
                                             All Products
                                             <span className="ml-auto text-slate-400 font-mono text-[10px]">/products</span>
                                         </button>

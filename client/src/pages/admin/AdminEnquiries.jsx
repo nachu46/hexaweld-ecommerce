@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { MessageCircle, Search, X, Phone, Mail, Package, ExternalLink, Download } from 'lucide-react';
+import { MessageCircle, Search, X, Phone, Mail, ExternalLink, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -26,7 +26,7 @@ const AdminEnquiries = () => {
     const filtered = enquiries.filter(e => {
         const q = search.toLowerCase();
         const matchSearch = !q || [e.productName, e.customerName, e.customerPhone, e.customerEmail, e.SKU]
-            .some(v => v && v.toLowerCase().includes(q));
+            .some(v => v && String(v).toLowerCase().includes(q));
         const matchSource = !sourceFilter || e.source === sourceFilter;
         return matchSearch && matchSource;
     });
@@ -35,10 +35,10 @@ const AdminEnquiries = () => {
         const headers = ['Date', 'Product', 'SKU', 'Source', 'Name', 'Phone', 'Email', 'Message'];
         const rows = filtered.map(e => [
             new Date(e.createdAt).toLocaleDateString('en-IN'),
-            `"${e.productName || ''}"`,
+            `"${(e.productName || '').replace(/"/g, '""')}"`,
             e.SKU || '',
             e.source,
-            `"${e.customerName || ''}"`,
+            `"${(e.customerName || '').replace(/"/g, '""')}"`,
             e.customerPhone || '',
             e.customerEmail || '',
             `"${(e.message || '').replace(/"/g, '""')}"`,
@@ -136,8 +136,8 @@ const AdminEnquiries = () => {
                             <table className="min-w-full text-sm">
                                 <thead className="bg-gray-50 border-b border-gray-200">
                                     <tr>
-                                        {['Date', 'Product', 'Source', 'Customer', 'Contact', 'Message', ''].map(h => (
-                                            <th key={h} className="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">{h}</th>
+                                        {['Date', 'Product', 'Source', 'Customer', 'Contact', 'Message', ''].map((h, idx) => (
+                                            <th key={h || `empty-${idx}`} className="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">{h}</th>
                                         ))}
                                     </tr>
                                 </thead>

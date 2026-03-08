@@ -201,7 +201,7 @@ const AdminAnnouncement = () => {
                                                 ? 'border-blue-500 bg-slate-50 text-slate-800'
                                                 : 'border-slate-200 hover:border-slate-400 text-slate-700'
                                                 }`}>
-                                            <Tag className="w-3.5 h-3.5 shrink-0" />
+                                            <img src="/placeholder-category.png" alt="All Products" className="w-5 h-5 rounded object-cover shrink-0 bg-slate-100" />
                                             All Products
                                             <span className="ml-auto text-slate-400 font-mono text-[10px]">/products</span>
                                         </button>
