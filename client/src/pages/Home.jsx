@@ -88,12 +88,9 @@ const Home = () => {
                     transition={{ duration: 0.7 }}
                     className={`bg-gradient-to-r ${banner.color} min-h-[320px] sm:min-h-[420px] relative overflow-hidden flex items-center`}
                 >
-                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 75% 50%, rgba(255,255,255,0.5) 0%, transparent 60%)' }} />
-                    {/* Banner image overlay if set */}
                     {banner.image && (
                         <div className="absolute inset-0 z-0">
-                            <img src={banner.image} alt={banner.title} className="w-full h-full object-cover opacity-25" />
-                            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+                            <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
                         </div>
                     )}
 
@@ -135,24 +132,7 @@ const Home = () => {
                 </button>
             </section>
 
-            {/* ══ TRUST STRIP (Flipkart/Amazon style) ══════════════ */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col sm:flex-row items-center justify-around gap-0 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-                        {features.map(({ icon: Icon, title, desc, color }) => (
-                            <div key={title} className="flex items-center gap-3 py-4 px-6 flex-1">
-                                <div className={`w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0`}>
-                                    <Icon className={`w-5 h-5 ${color}`} />
-                                </div>
-                                <div>
-                                    <p className="text-sm font-bold text-[#0F172A]">{title}</p>
-                                    <p className="text-xs text-slate-500">{desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+
 
             {/* ══ CATEGORY GRID — Full-width immersive ═══════════════ */}
             <section className="py-10 bg-[#F5F5F7]">
@@ -344,7 +324,7 @@ const Home = () => {
                             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#007AFF] text-white font-black hover:bg-blue-500 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-slate-500/30">
                                 Contact Us <ArrowRight className="w-5 h-5" />
                             </Link>
-                            <Link to="/products" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/20 text-white hover:bg-white/10 font-bold rounded-full transition-all">
+                            <Link to="/Catogory" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/20 text-white hover:bg-white/10 font-bold rounded-full transition-all">
                                 Browse Catalogue
                             </Link>
                         </div>

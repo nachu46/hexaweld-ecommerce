@@ -19,29 +19,6 @@ const Footer = () => {
 
     return (
         <footer className="bg-[#0F172A] text-slate-400">
-            {/* Trust Bar */}
-            <div className="border-b border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {[
-                            { icon: Shield, label: 'ISO Certified Products', sub: 'Certified by ISO & ESMA' },
-                            { icon: Award, label: 'Expert Vetted', sub: 'Tested by professionals' },
-                            { icon: Phone, label: 'UAE-Wide Delivery', sub: 'All major emirates covered' },
-                            { icon: Mail, label: '24/7 Support', sub: 'Always available to help' },
-                        ].map(({ icon: Icon, label, sub }) => (
-                            <div key={label} className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-xl bg-slate-500/10 flex items-center justify-center shrink-0">
-                                    <Icon className="w-4 h-4 text-blue-500" />
-                                </div>
-                                <div>
-                                    <p className="text-white text-xs font-bold">{label}</p>
-                                    <p className="text-slate-500 text-[10px]">{sub}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
             {/* Main Footer */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
@@ -82,7 +59,7 @@ const Footer = () => {
 
                     {/* Products */}
                     <div>
-                        <h4 className="text-white font-black text-xs uppercase tracking-[0.15em] mb-5">Products</h4>
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.15em] mb-5">Categories</h4>
                         <ul className="space-y-3">
                             {productLinks.map((item) => (
                                 <li key={item}>

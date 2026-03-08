@@ -43,8 +43,7 @@ const BannerPreview = ({ form }) => (
     >
         {form.image && (
             <div className="absolute inset-0">
-                <img src={form.image} alt="" className="w-full h-full object-cover opacity-20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+                <img src={form.image} alt="" className="w-full h-full object-cover" />
             </div>
         )}
         <div className="relative z-10">
