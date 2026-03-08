@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ArrowRight, ChevronRight, Shield, Award, Zap, Headphones, CheckCircle, Star, Package, Clock, Truck, ChevronLeft, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
+import QuickPreviewModal from '../components/QuickPreviewModal';
 
 // Add API base URL
 const API_URL = import.meta.env.VITE_API_URL;
@@ -36,6 +37,7 @@ const Home = () => {
     const [banners, setBanners] = useState([]);
     const [bannerLoading, setBannerLoading] = useState(true);
     const [bannerIndex, setBannerIndex] = useState(0);
+    const [previewProduct, setPreviewProduct] = useState(null);
 
     useEffect(() => {
         // Updated axios calls with API_URL
@@ -79,37 +81,40 @@ const Home = () => {
     return (
         <div className="flex flex-col bg-[#F5F5F7]">
 
-            {/* ══ HERO BANNER (Amazon-style with auto-rotate) ════════ */}
-            <section className="relative overflow-hidden" style={{ minHeight: '320px' }}>
-                <motion.div
-                    key={bannerIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.7 }}
-                    className={`bg-gradient-to-r ${banner.color} min-h-[320px] sm:min-h-[420px] relative overflow-hidden flex items-center`}
-                >
-                    {banner.image && (
-                        <div className="absolute inset-0 z-0">
-                            <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
-                        </div>
-                    )}
+            {/* ══ HERO BANNER (Udemandme-style Sliding) ════════ */}
+            <section className="relative overflow-hidden w-full h-[320px] sm:h-[420px] bg-black">
+                <AnimatePresence initial={false}>
+                    <motion.div
+                        key={bannerIndex}
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '-100%' }}
+                        transition={{ type: 'tween', ease: 'easeInOut', duration: 0.6 }}
+                        className={`absolute inset-0 w-full h-full bg-gradient-to-r ${banner.color} flex items-center shadow-lg`}
+                    >
+                        {banner.image && (
+                            <div className="absolute inset-0 z-0">
+                                <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
+                            </div>
+                        )}
 
-                    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full py-10 sm:py-16 relative z-10">
-                        <div className="max-w-lg">
-                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5 backdrop-blur-sm"
-                                style={{ color: banner.accent, borderColor: `${banner.accent}50`, background: `${banner.accent}20` }}>
-                                <span className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: banner.accent }} />
-                                {banner.label}
-                            </span>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4 drop-shadow-md">{banner.title}</h1>
-                            <p className="text-slate-100 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md drop-shadow">{banner.sub}</p>
-                            <Link to={banner.link}
-                                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-xl border border-white/30 text-white hover:bg-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]">
-                                {banner.btn} <ArrowRight className="w-4 h-4" />
-                            </Link>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full py-10 sm:py-16 relative z-10">
+                            <div className="max-w-lg">
+                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5 backdrop-blur-sm"
+                                    style={{ color: banner.accent, borderColor: `${banner.accent}50`, background: `${banner.accent}20` }}>
+                                    <span className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: banner.accent }} />
+                                    {banner.label}
+                                </span>
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4 drop-shadow-md">{banner.title}</h1>
+                                <p className="text-slate-100 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md drop-shadow">{banner.sub}</p>
+                                <Link to={banner.link}
+                                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-xl border border-white/30 text-white hover:bg-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]">
+                                    {banner.btn} <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </AnimatePresence>
 
                 {/* Slide indicators */}
                 <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
@@ -218,14 +223,16 @@ const Home = () => {
                     </div>
 
                     {prodLoading ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
+                        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-6">
+                            {Array.from({ length: 8 }).map((_, i) => <div key={i} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0"><SkeletonCard /></div>)}
                         </div>
                     ) : (
                         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 pb-8 -mx-4 px-4 lg:mx-0 lg:px-0">
                             {featuredProducts.map(p => (
-                                <motion.div key={p._id} variants={fadeUp}><ProductCard product={p} onQuickView={() => { }} /></motion.div>
+                                <motion.div key={p._id} variants={fadeUp} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0">
+                                    <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
+                                </motion.div>
                             ))}
                         </motion.div>
                     )}
@@ -252,7 +259,7 @@ const Home = () => {
                         <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto z-10">
                             <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer"
                                 className="btn-outline !rounded-xl px-6 py-3.5 text-sm font-bold flex items-center justify-center gap-2">
-                                <span className="text-lg">💬</span> WhatsApp Now
+                                <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-6 object-contain drop-shadow-sm" /> WhatsApp Now
                             </a>
                             <Link to="/contact" className="btn-outline !rounded-xl">
                                 Request Quote
@@ -274,14 +281,16 @@ const Home = () => {
                             <Link to="/products" className="text-sm font-bold text-slate-500 hover:underline flex items-center gap-1">See all <ChevronRight className="w-4 h-4" /></Link>
                         </div>
                         {prodLoading ? (
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+                            <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-6">
+                                {Array.from({ length: 4 }).map((_, i) => <div key={i} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0"><SkeletonCard /></div>)}
                             </div>
                         ) : (
                             <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-                                className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 pb-8 -mx-4 px-4 lg:mx-0 lg:px-0">
                                 {newArrivals.map(p => (
-                                    <motion.div key={p._id} variants={fadeUp}><ProductCard product={p} /></motion.div>
+                                    <motion.div key={p._id} variants={fadeUp} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0">
+                                        <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
+                                    </motion.div>
                                 ))}
                             </motion.div>
                         )}
@@ -324,7 +333,7 @@ const Home = () => {
                             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#007AFF] text-white font-black hover:bg-blue-500 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-slate-500/30">
                                 Contact Us <ArrowRight className="w-5 h-5" />
                             </Link>
-                            <Link to="/Catogory" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/20 text-white hover:bg-white/10 font-bold rounded-full transition-all">
+                            <Link to="/products" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/20 text-white hover:bg-white/10 font-bold rounded-full transition-all">
                                 Browse Catalogue
                             </Link>
                         </div>
@@ -332,6 +341,12 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Quick Preview Modal */}
+            <QuickPreviewModal
+                isOpen={!!previewProduct}
+                onClose={() => setPreviewProduct(null)}
+                product={previewProduct}
+            />
         </div>
     );
 };

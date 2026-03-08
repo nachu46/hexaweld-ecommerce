@@ -114,8 +114,8 @@ const Contact = () => (
                             rel="noopener noreferrer"
                             className="flex items-center gap-4 p-5 bg-[#25D366] hover:bg-[#20BA5A] rounded-xl transition-all duration-300 hover:shadow-lg group"
                         >
-                            <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                                <MessageCircle className="w-6 h-6 text-white" />
+                            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
+                                <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-8 object-contain drop-shadow-sm" />
                             </div>
                             <div className="flex-1">
                                 <p className="text-white font-bold">Direct WhatsApp Support</p>

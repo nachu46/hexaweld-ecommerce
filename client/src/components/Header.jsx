@@ -95,7 +95,7 @@ const Header = () => {
                             <img
                                 src={logo}
                                 alt="HexaWeld Industrial Store"
-                                className="h-20 sm:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                className="h-28 sm:h-[120px] w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                             />
                         </Link>
 
@@ -139,9 +139,8 @@ const Header = () => {
                             </button>
 
                             {/* Quote / Cart Icon */}
-                            <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer" className="relative p-2 text-slate-600 hover:text-orange-500 transition-colors" title="Get Quote via WhatsApp">
-                                <ShoppingBag className="w-5 h-5" />
-                                <span className="absolute top-1 right-1 w-3 h-3 bg-orange-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full border border-white">!</span>
+                            <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer" className="relative p-2 text-slate-600 hover:text-emerald-500 transition-colors" title="Get Quote via WhatsApp">
+                                <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-7 object-contain drop-shadow-sm opacity-90 hover:opacity-100 transition-opacity" />
                             </a>
 
                             {/* Account */}
@@ -229,7 +228,7 @@ const Header = () => {
                         >
                             <div className="flex items-center justify-between mb-8">
                                 <Link to="/" onClick={() => setIsOpen(false)}>
-                                    <img src={logo} alt="HexaWeld" className="h-10 w-auto object-contain" />
+                                    <img src={logo} alt="HexaWeld" className="h-20 sm:h-24 w-auto object-contain" />
                                 </Link>
                                 <button onClick={() => setIsOpen(false)} className="p-2 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200">
                                     <X className="w-5 h-5" />
@@ -252,7 +251,7 @@ const Header = () => {
                             <div className="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-3">
                                 <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer"
                                     className="btn-outline !py-3.5 !px-5 !rounded-xl !text-sm flex items-center justify-center gap-2">
-                                    <span className="text-lg">💬</span> Get Quote on WhatsApp
+                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-6 object-contain drop-shadow-sm" /> Get Quote on WhatsApp
                                 </a>
                                 {user ? (
                                     <>

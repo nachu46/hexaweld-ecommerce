@@ -30,7 +30,7 @@ const Footer = () => {
                             <img
                                 src={logo}
                                 alt="HexaWeld Industrial Store"
-                                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                className="h-24 sm:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                             />
                         </Link>
                         <p className="text-slate-400 text-sm leading-relaxed mb-6">
@@ -81,9 +81,9 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
-                                    <Phone className="w-3.5 h-3.5 text-blue-500" />
+                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-5 object-contain" />
                                 </div>
-                                <a href="tel:+919061627236" className="text-slate-400 hover:text-white text-sm transition-colors">+91 90616 27236</a>
+                                <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white text-sm transition-colors">+91 90616 27236</a>
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
