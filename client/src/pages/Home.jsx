@@ -75,7 +75,8 @@ const Home = () => {
     // Extract "All Products" pseudo-category to use its image, and remove it from standard list
     const allProductsCategory = categories.find(c => c.name.toLowerCase() === 'all products');
     const displayCategories = categories.filter(c => c.name.toLowerCase() !== 'all products');
-    const allProductsImage = allProductsCategory?.image || "https://images.unsplash.com/photo-1534398079543-7ae6d016b8bf?q=80&w=800&auto=format&fit=crop";
+    // Forcing a premium stock image of tools because the Render backend's disk is ephemeral and deletes uploaded files on restart
+    const allProductsImage = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200";
 
     // Map API banner fields to display fields
     const banner = {
