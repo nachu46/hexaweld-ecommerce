@@ -12,8 +12,8 @@ import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
 import QuickPreviewModal from '../components/QuickPreviewModal';
 
-// Hardcoding local backend url for dev to bypass proxy issues
-const API_URL = 'http://localhost:5000';
+// Add API base URL back for production
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
