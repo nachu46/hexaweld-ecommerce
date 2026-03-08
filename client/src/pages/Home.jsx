@@ -76,7 +76,7 @@ const Home = () => {
     const allProductsCategory = categories.find(c => c.name.toLowerCase() === 'all products');
     const displayCategories = categories.filter(c => c.name.toLowerCase() !== 'all products');
     // Forcing a premium stock image of tools because the Render backend's disk is ephemeral and deletes uploaded files on restart
-    const allProductsImage = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200";
+    const allProductsImage = "my tools.png";
 
     // Map API banner fields to display fields
     const banner = {
@@ -197,22 +197,23 @@ const Home = () => {
                                         to={`/products?category=${cat._id}`}
                                         className="group relative flex flex-col justify-end overflow-hidden h-48 sm:h-52 card card-hover"
                                     >
-                                        {/* Big image filling card */}
-                                        <div className="absolute inset-0 flex items-center justify-center p-6 z-0">
+                                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
                                             {cat.image ? (
                                                 <img
                                                     src={getImageUrl(cat.image)}
                                                     alt={cat.name}
-                                                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                 />
                                             ) : (
-                                                <span className="text-7xl group-hover:scale-110 transition-transform duration-300">🔧</span>
+                                                <div className="w-full h-full bg-slate-200 flex items-center justify-center">
+                                                    <span className="text-7xl group-hover:scale-110 transition-transform duration-300">🔧</span>
+                                                </div>
                                             )}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D1F]/90 via-[#1D1D1F]/40 to-transparent" />
                                         </div>
-                                        {/* Name bar at bottom with glass */}
-                                        <div className="relative p-4 bg-white/60 backdrop-blur-lg border-t border-white/40 z-10">
-                                            <p className="text-[#1D1D1F] font-bold text-sm leading-tight group-hover:text-[#007AFF] transition-colors">{cat.name}</p>
-                                            <p className="text-[#86868B] text-xs font-medium mt-0.5">Shop now →</p>
+                                        <div className="relative p-5 z-10 w-full backdrop-blur-sm">
+                                            <p className="text-white font-black text-lg leading-tight group-hover:text-blue-400 transition-colors">{cat.name}</p>
+                                            <p className="text-[#D2D2D7] text-xs font-semibold mt-1 flex items-center gap-1 group-hover:text-white transition-colors">Shop now <ArrowRight className="w-3 h-3" /></p>
                                         </div>
                                     </Link>
                                 </motion.div>
