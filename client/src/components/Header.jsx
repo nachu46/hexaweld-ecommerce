@@ -95,7 +95,7 @@ const Header = () => {
                             <img
                                 src={logo}
                                 alt="HexaWeld Industrial Store"
-                                className="h-20 sm:h-[120px] w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                                className="h-28 sm:h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                             />
                         </Link>
 
