@@ -3,6 +3,7 @@ import { Eye, Tag, ArrowRight, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { getImageUrl } from '../utils/getImageUrl';
 
 const WHATSAPP_NUMBER = '919061627236';
 const SITE_URL = window.location.origin;
@@ -32,7 +33,7 @@ const ProductCard = ({ product, onQuickView }) => {
 
     const imageSrc = imgError
         ? 'https://placehold.co/400x280/f1f5f9/94a3b8?text=No+Image'
-        : product.image || product.images?.[0] || 'https://placehold.co/400x280/f1f5f9/94a3b8?text=No+Image';
+        : getImageUrl(product.image || product.images?.[0]) || 'https://placehold.co/400x280/f1f5f9/94a3b8?text=No+Image';
 
     return (
         <motion.div

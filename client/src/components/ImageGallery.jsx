@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getImageUrl } from '../utils/getImageUrl';
 
 const ImageGallery = ({ images = [], mainImage = '' }) => {
-    const allImages = [mainImage, ...images.filter((img) => img !== mainImage)].filter(Boolean);
+    const allImages = [mainImage, ...images.filter((img) => img !== mainImage)].filter(Boolean).map(getImageUrl);
     const [current, setCurrent] = useState(0);
     const [zoomed, setZoomed] = useState(false);
     const [lightbox, setLightbox] = useState(false);
@@ -76,8 +77,8 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                             key={i}
                             onClick={() => setCurrent(i)}
                             className={`flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 ${i === current
-                                    ? 'border-slate-500 opacity-100'
-                                    : 'border-white/10 opacity-50 hover:opacity-80'
+                                ? 'border-slate-500 opacity-100'
+                                : 'border-white/10 opacity-50 hover:opacity-80'
                                 }`}
                         >
                             <img src={img} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />

@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
 import QuickPreviewModal from '../components/QuickPreviewModal';
+import { getImageUrl } from '../utils/getImageUrl';
 
 // Add API base URL back for production
 const API_URL = import.meta.env.VITE_API_URL || '';
@@ -105,7 +106,7 @@ const Home = () => {
                         >
                             {banner.image && (
                                 <div className="absolute inset-0 z-0">
-                                    <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
+                                    <img src={getImageUrl(banner.image)} alt={banner.title} className="w-full h-full object-cover" />
                                 </div>
                             )}
 
@@ -179,7 +180,7 @@ const Home = () => {
                             <motion.div variants={fadeUp} className="min-w-[75vw] sm:min-w-[40vw] lg:min-w-0 snap-center shrink-0 lg:shrink">
                                 <Link to="/products" className="group relative flex flex-col justify-end overflow-hidden h-48 sm:h-52 card card-hover">
                                     <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                                        <img src={allProductsImage} alt="All Products Catalog" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img src={getImageUrl(allProductsImage)} alt="All Products Catalog" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#1D1D1F]/90 via-[#1D1D1F]/40 to-transparent" />
                                     </div>
                                     <div className="relative p-5 z-10 w-full backdrop-blur-sm">
@@ -199,7 +200,7 @@ const Home = () => {
                                         <div className="absolute inset-0 flex items-center justify-center p-6 z-0">
                                             {cat.image ? (
                                                 <img
-                                                    src={cat.image}
+                                                    src={getImageUrl(cat.image)}
                                                     alt={cat.name}
                                                     className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
                                                 />
