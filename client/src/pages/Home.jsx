@@ -111,18 +111,18 @@ const Home = () => {
                                 </div>
                             )}
 
-                            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full py-10 sm:py-16 relative z-10">
-                                <div className="max-w-lg">
-                                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest border mb-4 sm:mb-5 backdrop-blur-sm"
+                            <div className="absolute inset-0 max-w-7xl mx-auto px-10 sm:px-16 lg:px-20 w-full flex items-center z-10">
+                                <div className="max-w-lg -mt-4 sm:mt-0">
+                                    <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-xs font-black uppercase tracking-widest border mb-3 sm:mb-5 backdrop-blur-sm"
                                         style={{ color: banner.accent, borderColor: `${banner.accent}50`, background: `${banner.accent}20` }}>
-                                        <span className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: banner.accent }} />
+                                        <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]" style={{ background: banner.accent }} />
                                         {banner.label}
                                     </span>
-                                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-3 sm:mb-4 drop-shadow-md">{banner.title}</h1>
-                                    <p className="text-slate-100 text-sm sm:text-lg mb-6 sm:mb-8 max-w-md drop-shadow">{banner.sub}</p>
+                                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-2 sm:mb-4 drop-shadow-md">{banner.title}</h1>
+                                    <p className="text-slate-200 text-xs sm:text-lg mb-5 sm:mb-8 max-w-md drop-shadow line-clamp-2 sm:line-clamp-none">{banner.sub}</p>
                                     <Link to={banner.link}
-                                        className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-xl border border-white/30 text-white hover:bg-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]">
-                                        {banner.btn} <ArrowRight className="w-4 h-4" />
+                                        className="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-105 bg-white/10 backdrop-blur-xl border border-white/30 text-white hover:bg-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]">
+                                        {banner.btn} <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                     </Link>
                                 </div>
                             </div>
@@ -130,23 +130,23 @@ const Home = () => {
                     </AnimatePresence>
 
                     {/* Slide indicators */}
-                    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
                         {banners.map((_, i) => (
                             <button key={i} onClick={() => setBannerIndex(i)}
-                                className="h-1.5 rounded-full transition-all duration-300"
-                                style={{ width: i === bannerIndex ? '28px' : '8px', background: i === bannerIndex ? banner.accent : 'rgba(255,255,255,0.4)' }}
+                                className="h-1 sm:h-1.5 rounded-full transition-all duration-300"
+                                style={{ width: i === bannerIndex ? '20px' : '6px', background: i === bannerIndex ? banner.accent : 'rgba(255,255,255,0.4)' }}
                             />
                         ))}
                     </div>
 
                     {/* Arrow nav */}
                     <button onClick={() => setBannerIndex(i => (i - 1 + banners.length) % banners.length)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all z-20">
-                        <ChevronLeft className="w-5 h-5" />
+                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all z-20">
+                        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                     <button onClick={() => setBannerIndex(i => (i + 1) % banners.length)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all z-20">
-                        <ChevronRight className="w-5 h-5" />
+                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/25 backdrop-blur rounded-full flex items-center justify-center text-white transition-all z-20">
+                        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                 </section>
             </div>
