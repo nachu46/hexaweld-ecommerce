@@ -34,122 +34,84 @@ const ProductCard = ({ product, onQuickView }) => {
         ? 'https://placehold.co/400x280/f1f5f9/94a3b8?text=No+Image'
         : product.image || product.images?.[0] || 'https://placehold.co/400x280/f1f5f9/94a3b8?text=No+Image';
 
-    const showPrice = !product.enquiryOnly && product.price > 0;
-    const hasDiscount = showPrice && product.comparePrice > 0 && product.comparePrice > product.price;
-    const discountPct = hasDiscount ? Math.round((1 - product.price / product.comparePrice) * 100) : 0;
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="group flex flex-col overflow-hidden card card-hover !p-0"
+            className="group flex flex-col h-full bg-white rounded-[24px] shadow-sm hover:shadow-xl transition-shadow duration-300 relative p-4"
         >
-            {/* Image zone */}
-            <div className="relative overflow-hidden bg-white/40" style={{ height: '220px' }}>
+            {/* Top Badges */}
+            <div className="absolute top-6 left-6 right-6 flex items-start justify-between z-10 pointer-events-none">
+                {product.category?.name && (
+                    <div className="bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm flex items-center justify-center max-w-[60%]">
+                        <span className="text-[10px] font-black text-gray-900 uppercase tracking-widest truncate">
+                            {product.category.name}
+                        </span>
+                    </div>
+                )}
+                {/* We always show Enquire Only for this styling, or conditionally if you prefer. We'll show it if enquiryOnly is true or price is 0 */}
+                {(product.enquiryOnly || !product.price) && (
+                    <div className="bg-blue-100/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-blue-200/50 shadow-sm flex items-center justify-center shrink-0 ml-auto">
+                        <span className="text-[10px] font-bold text-blue-600">
+                            Enquire Only
+                        </span>
+                    </div>
+                )}
+            </div>
+
+            {/* Image Zone */}
+            <Link to={`/product/${product._id}`} className="relative h-[220px] w-full flex flex-col items-center justify-center rounded-2xl mb-4 overflow-hidden">
                 <img
                     src={imageSrc}
                     alt={product.name}
                     onError={() => setImgError(true)}
-                    className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                 />
-
-                {/* Badges bar */}
-                <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
-                    {product.category?.name && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black bg-white/60 backdrop-blur-md text-[#1D1D1F] border border-white/40 shadow-sm uppercase tracking-wide">
-                            {product.category.name}
-                        </span>
-                    )}
-                    {hasDiscount && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black bg-[#007AFF] text-white ml-auto shadow-sm">
-                            -{discountPct}%
-                        </span>
-                    )}
-                    {product.enquiryOnly && !hasDiscount && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-black bg-[#007AFF]/10 text-[#007AFF] backdrop-blur-md border border-[#007AFF]/20 ml-auto">
-                            Enquire Only
-                        </span>
-                    )}
-                </div>
 
                 {/* Quick View overlay */}
                 {onQuickView && (
                     <button
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); onQuickView(product); }}
-                        className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                        className="absolute inset-x-0 bottom-4 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
                         title="Quick View"
                     >
-                        <div className="bg-white/60 backdrop-blur-md text-[#1D1D1F] text-xs font-bold px-5 py-2 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.08)] flex items-center gap-2 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 border border-white/40">
+                        <div className="bg-white/90 backdrop-blur-md text-[#1D1D1F] text-xs font-bold px-5 py-2 rounded-full shadow-lg flex items-center gap-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <Eye className="w-3.5 h-3.5" />
                             Quick View
                         </div>
                     </button>
                 )}
-            </div>
+            </Link>
 
-            {/* Content */}
-            <div className="p-4 flex flex-col flex-1 gap-2">
+            {/* Content Zone */}
+            <div className="flex flex-col flex-1 text-left">
+                {/* Product Title */}
                 <Link to={`/product/${product._id}`}>
-                    <h3 className="text-[#1D1D1F] font-bold text-sm leading-snug line-clamp-2 group-hover:text-[#007AFF] transition-colors duration-200">
+                    <h3 className="text-gray-900 font-bold text-sm leading-snug line-clamp-2 hover:text-blue-600 transition-colors duration-200 mb-2">
                         {product.name}
                     </h3>
                 </Link>
 
-                {product.SKU && (
-                    <p className="text-[10px] text-slate-400 font-medium tracking-wide">SKU: {product.SKU}</p>
-                )}
+                {/* Price on Request Indicator */}
+                <div className="flex items-center gap-1.5 mb-4 mt-auto">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
+                    <span className="text-xs font-bold text-[#047857]">Price on Request</span>
+                </div>
 
-                {/* Price */}
-                {showPrice ? (
-                    <div className="flex items-baseline gap-2">
-                        <span className="text-lg text-[#007AFF] font-black">₹{product.price.toLocaleString()}</span>
-                        {hasDiscount && (
-                            <span className="text-[#86868B] line-through text-xs">₹{product.comparePrice.toLocaleString()}</span>
-                        )}
-                    </div>
-                ) : (
-                    <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                        <p className="text-xs text-emerald-700 font-bold">Price on Request</p>
-                    </div>
-                )}
-
-                {/* First feature */}
-                {product.features?.length > 0 && (
-                    <p className="text-[#86868B] text-xs flex items-start gap-1.5">
-                        <CheckCircle className="w-3 h-3 text-emerald-500 mt-0.5 shrink-0" />
-                        <span className="line-clamp-1">{product.features[0]}</span>
-                    </p>
-                )}
-
-                {/* Variants */}
-                {product.variants?.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {product.variants.slice(0, 3).map((v, i) => (
-                            <span key={i} className="px-2 py-0.5 bg-slate-100 text-slate-700 text-[10px] font-semibold rounded-md border border-slate-200">
-                                {v.value}
-                            </span>
-                        ))}
-                        {product.variants.length > 3 && (
-                            <span className="px-2 py-0.5 bg-slate-100 text-slate-400 text-[10px] rounded-md border border-slate-200">
-                                +{product.variants.length - 3}
-                            </span>
-                        )}
-                    </div>
-                )}
-
-                {/* Action buttons */}
-                <div className="flex gap-2 mt-auto pt-2">
+                {/* Bottom Buttons */}
+                <div className="flex items-center gap-2 pt-1">
                     <button
                         onClick={handleWhatsApp}
-                        className="flex-1 btn-outline !py-2 !px-3 !rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] border-emerald-500/30 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10"
+                        className="flex-1 py-2.5 rounded-[12px] border border-[#a2e9c1] hover:bg-[#ecfdf5] transition-colors flex items-center justify-center group/btn"
+                        title="Enquire on WhatsApp"
                     >
-                        <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-6 object-contain drop-shadow-sm" />
+                        {/* Using explicit green icon as requested and shown in screenshot */}
+                        <img src="/whatsapp.png" alt="WhatsApp" className="h-5 w-auto object-contain group-hover/btn:scale-110 transition-transform" />
                     </button>
                     <Link
                         to={`/product/${product._id}`}
-                        className="flex-1 btn-outline !py-2.5 !px-3 !text-xs !rounded-xl flex items-center justify-center gap-1"
+                        className="flex-1 py-2 rounded-[12px] border border-gray-200 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1.5 text-xs font-bold text-gray-800"
                     >
                         View <ArrowRight className="w-3.5 h-3.5" />
                     </Link>

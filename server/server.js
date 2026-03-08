@@ -17,6 +17,7 @@ app.use(cors({
         const allowed = [
             'https://hexaweld-ecommerce.vercel.app',
             'https://hexaweld-commerce.vercel.app',
+            'http://localhost:5173',
             process.env.CLIENT_URL,
         ].filter(Boolean);
         // Allow requests with no origin (mobile apps, curl, Postman)

@@ -3,12 +3,17 @@ import axios from 'axios';
 import { ArrowRight, ChevronRight, Shield, Award, Zap, Headphones, CheckCircle, Star, Package, Clock, Truck, ChevronLeft, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import ProductCard from '../components/ProductCard';
 import { SkeletonCard, SkeletonCategory } from '../components/Skeletons';
 import QuickPreviewModal from '../components/QuickPreviewModal';
 
-// Add API base URL
-const API_URL = import.meta.env.VITE_API_URL;
+// Hardcoding local backend url for dev to bypass proxy issues
+const API_URL = 'http://localhost:5000';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -40,7 +45,7 @@ const Home = () => {
     const [previewProduct, setPreviewProduct] = useState(null);
 
     useEffect(() => {
-        // Updated axios calls with API_URL
+        // Updated axios calls to use proxy
         axios.get(`${API_URL}/api/categories`)
             .then(({ data }) => setCategories(data))
             .finally(() => setCatLoading(false));
@@ -232,13 +237,28 @@ const Home = () => {
                             {Array.from({ length: 8 }).map((_, i) => <div key={i} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0"><SkeletonCard /></div>)}
                         </div>
                     ) : (
-                        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-                            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 pb-8 -mx-4 px-4 lg:mx-0 lg:px-0">
-                            {featuredProducts.map(p => (
-                                <motion.div key={p._id} variants={fadeUp} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0">
-                                    <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
-                                </motion.div>
-                            ))}
+                        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="pb-8">
+                            <Swiper
+                                modules={[Autoplay, Navigation]}
+                                spaceBetween={20}
+                                slidesPerView={1.2}
+                                navigation
+                                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                breakpoints={{
+                                    640: { slidesPerView: 2.2 },
+                                    1024: { slidesPerView: 3.5 },
+                                    1280: { slidesPerView: 4.5 }
+                                }}
+                                className="!pb-6 !px-2"
+                            >
+                                {featuredProducts.map(p => (
+                                    <SwiperSlide key={p._id} className="h-auto">
+                                        <motion.div variants={fadeUp} className="h-full">
+                                            <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
+                                        </motion.div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </motion.div>
                     )}
 
@@ -290,13 +310,28 @@ const Home = () => {
                                 {Array.from({ length: 4 }).map((_, i) => <div key={i} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0"><SkeletonCard /></div>)}
                             </div>
                         ) : (
-                            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}
-                                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-5 pb-8 -mx-4 px-4 lg:mx-0 lg:px-0">
-                                {newArrivals.map(p => (
-                                    <motion.div key={p._id} variants={fadeUp} className="min-w-[70vw] sm:min-w-[40vw] lg:min-w-[280px] snap-start shrink-0">
-                                        <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
-                                    </motion.div>
-                                ))}
+                            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="pb-8">
+                                <Swiper
+                                    modules={[Autoplay, Navigation]}
+                                    spaceBetween={20}
+                                    slidesPerView={1.2}
+                                    navigation
+                                    autoplay={{ delay: 3500, disableOnInteraction: false }}
+                                    breakpoints={{
+                                        640: { slidesPerView: 2.2 },
+                                        1024: { slidesPerView: 3.5 },
+                                        1280: { slidesPerView: 4.5 }
+                                    }}
+                                    className="!pb-6 !px-2"
+                                >
+                                    {newArrivals.map(p => (
+                                        <SwiperSlide key={p._id} className="h-auto">
+                                            <motion.div variants={fadeUp} className="h-full">
+                                                <ProductCard product={p} onQuickView={() => setPreviewProduct(p)} />
+                                            </motion.div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
                             </motion.div>
                         )}
                     </div>
