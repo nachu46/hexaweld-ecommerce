@@ -3,6 +3,9 @@ import axios from 'axios';
 import { MapPin, Phone, Mail, Clock, ChevronRight, Send, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
+
 const contactItems = [
     { icon: MapPin, label: 'Our Location', value: '123 Industrial Area, Welding Zone\nMetal City, 67890', color: 'text-slate-500', bg: 'bg-slate-50' },
     { icon: Phone, label: 'Phone Number', value: '+91 90616 27236', sub: 'Mon–Sat  9am – 6pm', color: 'text-blue-500', bg: 'bg-blue-50' },
@@ -29,12 +32,12 @@ const Contact = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post('/api/enquiries', {
+            await axios.post(`${API_URL}/api/enquiries`, {
                 customerName: form.name,
                 customerEmail: form.email,
                 customerPhone: form.phone,
                 message: `Subject: ${form.subject}\n\n${form.message}`,
-                source: 'contact-form',
+                source: 'form',
             });
             setSuccess(true);
             setForm({ name: '', email: '', phone: '', subject: '', message: '' });
