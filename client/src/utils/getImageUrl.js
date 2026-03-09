@@ -7,10 +7,10 @@ export const getImageUrl = (url) => {
         fixedUrl = fixedUrl.replace('http://localhost:5000', '');
     }
 
-    // If it's a relative URL (like /uploads/...), prepend the actual API URL
+    // If it's a relative URL (like /uploads/...), return it directly since we are now serving uploads
+    // directly from the Vite public assets directory.
     if (fixedUrl.startsWith('/uploads')) {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        return `${apiUrl}${fixedUrl}`;
+        return fixedUrl;
     }
 
     // Otherwise return as is (e.g. valid external links, empty strings)

@@ -11,9 +11,17 @@ if (useCloudinary) {
     const { storage: cloudinaryStorage } = require('../config/cloudinary');
     storage = cloudinaryStorage;
 } else {
+    const uploadDir = path.join(__dirname, '../../client/public/uploads');
+
+    // Ensure the destination directory exists
+    const fs = require('fs');
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
     storage = multer.diskStorage({
         destination(req, file, cb) {
-            cb(null, 'uploads/');
+            cb(null, uploadDir);
         },
         filename(req, file, cb) {
             cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
@@ -47,8 +55,8 @@ router.post('/', upload.single('image'), (req, res) => {
     }
 
     // If using Cloudinary, it returns req.file.path as the URL
-    // If local, return the local path
-    const filePath = useCloudinary ? req.file.path : `/${req.file.path.replace(/\\/g, '/')}`;
+    // If local, return the relative path
+    const filePath = useCloudinary ? req.file.path : `/uploads/${req.file.filename}`;
     res.send(filePath);
 });
 
@@ -58,7 +66,7 @@ router.post('/multiple', upload.array('images', 10), (req, res) => {
     if (!req.files || req.files.length === 0) {
         return res.status(400).send({ message: 'No files uploaded' });
     }
-    const urls = req.files.map(f => useCloudinary ? f.path : `http://localhost:5000/${f.path.replace(/\\/g, '/')}`);
+    const urls = req.files.map(f => useCloudinary ? f.path : `/uploads/${f.filename}`);
     res.json({ urls });
 });
 
