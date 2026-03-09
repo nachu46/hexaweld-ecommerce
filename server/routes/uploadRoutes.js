@@ -1,21 +1,27 @@
-const path = require('path');
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
+const path = require('path');
 
-const storage = multer.diskStorage({
-    destination(req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename(req, file, cb) {
-        cb(
-            null,
-            `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-        );
-    },
-});
+// Conditional storage: Use Cloudinary if configured, otherwise fallback to local disk
+let storage;
+const useCloudinary = process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
-function checkFileType(file, cb) {
+if (useCloudinary) {
+    const { storage: cloudinaryStorage } = require('../config/cloudinary');
+    storage = cloudinaryStorage;
+} else {
+    storage = multer.diskStorage({
+        destination(req, file, cb) {
+            cb(null, 'uploads/');
+        },
+        filename(req, file, cb) {
+            cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+        },
+    });
+}
+
+const checkFileType = (file, cb) => {
     const filetypes = /jpg|jpeg|png|webp/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
@@ -25,7 +31,7 @@ function checkFileType(file, cb) {
     } else {
         cb('Images only!');
     }
-}
+};
 
 const upload = multer({
     storage,
@@ -36,12 +42,23 @@ const upload = multer({
 
 // Single image upload
 router.post('/', upload.single('image'), (req, res) => {
-    res.send(`/${req.file.path.replace(/\\/g, '/')}`);
+    if (!req.file) {
+        return res.status(400).send({ message: 'No file uploaded' });
+    }
+
+    // If using Cloudinary, it returns req.file.path as the URL
+    // If local, return the local path
+    const filePath = useCloudinary ? req.file.path : `/${req.file.path.replace(/\\/g, '/')}`;
+    res.send(filePath);
 });
+
 
 // Multiple images upload (up to 10)
 router.post('/multiple', upload.array('images', 10), (req, res) => {
-    const urls = req.files.map(f => `http://localhost:5000/${f.path.replace(/\\/g, '/')}`);
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).send({ message: 'No files uploaded' });
+    }
+    const urls = req.files.map(f => useCloudinary ? f.path : `http://localhost:5000/${f.path.replace(/\\/g, '/')}`);
     res.json({ urls });
 });
 
