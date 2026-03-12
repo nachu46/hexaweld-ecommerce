@@ -1,4 +1,4 @@
-# 🔥 HexaWeld — Industrial Welding Equipment E-Commerce
+# HexaWeld — Industrial Welding Equipment E-Commerce
 
 A full-stack B2B e-commerce platform for welding equipment, built with **React + Vite** and **Express 5 + MongoDB**. Operates on an enquiry-only model — customers browse products and reach out via WhatsApp or enquiry forms.
 
