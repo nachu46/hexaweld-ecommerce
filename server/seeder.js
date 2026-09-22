@@ -24,8 +24,8 @@ const importData = async () => {
         // Actually, User.insertMany does NOT trigger pre-save middleware.
         // So we use User.create or loop.
         const adminUser = await User.create({
-            name: 'Hexaweld Admin',
-            email: 'admin@hexaweld.com',
+            name: 'Jaza Trading Admin',
+            email: 'admin@jazatrading.com',
             password: 'password123',
             isAdmin: true,
         });

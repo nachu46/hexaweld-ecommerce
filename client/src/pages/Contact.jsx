@@ -7,11 +7,12 @@ const API_URL = import.meta.env.VITE_API_URL || '';
 
 
 const contactItems = [
-    { icon: MapPin, label: 'Our Location', value: '123 Industrial Area, Welding Zone\nMetal City, 67890', color: 'text-slate-500', bg: 'bg-slate-50' },
-    { icon: Phone, label: 'Phone Number', value: '+91 90616 27236', sub: 'Mon–Sat  9am – 6pm', color: 'text-blue-500', bg: 'bg-blue-50' },
-    { icon: Mail, label: 'Email Address', value: 'info@hexaweld.com', color: 'text-emerald-500', bg: 'bg-emerald-50' },
-    { icon: Clock, label: 'Working Hours', value: 'Mon–Sat: 9:00 AM – 6:00 PM', sub: 'Sunday: Closed', color: 'text-purple-500', bg: 'bg-purple-50' },
+    { icon: MapPin, label: 'Our Location', value: 'Al kassarat Street, Industrial Area\nstreet 5, Qatar', color: 'text-slate-500', bg: 'bg-slate-50' },
+    { icon: Phone, label: 'Phone Number', value: '+974 70605494\n+974 74080005', sub: 'Sat–Thu 8am – 6pm', color: 'text-blue-500', bg: 'bg-blue-50' },
+    { icon: Mail, label: 'Email Address', value: 'jazatrading@gmail.com', color: 'text-emerald-500', bg: 'bg-emerald-50' },
+    { icon: Clock, label: 'Working Hours', value: 'Sat–Thu: 8:00 AM – 6:00 PM', sub: 'Friday: Closed', color: 'text-purple-500', bg: 'bg-purple-50' },
 ];
+
 
 const fadeUp = {
     hidden: { opacity: 0, y: 16 },
@@ -137,8 +138,9 @@ const Contact = () => {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-3 rounded-xl bg-[#007AFF] hover:bg-blue-600 text-white text-sm font-bold flex items-center justify-center gap-2 transition-all hover:shadow-lg disabled:opacity-60"
+                                        className="w-full py-4 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white text-sm font-bold flex items-center justify-center gap-2 transition-all hover:shadow-lg disabled:opacity-60"
                                     >
+
                                         {loading ? (
                                             <span className="animate-pulse">Sending...</span>
                                         ) : (
@@ -181,8 +183,9 @@ const Contact = () => {
                             {/* WhatsApp CTA */}
                             <motion.a
                                 variants={fadeUp}
-                                href="https://wa.me/919061627236"
+                                href="https://wa.me/97470605494"
                                 target="_blank"
+
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-4 p-5 bg-[#25D366] hover:bg-[#20BA5A] rounded-xl transition-all duration-300 hover:shadow-lg group"
                             >

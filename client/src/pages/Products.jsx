@@ -11,15 +11,26 @@ const Products = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
     const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
+    const [selectedBrand, setSelectedBrand] = useState(searchParams.get('brand') || '');
     const [previewProduct, setPreviewProduct] = useState(null);
     const [mobileSidebar, setMobileSidebar] = useState(false);
 
+
     useEffect(() => {
-        Promise.all([axios.get('/api/products'), axios.get('/api/categories')])
-            .then(([pRes, cRes]) => { setProducts(pRes.data); setCategories(cRes.data); })
+        Promise.all([
+            axios.get('/api/products'),
+            axios.get('/api/categories'),
+            axios.get('/api/products/brands')
+        ])
+            .then(([pRes, cRes, bRes]) => {
+                setProducts(pRes.data);
+                setCategories(cRes.data);
+                setBrands(bRes.data);
+            })
             .catch(console.error)
             .finally(() => setLoading(false));
     }, []);
@@ -27,56 +38,102 @@ const Products = () => {
     useEffect(() => {
         const cat = searchParams.get('category');
         const search = searchParams.get('search');
+        const brand = searchParams.get('brand');
         if (cat) setSelectedCategory(cat);
         if (search) setSearchTerm(search);
+        if (brand) setSelectedBrand(brand);
     }, [searchParams]);
 
     const handleCategoryClick = (id) => {
         setSelectedCategory(id);
-        if (id) setSearchParams({ category: id });
-        else setSearchParams({});
+        const params = {};
+        if (id) params.category = id;
+        if (selectedBrand) params.brand = selectedBrand;
+        if (searchTerm) params.search = searchTerm;
+        setSearchParams(params);
+        setMobileSidebar(false);
+    };
+
+    const handleBrandClick = (b) => {
+        setSelectedBrand(b);
+        const params = {};
+        if (selectedCategory) params.category = selectedCategory;
+        if (b) params.brand = b;
+        if (searchTerm) params.search = searchTerm;
+        setSearchParams(params);
         setMobileSidebar(false);
     };
 
     const filtered = products.filter((p) => {
         const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchCat = selectedCategory ? p.category?._id === selectedCategory : true;
-        return matchSearch && matchCat;
+        const matchBrand = selectedBrand ? p.brand?.toLowerCase() === selectedBrand.toLowerCase() : true;
+        return matchSearch && matchCat && matchBrand;
     });
 
     const selectedCatName = categories.find(c => c._id === selectedCategory)?.name;
 
     const SidebarContent = () => (
-        <div className="space-y-1">
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4 mb-4">Product Categories</p>
-            <button
-                onClick={() => handleCategoryClick('')}
-                className={`sidebar-link w-full text-left ${!selectedCategory ? 'active' : ''}`}
-            >
-                <img src="/placeholder-category.png" alt="All Products" className="w-5 h-5 object-cover rounded shrink-0 bg-slate-100" />
-                <span className="flex-1">All Products</span>
-                {!selectedCategory && <span className="text-[10px] font-bold bg-slate-500 text-white px-2 py-0.5 rounded-full">{products.length}</span>}
-            </button>
-            {categories.map((cat) => {
-                const count = products.filter(p => p.category?._id === cat._id).length;
-                return (
-                    <button
-                        key={cat._id}
-                        onClick={() => handleCategoryClick(cat._id)}
-                        className={`sidebar-link w-full text-left ${selectedCategory === cat._id ? 'active' : ''}`}
-                    >
-                        {cat.image ? (
-                            <img src={cat.image} alt={cat.name} className="w-5 h-5 object-contain rounded shrink-0" />
-                        ) : (
-                            <span className="w-4 h-4 shrink-0 text-sm">🔧</span>
-                        )}
-                        <span className="flex-1 text-left">{cat.name}</span>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === cat._id ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-500'}`}>{count}</span>
-                    </button>
-                );
-            })}
+        <div className="space-y-6">
+            {/* Categories */}
+            <div className="space-y-1">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Categories</p>
+                <button
+                    onClick={() => handleCategoryClick('')}
+                    className={`sidebar-link w-full text-left ${!selectedCategory ? 'active' : ''}`}
+                >
+                    <Package className="w-4 h-4 shrink-0 text-slate-500" />
+                    <span className="flex-1">All Categories</span>
+                    {!selectedCategory && <span className="text-[10px] font-bold bg-slate-500 text-white px-2 py-0.5 rounded-full">{products.length}</span>}
+                </button>
+                {categories.map((cat) => {
+                    const count = products.filter(p => p.category?._id === cat._id).length;
+                    return (
+                        <button
+                            key={cat._id}
+                            onClick={() => handleCategoryClick(cat._id)}
+                            className={`sidebar-link w-full text-left ${selectedCategory === cat._id ? 'active' : ''}`}
+                        >
+                            {cat.image ? (
+                                <img src={cat.image} alt={cat.name} className="w-4 h-4 object-cover rounded shrink-0" />
+                            ) : (
+                                <Package className="w-4 h-4 shrink-0 text-slate-500" />
+                            )}
+                            <span className="flex-1 text-left text-xs font-semibold">{cat.name}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === cat._id ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-500'}`}>{count}</span>
+                        </button>
+                    );
+                })}
+            </div>
+
+            {/* Brands */}
+            <div className="space-y-1 pt-4 border-t border-slate-100">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Brands</p>
+                <button
+                    onClick={() => handleBrandClick('')}
+                    className={`sidebar-link w-full text-left ${!selectedBrand ? 'active' : ''}`}
+                >
+                    <Tag className="w-4 h-4 shrink-0 text-slate-500" />
+                    <span className="flex-1">All Brands</span>
+                </button>
+                {brands.map((b) => {
+                    const count = products.filter(p => p.brand?.toLowerCase() === b.toLowerCase()).length;
+                    return (
+                        <button
+                            key={b}
+                            onClick={() => handleBrandClick(b)}
+                            className={`sidebar-link w-full text-left ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'active' : ''}`}
+                        >
+                            <span className="flex-1 text-left text-xs font-semibold">{b}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-500'}`}>{count}</span>
+                        </button>
+                    );
+                })}
+            </div>
+
         </div>
     );
+
 
     return (
         <div className="bg-[#F5F5F7] min-h-screen">

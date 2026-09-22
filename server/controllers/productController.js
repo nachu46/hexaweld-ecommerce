@@ -29,7 +29,7 @@ const buildSlug = (name) =>
     name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 // ─────────────────────────────────────────────────────────────────────────────
-// @desc    Fetch all products
+// @desc    Fetch all products (with optional keyword, category, tag, brand filtering)
 // @route   GET /api/products
 // @access  Public
 // ─────────────────────────────────────────────────────────────────────────────
@@ -40,13 +40,26 @@ const getProducts = asyncHandler(async (req, res) => {
 
     const tagFilter = req.query.tag ? { tags: req.query.tag } : {};
     const category = req.query.category ? { category: req.query.category } : {};
+    const brandFilter = req.query.brand ? { brand: { $regex: new RegExp(`^${req.query.brand}$`, 'i') } } : {};
 
-    const products = await Product.find({ ...keyword, ...category, ...tagFilter })
+    const products = await Product.find({ ...keyword, ...category, ...tagFilter, ...brandFilter })
         .populate('category', 'name')
         .sort({ createdAt: -1 });
 
     res.json(products);
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// @desc    Fetch distinct brand names
+// @route   GET /api/products/brands
+// @access  Public
+// ─────────────────────────────────────────────────────────────────────────────
+const getBrands = asyncHandler(async (req, res) => {
+    const brands = await Product.distinct('brand');
+    const filteredBrands = brands.filter(b => b && b.trim() !== '');
+    res.json(filteredBrands);
+});
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // @desc    Fetch single product
@@ -413,6 +426,7 @@ const importProducts = asyncHandler(async (req, res) => {
 
 module.exports = {
     getProducts,
+    getBrands,
     getProductById,
     deleteProduct,
     createProduct,
@@ -420,3 +434,4 @@ module.exports = {
     exportProducts,
     importProducts,
 };
+

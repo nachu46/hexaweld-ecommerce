@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const WHATSAPP_NUMBER = '919061627236';
+const WHATSAPP_NUMBER = '97470605494';
+
 
 const WhatsAppFloat = () => {
     const [visible, setVisible] = useState(false);
@@ -36,7 +37,8 @@ const WhatsAppFloat = () => {
                                 exit={{ opacity: 0, x: 10 }}
                                 className="bg-white text-[#1E293B] text-sm font-semibold px-4 py-2 rounded-xl shadow-card-lg border border-[#E2E8F0] whitespace-nowrap"
                             >
-                                💬 Chat with us!
+                                Chat with us!
+
                                 <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-r border-b border-[#E2E8F0] rotate-[-45deg]" />
                             </motion.div>
                         )}

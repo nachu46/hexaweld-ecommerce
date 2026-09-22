@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const {
     getProducts,
+    getBrands,
     getProductById,
     deleteProduct,
     updateProduct,
@@ -33,6 +34,9 @@ const upload = multer({
 
 // Export — must come BEFORE /:id routes so "export" isn't treated as an id
 router.get('/export', protect, admin, exportProducts);
+
+// Brands list route
+router.get('/brands', getBrands);
 
 // Import
 router.post('/import', protect, admin, upload.single('file'), importProducts);
