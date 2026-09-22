@@ -12,8 +12,6 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [showMobileSearch, setShowMobileSearch] = useState(false);
-    const [announcements, setAnnouncements] = useState([]);
-    const [currentAnnIndex, setCurrentAnnIndex] = useState(0);
 
     const { user, logout } = useAuth();
     const location = useLocation();
@@ -22,29 +20,10 @@ const Header = () => {
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', onScroll);
-
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    // Fetch Top Bar Announcements when route changes (so Admin updates reflect)
-    useEffect(() => {
-        axios.get('/api/announcement')
-            .then(({ data }) => setAnnouncements(Array.isArray(data) ? data : []))
-            .catch(() => setAnnouncements([]));
-    }, [location.pathname]);
-
-    // Slide interval every 3 seconds if there are multiple
-    useEffect(() => {
-        if (announcements.length <= 1) return;
-        const interval = setInterval(() => {
-            setCurrentAnnIndex(prev => (prev + 1) % announcements.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [announcements.length]);
-
     useEffect(() => { setIsOpen(false); setShowMobileSearch(false); }, [location.pathname]);
-
-    const activeAnn = announcements[currentAnnIndex];
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -57,150 +36,100 @@ const Header = () => {
 
     return (
         <>
-            {/* Top Promotion Bar with 3s Slider */}
-            {activeAnn && (
-                <div className="text-white text-[11px] sm:text-xs py-1.5 px-4 overflow-hidden relative shadow-sm" style={{ backgroundColor: activeAnn.bgColor || '#0F172A' }}>
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentAnnIndex}
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: 'easeOut' }}
-                            className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-center"
-                        >
-                            <span className="truncate">
-                                <span className="font-bold mr-1" style={{ color: activeAnn.accentColor }}>{activeAnn.badge}:</span>
-                                {activeAnn.message}
-                                {activeAnn.linkText && (
-                                    <Link to={activeAnn.linkUrl} className="underline ml-1.5 transition-colors font-semibold inline-block whitespace-nowrap" style={{ color: activeAnn.accentColor }}>
-                                        {activeAnn.linkText}
-                                    </Link>
-                                )}
-                            </span>
-                        </motion.div>
-                    </AnimatePresence>
+            {/* Top Info Bar */}
+            <div className="bg-[#0F172A] text-slate-300 text-[11px] py-1.5 px-4 border-b border-slate-800">
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                    <span className="font-medium tracking-wide">Building materials • Tools • Industrial supplies</span>
+                    <a href="mailto:jazatrading@gmail.com" className="hover:text-white transition-colors font-medium flex items-center gap-1.5">
+                        <Mail className="w-3 h-3 text-[#007AFF]" />
+                        jazatrading@gmail.com
+                    </a>
                 </div>
-            )}
+            </div>
 
-            {/* Main Header */}
-            <header className={`sticky top-0 w-full z-50 transition-all duration-300 bg-[#0B132B] border-b border-slate-800 ${scrolled ? 'py-2 shadow-lg' : 'py-3'}`}>
+            {/* Main White Header */}
+            <header className={`sticky top-0 w-full z-50 transition-all duration-300 bg-white border-b border-slate-200 ${scrolled ? 'py-2.5 shadow-md' : 'py-3.5'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-between gap-4">
 
                         {/* 1. Logo */}
-                        <Link to="/" className="flex items-center shrink-0 mr-2 group py-1">
-                            <JtLogo />
+                        <Link to="/" className="flex items-center shrink-0 py-0.5">
+                            <JtLogo dark={false} />
                         </Link>
 
-                        {/* 2. Global Search (Desktop only) */}
-                        <div className="hidden md:flex flex-1 relative max-w-2xl">
-                            <form onSubmit={handleSearch} className="w-full relative group">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Search className="h-4 w-4 text-slate-400 group-focus-within:text-[#007AFF] transition-colors" />
-                                </div>
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-10 pr-28 py-2.5 rounded-full bg-[#16203D] border border-slate-700 text-white placeholder-slate-400 text-xs focus:border-[#007AFF] outline-none transition-all"
-                                    placeholder="Search catalog for building materials, tools..."
-                                />
-                                <button type="submit" className="absolute inset-y-1.5 right-1.5 px-4 py-1 rounded-full bg-[#007AFF] hover:bg-[#0066CC] text-white font-bold text-xs transition-all shadow-sm">
-                                    Search
-                                </button>
-                            </form>
-                        </div>
-
-                        {/* 3. Right side actions */}
-                        <div className="flex items-center gap-1 sm:gap-2 ml-auto shrink-0">
-
-                            {/* Desktop nav links */}
-                            <Link to="/products" className="hidden lg:flex text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors px-3 py-2">
-                                Catalog
+                        {/* 2. Desktop Navigation Center */}
+                        <nav className="hidden md:flex items-center gap-8">
+                            <Link to="/" className={`text-xs uppercase font-bold tracking-wider transition-colors ${location.pathname === '/' ? 'text-[#007AFF]' : 'text-slate-700 hover:text-[#007AFF]'}`}>
+                                Home
                             </Link>
-                            <Link to="/about" className="hidden lg:flex text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors px-3 py-2">
+                            <Link to="/products" className={`text-xs uppercase font-bold tracking-wider transition-colors ${location.pathname === '/products' ? 'text-[#007AFF]' : 'text-slate-700 hover:text-[#007AFF]'}`}>
+                                Products
+                            </Link>
+                            <Link to="/about" className={`text-xs uppercase font-bold tracking-wider transition-colors ${location.pathname === '/about' ? 'text-[#007AFF]' : 'text-slate-700 hover:text-[#007AFF]'}`}>
                                 About Us
                             </Link>
-                            <Link to="/contact" className="hidden lg:flex text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors px-3 py-2">
+                            <Link to="/contact" className={`text-xs uppercase font-bold tracking-wider transition-colors ${location.pathname === '/contact' ? 'text-[#007AFF]' : 'text-slate-700 hover:text-[#007AFF]'}`}>
                                 Contact
                             </Link>
-                            <div className="w-px h-5 bg-slate-700 hidden lg:block mx-1" />
+                        </nav>
 
-                            {/* Mobile search icon */}
+                        {/* 3. Search & Actions Right */}
+                        <div className="flex items-center gap-3">
+                            {/* Search Button Toggle */}
                             <button
                                 onClick={() => setShowMobileSearch(!showMobileSearch)}
-                                className="md:hidden p-2 text-slate-300 hover:bg-slate-800 rounded-xl transition-colors"
+                                className="p-2 text-slate-700 hover:text-[#007AFF] hover:bg-slate-100 rounded-full transition-colors"
+                                title="Search Products"
                             >
-                                <Search className="w-5 h-5" />
+                                <Search className="w-4 h-4" />
                             </button>
 
-                            {/* Quote / WhatsApp Icon */}
-                            <a href="https://wa.me/97470605494" target="_blank" rel="noopener noreferrer" className="relative p-2 text-slate-300 hover:text-emerald-400 transition-colors" title="Get Quote via WhatsApp">
-                                <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-7 object-contain drop-shadow-sm opacity-90 hover:opacity-100 transition-opacity" />
-                            </a>
+                            {/* Request a Quote Blue Pill Button */}
+                            <Link
+                                to="/contact"
+                                className="hidden sm:inline-flex items-center justify-center px-5 py-2 rounded-full bg-[#007AFF] hover:bg-[#0066CC] text-white font-bold text-xs tracking-wide transition-all shadow-sm"
+                            >
+                                Request a Quote
+                            </Link>
 
-                            {/* Account */}
-                            {user ? (
-                                <div className="relative group hidden sm:block">
-                                    <button className="p-2 text-slate-300 hover:text-white transition-colors">
-                                        <div className="w-8 h-8 rounded-full bg-[#16203D] border border-slate-700 flex items-center justify-center">
-                                            <User className="w-4 h-4 text-white" />
-                                        </div>
-                                    </button>
-                                    <div className="absolute right-0 top-full mt-2 w-48 bg-[#16203D] rounded-2xl shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 z-50">
-                                        <div className="p-4 border-b border-slate-700">
-                                            <p className="text-xs font-bold text-white truncate">{user.email}</p>
-                                            <p className="text-[10px] text-slate-400 capitalize">{user.role || 'Admin'} Account</p>
-                                        </div>
-                                        <div className="p-2">
-                                            <Link to={user.isAdmin ? "/admin/dashboard" : "/profile"} className="flex items-center gap-2 px-3 py-2 text-xs font-bold text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg transition-colors">
-                                                <LayoutDashboard className="w-4 h-4" /> Dashboard
-                                            </Link>
-                                            <button onClick={logout} className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left mt-1">
-                                                <LogOut className="w-4 h-4" /> Sign Out
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <Link to="/admin/login" className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#007AFF] hover:bg-[#0066CC] rounded-full transition-all shadow-sm">
-                                    <User className="w-3.5 h-3.5" />
-                                    <span>Sign In</span>
+                            {/* User Account / Admin */}
+                            {user && (
+                                <Link to={user.isAdmin ? "/admin/dashboard" : "/profile"} className="p-2 text-slate-700 hover:text-[#007AFF] transition-colors">
+                                    <User className="w-4 h-4" />
                                 </Link>
                             )}
 
                             {/* Mobile Menu Toggle */}
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="lg:hidden p-2 text-slate-300 hover:bg-slate-800 rounded-xl transition-colors"
+                                className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
                             >
                                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                             </button>
                         </div>
                     </div>
 
-                    {/* Mobile Search Bar — drops down under header */}
+                    {/* Search Bar Dropdown */}
                     <AnimatePresence>
                         {showMobileSearch && (
                             <motion.div
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="md:hidden overflow-hidden"
+                                className="overflow-hidden pt-3"
                             >
-                                <form onSubmit={handleSearch} className="w-full relative py-3">
+                                <form onSubmit={handleSearch} className="w-full relative">
                                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                                     <input
                                         autoFocus
                                         type="text"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-10 pr-16 py-2.5 rounded-full bg-[#16203D] border border-slate-700 text-white placeholder-slate-400 text-xs outline-none"
-                                        placeholder="Search products..."
+                                        className="w-full pl-10 pr-24 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:border-[#007AFF] outline-none"
+                                        placeholder="Search for building materials, tools..."
                                     />
-                                    <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-full bg-[#007AFF] text-white text-xs font-bold">
-                                        Go
+                                    <button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-1 rounded-full bg-[#007AFF] text-white text-xs font-bold">
+                                        Search
                                     </button>
                                 </form>
                             </motion.div>
@@ -215,55 +144,40 @@ const Header = () => {
                     <>
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden"
+                            className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden"
                             onClick={() => setIsOpen(false)}
                         />
                         <motion.div
                             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 h-full w-4/5 max-w-sm glass-card !border-y-0 !border-r-0 !rounded-none !rounded-l-[24px] z-50 flex flex-col pt-6 pb-8 px-6 overflow-y-auto"
+                            className="fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white z-50 flex flex-col pt-6 pb-8 px-6 shadow-2xl"
                         >
-                            <div className="flex items-center justify-between mb-8">
+                            <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
                                 <Link to="/" onClick={() => setIsOpen(false)}>
-                                    <img src={logo} alt="HexaWeld" className="h-20 sm:h-24 w-auto object-contain" />
+                                    <JtLogo dark={false} />
                                 </Link>
                                 <button onClick={() => setIsOpen(false)} className="p-2 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200">
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
-                            <div className="flex flex-col gap-1 flex-1">
+                            <div className="flex flex-col gap-2 flex-1">
                                 {[
-                                    { to: '/', label: '  Home' },
-                                    { to: '/products', label: '  All Products' },
-                                    { to: '/about', label: ' About Us' },
-                                    { to: '/contact', label: '  Contact & Support' },
+                                    { to: '/', label: 'Home' },
+                                    { to: '/products', label: 'Products' },
+                                    { to: '/about', label: 'About Us' },
+                                    { to: '/contact', label: 'Contact' },
                                 ].map(({ to, label }) => (
-                                    <Link key={to} to={to} className="text-base font-semibold text-slate-800 py-3.5 px-4 rounded-xl hover:bg-[#007AFF]/10 hover:text-[#007AFF] transition-colors">
+                                    <Link key={to} to={to} className="text-sm font-bold uppercase tracking-wider text-slate-800 py-3 px-4 rounded-xl hover:bg-slate-50 hover:text-[#007AFF] transition-colors">
                                         {label}
                                     </Link>
                                 ))}
                             </div>
 
                             <div className="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-3">
-                                <a href="https://wa.me/919061627236" target="_blank" rel="noopener noreferrer"
-                                    className="btn-outline !py-3.5 !px-5 !rounded-xl !text-sm flex items-center justify-center gap-2">
-                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-6 object-contain drop-shadow-sm" /> Get Quote on WhatsApp
-                                </a>
-                                {user ? (
-                                    <>
-                                        <Link to={user.isAdmin ? "/admin/dashboard" : "/profile"} className="btn-outline !py-3 !px-5 !rounded-xl !text-sm flex items-center justify-center gap-2">
-                                            <LayoutDashboard className="w-4 h-4" /> Admin Dashboard
-                                        </Link>
-                                        <button onClick={logout} className="flex items-center justify-center gap-2 py-3 px-5 rounded-xl border-2 border-red-100 text-red-600 font-semibold text-sm hover:bg-red-50">
-                                            <LogOut className="w-4 h-4" /> Sign Out
-                                        </button>
-                                    </>
-                                ) : (
-                                    <Link to="/admin/login" className="btn-outline !py-3 !px-5 !rounded-xl !text-sm flex items-center justify-center gap-2">
-                                        <User className="w-4 h-4" /> Sign In
-                                    </Link>
-                                )}
+                                <Link to="/contact" className="w-full py-3 rounded-full bg-[#007AFF] text-white text-center font-bold text-xs">
+                                    Request a Quote
+                                </Link>
                             </div>
                         </motion.div>
                     </>
