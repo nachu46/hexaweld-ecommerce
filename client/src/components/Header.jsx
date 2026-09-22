@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, ShoppingBag, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag, User, LogOut, LayoutDashboard, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
