@@ -1,27 +1,19 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { MapPin, Phone, Mail, Clock, ChevronRight, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
-
 const contactItems = [
-    { icon: MapPin, label: 'Our Location', value: 'Al kassarat Street, Industrial Area\nstreet 5, Qatar', color: 'text-slate-500', bg: 'bg-slate-50' },
-    { icon: Phone, label: 'Phone Number', value: '+974 70605494\n+974 74080005', sub: 'Sat–Thu 8am – 6pm', color: 'text-blue-500', bg: 'bg-blue-50' },
-    { icon: Mail, label: 'Email Address', value: 'jazatrading@gmail.com', color: 'text-emerald-500', bg: 'bg-emerald-50' },
-    { icon: Clock, label: 'Working Hours', value: 'Sat–Thu: 8:00 AM – 6:00 PM', sub: 'Friday: Closed', color: 'text-purple-500', bg: 'bg-purple-50' },
+    { icon: MapPin, label: 'Location Address', value: 'Al Kassarat Street, Industrial Area, Street 5, Qatar' },
+    { icon: Phone, label: 'Direct Phone', value: '+974 70605494 / +974 74080005' },
+    { icon: Mail, label: 'Email Address', value: 'jazatrading@gmail.com' },
+    { icon: Clock, label: 'Working Hours', value: 'Sat – Thu: 8:00 AM – 6:00 PM (Friday Closed)' },
 ];
 
-
-const fadeUp = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
-};
-const stagger = { show: { transition: { staggerChildren: 0.08 } } };
-
 const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+    const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
@@ -37,171 +29,166 @@ const Contact = () => {
                 customerName: form.name,
                 customerEmail: form.email,
                 customerPhone: form.phone,
-                message: `Subject: ${form.subject}\n\n${form.message}`,
-                source: 'form',
+                message: `Company: ${form.company || 'N/A'}\nSubject: ${form.subject || 'N/A'}\n\n${form.message}`,
+                source: 'contact_page_form',
             });
             setSuccess(true);
-            setForm({ name: '', email: '', phone: '', subject: '', message: '' });
+            setForm({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
         } catch (err) {
-            setError('Something went wrong. Please try WhatsApp instead.');
+            setError('Could not send enquiry. Please connect via WhatsApp directly.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen">
-            {/* ── Breadcrumb ── */}
-            <div className="border-b border-white/40 glass-navbar relative z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-[#64748B]">
-                    <span>Home</span>
-                    <ChevronRight className="w-3 h-3" />
-                    <span className="text-[#007AFF] font-medium">Contact</span>
-                </div>
-            </div>
+        <div className="flex flex-col bg-white text-slate-900 font-sans min-h-screen">
 
-            {/* ── Page Header ── */}
-            <div className="py-12 border-b border-white/40 relative z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                        <p className="section-label mb-2">Contact Us</p>
-                        <h1 className="text-4xl font-black text-[#0F172A] mb-2">Get in <span className="text-gradient-orange">Touch</span></h1>
-                        <p className="text-[#64748B]">Have a question or bulk order? We'd love to hear from you.</p>
-                    </motion.div>
-                </div>
-            </div>
+            {/* ══ 1. HERO BANNER ARCH (Matching Front Page Design) ══════════════ */}
+            <section className="px-4 sm:px-6 lg:px-8 pt-3 pb-8">
+                <div className="max-w-7xl mx-auto bg-[#0B132B] rounded-3xl overflow-hidden relative text-white p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-xl">
+                    <div className="flex items-center justify-between z-10">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-300">
+                            CONTACT & ENQUIRIES • QATAR
+                        </span>
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                            JAZA TRADING W.L.L
+                        </span>
+                    </div>
 
-            {/* ── Main ── */}
-            <section className="py-12">
+                    <div className="my-6 z-10 max-w-2xl">
+                        <h1 className="text-4xl sm:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+                            Let’s build<br />
+                            <span className="text-slate-200">something together.</span>
+                        </h1>
+                        <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Have a project in mind or bulk building material requirements? Send us your enquiry and our Qatar sales team will get back to you promptly.
+                        </p>
+                    </div>
+
+                    <div className="z-10 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-bold uppercase tracking-wider">
+                        <span>FAST WHOLESALE QUOTES</span>
+                        <span>WE RESPOND WITHIN 1 BUSINESS DAY</span>
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 2. MAIN CONTACT & FORM SECTION ══════════════════════════════ */}
+            <section className="py-14 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
-                        {/* Contact Form */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.55 }}
-                            className="card rounded-2xl p-8 shadow-card-lg"
-                        >
-                            <h2 className="text-xl font-bold text-[#0F172A] mb-1">Request a Quote</h2>
-                            <p className="text-[#64748B] text-sm mb-6">We reply within 24 hours on business days.</p>
+                        {/* Left Info Column */}
+                        <div className="lg:col-span-5 space-y-6">
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">GET IN TOUCH</span>
+                                <div className="w-12 h-px bg-slate-300" />
+                            </div>
+
+                            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+                                Contact Information
+                            </h2>
+                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Reach out directly via phone, email, or visit our facility in Qatar's Industrial Area.
+                            </p>
+
+                            <div className="space-y-4 pt-2">
+                                {contactItems.map((item) => (
+                                    <div key={item.label} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4 shadow-sm">
+                                        <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#007AFF] flex items-center justify-center shrink-0 mt-0.5">
+                                            <item.icon className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">{item.label}</span>
+                                            <p className="font-bold text-xs sm:text-sm text-slate-900 leading-snug">{item.value}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* WhatsApp Direct Banner */}
+                            <a
+                                href="https://wa.me/97470605494"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-2xl flex items-center gap-4 transition-all shadow-md group"
+                            >
+                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shrink-0">
+                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-7 object-contain" />
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-bold text-sm">Direct WhatsApp Support</h4>
+                                    <p className="text-emerald-100 text-xs">+974 70605494 / +974 74080005</p>
+                                </div>
+                                <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+                            </a>
+                        </div>
+
+                        {/* Right RFQ Form */}
+                        <div className="lg:col-span-7 bg-[#EBF1F8] p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm">
+                            <h2 className="text-2xl font-black text-slate-900 mb-1">Send an Enquiry</h2>
+                            <p className="text-slate-600 text-xs mb-6">Fill out your requirement details below for a wholesale quote.</p>
 
                             {success ? (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="flex flex-col items-center justify-center py-12 text-center gap-4"
-                                >
-                                    <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center">
-                                        <CheckCircle className="w-8 h-8 text-emerald-500" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-bold text-[#0F172A] mb-1">Message Sent!</h3>
-                                        <p className="text-[#64748B] text-sm">Our team will get back to you within 24 hours.</p>
-                                    </div>
-                                    <button onClick={() => setSuccess(false)} className="btn-outline !rounded-full !px-6 !py-2 text-sm">
-                                        Send Another
+                                <div className="text-center py-10">
+                                    <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
+                                    <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Submitted Successfully!</h3>
+                                    <p className="text-slate-600 text-xs mb-6">Our Qatar sales team will contact you within 1 business day.</p>
+                                    <button onClick={() => setSuccess(false)} className="px-6 py-2.5 rounded-full bg-[#0B132B] text-white text-xs font-bold">
+                                        Send Another Enquiry
                                     </button>
-                                </motion.div>
+                                </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Name *</label>
-                                            <input required name="name" type="text" value={form.name} onChange={handleChange} className="input" placeholder="Your Name" />
+                                            <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Name *</label>
+                                            <input required name="name" type="text" value={form.name} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Your Name" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Email</label>
-                                            <input name="email" type="email" value={form.email} onChange={handleChange} className="input" placeholder="your@email.com" />
+                                            <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Company</label>
+                                            <input name="company" type="text" value={form.company} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Company Name" />
                                         </div>
-                                    </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Phone *</label>
-                                            <input required name="phone" type="tel" value={form.phone} onChange={handleChange} className="input" placeholder="+91 98765 43210" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Subject</label>
-                                            <input name="subject" type="text" value={form.subject} onChange={handleChange} className="input" placeholder="Product Enquiry" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Message *</label>
-                                        <textarea required name="message" rows={5} value={form.message} onChange={handleChange} className="input resize-none" placeholder="Tell us about your requirement, quantities, or any specific questions..." />
                                     </div>
 
-                                    {error && (
-                                        <p className="text-red-500 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-2">{error}</p>
-                                    )}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Email *</label>
+                                            <input required name="email" type="email" value={form.email} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="email@company.com" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Phone</label>
+                                            <input name="phone" type="tel" value={form.phone} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="+974 70605494" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Subject</label>
+                                        <input name="subject" type="text" value={form.subject} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Building Material Wholesale Order" />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Message / Requirements *</label>
+                                        <textarea required name="message" rows={4} value={form.message} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs resize-none focus:border-[#007AFF] outline-none" placeholder="Enter product names, quantities, or specific project requirements..." />
+                                    </div>
+
+                                    {error && <p className="text-red-600 text-xs bg-red-50 p-3 rounded-lg border border-red-200">{error}</p>}
 
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-4 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white text-sm font-bold flex items-center justify-center gap-2 transition-all hover:shadow-lg disabled:opacity-60"
+                                        className="w-full py-3.5 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
                                     >
-
-                                        {loading ? (
-                                            <span className="animate-pulse">Sending...</span>
-                                        ) : (
-                                            <><Send className="w-4 h-4" /> Send Message</>
-                                        )}
+                                        {loading ? 'Submitting...' : <>Request a Quote <ArrowRight className="w-4 h-4 text-white" /></>}
                                     </button>
                                 </form>
                             )}
-                        </motion.div>
+                        </div>
 
-                        {/* Info + WhatsApp */}
-                        <motion.div
-                            variants={stagger}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="flex flex-col gap-4"
-                        >
-                            {contactItems.map((item) => (
-                                <motion.div
-                                    key={item.label}
-                                    variants={fadeUp}
-                                    whileHover={{ y: -2 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="card card-hover rounded-xl p-5 flex items-start gap-4"
-                                >
-                                    <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
-                                        <item.icon className={`w-5 h-5 ${item.color}`} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1">{item.label}</p>
-                                        {item.value.split('\n').map((line, i) => (
-                                            <p key={i} className="text-[#0F172A] font-semibold text-sm">{line}</p>
-                                        ))}
-                                        {item.sub && <p className="text-[#94A3B8] text-xs mt-0.5">{item.sub}</p>}
-                                    </div>
-                                </motion.div>
-                            ))}
-
-                            {/* WhatsApp CTA */}
-                            <motion.a
-                                variants={fadeUp}
-                                href="https://wa.me/97470605494"
-                                target="_blank"
-
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-4 p-5 bg-[#25D366] hover:bg-[#20BA5A] rounded-xl transition-all duration-300 hover:shadow-lg group"
-                            >
-                                <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
-                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-8 object-contain drop-shadow-sm" />
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-white font-bold">Direct WhatsApp Support</p>
-                                    <p className="text-emerald-100 text-sm">Instant response — chat with our team now</p>
-                                </div>
-                                <ChevronRight className="w-5 h-5 text-white/70 group-hover:translate-x-1 transition-transform" />
-                            </motion.a>
-                        </motion.div>
                     </div>
                 </div>
             </section>
+
         </div>
     );
 };
