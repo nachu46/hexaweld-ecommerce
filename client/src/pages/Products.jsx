@@ -66,7 +66,9 @@ const Products = () => {
 
     const filtered = products.filter((p) => {
         const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchCat = selectedCategory ? p.category?._id === selectedCategory : true;
+        const matchCat = selectedCategory
+            ? (p.category?._id === selectedCategory || p.category?.name === selectedCategory || p.category === selectedCategory)
+            : true;
         const matchBrand = selectedBrand ? p.brand?.toLowerCase() === selectedBrand.toLowerCase() : true;
         return matchSearch && matchCat && matchBrand;
     });
