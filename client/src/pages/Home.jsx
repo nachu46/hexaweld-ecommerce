@@ -388,56 +388,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ══ 6. CONTACT US BANNER (Matching Reference Screenshot) ═════════ */}
-            <section className="py-14 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2 mb-6">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">CONTACT US</span>
-                        <div className="w-12 h-px bg-slate-300" />
-                    </div>
-
-                    <div className="bg-[#EBF1F8] p-8 sm:p-14 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div className="lg:col-span-8 space-y-6">
-                            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                                Let’s build<br />something together.
-                            </h2>
-
-                            <div className="flex flex-wrap items-center gap-4">
-                                <Link
-                                    to="/contact"
-                                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md transition-all group"
-                                >
-                                    Request a Quote <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-                                </Link>
-
-                                <div className="text-xs text-slate-700 font-bold space-y-1 pl-2">
-                                    <div className="flex items-center gap-2">
-                                        <Phone className="w-3.5 h-3.5 text-[#0B132B]" />
-                                        <span>+974 70605494 / +974 74080005</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Mail className="w-3.5 h-3.5 text-[#0B132B]" />
-                                        <span>jazatrading@gmail.com</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="lg:col-span-4 flex flex-col items-center justify-center text-center">
-                            <Link
-                                to="/contact"
-                                className="w-24 h-24 rounded-full bg-[#0B132B] hover:scale-105 text-white flex items-center justify-center transition-all shadow-xl mb-3"
-                            >
-                                <ArrowRight className="w-10 h-10 text-white" />
-                            </Link>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                SAME MATERIALS. BRIGHTER TOMORROWS.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
     );
 };

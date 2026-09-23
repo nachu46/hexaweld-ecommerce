@@ -19,50 +19,25 @@ const Footer = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
 
-                {/* ══ 1. TOP CTA SECTION (Matching Reference Screenshot) ════════════ */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    {/* Left CTA Box */}
-                    <div className="md:col-span-6 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between min-h-[220px]">
-                        <div>
-                            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-snug mb-2">
-                                Need expert guidance for<br />your next project?
-                            </h3>
-                            <p className="text-slate-500 text-xs sm:text-sm font-medium">
-                                Our engineering team is ready to help.
-                            </p>
-                        </div>
-                        <div className="pt-6">
-                            <Link
-                                to="/contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 hover:border-slate-900 bg-white hover:bg-slate-900 hover:text-white transition-all duration-300 text-xs font-bold text-slate-800 shadow-sm group"
-                            >
-                                <span>Get in Touch</span>
-                                <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </Link>
-                        </div>
+                {/* ══ 1. TOP CTA SECTION ════════════ */}
+                <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-snug mb-2">
+                            Need expert guidance for your next project?
+                        </h3>
+                        <p className="text-slate-500 text-xs sm:text-sm font-medium">
+                            Our Qatar engineering team is ready to help with technical specifications and equipment selection.
+                        </p>
                     </div>
-
-                    {/* Right Image Banner Box */}
-                    <Link
-                        to="/contact"
-                        className="md:col-span-6 rounded-3xl overflow-hidden min-h-[220px] h-full relative border border-slate-200 shadow-sm group block"
-                        title="Contact Engineering Team"
-                    >
-                        <img
-                            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80"
-                            alt="Industrial Engineering Team"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
-                        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
-                            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
-                                Qatar Industrial & Site Engineering
-                            </span>
-                            <div className="w-9 h-9 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                                <ArrowUpRight className="w-4 h-4 text-slate-900" />
-                            </div>
-                        </div>
-                    </Link>
+                    <div className="shrink-0">
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-slate-300 hover:border-slate-900 bg-white hover:bg-slate-900 hover:text-white transition-all duration-300 text-xs font-bold text-slate-800 shadow-sm group"
+                        >
+                            <span>Get in Touch</span>
+                            <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                    </div>
                 </div>
 
                 {/* ══ 2. MIDDLE MAIN FOOTER SECTION (Matching Reference Screenshot) ══ */}
@@ -150,7 +125,7 @@ const Footer = () => {
                                     <span>jazatrading@gmail.com</span>
                                 </a>
                                 <a href="https://wa.me/97470605494" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
-                                    <MessageSquare className="w-4 h-4 text-emerald-500 shrink-0" />
+                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain shrink-0" />
                                     <span>+974 7060 5494 (WhatsApp Sales)</span>
                                 </a>
                             </div>
