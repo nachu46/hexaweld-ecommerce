@@ -84,7 +84,7 @@ const AdminManagement = () => {
                     <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
                             { label: 'Full Name', key: 'name', type: 'text', placeholder: 'John Doe' },
-                            { label: 'Email', key: 'email', type: 'email', placeholder: 'john@hexaweld.com' },
+                            { label: 'Email', key: 'email', type: 'email', placeholder: 'john@jazatrading.com' },
                             { label: 'Password', key: 'password', type: 'password', placeholder: '••••••••' },
                         ].map(({ label, key, type, placeholder }) => (
                             <div key={key}>

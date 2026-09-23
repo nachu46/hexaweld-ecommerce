@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs');
 
 const users = [
     {
-        name: 'Hexaweld Admin',
-        email: 'admin@hexaweld.com',
+        name: 'Jaza Trading Admin',
+        email: 'admin@jazatrading.com',
         password: '1234', // Will be hashed by model pre-save hook? 
         // Wait, insertMany doesn't trigger pre-save hooks in Mongoose 5.x/6.x usually unless using create.
         // I should manually hash it here or use create loop. 

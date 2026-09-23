@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'hexaweld_uploads',
+        folder: 'jazatrading_uploads',
         allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
     },
 });

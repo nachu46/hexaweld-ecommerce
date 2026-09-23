@@ -57,7 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hexaweld API is running...');
+    res.send('Jaza Trading W.L.L API is running...');
 });
 
 const PORT = process.env.PORT || 5000;

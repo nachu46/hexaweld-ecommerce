@@ -25,7 +25,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
         const productUrl = `${SITE_URL}/product/${product._id}`;
         const skuPart = product.SKU ? ` (SKU: ${product.SKU})` : '';
         const message = encodeURIComponent(
-            `Hello Hexaweld, I am interested in this product: *${product.name}*${skuPart}\n${productUrl}`
+            `Hello Jaza Trading W.L.L, I am interested in this product: *${product.name}*${skuPart}\n${productUrl}`
         );
         axios.post('/api/enquiries', {
             productId: product._id,

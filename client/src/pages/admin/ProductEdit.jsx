@@ -289,7 +289,7 @@ const ProductEdit = () => {
                             </Field>
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Brand">
-                                    <input type="text" className={inputCls} value={brand} onChange={e => setBrand(e.target.value)} placeholder="e.g. Hexaweld" />
+                                    <input type="text" className={inputCls} value={brand} onChange={e => setBrand(e.target.value)} placeholder="e.g. Tork" />
                                 </Field>
                                 <Field label="Category" hint="required">
                                     <select required className={inputCls} value={category} onChange={e => setCategory(e.target.value)}>
@@ -565,7 +565,7 @@ const ProductEdit = () => {
                             <div className="mt-4 border border-gray-200 rounded-xl p-4 bg-gray-50">
                                 <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">Search Preview</p>
                                 <p className="text-blue-700 text-base font-medium hover:underline cursor-pointer">{seoTitle || name}</p>
-                                <p className="text-emerald-700 text-xs mt-0.5">hexaweld.com/product/{slug}</p>
+                                <p className="text-emerald-700 text-xs mt-0.5">jazatrading.com/product/{slug}</p>
                                 <p className="text-gray-600 text-sm mt-1 line-clamp-2">{seoDescription || description}</p>
                             </div>
                         )}

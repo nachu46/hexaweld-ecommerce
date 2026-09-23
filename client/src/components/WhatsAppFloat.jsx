@@ -14,7 +14,7 @@ const WhatsAppFloat = () => {
     }, []);
 
     const handleClick = () => {
-        const msg = encodeURIComponent('Hi Hexaweld! I would like to enquire about your products.');
+        const msg = encodeURIComponent('Hi Jaza Trading W.L.L! I would like to enquire about your products.');
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
     };
 

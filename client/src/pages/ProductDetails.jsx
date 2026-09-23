@@ -65,7 +65,7 @@ const ProductDetails = () => {
 
     const handleWhatsApp = () => {
         const message = encodeURIComponent(
-            `Hello Hexaweld, I am interested in this product: *${product.name}*${skuPart}${variantText}\n${productUrl}`
+            `Hello Jaza Trading W.L.L, I am interested in this product: *${product.name}*${skuPart}${variantText}\n${productUrl}`
         );
         // Track
         axios.post('/api/enquiries', {
@@ -109,7 +109,7 @@ const ProductDetails = () => {
     return (
         <>
             <Helmet>
-                <title>{product.seoTitle || product.name} | Hexaweld</title>
+                <title>{product.seoTitle || product.name} | Jaza Trading W.L.L</title>
                 <meta name="description" content={product.seoDescription || product.description} />
                 <meta name="keywords" content={product.seoKeywords || (product.tags || []).join(', ')} />
                 <meta property="og:title" content={product.seoTitle || product.name} />
