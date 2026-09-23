@@ -42,24 +42,27 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Right Image CTA Banner Box */}
-                    <div className="md:col-span-6 rounded-3xl overflow-hidden min-h-[220px] relative border border-slate-200 shadow-sm group">
+                    {/* Right Image Banner Box */}
+                    <Link
+                        to="/contact"
+                        className="md:col-span-6 rounded-3xl overflow-hidden min-h-[220px] h-full relative border border-slate-200 shadow-sm group block"
+                        title="Contact Engineering Team"
+                    >
                         <img
                             src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80"
-                            alt="Engineering Guidance"
+                            alt="Industrial Engineering Team"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
-                        <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-[1px]" />
-                        <div className="absolute inset-0 p-8 flex items-end justify-start">
-                            <Link
-                                to="/contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/90 backdrop-blur-md hover:bg-white text-slate-900 transition-all duration-300 text-xs font-bold shadow-lg hover:scale-105"
-                            >
-                                <span>Get in Touch</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
+                        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
+                            <span className="text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
+                                Qatar Industrial & Site Engineering
+                            </span>
+                            <div className="w-9 h-9 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                                 <ArrowUpRight className="w-4 h-4 text-slate-900" />
-                            </Link>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* ══ 2. MIDDLE MAIN FOOTER SECTION (Matching Reference Screenshot) ══ */}
