@@ -29,6 +29,29 @@ const Home = () => {
     const [formSuccess, setFormSuccess] = useState(false);
     const [formError, setFormError] = useState('');
 
+    // Dynamic Brands State
+    const [dynamicBrands, setDynamicBrands] = useState([]);
+
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const { data } = await axios.get(`${API_URL}/api/brands`);
+                if (Array.isArray(data) && data.length > 0) {
+                    setDynamicBrands(data);
+                }
+            } catch (err) {
+                console.error('Failed to load dynamic brands:', err);
+            }
+        };
+        fetchBrands();
+    }, []);
+
+    const getImageUrl = (url) => {
+        if (!url) return '';
+        if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+        return `${API_URL}${url.startsWith('/') ? '' : '/'}${url}`;
+    };
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         setFormError('');
@@ -284,33 +307,83 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ══ 5. OUR BRANDS (Matching Reference Screenshot) ═════════════════ */}
+            {/* ══ 5. OUR BRANDS ═════════════════ */}
             <section className="py-14 bg-white border-t border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2 mb-8">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">OUR BRANDS</span>
-                        <div className="w-12 h-px bg-slate-300" />
+                    <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">OUR BRANDS & PARTNERS</span>
+                            <div className="w-12 h-px bg-slate-300" />
+                        </div>
                     </div>
 
                     {/* Main Registered Brands */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 items-center text-center mb-8">
-                        {REGISTERED_BRANDS.map((b) => (
-                            <Link
-                                key={b.name}
-                                to={`/products?brand=${encodeURIComponent(b.name.replace('®', ''))}`}
-                                className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-900 transition-all flex flex-col items-center justify-center h-20 shadow-sm"
-                            >
-                                <span className={`text-sm tracking-tight ${b.style}`}>{b.name}</span>
-                            </Link>
-                        ))}
+                        {dynamicBrands.length > 0 ? (
+                            dynamicBrands.filter(b => b.isRegistered !== false).map((b) => (
+                                <Link
+                                    key={b._id || b.name}
+                                    to={`/products?brand=${encodeURIComponent(b.name.replace('®', ''))}`}
+                                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-900 transition-all flex flex-col items-center justify-center h-24 shadow-sm group hover:bg-white"
+                                >
+                                    {b.logo ? (
+                                        <img
+                                            src={getImageUrl(b.logo)}
+                                            alt={b.name}
+                                            className="max-h-12 max-w-[90%] object-contain group-hover:scale-105 transition-transform"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.style.display = 'none';
+                                                e.target.nextSibling.style.display = 'block';
+                                            }}
+                                        />
+                                    ) : null}
+                                    <span
+                                        className={`text-xs font-black tracking-tight text-slate-900 ${b.logo ? 'hidden mt-1' : 'block'}`}
+                                    >
+                                        {b.name}
+                                    </span>
+                                    {b.badgeTag && (
+                                        <span className="text-[9px] font-bold text-blue-600 tracking-tighter uppercase mt-1">
+                                            {b.badgeTag}
+                                        </span>
+                                    )}
+                                </Link>
+                            ))
+                        ) : (
+                            REGISTERED_BRANDS.map((b) => (
+                                <Link
+                                    key={b.name}
+                                    to={`/products?brand=${encodeURIComponent(b.name.replace('®', ''))}`}
+                                    className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-900 transition-all flex flex-col items-center justify-center h-20 shadow-sm"
+                                >
+                                    <span className={`text-sm tracking-tight ${b.style}`}>{b.name}</span>
+                                </Link>
+                            ))
+                        )}
                     </div>
 
                     {/* Brand Partners Horizontal List */}
                     <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-500 gap-3">
                         <span className="font-bold uppercase tracking-wider text-slate-900">Brand partners</span>
-                        {PARTNER_BRANDS.map((pb) => (
-                            <span key={pb} className="font-medium hover:text-slate-900 transition-colors">{pb}</span>
-                        ))}
+                        {dynamicBrands.length > 0 ? (
+                            dynamicBrands.map((pb) => (
+                                <Link
+                                    key={pb._id || pb.name}
+                                    to={`/products?brand=${encodeURIComponent(pb.name.replace('®', ''))}`}
+                                    className="font-medium hover:text-slate-900 transition-colors flex items-center gap-1.5"
+                                >
+                                    {pb.logo && (
+                                        <img src={getImageUrl(pb.logo)} alt={pb.name} className="w-4 h-4 object-contain rounded" />
+                                    )}
+                                    <span>{pb.name}</span>
+                                </Link>
+                            ))
+                        ) : (
+                            PARTNER_BRANDS.map((pb) => (
+                                <span key={pb} className="font-medium hover:text-slate-900 transition-colors">{pb}</span>
+                            ))
+                        )}
                     </div>
                 </div>
             </section>

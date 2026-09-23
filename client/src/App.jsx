@@ -17,6 +17,8 @@ import AdminManagement from './pages/admin/AdminManagement';
 import AdminEnquiries from './pages/admin/AdminEnquiries';
 import AdminBanners from './pages/admin/AdminBanners';
 import AdminAnnouncement from './pages/admin/AdminAnnouncement';
+import BrandList from './pages/admin/BrandList';
+import BrandEdit from './pages/admin/BrandEdit';
 import ProtectedRoute from './components/ProtectedRoute';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -48,6 +50,15 @@ function App() {
                     } />
                     <Route path="/admin/categories" element={
                         <ProtectedRoute requireAdmin><CategoryList /></ProtectedRoute>
+                    } />
+                    <Route path="/admin/brands" element={
+                        <ProtectedRoute requireAdmin><BrandList /></ProtectedRoute>
+                    } />
+                    <Route path="/admin/brands/new" element={
+                        <ProtectedRoute requireAdmin><BrandEdit /></ProtectedRoute>
+                    } />
+                    <Route path="/admin/brands/:id/edit" element={
+                        <ProtectedRoute requireAdmin><BrandEdit /></ProtectedRoute>
                     } />
                     <Route path="/admin/analytics" element={
                         <ProtectedRoute requireAdmin><Analytics /></ProtectedRoute>

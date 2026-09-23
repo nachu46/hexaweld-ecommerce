@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Package, List, MessageCircle, LayoutTemplate, Megaphone } from 'lucide-react';
+import { Package, List, MessageCircle, LayoutTemplate, Megaphone, ShieldCheck } from 'lucide-react';
 
 const Dashboard = () => {
-    const [stats, setStats] = useState({ products: 0, categories: 0, enquiries: 0, banners: 0, announcements: 0 });
+    const [stats, setStats] = useState({ products: 0, categories: 0, brands: 0, enquiries: 0, banners: 0, announcements: 0 });
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const [productsRes, categoriesRes, enquiriesRes, bannersRes, annRes] = await Promise.all([
+                const [productsRes, categoriesRes, brandsRes, enquiriesRes, bannersRes, annRes] = await Promise.all([
                     axios.get('/api/products'),
                     axios.get('/api/categories'),
+                    axios.get('/api/brands'),
                     axios.get('/api/enquiries'),
                     axios.get('/api/banners'),
                     axios.get('/api/announcement/all'),
@@ -19,6 +20,7 @@ const Dashboard = () => {
                 setStats({
                     products: productsRes.data.length,
                     categories: categoriesRes.data.length,
+                    brands: brandsRes.data.length,
                     enquiries: enquiriesRes.data.length,
                     banners: bannersRes.data.length,
                     announcements: annRes.data.length,
@@ -55,6 +57,18 @@ const Dashboard = () => {
                         </div>
                         <div className="bg-emerald-100 p-3 rounded-full">
                             <List className="w-8 h-8 text-emerald-600" />
+                        </div>
+                    </div>
+                </Link>
+
+                <Link to="/admin/brands" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition border border-amber-100">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-gray-500 text-sm font-medium">Partner Brands</p>
+                            <h2 className="text-3xl font-bold text-gray-900">{stats.brands}</h2>
+                        </div>
+                        <div className="bg-amber-100 p-3 rounded-full">
+                            <ShieldCheck className="w-8 h-8 text-amber-600" />
                         </div>
                     </div>
                 </Link>
@@ -98,6 +112,12 @@ const Dashboard = () => {
             <div className="flex flex-wrap gap-3">
                 <Link to="/admin/product/create" className="bg-brand-primary text-white px-6 py-3 rounded-md font-bold hover:bg-blue-700 transition">
                     Add New Product
+                </Link>
+                <Link to="/admin/brands/new" className="bg-amber-600 text-white px-6 py-3 rounded-md font-bold hover:bg-amber-700 transition">
+                    Add New Brand
+                </Link>
+                <Link to="/admin/brands" className="bg-slate-900 text-white px-6 py-3 rounded-md font-bold hover:bg-black transition">
+                    Manage Brands
                 </Link>
                 <Link to="/admin/products" className="bg-hex-dark text-white px-6 py-3 rounded-md font-bold hover:bg-gray-800 transition">
                     Manage Products
