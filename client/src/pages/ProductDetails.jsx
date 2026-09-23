@@ -8,7 +8,7 @@ import ImageGallery from '../components/ImageGallery';
 import { SkeletonDetail } from '../components/Skeletons';
 import ProductCard from '../components/ProductCard';
 
-const WHATSAPP_NUMBER = '919061627236';
+const WHATSAPP_NUMBER = '97470605494';
 const SITE_URL = window.location.origin;
 
 

@@ -146,9 +146,9 @@ const Footer = () => {
                                     <Mail className="w-4 h-4 text-purple-500 shrink-0" />
                                     <span>jazatrading@gmail.com</span>
                                 </a>
-                                <a href="https://wa.me/919061627236" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
+                                <a href="https://wa.me/97470605494" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
                                     <MessageSquare className="w-4 h-4 text-emerald-500 shrink-0" />
-                                    <span>+91 9061 627 236 (WhatsApp Sales)</span>
+                                    <span>+974 7060 5494 (WhatsApp Sales)</span>
                                 </a>
                             </div>
                         </div>
