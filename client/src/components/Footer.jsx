@@ -42,11 +42,11 @@ const Footer = () => {
 
                 {/* ══ 2. MIDDLE MAIN FOOTER SECTION (Matching Reference Screenshot) ══ */}
                 <div className="pt-12 border-t border-slate-200 relative">
-                    
+
                     {/* Background Subtle Watermark Text */}
                     <div className="absolute bottom-4 left-0 right-0 pointer-events-none select-none overflow-hidden opacity-5 text-center">
                         <span className="text-[120px] sm:text-[180px] font-black text-slate-900 tracking-tighter uppercase leading-none block">
-                            JAZA TRADING
+                            JAZA
                         </span>
                     </div>
 

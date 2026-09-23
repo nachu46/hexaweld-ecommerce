@@ -149,19 +149,19 @@ const BrandDirectory = () => {
                                         </div>
 
                                         <div className="flex items-center justify-between mb-2">
-                                            <h2 className="text-xl font-black text-slate-900 group-hover:text-blue-600 transition-colors">
+                                            <h2 className="text-xl font-black text-slate-900 group-hover:text-slate-700 transition-colors">
                                                 {b.name}
                                             </h2>
                                             {b.category && (
-                                                <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                                                <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
                                                     {b.category}
                                                 </span>
                                             )}
                                         </div>
 
                                         {b.badgeTag && (
-                                            <p className="text-xs font-bold text-blue-600 mb-3 flex items-center gap-1">
-                                                <Tag className="w-3 h-3" />
+                                            <p className="text-xs font-bold text-slate-700 mb-3 flex items-center gap-1">
+                                                <Tag className="w-3 h-3 text-slate-500" />
                                                 {b.badgeTag}
                                             </p>
                                         )}
@@ -171,7 +171,7 @@ const BrandDirectory = () => {
                                         </p>
 
                                         {/* Bottom Action */}
-                                        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-900 group-hover:text-blue-600">
+                                        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-900 group-hover:text-slate-700">
                                             <span>View Products & Catalog</span>
                                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </div>

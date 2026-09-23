@@ -4,9 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-
   *,
   *::before,
   *::after {
@@ -15,12 +13,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply text-[#1D1D1F] font-sans antialiased;
-    background: linear-gradient(135deg, #F5F5F7, #FFFFFF, #F5F5F7);
+    background: linear-gradient(135deg, #F8FAFC, #FFFFFF, #F8FAFC);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   h1,
@@ -32,17 +32,23 @@
     @apply font-bold tracking-tight;
   }
 
-
+  /* Sleek modern neutral scrollbar (eliminates bright neon blue bar) */
   ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-100;
+    background: #F1F5F9;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-[#007AFF] rounded-full;
+    background: #CBD5E1;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
   }
 }
 
@@ -51,19 +57,19 @@
   /* ── Premium Cards (Glassmorphism) ── */
   .card,
   .glass-card {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(226, 232, 240, 0.8);
     border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
   }
 
   .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.9);
   }
 
   /* ── Glass Button Base ── */
@@ -71,105 +77,77 @@
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
   }
 
-  /* ── Primary Ecommerce Button (Glass) ── */
+  /* ── Primary Ecommerce Button ── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
-    background: #007AFF;
+    background: #0F172A;
     color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
     border: none;
   }
 
   .btn-primary:hover {
-    background: #005BB5;
+    background: #1E293B;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 122, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.3);
   }
 
-  /* ── Dark Action Button (Premium feel Glass) ── */
+  /* ── Dark Action Button ── */
   .btn-dark {
-    @apply btn-base text-white bg-[#1D1D1F]/90 backdrop-blur-md border border-white/10;
-    box-shadow: 0 8px 20px -6px rgba(29, 29, 31, 0.4);
+    @apply btn-base text-white bg-[#0F172A] border border-slate-700;
+    box-shadow: 0 8px 20px -6px rgba(15, 23, 42, 0.4);
     border-radius: 12px;
   }
 
   .btn-dark:hover {
-    @apply bg-[#1D1D1F];
+    @apply bg-slate-800;
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px -6px rgba(15, 23, 42, 0.5);
   }
 
   /* ── Outline Glass Button ── */
   .btn-outline {
-    @apply btn-base text-[#1D1D1F];
-    background: rgba(255, 255, 255, 0.4);
+    @apply btn-base text-slate-800;
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(203, 213, 225, 0.8);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     border-radius: 12px;
   }
 
   .btn-outline:hover {
-    border-color: rgba(29, 29, 31, 0.2);
-    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(15, 23, 42, 0.4);
+    background: #ffffff;
     transform: translateY(-2px);
   }
 
-  /* ── Ghost Glass Button ── */
-  .btn-ghost {
-    @apply btn-base text-[#86868B] px-4 py-2 hover:bg-slate-100/50 hover:backdrop-blur-md hover:text-[#1D1D1F];
-  }
-
-  /* ── Section label ── */
-  .section-label {
-    @apply text-[#007AFF] text-sm font-black uppercase tracking-[0.15em] mb-2 block;
-  }
-
-  /* ── Sidebar link ── */
-  .sidebar-link {
-    @apply flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-[#64748B] rounded-xl hover:bg-slate-50 hover:text-[#007AFF] transition-all duration-200;
-  }
-
-  .sidebar-link.active {
-    @apply bg-slate-50 text-[#007AFF] font-bold shadow-sm ring-1 ring-slate-100;
-  }
-
-  /* ── Input (Glass Element) ── */
+  /* ── Input ── */
   .input {
-    @apply w-full px-4 py-3 text-[#1D1D1F] placeholder-[#86868B] text-sm focus:outline-none focus:border-[#007AFF] focus:ring-4 focus:ring-[#007AFF]/20 transition-all duration-300;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    @apply w-full px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 transition-all duration-300;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(203, 213, 225, 0.8);
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-  }
-
-  /* ── Badge ── */
-  .badge-orange {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-800 uppercase tracking-wide;
   }
 }
 
-@layer utilities {
-  .text-gradient-orange {
-    @apply bg-gradient-to-r from-[#007AFF] to-[#005bb5] bg-clip-text text-transparent;
+/* ── Continuous Moving Infinite Marquee Carousel ── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
   }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
-  .glass-panel {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  }
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
 
-  .glass-navbar {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  }
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* ── Skeleton shimmer ── */
@@ -177,7 +155,6 @@
   from {
     background-position: -200% 0;
   }
-
   to {
     background-position: 200% 0;
   }
@@ -189,52 +166,11 @@
   animation: shimmer 1.5s ease infinite;
 }
 
-/* ── Float animation ── */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* ── Scrollbar hide (for horizontal scroll strips) ── */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
+/* ── Scrollbar hide ── */
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-/* ── Mobile safe section padding ── */
-@media (max-width: 640px) {
-  .section-label {
-    font-size: 9px;
-  }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
