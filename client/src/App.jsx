@@ -18,6 +18,7 @@ import CategoryDetailsPage from './pages/CategoryDetailsPage';
 import Services from './pages/Services';
 import Industries from './pages/Industries';
 import FAQ from './pages/FAQ';
+import Career from './pages/Career';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import ShippingPolicy from './pages/ShippingPolicy';
@@ -72,6 +73,7 @@ function App() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/industries" element={<Industries />} />
                     <Route path="/faq" element={<FAQ />} />
+                    <Route path="/career" element={<Career />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/terms-and-conditions" element={<TermsConditions />} />
                     <Route path="/shipping-policy" element={<ShippingPolicy />} />

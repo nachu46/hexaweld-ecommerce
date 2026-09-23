@@ -1,28 +1,72 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ArrowRight, Phone, Mail, MapPin, Building2, ShieldCheck, CheckCircle2, FileText, ExternalLink } from 'lucide-react';
+import { ArrowRight, Phone, Mail, MapPin, Building2, ShieldCheck, CheckCircle2, FileText, Download, Award, Clock, Users, PackageCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
-// Registered Brand Trademarks fallback
-const REGISTERED_BRANDS = [
-    { name: 'TORK®', cat: 'Electricals & Tools', style: 'text-[#E11D48] font-black' },
-    { name: 'EUREX®', cat: 'Lock Cylinders & Handles', style: 'text-[#2563EB] font-black' },
-    { name: 'NEXT®', cat: 'Hand Tools & Painting', style: 'text-slate-900 font-black italic' },
-    { name: 'MARK SAFETY PRO®', cat: 'Safety Boots & PPE', style: 'bg-black text-[#FACC15] font-black px-2 py-1 rounded' },
-    { name: 'CLEXO®', cat: 'Sanitary Wares', style: 'text-[#0EA5E9] font-black' },
-    { name: 'EDON®', cat: 'Welders & Machinery', style: 'text-[#DC2626] font-black flex items-center gap-1' },
-    { name: 'TENZO®', cat: 'Power Tools', style: 'text-slate-900 font-black' }
+// Own Brands from Brief
+const OWN_BRANDS = [
+    { name: 'TORK®', cat: 'Electricals, power tools & accessories', tag: 'OWN BRAND', style: 'text-[#B15E2B] font-serif font-bold' },
+    { name: 'EUREX®', cat: 'Lock cylinders, door handles & lock bodies', tag: 'OWN BRAND', style: 'text-[#2E4046] font-serif font-bold' },
+    { name: 'NEXT®', cat: 'Hand tools & painting accessories', tag: 'OWN BRAND', style: 'text-[#1C1B17] font-black italic' },
+    { name: 'MARK SAFETY PRO®', cat: 'Safety shoes & safety products', tag: 'OWN BRAND', style: 'bg-[#1C1B17] text-[#B15E2B] font-bold px-2 py-0.5 rounded' },
+    { name: 'CLEXO®', cat: 'Sanitaryware', tag: 'OWN BRAND', style: 'text-[#2E4046] font-bold' },
+    { name: 'TENZO®', cat: 'Power tools & machineries', tag: 'OWN BRAND', style: 'text-[#1C1B17] font-bold' }
 ];
 
-// Partner Brands List fallback
-const PARTNER_BRANDS = [
-    'Vini-Tape', 'Oryx Paints', 'Tenby', 'National Paints', 'Total', 'EBM', 'Jotun', 'Mac Paints', 'Makita'
+// Distributed Partner Brands from Brief
+const DISTRIBUTED_BRANDS = [
+    'Vini-Tape', 'Oryx Paints', 'Tenby', 'National Paints', 'Total', 'EBM Coatings & Chemicals', 'Jotun', 'Mas Paints', 'Makita', 'Edon'
+];
+
+// Product Categories from Brief
+const CATEGORIES_BRIEF = [
+    {
+        title: 'Power & Hand Tools',
+        desc: 'Cordless drills, angle grinders, hammers, pliers, screwdriver sets & measuring tapes.',
+        categoryQuery: 'Electricals,%20Power%20Tools%20%26%20Accessories',
+        img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'Tork® & Tenzo®'
+    },
+    {
+        title: 'Door Hardware',
+        desc: 'Mortise lock bodies, high-security cylinder locks & keys, door handles & escutcheons.',
+        categoryQuery: 'Lock%20Cylinder,%20Door%20Handles%20%26%20Lock%20Body',
+        img: 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'Eurex®'
+    },
+    {
+        title: 'Painting Accessories',
+        desc: 'Paint rollers, trays, brushes, masking tape, drop sheets & surface preparation gear.',
+        categoryQuery: 'Hand%20Tools%20%26%20Painting%20Accessories',
+        img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'NexT® & Oryx Paints'
+    },
+    {
+        title: 'Safety & PPE',
+        desc: 'Steel-toe safety shoes, helmets, high-vis vests, safety glasses & work gloves.',
+        categoryQuery: 'Safety%20Shoes%20%26%20Safety%20Products',
+        img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'Mark Safety Pro®'
+    },
+    {
+        title: 'Sanitaryware',
+        desc: 'Wash basins, mixer taps, shower fittings & commercial plumbing accessories.',
+        categoryQuery: 'Sanitaryware',
+        img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'Clexo®'
+    },
+    {
+        title: 'Power Machineries',
+        desc: 'Generators, air compressors, industrial welding machines & chainsaws.',
+        categoryQuery: 'Power%20Tools%20%26%20Machineries',
+        img: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80',
+        brandTag: 'Tenzo® & Edon'
+    }
 ];
 
 const Home = () => {
-    // Dynamic Brands State
     const [dynamicBrands, setDynamicBrands] = useState([]);
 
     useEffect(() => {
@@ -45,314 +89,288 @@ const Home = () => {
         return `${API_URL}${url.startsWith('/') ? '' : '/'}${url}`;
     };
 
-    // Duplicate brands array for infinite seamless looping carousel
     const brandCarouselList = dynamicBrands.length > 0
         ? [...dynamicBrands, ...dynamicBrands, ...dynamicBrands]
-        : [...REGISTERED_BRANDS, ...REGISTERED_BRANDS, ...REGISTERED_BRANDS];
+        : [...OWN_BRANDS, ...OWN_BRANDS, ...OWN_BRANDS];
 
     return (
-        <div className="flex flex-col bg-white text-slate-900 font-sans overflow-x-hidden w-full">
+        <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans overflow-x-hidden w-full">
 
-            {/* ══ 1. HERO BANNER (Compact, Responsive & Clean) ════════════════ */}
-            <section className="px-3 sm:px-6 lg:px-8 pt-3 pb-6">
-                <div className="max-w-7xl mx-auto bg-[#0B132B] rounded-2xl sm:rounded-3xl overflow-hidden relative text-white p-5 sm:p-10 min-h-[440px] flex flex-col justify-between shadow-xl">
+            {/* ══ 1. HERO BANNER (Refined Lulu Rayyan Style Structure) ════════════ */}
+            <section className="px-3 sm:px-6 lg:px-8 pt-4 pb-6">
+                <div className="max-w-7xl mx-auto bg-[#1C1B17] rounded-3xl overflow-hidden relative text-white p-6 sm:p-12 min-h-[460px] flex flex-col justify-between shadow-xl border border-[#2E4046]">
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10 gap-2">
-                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-300">
-                            BUILDING MATERIALS • QATAR
+                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
+                            BUILDING MATERIALS WHOLESALE • QATAR
                         </span>
                         <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">
-                            MATERIALS TODAY.<br />STRONGER TOMORROW.
+                            ESTABLISHED 2009 • DIVISION OF SANA GROUP
                         </span>
                     </div>
 
-                    {/* Main Content & Hero Image */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center my-4 z-10">
-                        <div className="max-w-xl">
-                            <h1 className="text-3xl sm:text-5xl font-black leading-tight text-white tracking-tight mb-3">
-                                Complex projects.<br />
-                                <span className="text-slate-200">Simple supply.</span>
+                    {/* Main Hero Content & Photography */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-4 z-10">
+                        <div className="lg:col-span-7 space-y-4">
+                            <span className="inline-block px-3 py-1 rounded-md bg-[#2E4046] text-[#E5E0D8] text-[10px] font-bold uppercase tracking-wider">
+                                15+ Years in the Qatar Market
+                            </span>
+                            <h1 className="text-3xl sm:text-5xl font-serif font-bold leading-tight text-white tracking-tight">
+                                Your trusted partner in quality building materials & reliable supply.
                             </h1>
-                            <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed mb-6 max-w-md">
-                                Quality building materials, electricals, lock cylinders, hardware, and safety tools for Qatar projects.
+                            <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed max-w-lg">
+                                Jaza Trading W.L.L provides premium electricals, door hardware, lock cylinders, hand tools, welders, sanitaryware, and PPE safety gear to contractors across the State of Qatar.
                             </p>
-                            <div className="flex flex-wrap items-center gap-3">
+                            
+                            <div className="flex flex-wrap items-center gap-3 pt-2">
                                 <Link
                                     to="/products"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-[#0B132B] font-bold text-xs transition-all shadow-md group"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white font-bold text-xs transition-all shadow-sm group"
                                 >
-                                    Explore range <ArrowRight className="w-4 h-4 text-[#0B132B] group-hover:translate-x-1 transition-transform" />
+                                    <span>Explore Products Catalog</span>
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
-                                <Link
-                                    to="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-700 hover:border-white text-white font-bold text-xs transition-all"
+
+                                <a
+                                    href="/catalog.pdf"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-600 hover:border-white text-white font-bold text-xs transition-all"
                                 >
-                                    Get Quote
-                                </Link>
+                                    <Download className="w-4 h-4 text-[#B15E2B]" />
+                                    <span>Download PDF Catalog</span>
+                                </a>
                             </div>
                         </div>
 
-                        {/* Right Hero Image */}
-                        <div className="relative flex justify-center items-center mt-2 lg:mt-0">
-                            <div className="w-full max-w-md h-56 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 relative bg-slate-800">
+                        {/* Right Photography Frame */}
+                        <div className="lg:col-span-5 relative flex justify-center items-center">
+                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-slate-700/60 relative bg-[#2E4046]">
                                 <img
                                     src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1000&q=80"
-                                    alt="Industrial Construction Tools Qatar"
+                                    alt="Industrial Building Materials Qatar"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/80 via-transparent to-transparent" />
-                                <div className="absolute bottom-3 left-3 right-3 bg-white/10 backdrop-blur-md p-2.5 rounded-xl border border-white/20 flex items-center justify-between text-xs text-white">
-                                    <span className="font-bold text-xs">Jaza Trading W.L.L</span>
-                                    <span className="text-[10px] text-slate-300">Doha, Qatar</span>
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1B17]/90 via-transparent to-transparent" />
+                                <div className="absolute bottom-3 left-3 right-3 bg-[#1C1B17]/80 backdrop-blur-md p-3 rounded-xl border border-white/10 flex items-center justify-between text-xs text-white">
+                                    <div>
+                                        <p className="font-bold text-xs text-white">Jaza Trading W.L.L</p>
+                                        <p className="text-[10px] text-slate-400">Street 5, Industrial Area, Doha</p>
+                                    </div>
+                                    <span className="text-[10px] font-bold text-[#B15E2B] bg-[#B15E2B]/20 px-2 py-0.5 rounded border border-[#B15E2B]/40">QATAR</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Bottom Established Badge */}
-                    <div className="z-10 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
-                        <div>
-                            <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block">ESTABLISHED IN QATAR</span>
-                            <span className="text-sm sm:text-base font-black text-white">2009 • Sana Group Division</span>
+                    {/* Bottom Core Values Strip */}
+                    <div className="z-10 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-300 gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">CORE VALUES</span>
+                        <div className="flex flex-wrap items-center gap-4 font-serif font-bold text-white text-xs">
+                            <span className="text-[#B15E2B]">Reliability</span>
+                            <span>•</span>
+                            <span className="text-[#B15E2B]">Quality</span>
+                            <span>•</span>
+                            <span className="text-[#B15E2B]">Value</span>
+                            <span>•</span>
+                            <span className="text-[#B15E2B]">Service</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ══ 2. COMPANY INTRO & DETAILED CORPORATE INFORMATION ═══════════════ */}
-            <section className="py-8 bg-white">
+            {/* ══ 2. STATS STRIP ════════════════════════════════════ */}
+            <section className="py-6 bg-white border-y border-[#E5E0D8]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x-0 sm:divide-x divide-[#E5E0D8]">
+                        <div className="p-2">
+                            <div className="flex justify-center mb-1"><Clock className="w-5 h-5 text-[#B15E2B]" /></div>
+                            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1B17]">15+ Years</h3>
+                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Established 2009 in Qatar</p>
+                        </div>
+
+                        <div className="p-2">
+                            <div className="flex justify-center mb-1"><PackageCheck className="w-5 h-5 text-[#B15E2B]" /></div>
+                            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1B17]">10,000+</h3>
+                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">SKUs & Building Materials</p>
+                        </div>
+
+                        <div className="p-2">
+                            <div className="flex justify-center mb-1"><Users className="w-5 h-5 text-[#B15E2B]" /></div>
+                            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1B17]">500+</h3>
+                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Qatar Project Partners</p>
+                        </div>
+
+                        <div className="p-2">
+                            <div className="flex justify-center mb-1"><Award className="w-5 h-5 text-[#B15E2B]" /></div>
+                            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1B17]">100%</h3>
+                            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">Quality Assurance Certified</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 3. WELCOME & CORPORATE OVERVIEW (Vision, Mission & Brief Info) ══ */}
+            <section className="py-10 bg-[#F6F4EE]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 mb-6">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">ABOUT THE COMPANY</span>
-                        <div className="w-12 h-px bg-slate-300" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B]">WELCOME TO JAZA TRADING</span>
+                        <div className="w-12 h-px bg-[#D5CFCE]" />
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-xs border border-slate-200 bg-slate-100 h-64 sm:h-80">
+                        <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-xs border border-[#E5E0D8] bg-white h-64 sm:h-80">
                             <img
                                 src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=800&q=80"
-                                alt="Supplying Progress in Qatar"
+                                alt="Building Construction Materials Qatar"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-900 border border-slate-200">
-                                SUPPLYING PROGRESS IN QATAR
+                            <div className="absolute bottom-3 left-3 bg-[#1C1B17]/90 backdrop-blur-sm px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-slate-700">
+                                SANA GROUP DIVISION • QATAR
                             </div>
                         </div>
 
                         <div className="lg:col-span-7 space-y-4">
-                            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight tracking-tight">
-                                Jaza Trading W.L.L<br />
-                                <span className="text-slate-500 text-base sm:text-xl font-bold">Materials. Expertise. Trusted Partner in Qatar.</span>
+                            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#1C1B17] leading-tight">
+                                Quality building materials at competitive prices with responsive service.
                             </h2>
-                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                                Established in 2009 in Doha, Qatar, <strong>Jaza Trading W.L.L</strong> is a leading wholesaler of premium building materials, electrical accessories, door hardware, lock cylinders, hand tools, welders, sanitary wares, and safety PPE. As a core division of <strong>Sana Group</strong>, we focus on quality, competitive value, and lasting relationships with Qatar contractors.
+                            <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal">
+                                Established in Qatar in 2009, <strong>Jaza Trading W.L.L</strong> is a leading wholesaler of construction and industrial building supplies. As a core division of <strong>Sana Group</strong>, we provide wholesale and retail supply across electricals, hardware, lock bodies, safety PPE, and sanitaryware.
                             </p>
 
-                            {/* Corporate Info Cards */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
-                                    <MapPin className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                                    <div>
-                                        <p className="text-[10px] font-black text-slate-400 uppercase">Headquarters</p>
-                                        <p className="text-xs font-bold text-slate-800">Al Kassarat Street, Industrial Area, Street 5</p>
-                                        <p className="text-[11px] text-slate-500">P.O. Box 31221, Doha, Qatar</p>
-                                    </div>
+                            {/* Vision & Mission Cards */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                <div className="p-4 rounded-xl bg-white border border-[#E5E0D8] space-y-1 shadow-xs">
+                                    <span className="text-[10px] font-black text-[#B15E2B] uppercase tracking-wider">OUR VISION</span>
+                                    <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                                        To become a leading and future-ready building materials company in Qatar, contributing to the country's development through innovation, quality, and excellence.
+                                    </p>
                                 </div>
 
-                                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
-                                    <Phone className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                                    <div>
-                                        <p className="text-[10px] font-black text-slate-400 uppercase">Contact Lines</p>
-                                        <p className="text-xs font-bold text-slate-800">+974 7060 5494 / +974 4450 1234</p>
-                                        <p className="text-[11px] text-slate-500">jazatrading@gmail.com</p>
-                                    </div>
+                                <div className="p-4 rounded-xl bg-white border border-[#E5E0D8] space-y-1 shadow-xs">
+                                    <span className="text-[10px] font-black text-[#B15E2B] uppercase tracking-wider">OUR MISSION</span>
+                                    <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                                        To provide quality building materials at competitive prices with responsive service, understanding customer needs and building lasting relationships.
+                                    </p>
                                 </div>
                             </div>
 
-                            {/* Refined Link (Sleek Dark Corporate Styling) */}
-                            <div className="pt-2">
+                            <div className="pt-2 flex flex-wrap items-center gap-3">
                                 <Link
                                     to="/about"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs group"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1C1B17] hover:bg-[#2E4046] text-white font-bold text-xs transition-all shadow-xs"
                                 >
-                                    <span>Read complete company profile</span>
-                                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-1 transition-transform" />
+                                    <span>Read Complete Company Profile</span>
+                                    <ArrowRight className="w-4 h-4 text-[#B15E2B]" />
                                 </Link>
+
+                                <a
+                                    href="tel:+97470605494"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#D5CFCE] hover:border-[#1C1B17] text-[#1C1B17] font-bold text-xs transition-all"
+                                >
+                                    <Phone className="w-3.5 h-3.5 text-[#B15E2B]" />
+                                    <span>Call Sales: +974 7060 5494</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ══ 3. OUR STRENGTHS 01, 02, 03 (Compact) ═════════════════════ */}
-            <section className="py-8 bg-slate-50 border-y border-slate-200">
+            {/* ══ 4. PRODUCT CATEGORIES OVERVIEW GRID (From Brief Section 7) ═══════ */}
+            <section className="py-10 bg-white border-t border-[#E5E0D8]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2 mb-3">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">OUR PILLARS</span>
-                        <div className="w-12 h-px bg-slate-300" />
-                    </div>
-
-                    <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
-                        Why Qatar contractors choose Jaza Trading.
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-                        <div className="pt-3 md:pt-0 md:pr-4">
-                            <div className="text-4xl font-black text-slate-900 mb-1">01</div>
-                            <h3 className="text-base font-black text-slate-900 mb-1">Certified Quality</h3>
-                            <p className="text-slate-600 text-xs leading-relaxed">
-                                International standards compliant tools, safety equipment, and building supplies tested for heavy industrial demands.
-                            </p>
-                        </div>
-
-                        <div className="pt-4 md:pt-0 md:px-4">
-                            <div className="text-4xl font-black text-slate-900 mb-1">02</div>
-                            <h3 className="text-base font-black text-slate-900 mb-1">Wholesale Value</h3>
-                            <p className="text-slate-600 text-xs leading-relaxed">
-                                Direct importer pricing and flexible procurement for bulk construction contracts across the State of Qatar.
-                            </p>
-                        </div>
-
-                        <div className="pt-4 md:pt-0 md:pl-4">
-                            <div className="text-4xl font-black text-slate-900 mb-1">03</div>
-                            <h3 className="text-base font-black text-slate-900 mb-1">Rapid Delivery</h3>
-                            <p className="text-slate-600 text-xs leading-relaxed">
-                                Dedicated delivery fleet serving Industrial Area, Doha, Lusail, Al Wakrah, and all major project sites.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ══ 4. EXPLORE OUR CATEGORIES (Compact 3 Cards) ═════════════════ */}
-            <section className="py-8 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-6">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
                         <div>
-                            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                                Explore product range.
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B] block mb-1">
+                                PRODUCT CATEGORIES
+                            </span>
+                            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#1C1B17] tracking-tight">
+                                Comprehensive Product Range
                             </h2>
                         </div>
-                        <div className="mt-1 md:mt-0 text-left md:text-right">
-                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                                TRUSTED SUPPLIER • PROVEN QUALITY
-                            </span>
+                        <div className="mt-2 md:mt-0">
+                            <Link to="/categories" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B15E2B] hover:underline">
+                                View All Categories <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {CATEGORIES_BRIEF.map((cat, idx) => (
+                            <div key={cat.title} className="bg-[#F6F4EE] rounded-2xl border border-[#E5E0D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+                                <div className="h-44 bg-slate-200 overflow-hidden relative border-b border-[#E5E0D8]">
+                                    <img
+                                        src={cat.img}
+                                        alt={cat.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <span className="absolute top-3 left-3 bg-[#1C1B17]/90 text-[#B15E2B] font-bold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider">
+                                        {cat.brandTag}
+                                    </span>
+                                </div>
 
-                        {/* Card 01: Power Tools & Equipment */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-slate-50 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200">
-                            <div className="lg:col-span-6 rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60 bg-slate-200 border border-slate-300">
-                                <img
-                                    src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80"
-                                    alt="Power Tools & Equipment"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div className="lg:col-span-6 space-y-2">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">ELECTRICALS & MACHINERY</span>
-                                    <span className="text-3xl font-black text-slate-300">01</span>
-                                </div>
-                                <h3 className="text-xl sm:text-2xl font-black text-slate-900">Power your construction site.</h3>
-                                <p className="text-slate-600 text-xs font-semibold">Tork®, EDON® and TENZO® machinery & power tools.</p>
-                                <div className="pt-2">
-                                    <Link to="/products?category=Electricals,%20Power%20Tools%20%26%20Accessories" className="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:underline group">
-                                        Explore electricals & tools <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                                    <div>
+                                        <h3 className="text-lg font-serif font-bold text-[#1C1B17] group-hover:text-[#B15E2B] transition-colors">
+                                            {cat.title}
+                                        </h3>
+                                        <p className="text-xs text-slate-600 font-medium leading-relaxed mt-1">
+                                            {cat.desc}
+                                        </p>
+                                    </div>
 
-                        {/* Card 02: Door Hardware & Sanitary */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-slate-50 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200">
-                            <div className="lg:col-span-6 order-2 lg:order-1 space-y-2">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">DOOR HARDWARE & SANITARY</span>
-                                    <span className="text-3xl font-black text-slate-300">02</span>
-                                </div>
-                                <h3 className="text-xl sm:text-2xl font-black text-slate-900">Details built for durability.</h3>
-                                <p className="text-slate-600 text-xs font-semibold">Eurex® lock cylinders & Clexo® sanitary fittings.</p>
-                                <div className="pt-2">
-                                    <Link to="/products?category=Lock%20Cylinder,%20Door%20Handles%20%26%20Lock%20Body" className="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:underline group">
-                                        Explore door hardware <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
+                                    <div className="pt-2 border-t border-[#E5E0D8]">
+                                        <Link
+                                            to={`/products?category=${cat.categoryQuery}`}
+                                            className="inline-flex items-center justify-between w-full text-xs font-bold text-[#1C1B17] group-hover:text-[#B15E2B] transition-colors"
+                                        >
+                                            <span>Explore {cat.title}</span>
+                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="lg:col-span-6 order-1 lg:order-2 rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60 bg-slate-200 border border-slate-300">
-                                <img
-                                    src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80"
-                                    alt="Door Hardware & Sanitary"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Card 03: Hand Tools, Paints & Safety */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-slate-50 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200">
-                            <div className="lg:col-span-6 rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60 bg-slate-200 border border-slate-300">
-                                <img
-                                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
-                                    alt="Hand Tools, Paints & Safety"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div className="lg:col-span-6 space-y-2">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">HAND TOOLS, PAINTS & SAFETY PPE</span>
-                                    <span className="text-3xl font-black text-slate-300">03</span>
-                                </div>
-                                <h3 className="text-xl sm:text-2xl font-black text-slate-900">Safety & high performance hand tools.</h3>
-                                <p className="text-slate-600 text-xs font-semibold">Next® hand tools and Mark Safety Pro® safety footwear.</p>
-                                <div className="pt-2">
-                                    <Link to="/products?category=Safety%20Shoes%20%26%20Safety%20Products" className="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:underline group">
-                                        Explore safety & hand tools <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* ══ 5. CONTINUOUS MOVING INFINITE BRAND MARQUEE CAROUSEL ════════════ */}
-            <section className="py-10 bg-slate-50 border-t border-slate-200 overflow-hidden">
+            {/* ══ 5. OWN BRANDS & DISTRIBUTED PARTNERS MARQUEE ═══════════════════ */}
+            <section className="py-10 bg-[#F6F4EE] border-t border-[#E5E0D8] overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">REGISTERED BRANDS & PARTNERS</span>
-                            <div className="w-12 h-px bg-slate-300" />
+                        <div>
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B] block mb-1">OWN BRANDS & DISTRIBUTED PARTNERS</span>
+                            <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1B17]">Trusted Manufacturers & Trademarks</h2>
                         </div>
-                        <span className="text-[10px] font-bold text-slate-400 hidden sm:inline-block">Hover to pause</span>
+                        <span className="text-[10px] font-bold text-slate-500 hidden sm:inline-block">Hover to pause</span>
                     </div>
                 </div>
 
-                {/* Infinite Moving Marquee Container with Gradient Side Masks */}
-                <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:bottom-0 before:w-12 sm:before:w-24 before:bg-gradient-to-r before:from-slate-50 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-12 sm:after:w-24 after:bg-gradient-to-l after:from-slate-50 after:to-transparent after:z-10">
+                {/* Marquee Slider Container */}
+                <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:bottom-0 before:w-16 before:bg-gradient-to-r before:from-[#F6F4EE] before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-16 after:bg-gradient-to-l after:from-[#F6F4EE] after:to-transparent after:z-10">
                     
                     <div className="animate-marquee flex items-center gap-4 py-2">
                         {brandCarouselList.map((item, idx) => {
                             const isDynamic = !!item._id;
                             const brandName = isDynamic ? item.name : item.name;
                             const logoUrl = isDynamic && item.logo ? getImageUrl(item.logo) : null;
-                            const badgeTag = isDynamic ? item.badgeTag : 'REGISTERED';
+                            const badgeTag = isDynamic ? (item.badgeTag || 'OWN BRAND') : (item.tag || 'BRAND');
                             const targetBrand = brandName.replace('®', '');
 
                             return (
                                 <Link
                                     key={`${item._id || item.name}-${idx}`}
                                     to={`/products?brand=${encodeURIComponent(targetBrand)}`}
-                                    className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 hover:border-slate-900 transition-all flex items-center gap-3 shrink-0 shadow-xs hover:shadow-md group min-w-[180px] sm:min-w-[210px] h-20"
+                                    className="p-4 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#1C1B17] transition-all flex items-center gap-3 shrink-0 shadow-xs hover:shadow-md group min-w-[200px] h-20"
                                 >
                                     {logoUrl ? (
                                         <img
                                             src={logoUrl}
                                             alt={brandName}
-                                            className="h-10 w-auto max-w-[110px] object-contain group-hover:scale-105 transition-transform"
+                                            className="h-9 w-auto max-w-[100px] object-contain group-hover:scale-105 transition-transform"
                                             onError={(e) => {
                                                 e.target.onerror = null;
                                                 e.target.style.display = 'none';
@@ -362,21 +380,21 @@ const Home = () => {
                                     ) : null}
 
                                     <div className={`${logoUrl ? 'hidden' : 'block'}`}>
-                                        <p className={`text-xs sm:text-sm font-black text-slate-900 tracking-tight`}>
+                                        <p className="text-sm font-serif font-bold text-[#1C1B17] tracking-tight">
                                             {brandName}
                                         </p>
-                                        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mt-0.5">
-                                            {badgeTag || 'REGISTERED'}
+                                        <span className="text-[9px] font-bold text-[#B15E2B] uppercase tracking-wider block mt-0.5">
+                                            {badgeTag}
                                         </span>
                                     </div>
 
                                     {logoUrl && (
                                         <div className="overflow-hidden">
-                                            <p className="text-xs font-bold text-slate-800 line-clamp-1 group-hover:text-slate-900 transition-colors">
+                                            <p className="text-xs font-serif font-bold text-[#1C1B17] line-clamp-1">
                                                 {brandName}
                                             </p>
-                                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">
-                                                {badgeTag || 'BRAND'}
+                                            <span className="text-[9px] font-bold text-[#B15E2B] uppercase tracking-wider block">
+                                                {badgeTag}
                                             </span>
                                         </div>
                                     )}
@@ -385,6 +403,102 @@ const Home = () => {
                         })}
                     </div>
 
+                </div>
+
+                {/* Distributed Brands Bar */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-[#D5CFCE] mt-6 flex flex-wrap items-center justify-between text-xs text-slate-600 gap-3">
+                    <span className="font-bold uppercase tracking-wider text-[#1C1B17] text-[10px]">Distributed Brands:</span>
+                    {DISTRIBUTED_BRANDS.map((pb) => (
+                        <Link
+                            key={pb}
+                            to={`/products?brand=${encodeURIComponent(pb)}`}
+                            className="font-medium text-slate-700 hover:text-[#B15E2B] transition-colors"
+                        >
+                            {pb}
+                        </Link>
+                    ))}
+                </div>
+            </section>
+
+            {/* ══ 6. SHOWROOMS & WAREHOUSE LOCATION MAP (Brief Requirement) ═══════ */}
+            <section className="py-10 bg-white border-t border-[#E5E0D8]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div className="lg:col-span-6 space-y-4">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B]">
+                                CENTRAL WAREHOUSE & SHOWROOM QATAR
+                            </span>
+                            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#1C1B17]">
+                                Visit Our Central Supply Facility in Doha
+                            </h2>
+                            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                                Conveniently located in Industrial Area Street 5, our warehouse and showroom stock over 10,000+ building material SKUs available for immediate contractor pickup or fleet delivery.
+                            </p>
+
+                            <div className="space-y-3 pt-2">
+                                <div className="p-3.5 rounded-xl bg-[#F6F4EE] border border-[#E5E0D8] flex items-start gap-3">
+                                    <MapPin className="w-5 h-5 text-[#B15E2B] shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="text-[10px] font-black text-slate-500 uppercase">Address</p>
+                                        <p className="text-xs font-bold text-[#1C1B17]">Al Kassarat Street, Industrial Area, Street 5</p>
+                                        <p className="text-[11px] text-slate-600">P.O. Box 31221, Doha, State of Qatar</p>
+                                    </div>
+                                </div>
+
+                                <div className="p-3.5 rounded-xl bg-[#F6F4EE] border border-[#E5E0D8] flex items-start gap-3">
+                                    <Phone className="w-5 h-5 text-[#B15E2B] shrink-0 mt-0.5" />
+                                    <div>
+                                        <p className="text-[10px] font-black text-slate-500 uppercase">Direct Phone Lines</p>
+                                        <p className="text-xs font-bold text-[#1C1B17]">+974 7060 5494 / +974 7408 0005</p>
+                                        <p className="text-[11px] text-slate-600">jazatrading@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="pt-2">
+                                <Link
+                                    to="/contact"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1C1B17] hover:bg-[#2E4046] text-white font-bold text-xs transition-all shadow-xs"
+                                >
+                                    <span>Contact & Showroom Directions</span>
+                                    <ArrowRight className="w-4 h-4 text-[#B15E2B]" />
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Visual Map Representation Frame */}
+                        <div className="lg:col-span-6 bg-[#2E4046] rounded-3xl p-6 text-white space-y-4 border border-slate-700 shadow-lg relative overflow-hidden">
+                            <div className="flex items-center justify-between border-b border-slate-600 pb-3">
+                                <div>
+                                    <h3 className="font-serif font-bold text-lg text-white">Doha Central Warehouse</h3>
+                                    <p className="text-[10px] text-slate-300">Street 5, Industrial Area, Qatar</p>
+                                </div>
+                                <span className="text-[10px] font-bold text-[#B15E2B] bg-[#1C1B17] px-3 py-1 rounded-full border border-[#B15E2B]/40">
+                                    OPEN FOR PICKUP
+                                </span>
+                            </div>
+
+                            <div className="h-52 rounded-2xl overflow-hidden relative bg-[#1C1B17] border border-slate-700 flex items-center justify-center text-center p-6">
+                                <div className="space-y-2">
+                                    <MapPin className="w-10 h-10 text-[#B15E2B] mx-auto animate-bounce" />
+                                    <p className="text-xs font-bold text-white">Industrial Area Street 5 Pin</p>
+                                    <p className="text-[11px] text-slate-400">Serving Lusail, Doha, Al Wakrah & all Qatar project sites</p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between text-xs pt-1">
+                                <span className="text-slate-300 text-[11px]">Working Hours: Sat - Thu (7:00 AM - 7:00 PM)</span>
+                                <a
+                                    href="https://maps.google.com"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="text-[#B15E2B] hover:text-white font-bold text-xs inline-flex items-center gap-1"
+                                >
+                                    Google Maps <ArrowRight className="w-3.5 h-3.5" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

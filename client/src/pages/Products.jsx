@@ -79,14 +79,14 @@ const Products = () => {
         <div className="space-y-6">
             {/* Categories */}
             <div className="space-y-1">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Categories</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Product Categories</p>
                 <button
                     onClick={() => handleCategoryClick('')}
-                    className={`sidebar-link w-full text-left ${!selectedCategory ? 'active' : ''}`}
+                    className={`sidebar-link w-full text-left ${!selectedCategory ? 'active !bg-[#B15E2B] !text-white' : 'hover:bg-[#ECE8E0]'}`}
                 >
                     <Package className="w-4 h-4 shrink-0 text-slate-500" />
                     <span className="flex-1">All Categories</span>
-                    {!selectedCategory && <span className="text-[10px] font-bold bg-slate-500 text-white px-2 py-0.5 rounded-full">{products.length}</span>}
+                    {!selectedCategory && <span className="text-[10px] font-bold bg-[#1C1B17] text-white px-2 py-0.5 rounded-full">{products.length}</span>}
                 </button>
                 {categories.map((cat) => {
                     const count = products.filter(p => p.category?._id === cat._id).length;
@@ -94,7 +94,7 @@ const Products = () => {
                         <button
                             key={cat._id}
                             onClick={() => handleCategoryClick(cat._id)}
-                            className={`sidebar-link w-full text-left ${selectedCategory === cat._id ? 'active' : ''}`}
+                            className={`sidebar-link w-full text-left ${selectedCategory === cat._id ? 'active !bg-[#B15E2B] !text-white font-bold' : 'hover:bg-[#ECE8E0]'}`}
                         >
                             {cat.image ? (
                                 <img src={cat.image} alt={cat.name} className="w-4 h-4 object-cover rounded shrink-0" />
@@ -102,18 +102,18 @@ const Products = () => {
                                 <Package className="w-4 h-4 shrink-0 text-slate-500" />
                             )}
                             <span className="flex-1 text-left text-xs font-semibold">{cat.name}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === cat._id ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-500'}`}>{count}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === cat._id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'}`}>{count}</span>
                         </button>
                     );
                 })}
             </div>
 
             {/* Brands */}
-            <div className="space-y-1 pt-4 border-t border-slate-100">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Brands</p>
+            <div className="space-y-1 pt-4 border-t border-[#E5E0D8]">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Filter by Brand</p>
                 <button
                     onClick={() => handleBrandClick('')}
-                    className={`sidebar-link w-full text-left ${!selectedBrand ? 'active' : ''}`}
+                    className={`sidebar-link w-full text-left ${!selectedBrand ? 'active !bg-[#2E4046] !text-white' : 'hover:bg-[#ECE8E0]'}`}
                 >
                     <Tag className="w-4 h-4 shrink-0 text-slate-500" />
                     <span className="flex-1">All Brands</span>
@@ -124,10 +124,10 @@ const Products = () => {
                         <button
                             key={b}
                             onClick={() => handleBrandClick(b)}
-                            className={`sidebar-link w-full text-left ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'active' : ''}`}
+                            className={`sidebar-link w-full text-left ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'active !bg-[#B15E2B] !text-white' : 'hover:bg-[#ECE8E0]'}`}
                         >
                             <span className="flex-1 text-left text-xs font-semibold">{b}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-500'}`}>{count}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'}`}>{count}</span>
                         </button>
                     );
                 })}
@@ -138,27 +138,27 @@ const Products = () => {
 
 
     return (
-        <div className="bg-[#F5F5F7] min-h-screen">
+        <div className="bg-[#F6F4EE] min-h-screen">
 
             {/* ── Page Header Band ── */}
-            <div className="bg-[#0F172A] text-white py-6 px-4">
+            <div className="bg-[#1C1B17] text-white py-8 px-4 border-b border-[#2E4046]/40">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-2 flex-wrap">
                         <Link to="/" className="hover:text-white transition-colors">Home</Link>
-                        <ChevronRight className="w-3 h-3" />
+                        <ChevronRight className="w-3 h-3 text-[#B15E2B]" />
                         <span className="text-white font-semibold">Products</span>
                         {selectedCatName && (
                             <>
-                                <ChevronRight className="w-3 h-3" />
-                                <span className="text-blue-500 font-semibold">{selectedCatName}</span>
+                                <ChevronRight className="w-3 h-3 text-[#B15E2B]" />
+                                <span className="text-[#B15E2B] font-semibold">{selectedCatName}</span>
                             </>
                         )}
                     </div>
-                    <h1 className="text-2xl md:text-4xl font-black">
-                        {selectedCatName ? selectedCatName : 'All Products'}
+                    <h1 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight">
+                        {selectedCatName ? selectedCatName : 'Building Materials Wholesale Products'}
                     </h1>
-                    <p className="text-slate-400 mt-1 text-xs md:text-sm">
-                        {loading ? 'Loading products...' : `${filtered.length} ${filtered.length === 1 ? 'product' : 'products'} available`}
+                    <p className="text-slate-300 mt-2 text-xs md:text-sm">
+                        {loading ? 'Loading products...' : `${filtered.length} ${filtered.length === 1 ? 'item' : 'items'} available for Qatar wholesale distribution`}
                     </p>
                 </div>
             </div>
@@ -168,7 +168,7 @@ const Products = () => {
 
                     {/* ── Desktop Sidebar ── */}
                     <aside className="hidden lg:block w-60 flex-shrink-0">
-                        <div className="card p-4 sticky top-24">
+                        <div className="bg-white border border-[#E5E0D8] rounded-2xl p-4 sticky top-24 shadow-sm">
                             <SidebarContent />
                         </div>
                     </aside>
@@ -184,7 +184,7 @@ const Products = () => {
                                 <input
                                     type="text"
                                     placeholder="Search products..."
-                                    className="input pl-11 w-full"
+                                    className="input pl-11 w-full !bg-white !border-[#D5CFCE]"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
@@ -194,18 +194,18 @@ const Products = () => {
                                 {/* Mobile filter button */}
                                 <button
                                     onClick={() => setMobileSidebar(true)}
-                                    className="lg:hidden btn-outline !px-4 !py-3 !text-sm flex shrink-0"
+                                    className="lg:hidden btn-outline !px-4 !py-3 !text-sm flex shrink-0 border-[#D5CFCE]"
                                 >
-                                    <SlidersHorizontal className="w-4 h-4" />
+                                    <SlidersHorizontal className="w-4 h-4 text-[#B15E2B]" />
                                     Filter
                                     {selectedCategory && (
-                                        <span className="w-2 h-2 bg-[#007AFF] rounded-full" />
+                                        <span className="w-2 h-2 bg-[#B15E2B] rounded-full" />
                                     )}
                                 </button>
 
                                 {/* Results count */}
-                                <div className="hidden sm:flex items-center gap-1 text-sm text-slate-500 shrink-0">
-                                    <span className="font-bold text-[#0F172A]">{filtered.length}</span>{' '}product{filtered.length !== 1 && 's'}
+                                <div className="hidden sm:flex items-center gap-1 text-sm text-slate-600 shrink-0">
+                                    <span className="font-serif font-bold text-[#1C1B17]">{filtered.length}</span> wholesale item{filtered.length !== 1 && 's'}
                                 </div>
                             </div>
                         </div>
@@ -213,11 +213,11 @@ const Products = () => {
                         {/* Active filter chips */}
                         {(selectedCatName || searchTerm) && (
                             <div className="flex flex-wrap items-center gap-2 mb-5">
-                                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Filters:</span>
+                                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Active Filters:</span>
                                 {selectedCatName && (
                                     <button
                                         onClick={() => handleCategoryClick('')}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-800 text-xs font-bold rounded-full hover:bg-slate-200 transition-colors"
+                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-[#B15E2B] text-white text-xs font-bold rounded-full hover:bg-[#8E4920] transition-colors"
                                     >
                                         Category: {selectedCatName} <X className="w-3 h-3" />
                                     </button>

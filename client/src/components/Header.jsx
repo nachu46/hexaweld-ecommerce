@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, User, ShoppingBag, Layers, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowRight, User, ShoppingBag, Phone, Mail, FileText, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -22,95 +22,116 @@ const Header = () => {
     useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
     return (
-        <header className={`sticky top-0 w-full z-50 bg-white transition-all duration-300 border-b border-slate-200 ${scrolled ? 'py-3 shadow-sm' : 'py-4'}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-                
-                {/* 1. Logo */}
-                <Link to="/" className="flex items-center">
-                    <JtLogo dark={false} />
-                </Link>
+        <header className="w-full z-50 sticky top-0 shadow-xs font-sans">
+            
+            {/* Top Contact Bar */}
+            <div className="bg-[#1C1B17] text-[#E5E0D8] text-[11px] py-2 px-4 sm:px-6 lg:px-8 border-b border-[#2E4046] flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                    <a href="tel:+97470605494" className="flex items-center gap-1.5 hover:text-[#B15E2B] transition-colors">
+                        <Phone className="w-3 h-3 text-[#B15E2B]" />
+                        <span>+974 7060 5494 / +974 7408 0005</span>
+                    </a>
+                    <a href="mailto:jazatrading@gmail.com" className="hidden sm:flex items-center gap-1.5 hover:text-[#B15E2B] transition-colors">
+                        <Mail className="w-3 h-3 text-[#B15E2B]" />
+                        <span>jazatrading@gmail.com</span>
+                    </a>
+                </div>
 
-                {/* 2. Nav Menu Right Center */}
-                <nav className="hidden md:flex items-center gap-7">
-                    <Link
-                        to="/about"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/about' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
+                <div className="flex items-center gap-4">
+                    <a
+                        href="/catalog.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[10px] font-bold text-[#B15E2B] hover:text-white transition-colors"
+                        title="Download Product Catalog PDF"
                     >
-                        Company
-                    </Link>
-                    <Link
-                        to="/products"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/products' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
-                    >
-                        Products
-                    </Link>
-                    <Link
-                        to="/categories"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/categories' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
-                    >
-                        Categories
-                    </Link>
-                    <Link
-                        to="/brands"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/brands' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
-                    >
-                        Brands
-                    </Link>
-                    <Link
-                        to="/services"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/services' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
-                    >
-                        Services
-                    </Link>
-                    <Link
-                        to="/contact"
-                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/contact' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
-                    >
-                        Contact
-                    </Link>
-                </nav>
+                        <Download className="w-3 h-3" />
+                        <span>PDF Catalog</span>
+                    </a>
+                    <span className="text-[#2E4046]">|</span>
+                    <span className="text-[10px] font-bold text-slate-400">Qatar Wholesale Supplier</span>
+                </div>
+            </div>
 
-                {/* 3. Action Circle Button Far Right */}
-                <div className="flex items-center gap-2.5">
-                    {/* Cart Trigger */}
-                    <button
-                        onClick={() => setIsCartOpen(true)}
-                        className="relative p-2.5 text-slate-700 hover:text-black hover:bg-slate-100 rounded-full transition-colors"
-                        title="Shopping Cart"
-                    >
-                        <ShoppingBag className="w-5 h-5 text-slate-800" />
-                        {cartCount > 0 && (
-                            <span className="absolute top-1 right-1 bg-[#0B132B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                                {cartCount}
-                            </span>
-                        )}
-                    </button>
-
-                    {/* User Account / Profile */}
-                    <Link
-                        to={user ? (user.isAdmin ? "/admin/dashboard" : "/account") : "/login"}
-                        className="p-2.5 text-slate-700 hover:text-black hover:bg-slate-100 rounded-full transition-colors"
-                        title={user ? user.name : "Sign In Account"}
-                    >
-                        <User className="w-5 h-5 text-slate-800" />
+            {/* Main Header Bar */}
+            <div className={`w-full bg-[#F6F4EE] border-b border-[#E5E0D8] transition-all duration-300 ${scrolled ? 'py-3 shadow-sm' : 'py-4'}`}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                    
+                    {/* Logo */}
+                    <Link to="/" className="flex items-center">
+                        <JtLogo dark={false} />
                     </Link>
 
-                    {/* Quick Action RFQ */}
-                    <Link
-                        to="/contact"
-                        className="w-10 h-10 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white flex items-center justify-center transition-transform hover:scale-105 shadow-sm"
-                        title="Contact & Request Quote"
-                    >
-                        <ArrowRight className="w-4 h-4 text-white" />
-                    </Link>
+                    {/* Nav Links Center */}
+                    <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+                        {[
+                            { label: 'Home', path: '/' },
+                            { label: 'About Us', path: '/about' },
+                            { label: 'Products', path: '/products' },
+                            { label: 'Categories', path: '/categories' },
+                            { label: 'Our Brands', path: '/brands' },
+                            { label: 'Services', path: '/services' },
+                            { label: 'Careers', path: '/career' },
+                            { label: 'Contact', path: '/contact' },
+                        ].map((link) => {
+                            const isActive = location.pathname === link.path;
+                            return (
+                                <Link
+                                    key={link.path}
+                                    to={link.path}
+                                    className={`text-xs font-bold tracking-wide transition-colors ${
+                                        isActive ? 'text-[#B15E2B] font-extrabold' : 'text-[#1C1B17] hover:text-[#B15E2B]'
+                                    }`}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
+                    </nav>
 
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-xl"
-                    >
-                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </button>
+                    {/* Right Action Icons */}
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        
+                        {/* Cart Trigger */}
+                        <button
+                            onClick={() => setIsCartOpen(true)}
+                            className="relative p-2.5 text-[#1C1B17] hover:text-[#B15E2B] hover:bg-[#EAE6DF] rounded-full transition-colors"
+                            title="Shopping Cart"
+                        >
+                            <ShoppingBag className="w-5 h-5 text-[#1C1B17]" />
+                            {cartCount > 0 && (
+                                <span className="absolute top-1 right-1 bg-[#B15E2B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </button>
+
+                        {/* Account */}
+                        <Link
+                            to={user ? (user.isAdmin ? "/admin/dashboard" : "/account") : "/login"}
+                            className="p-2.5 text-[#1C1B17] hover:text-[#B15E2B] hover:bg-[#EAE6DF] rounded-full transition-colors"
+                            title={user ? user.name : "Sign In Account"}
+                        >
+                            <User className="w-5 h-5 text-[#1C1B17]" />
+                        </Link>
+
+                        {/* RFQ Quote Button */}
+                        <Link
+                            to="/contact"
+                            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white text-xs font-bold transition-all shadow-xs"
+                        >
+                            <span>Get Quote</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="md:hidden p-2 text-[#1C1B17] hover:bg-[#EAE6DF] rounded-xl"
+                        >
+                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -120,36 +141,48 @@ const Header = () => {
                     <>
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
+                            className="fixed inset-0 bg-[#1C1B17]/50 backdrop-blur-sm z-40 md:hidden"
                             onClick={() => setIsOpen(false)}
                         />
                         <motion.div
                             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25 }}
-                            className="fixed top-0 right-0 h-full w-3/4 max-w-xs bg-white z-50 flex flex-col pt-6 pb-8 px-6 shadow-2xl"
+                            className="fixed top-0 right-0 h-full w-3/4 max-w-xs bg-[#F6F4EE] z-50 flex flex-col pt-6 pb-8 px-6 shadow-2xl border-l border-[#E5E0D8]"
                         >
-                            <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                            <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E5E0D8]">
                                 <Link to="/" onClick={() => setIsOpen(false)}>
                                     <JtLogo dark={false} />
                                 </Link>
-                                <button onClick={() => setIsOpen(false)} className="p-2 bg-slate-100 rounded-full text-slate-600">
+                                <button onClick={() => setIsOpen(false)} className="p-2 bg-[#EAE6DF] rounded-full text-[#1C1B17]">
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
-                            <div className="flex flex-col gap-2 flex-1">
-                                <Link to="/" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Home</Link>
-                                <Link to="/about" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Company Profile</Link>
-                                <Link to="/products" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Products Catalog</Link>
-                                <Link to="/categories" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Product Categories</Link>
-                                <Link to="/brands" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Partner Brands</Link>
-                                <Link to="/services" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Services</Link>
-                                <Link to="/contact" className="text-sm font-bold text-slate-800 py-2">Contact & RFQ</Link>
+                            <div className="flex flex-col gap-2 flex-1 overflow-y-auto">
+                                {[
+                                    { label: 'Home', path: '/' },
+                                    { label: 'About Jaza Trading', path: '/about' },
+                                    { label: 'Products Catalog', path: '/products' },
+                                    { label: 'Product Categories', path: '/categories' },
+                                    { label: 'Our Brands', path: '/brands' },
+                                    { label: 'Services', path: '/services' },
+                                    { label: 'Careers in Qatar', path: '/career' },
+                                    { label: 'Contact & RFQ', path: '/contact' },
+                                ].map((link) => (
+                                    <Link
+                                        key={link.path}
+                                        to={link.path}
+                                        className="text-xs font-bold text-[#1C1B17] py-2.5 border-b border-[#E5E0D8] hover:text-[#B15E2B] transition-colors"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
                             </div>
 
-                            <div className="mt-auto">
-                                <Link to="/contact" className="w-full py-3 rounded-full bg-[#0B132B] text-white text-center font-bold text-xs flex items-center justify-center gap-2">
-                                    Request a Quote <ArrowRight className="w-4 h-4" />
+                            <div className="mt-auto space-y-2 pt-4">
+                                <Link to="/contact" className="w-full py-3 rounded-xl bg-[#B15E2B] text-white text-center font-bold text-xs flex items-center justify-center gap-2 shadow-sm">
+                                    <span>Request a Quote</span>
+                                    <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         </motion.div>

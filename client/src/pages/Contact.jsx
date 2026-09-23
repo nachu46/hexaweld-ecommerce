@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 const API_URL = import.meta.env.VITE_API_URL || '';
 
 const contactItems = [
-    { icon: MapPin, label: 'Location Address', value: 'Al Kassarat Street, Industrial Area, Street 5, Qatar' },
-    { icon: Phone, label: 'Direct Phone', value: '+974 70605494 / +974 74080005' },
+    { icon: MapPin, label: 'Showroom & Warehouse Address', value: 'Al Kassarat Street, Industrial Area, Street 5, Doha, Qatar' },
+    { icon: Phone, label: 'Direct Phone Lines', value: '+974 7060 5494 / +974 7408 0005' },
     { icon: Mail, label: 'Email Address', value: 'jazatrading@gmail.com' },
-    { icon: Clock, label: 'Working Hours', value: 'Sat – Thu: 8:00 AM – 6:00 PM (Friday Closed)' },
+    { icon: Clock, label: 'Working Hours', value: 'Sat – Thu: 7:30 AM – 6:00 PM (Friday Closed)' },
 ];
 
 const Contact = () => {
@@ -42,24 +42,24 @@ const Contact = () => {
     };
 
     return (
-        <div className="flex flex-col bg-white text-slate-900 font-sans min-h-screen">
+        <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans min-h-screen">
 
-            {/* ══ 1. HERO BANNER ARCH (Matching Front Page Design) ══════════════ */}
-            <section className="px-4 sm:px-6 lg:px-8 pt-3 pb-8">
-                <div className="max-w-7xl mx-auto bg-[#0B132B] rounded-3xl overflow-hidden relative text-white p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-xl">
+            {/* ══ 1. HERO BANNER ARCH ═══════════════════════════════════════════ */}
+            <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
+                <div className="max-w-7xl mx-auto bg-[#1C1B17] rounded-3xl overflow-hidden relative text-white p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-2xl border border-[#2E4046]/40">
                     <div className="flex items-center justify-between z-10">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-300">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             CONTACT & ENQUIRIES • QATAR
                         </span>
-                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">
                             JAZA TRADING W.L.L
                         </span>
                     </div>
 
                     <div className="my-6 z-10 max-w-2xl">
-                        <h1 className="text-4xl sm:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+                        <h1 className="text-4xl sm:text-6xl font-serif font-bold text-white leading-tight tracking-tight mb-4">
                             Let’s build<br />
-                            <span className="text-slate-200">something together.</span>
+                            <span className="text-[#E5DACE]">something together.</span>
                         </h1>
                         <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                             Have a project in mind or bulk building material requirements? Send us your enquiry and our Qatar sales team will get back to you promptly.
@@ -74,33 +74,33 @@ const Contact = () => {
             </section>
 
             {/* ══ 2. MAIN CONTACT & FORM SECTION ══════════════════════════════ */}
-            <section className="py-14 bg-white">
+            <section className="py-14 bg-[#F6F4EE]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
                         {/* Left Info Column */}
                         <div className="lg:col-span-5 space-y-6">
                             <div className="flex items-center gap-2 mb-2">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">GET IN TOUCH</span>
-                                <div className="w-12 h-px bg-slate-300" />
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">GET IN TOUCH</span>
+                                <div className="w-12 h-px bg-[#D5CFCE]" />
                             </div>
 
-                            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+                            <h2 className="text-3xl font-serif font-bold text-[#1C1B17] tracking-tight">
                                 Contact Information
                             </h2>
                             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                                Reach out directly via phone, email, or visit our facility in Qatar's Industrial Area.
+                                Reach out directly via phone, email, or visit our wholesale warehouse in Qatar's Industrial Area.
                             </p>
 
                             <div className="space-y-4 pt-2">
                                 {contactItems.map((item) => (
-                                    <div key={item.label} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4 shadow-sm">
-                                        <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#007AFF] flex items-center justify-center shrink-0 mt-0.5">
+                                    <div key={item.label} className="p-4 rounded-2xl bg-white border border-[#E5E0D8] flex items-start gap-4 shadow-xs">
+                                        <div className="w-10 h-10 rounded-xl bg-[#B15E2B]/10 text-[#B15E2B] border border-[#B15E2B]/20 flex items-center justify-center shrink-0 mt-0.5">
                                             <item.icon className="w-5 h-5" />
                                         </div>
                                         <div>
                                             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">{item.label}</span>
-                                            <p className="font-bold text-xs sm:text-sm text-slate-900 leading-snug">{item.value}</p>
+                                            <p className="font-bold text-xs sm:text-sm text-[#1C1B17] leading-snug">{item.value}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -118,23 +118,23 @@ const Contact = () => {
                                 </div>
                                 <div className="flex-1">
                                     <h4 className="font-bold text-sm">Direct WhatsApp Support</h4>
-                                    <p className="text-emerald-100 text-xs">+974 70605494 / +974 74080005</p>
+                                    <p className="text-emerald-100 text-xs">+974 7060 5494 / +974 7408 0005</p>
                                 </div>
                                 <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
                             </a>
                         </div>
 
                         {/* Right RFQ Form */}
-                        <div className="lg:col-span-7 bg-[#EBF1F8] p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm">
-                            <h2 className="text-2xl font-black text-slate-900 mb-1">Send an Enquiry</h2>
-                            <p className="text-slate-600 text-xs mb-6">Fill out your requirement details below for a wholesale quote.</p>
+                        <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-[#E5E0D8] shadow-sm">
+                            <h2 className="text-2xl font-serif font-bold text-[#1C1B17] mb-1">Send an Enquiry</h2>
+                            <p className="text-slate-600 text-xs mb-6">Fill out your requirement details below for a wholesale price quote.</p>
 
                             {success ? (
                                 <div className="text-center py-10">
-                                    <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
-                                    <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Submitted Successfully!</h3>
+                                    <CheckCircle className="w-12 h-12 text-[#B15E2B] mx-auto mb-3" />
+                                    <h3 className="text-xl font-serif font-bold text-[#1C1B17] mb-1">Enquiry Submitted Successfully!</h3>
                                     <p className="text-slate-600 text-xs mb-6">Our Qatar sales team will contact you within 1 business day.</p>
-                                    <button onClick={() => setSuccess(false)} className="px-6 py-2.5 rounded-full bg-[#0B132B] text-white text-xs font-bold">
+                                    <button onClick={() => setSuccess(false)} className="px-6 py-2.5 rounded-full bg-[#B15E2B] text-white text-xs font-bold hover:bg-[#8E4920] transition-colors">
                                         Send Another Enquiry
                                     </button>
                                 </div>
@@ -143,33 +143,33 @@ const Contact = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Name *</label>
-                                            <input required name="name" type="text" value={form.name} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Your Name" />
+                                            <input required name="name" type="text" value={form.name} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs focus:border-[#B15E2B] outline-none" placeholder="Your Name" />
                                         </div>
                                         <div>
                                             <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Company</label>
-                                            <input name="company" type="text" value={form.company} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Company Name" />
+                                            <input name="company" type="text" value={form.company} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs focus:border-[#B15E2B] outline-none" placeholder="Company Name" />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Email *</label>
-                                            <input required name="email" type="email" value={form.email} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="email@company.com" />
+                                            <input required name="email" type="email" value={form.email} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs focus:border-[#B15E2B] outline-none" placeholder="email@company.com" />
                                         </div>
                                         <div>
                                             <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Phone</label>
-                                            <input name="phone" type="tel" value={form.phone} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="+974 70605494" />
+                                            <input name="phone" type="tel" value={form.phone} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs focus:border-[#B15E2B] outline-none" placeholder="+974 7060 5494" />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Subject</label>
-                                        <input name="subject" type="text" value={form.subject} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs focus:border-[#007AFF] outline-none" placeholder="Building Material Wholesale Order" />
+                                        <input name="subject" type="text" value={form.subject} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs focus:border-[#B15E2B] outline-none" placeholder="Building Material Wholesale Order" />
                                     </div>
 
                                     <div>
                                         <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">Message / Requirements *</label>
-                                        <textarea required name="message" rows={4} value={form.message} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-900 text-xs resize-none focus:border-[#007AFF] outline-none" placeholder="Enter product names, quantities, or specific project requirements..." />
+                                        <textarea required name="message" rows={4} value={form.message} onChange={handleChange} className="w-full px-4 py-2.5 rounded-lg bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] text-xs resize-none focus:border-[#B15E2B] outline-none" placeholder="Enter product names, quantities, or specific project requirements..." />
                                     </div>
 
                                     {error && <p className="text-red-600 text-xs bg-red-50 p-3 rounded-lg border border-red-200">{error}</p>}
@@ -177,7 +177,7 @@ const Contact = () => {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-3.5 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
+                                        className="w-full py-3.5 rounded-full bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
                                     >
                                         {loading ? 'Submitting...' : <>Request a Quote <ArrowRight className="w-4 h-4 text-white" /></>}
                                     </button>
@@ -194,3 +194,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

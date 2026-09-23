@@ -38,39 +38,39 @@ const BrandDirectory = () => {
     });
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
             <Helmet>
-                <title>Partner Brands Directory | Jaza Trading W.L.L Qatar</title>
-                <meta name="description" content="Explore our complete directory of authorized industrial brands, tools, PPE safety products, and welding equipment in Qatar." />
+                <title>Brands Directory | Jaza Trading W.L.L Qatar</title>
+                <meta name="description" content="Explore our complete directory of authorized industrial brands, tools, PPE safety products, and door locks in Qatar." />
             </Helmet>
 
             <div className="max-w-7xl mx-auto">
                 {/* Header Banner */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-12 mb-10 shadow-xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="bg-[#1C1B17] text-white rounded-3xl p-8 sm:p-12 mb-10 shadow-2xl relative overflow-hidden border border-[#2E4046]/40">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#B15E2B]/10 rounded-full blur-3xl pointer-events-none" />
                     
-                    <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-3">
-                        <ShieldCheck className="w-4 h-4 text-amber-400" />
-                        <span>AUTHORIZED DISTRIBUTORS & TRADEMARKS</span>
+                    <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
+                        <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
+                        <span>PROPRIETARY & DISTRIBUTED BRANDS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4 leading-tight">
-                        Our World-Class Partner Brands
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight">
+                        Our World-Class Product Brands
                     </h1>
 
                     <p className="text-slate-300 text-sm sm:text-base font-medium max-w-2xl">
-                        Discover top-tier industrial machinery, safety gear, hand tools, and building supplies from internationally certified brand partners.
+                        Discover Tork®, Eurex®, NexT®, Mark Safety Pro®, Clexo®, Tenzo®, and our international partner brands in Qatar.
                     </p>
                 </div>
 
                 {/* Filter & Search Bar */}
-                <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-[#E5E0D8] mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
                     {/* Search Bar */}
                     <div className="relative flex-1 w-full">
                         <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                         <input
                             type="text"
-                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-900 focus:outline-none focus:border-[#0B132B] transition-colors"
+                            className="w-full pl-10 pr-4 py-2.5 bg-[#F6F4EE] border border-[#D5CFCE] rounded-xl text-xs sm:text-sm font-medium text-[#1C1B17] focus:outline-none focus:border-[#B15E2B] transition-colors"
                             placeholder="Search brand by name, category or tag..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -85,8 +85,8 @@ const BrandDirectory = () => {
                                 onClick={() => setSelectedCat(cat)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                                     selectedCat === cat
-                                        ? 'bg-[#0B132B] text-white shadow-sm'
-                                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                        ? 'bg-[#B15E2B] text-white shadow-sm'
+                                        : 'bg-[#ECE8E0] text-slate-700 hover:bg-[#E5E0D8]'
                                 }`}
                             >
                                 {cat}
