@@ -79,30 +79,44 @@ const Products = () => {
         <div className="space-y-6">
             {/* Categories */}
             <div className="space-y-1">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Product Categories</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-3 mb-3">Product Categories</p>
                 <button
                     onClick={() => handleCategoryClick('')}
-                    className={`sidebar-link w-full text-left ${!selectedCategory ? 'active !bg-[#B15E2B] !text-white' : 'hover:bg-[#ECE8E0]'}`}
+                    className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs transition-all ${
+                        !selectedCategory 
+                            ? 'bg-[#B15E2B] text-white font-bold shadow-xs' 
+                            : 'text-slate-700 hover:bg-[#B15E2B]/10 hover:text-[#B15E2B]'
+                    }`}
                 >
-                    <Package className="w-4 h-4 shrink-0 text-slate-500" />
-                    <span className="flex-1">All Categories</span>
-                    {!selectedCategory && <span className="text-[10px] font-bold bg-[#1C1B17] text-white px-2 py-0.5 rounded-full">{products.length}</span>}
+                    <Package className={`w-4 h-4 shrink-0 ${!selectedCategory ? 'text-white' : 'text-[#B15E2B]'}`} />
+                    <span className="flex-1 text-left truncate">All Categories</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${!selectedCategory ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                        {products.length}
+                    </span>
                 </button>
+
                 {categories.map((cat) => {
                     const count = products.filter(p => p.category?._id === cat._id).length;
+                    const isActive = selectedCategory === cat._id;
                     return (
                         <button
                             key={cat._id}
                             onClick={() => handleCategoryClick(cat._id)}
-                            className={`sidebar-link w-full text-left ${selectedCategory === cat._id ? 'active !bg-[#B15E2B] !text-white font-bold' : 'hover:bg-[#ECE8E0]'}`}
+                            className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs transition-all ${
+                                isActive 
+                                    ? 'bg-[#B15E2B] text-white font-bold shadow-xs' 
+                                    : 'text-slate-700 hover:bg-[#B15E2B]/10 hover:text-[#B15E2B]'
+                            }`}
                         >
                             {cat.image ? (
-                                <img src={cat.image} alt={cat.name} className="w-4 h-4 object-cover rounded shrink-0" />
+                                <img src={cat.image} alt={cat.name} className="w-4 h-4 object-cover rounded-md shrink-0" />
                             ) : (
-                                <Package className="w-4 h-4 shrink-0 text-slate-500" />
+                                <Package className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                             )}
-                            <span className="flex-1 text-left text-xs font-semibold">{cat.name}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === cat._id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'}`}>{count}</span>
+                            <span className="flex-1 text-left truncate">{cat.name}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                                {count}
+                            </span>
                         </button>
                     );
                 })}
@@ -110,29 +124,40 @@ const Products = () => {
 
             {/* Brands */}
             <div className="space-y-1 pt-4 border-t border-[#E5E0D8]">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-4 mb-3">Filter by Brand</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] px-3 mb-3">Filter by Brand</p>
                 <button
                     onClick={() => handleBrandClick('')}
-                    className={`sidebar-link w-full text-left ${!selectedBrand ? 'active !bg-[#2E4046] !text-white' : 'hover:bg-[#ECE8E0]'}`}
+                    className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs transition-all ${
+                        !selectedBrand 
+                            ? 'bg-[#B15E2B] text-white font-bold shadow-xs' 
+                            : 'text-slate-700 hover:bg-[#B15E2B]/10 hover:text-[#B15E2B]'
+                    }`}
                 >
-                    <Tag className="w-4 h-4 shrink-0 text-slate-500" />
-                    <span className="flex-1">All Brands</span>
+                    <Tag className={`w-4 h-4 shrink-0 ${!selectedBrand ? 'text-white' : 'text-[#B15E2B]'}`} />
+                    <span className="flex-1 text-left truncate">All Brands</span>
                 </button>
                 {brands.map((b) => {
                     const count = products.filter(p => p.brand?.toLowerCase() === b.toLowerCase()).length;
+                    const isActive = selectedBrand.toLowerCase() === b.toLowerCase();
                     return (
                         <button
                             key={b}
                             onClick={() => handleBrandClick(b)}
-                            className={`sidebar-link w-full text-left ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'active !bg-[#B15E2B] !text-white' : 'hover:bg-[#ECE8E0]'}`}
+                            className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs transition-all ${
+                                isActive 
+                                    ? 'bg-[#B15E2B] text-white font-bold shadow-xs' 
+                                    : 'text-slate-700 hover:bg-[#B15E2B]/10 hover:text-[#B15E2B]'
+                            }`}
                         >
-                            <span className="flex-1 text-left text-xs font-semibold">{b}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedBrand.toLowerCase() === b.toLowerCase() ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'}`}>{count}</span>
+                            <Tag className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                            <span className="flex-1 text-left truncate capitalize">{b}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                                {count}
+                            </span>
                         </button>
                     );
                 })}
             </div>
-
         </div>
     );
 
