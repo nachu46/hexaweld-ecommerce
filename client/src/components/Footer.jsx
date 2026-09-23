@@ -103,22 +103,23 @@ const Footer = () => {
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Quick Navigation</p>
                             <ul className="space-y-2.5">
                                 <li><Link to="/" className="hover:text-slate-900 transition-colors">Home</Link></li>
-                                <li><Link to="/about" className="hover:text-slate-900 transition-colors">About Us</Link></li>
+                                <li><Link to="/about" className="hover:text-slate-900 transition-colors">About Jaza Trading</Link></li>
                                 <li><Link to="/services" className="hover:text-slate-900 transition-colors">Services</Link></li>
                                 <li><Link to="/products" className="hover:text-slate-900 transition-colors">Products & Machinery</Link></li>
+                                <li><Link to="/categories" className="hover:text-slate-900 transition-colors">Product Categories</Link></li>
                                 <li><Link to="/brands" className="hover:text-slate-900 transition-colors">Partner Brands</Link></li>
                                 <li><Link to="/faq" className="hover:text-slate-900 transition-colors">FAQs & Support</Link></li>
-                                <li><Link to="/contact" className="hover:text-slate-900 transition-colors">Consultation & Contact</Link></li>
+                                <li><Link to="/contact" className="hover:text-slate-900 transition-colors">Contact & RFQ</Link></li>
                             </ul>
                         </div>
 
                         {/* Contact Info Right Column */}
                         <div className="lg:col-span-4 space-y-3 text-xs font-medium text-slate-600">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Contact Info</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Contact Info & Policies</p>
                             <div className="space-y-3">
-                                <a href="tel:+97455123456" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
+                                <a href="tel:+97470605494" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
                                     <Phone className="w-4 h-4 text-rose-500 shrink-0" />
-                                    <span>+974 5512 3456 / +974 4450 1234</span>
+                                    <span>+974 7060 5494 / +974 4450 1234</span>
                                 </a>
                                 <a href="mailto:jazatrading@gmail.com" className="flex items-center gap-3 hover:text-slate-900 transition-colors">
                                     <Mail className="w-4 h-4 text-purple-500 shrink-0" />
@@ -128,6 +129,16 @@ const Footer = () => {
                                     <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain shrink-0" />
                                     <span>+974 7060 5494 (WhatsApp Sales)</span>
                                 </a>
+                            </div>
+
+                            <div className="pt-3 flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
+                                <Link to="/privacy-policy" className="hover:text-slate-700">Privacy Policy</Link>
+                                <span>•</span>
+                                <Link to="/terms-and-conditions" className="hover:text-slate-700">Terms</Link>
+                                <span>•</span>
+                                <Link to="/shipping-policy" className="hover:text-slate-700">Shipping</Link>
+                                <span>•</span>
+                                <Link to="/return-policy" className="hover:text-slate-700">Returns</Link>
                             </div>
                         </div>
 

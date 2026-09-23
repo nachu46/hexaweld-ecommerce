@@ -137,11 +137,14 @@ const Header = () => {
                                 </button>
                             </div>
 
-                            <div className="flex flex-col gap-3 flex-1">
-                                <Link to="/" className="text-sm font-bold text-slate-800 py-2">Home</Link>
-                                <Link to="/about" className="text-sm font-bold text-slate-800 py-2">Company</Link>
-                                <Link to="/products" className="text-sm font-bold text-slate-800 py-2">Products</Link>
-                                <Link to="/contact" className="text-sm font-bold text-slate-800 py-2">Contact</Link>
+                            <div className="flex flex-col gap-2 flex-1">
+                                <Link to="/" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Home</Link>
+                                <Link to="/about" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Company Profile</Link>
+                                <Link to="/products" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Products Catalog</Link>
+                                <Link to="/categories" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Product Categories</Link>
+                                <Link to="/brands" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Partner Brands</Link>
+                                <Link to="/services" className="text-sm font-bold text-slate-800 py-2 border-b border-slate-50">Services</Link>
+                                <Link to="/contact" className="text-sm font-bold text-slate-800 py-2">Contact & RFQ</Link>
                             </div>
 
                             <div className="mt-auto">
