@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Trash2, UserPlus, ShieldCheck } from 'lucide-react';
+import { Trash2, UserPlus, ShieldCheck, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
+import AdminNav from '../../components/AdminNav';
 
-const ROLE_COLORS = {
-    superadmin: 'bg-purple-500/20 text-purple-300 border border-purple-500/30',
-    admin: 'bg-slate-500/20 text-slate-300 border border-slate-500/30',
-    editor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
+const ROLE_BADGES = {
+    superadmin: 'bg-purple-50 text-purple-700 border-purple-200',
+    admin: 'bg-blue-50 text-[#007AFF] border-blue-200',
+    editor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
 };
 
 const AdminManagement = () => {
     const { user } = useAuth();
     const [admins, setAdmins] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [creating, setCreating] = useState(false);
     const [form, setForm] = useState({ name: '', email: '', password: '', role: 'admin' });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -28,7 +28,7 @@ const AdminManagement = () => {
             const { data } = await axios.get('/api/admin/list-admins', authHeader());
             setAdmins(data);
         } catch {
-            setError('Failed to load admins');
+            setError('Failed to load admin accounts list');
         } finally {
             setLoading(false);
         }
@@ -41,7 +41,7 @@ const AdminManagement = () => {
         setError(''); setSuccess('');
         try {
             await axios.post('/api/admin/create-admin', form, authHeader());
-            setSuccess('Admin created successfully!');
+            setSuccess('New admin account created successfully!');
             setForm({ name: '', email: '', password: '', role: 'admin' });
             fetchAdmins();
         } catch (err) {
@@ -50,7 +50,7 @@ const AdminManagement = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to remove this admin?')) return;
+        if (!window.confirm('Are you sure you want to remove this admin account?')) return;
         try {
             await axios.delete(`/api/admin/${id}`, authHeader());
             setAdmins((prev) => prev.filter((a) => a._id !== id));
@@ -60,98 +60,97 @@ const AdminManagement = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-6">
-            <div className="max-w-5xl mx-auto">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-                        <ShieldCheck className="w-8 h-8 text-blue-500" />
-                        Admin Management
-                    </h1>
-                    <p className="text-gray-400 mt-1">Manage admin users and their roles</p>
-                </div>
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title="Admin Team & Roles" 
+                subtitle="Manage team members, roles, and administrative access credentials."
+            />
+
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
                 {/* Create Form */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8"
-                >
-                    <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                        <UserPlus className="w-5 h-5 text-blue-500" /> Create New Admin
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+                    <h2 className="text-base font-black text-slate-900 mb-4 flex items-center gap-2">
+                        <UserPlus className="w-4 h-4 text-[#007AFF]" /> Add New Admin Account
                     </h2>
-                    {error && <p className="text-red-400 text-sm mb-4 bg-red-500/10 px-4 py-2 rounded-lg">{error}</p>}
-                    {success && <p className="text-emerald-400 text-sm mb-4 bg-emerald-500/10 px-4 py-2 rounded-lg">{success}</p>}
+
+                    {error && <p className="text-rose-600 text-xs font-bold mb-4 bg-rose-50 border border-rose-200 p-3 rounded-xl">{error}</p>}
+                    {success && <p className="text-emerald-700 text-xs font-bold mb-4 bg-emerald-50 border border-emerald-200 p-3 rounded-xl">{success}</p>}
+
                     <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
-                            { label: 'Full Name', key: 'name', type: 'text', placeholder: 'John Doe' },
-                            { label: 'Email', key: 'email', type: 'email', placeholder: 'john@jazatrading.com' },
-                            { label: 'Password', key: 'password', type: 'password', placeholder: '••••••••' },
+                            { label: 'Full Name', key: 'name', type: 'text', placeholder: 'e.g. Salim Al-Kuwari' },
+                            { label: 'Email Address', key: 'email', type: 'email', placeholder: 'salim@jazatrading.com' },
+                            { label: 'Account Password', key: 'password', type: 'password', placeholder: '••••••••' },
                         ].map(({ label, key, type, placeholder }) => (
                             <div key={key}>
-                                <label className="block text-sm text-gray-400 mb-1">{label}</label>
+                                <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">{label}</label>
                                 <input
                                     type={type}
                                     value={form[key]}
                                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                                     placeholder={placeholder}
                                     required
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500/50"
+                                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:border-slate-900 focus:outline-none bg-slate-50/50"
                                 />
                             </div>
                         ))}
+
                         <div>
-                            <label className="block text-sm text-gray-400 mb-1">Role</label>
+                            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Access Role</label>
                             <select
                                 value={form.role}
                                 onChange={(e) => setForm({ ...form, role: e.target.value })}
-                                className="w-full bg-gray-800 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-slate-500/50"
+                                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:border-slate-900 focus:outline-none bg-slate-50/50"
                             >
-                                <option value="editor">Editor</option>
-                                <option value="admin">Admin</option>
-                                <option value="superadmin">Super Admin</option>
+                                <option value="editor">Editor (Products & Content)</option>
+                                <option value="admin">Admin (Full Management)</option>
+                                <option value="superadmin">Super Admin (System Owner)</option>
                             </select>
                         </div>
-                        <div className="md:col-span-2 flex justify-end">
+
+                        <div className="md:col-span-2 flex justify-end pt-2">
                             <button
                                 type="submit"
-                                className="px-6 py-2.5 bg-slate-500 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition-colors"
                             >
-                                Create Admin
+                                <UserPlus className="w-4 h-4 text-blue-400" /> Create Account
                             </button>
                         </div>
                     </form>
-                </motion.div>
+                </div>
 
                 {/* Admins Table */}
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-x-auto">
-                    <table className="min-w-full">
-                        <thead>
-                            <tr className="border-b border-white/10">
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-400">Name</th>
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-400">Email</th>
-                                <th className="text-left px-6 py-4 text-sm font-semibold text-gray-400">Role</th>
-                                <th className="text-right px-6 py-4 text-sm font-semibold text-gray-400">Action</th>
+                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                    <table className="min-w-full divide-y divide-slate-100">
+                        <thead className="bg-slate-50">
+                            <tr>
+                                <th className="text-left px-6 py-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">User Name</th>
+                                <th className="text-left px-6 py-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Email Address</th>
+                                <th className="text-left px-6 py-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Role</th>
+                                <th className="text-right px-6 py-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-slate-100">
                             {loading ? (
-                                <tr><td colSpan={4} className="text-center py-10 text-gray-500">Loading...</td></tr>
+                                <tr><td colSpan={4} className="text-center py-10 text-slate-400 text-xs font-bold">Loading accounts...</td></tr>
                             ) : admins.length === 0 ? (
-                                <tr><td colSpan={4} className="text-center py-10 text-gray-500">No admins found</td></tr>
+                                <tr><td colSpan={4} className="text-center py-10 text-slate-400 text-xs font-bold">No admin accounts found</td></tr>
                             ) : admins.map((a) => (
-                                <tr key={a._id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                    <td className="px-6 py-4 text-white font-medium">{a.name}</td>
-                                    <td className="px-6 py-4 text-gray-400">{a.email}</td>
-                                    <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${ROLE_COLORS[a.role] || ROLE_COLORS.admin}`}>
+                                <tr key={a._id} className="hover:bg-slate-50/60 transition-colors">
+                                    <td className="px-6 py-3.5 text-xs font-bold text-slate-900">{a.name}</td>
+                                    <td className="px-6 py-3.5 text-xs font-medium text-slate-500">{a.email}</td>
+                                    <td className="px-6 py-3.5">
+                                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border ${ROLE_BADGES[a.role] || ROLE_BADGES.admin}`}>
                                             {a.role}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-right">
+                                    <td className="px-6 py-3.5 text-right">
                                         {a._id !== user?._id && (
                                             <button
                                                 onClick={() => handleDelete(a._id)}
-                                                className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
+                                                className="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                                                title="Delete Admin Account"
                                             >
                                                 <Trash2 className="w-4 h-4" />
                                             </button>

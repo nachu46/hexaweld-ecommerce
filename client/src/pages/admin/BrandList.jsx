@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Plus, Edit, Trash2, Search, Image as ImageIcon, ExternalLink, Tag, ShieldCheck, RefreshCw } from 'lucide-react';
+import AdminNav from '../../components/AdminNav';
 
 const BrandList = () => {
     const [brands, setBrands] = useState([]);
@@ -46,7 +47,14 @@ const BrandList = () => {
     );
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title="Brand Image & Content Studio" 
+                subtitle="Manage brand logos, banners, gallery photos, and partner tags."
+                actionLink="/admin/brands/new"
+                actionLabel="Add New Brand"
+            />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                 <div>
@@ -196,6 +204,7 @@ const BrandList = () => {
                     ))}
                 </div>
             )}
+            </div>
         </div>
     );
 };

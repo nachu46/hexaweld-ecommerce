@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowLeft, Save, Upload, Trash2, Image as ImageIcon, Plus, Link as LinkIcon, ShieldCheck, AlertCircle, Loader2 } from 'lucide-react';
+import AdminNav from '../../components/AdminNav';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
@@ -202,7 +203,15 @@ const BrandEdit = () => {
     }
 
     return (
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title={isEdit ? `Edit Brand: ${name}` : 'Create New Brand'} 
+                subtitle="Configure logos, banner image, gallery, tag, description, and website URL."
+                actionLink="/admin/brands"
+                actionLabel="Back to Brands"
+                actionIcon={ArrowLeft}
+            />
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             {/* Back Header */}
             <div className="flex items-center justify-between mb-8">
                 <Link to="/admin/brands" className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900">
@@ -541,6 +550,7 @@ const BrandEdit = () => {
                 </div>
 
             </form>
+            </div>
         </div>
     );
 };

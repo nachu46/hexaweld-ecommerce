@@ -3,8 +3,9 @@ import axios from 'axios';
 import {
     Plus, Trash2, Edit2, Check, X, Eye, EyeOff,
     Upload, Image, Loader2, ChevronUp, ChevronDown,
-    LayoutTemplate, ArrowRight, Link, Package, List, Tag,
+    LayoutTemplate, ArrowRight, Link as LinkIcon, Package, List, Tag,
 } from 'lucide-react';
+import AdminNav from '../../components/AdminNav';
 
 const GRADIENT_PRESETS = [
     { label: 'Navy → Steel', value: 'from-[#0F172A] to-[#1E3A5F]' },
@@ -202,7 +203,12 @@ const AdminBanners = () => {
     const field = (key, value) => setForm(f => ({ ...f, [key]: value }));
 
     return (
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title="Homepage Banner Studio" 
+                subtitle="Configure slide banners, CTA buttons, background gradients, and promotional links."
+            />
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* Header */}
             <div className="flex items-center justify-between mb-7">
@@ -556,6 +562,7 @@ const AdminBanners = () => {
                     ))}
                 </div>
             )}
+            </div>
         </div>
     );
 };

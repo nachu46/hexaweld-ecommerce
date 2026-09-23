@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MessageCircle, Search, X, Phone, Mail, ExternalLink, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import AdminNav from '../../components/AdminNav';
 
 const SOURCE_LABELS = {
     whatsapp: { label: 'WhatsApp', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
@@ -54,8 +55,15 @@ const AdminEnquiries = () => {
     const totalBySource = (src) => enquiries.filter(e => e.source === src).length;
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title="Customer RFQs & Product Enquiries" 
+                subtitle={`View and respond to customer RFQs, WhatsApp clicks, and quote requests.`}
+                actionLink="#"
+                actionLabel="Export CSV"
+                actionIcon={Download}
+            />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">

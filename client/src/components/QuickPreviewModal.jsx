@@ -108,10 +108,10 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 {/* Price or contact for price */}
                                 {showPrice ? (
                                     <div className="flex items-baseline gap-2 mb-3">
-                                        <span className="text-[#007AFF] font-bold text-lg">₹{product.price.toLocaleString()}</span>
+                                        <span className="text-[#007AFF] font-bold text-lg">QAR {product.price.toLocaleString()}</span>
                                         {hasDiscount && (
                                             <>
-                                                <span className="text-[#94A3B8] line-through text-sm">₹{product.comparePrice.toLocaleString()}</span>
+                                                <span className="text-[#94A3B8] line-through text-sm">QAR {product.comparePrice.toLocaleString()}</span>
                                                 <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">{discountPct}% OFF</span>
                                             </>
                                         )}

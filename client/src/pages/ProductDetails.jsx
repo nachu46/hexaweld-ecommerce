@@ -180,10 +180,10 @@ const ProductDetails = () => {
                             {/* Price / Contact for Price */}
                             {showPrice ? (
                                 <div className="flex items-baseline gap-3 mb-4">
-                                    <span className="text-2xl font-bold text-[#007AFF]">₹{product.price.toLocaleString()}</span>
+                                    <span className="text-2xl font-bold text-[#007AFF]">QAR {product.price.toLocaleString()}</span>
                                     {hasDiscount && (
                                         <>
-                                            <span className="text-base text-[#94A3B8] line-through">₹{product.comparePrice.toLocaleString()}</span>
+                                            <span className="text-base text-[#94A3B8] line-through">QAR {product.comparePrice.toLocaleString()}</span>
                                             <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">{discountPct}% OFF</span>
                                         </>
                                     )}
@@ -375,7 +375,7 @@ const ProductDetails = () => {
                                                     {rel.name}
                                                 </p>
                                                 {rel.price > 0 && !rel.enquiryOnly ? (
-                                                    <p className="text-sm font-black text-slate-500">₹{rel.price.toLocaleString()}</p>
+                                                    <p className="text-xs font-bold text-slate-700">QAR {rel.price.toLocaleString()}</p>
                                                 ) : (
                                                     <p className="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
                                                         <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> Price on Request

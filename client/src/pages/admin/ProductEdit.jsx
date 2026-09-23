@@ -6,6 +6,7 @@ import {
     ChevronDown, ChevronUp, Image as ImageIcon, Package,
     DollarSign, BarChart2, Layers, FileText, Search
 } from 'lucide-react';
+import AdminNav from '../../components/AdminNav';
 
 // ── Section wrapper ─────────────────────────────────────────────────────────
 const Section = ({ icon: Icon, title, children, defaultOpen = true }) => {
@@ -249,8 +250,15 @@ const ProductEdit = () => {
 
     // ─────────────────────────────────────────────────────────────────────────
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+            <AdminNav 
+                title={isEditMode ? 'Edit Product Details' : 'Add New Catalog Product'}
+                subtitle={isEditMode ? 'Update images, pricing, specs, tags, and category assignment.' : 'Fill in the form to publish a new product to the store.'}
+                actionLink="/admin/products"
+                actionLabel="Back to Products"
+                actionIcon={ArrowLeft}
+            />
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
@@ -377,22 +385,22 @@ const ProductEdit = () => {
                     {/* ── PRICING ── */}
                     <Section icon={DollarSign} title="Pricing">
                         <div className="grid grid-cols-3 gap-4 mt-2">
-                            <Field label="Price (₹)">
+                            <Field label="Price (QAR)">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">₹</span>
-                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-7`} value={price} onChange={e => setPrice(e.target.value)} placeholder="0.00" />
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={price} onChange={e => setPrice(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
                             <Field label="Compare at Price" hint="original">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">₹</span>
-                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-7`} value={comparePrice} onChange={e => setComparePrice(e.target.value)} placeholder="0.00" />
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={comparePrice} onChange={e => setComparePrice(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
                             <Field label="Cost per Item" hint="internal">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">₹</span>
-                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-7`} value={costPerItem} onChange={e => setCostPerItem(e.target.value)} placeholder="0.00" />
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={costPerItem} onChange={e => setCostPerItem(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
                         </div>
