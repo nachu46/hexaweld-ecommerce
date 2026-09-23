@@ -217,8 +217,11 @@ const Home = () => {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="lg:col-span-6 relative space-y-3">
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">POWER TOOLS & EQUIPMENT</span>
+                            <div className="lg:col-span-6 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">POWER TOOLS & EQUIPMENT</span>
+                                    <span className="text-4xl font-black text-slate-300">01</span>
+                                </div>
                                 <h3 className="text-3xl font-black text-slate-900">Power your work.</h3>
                                 <p className="text-slate-600 text-xs sm:text-sm font-semibold">Tork, EDON and TENZO.</p>
                                 <div className="pt-3">
@@ -226,14 +229,16 @@ const Home = () => {
                                         Explore range <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
-                                <span className="absolute top-0 right-0 text-6xl font-black text-slate-200 pointer-events-none">01</span>
                             </div>
                         </div>
 
                         {/* Card 02: Door Hardware & Sanitary */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-50 p-6 sm:p-10 rounded-3xl border border-slate-200">
-                            <div className="lg:col-span-6 order-2 lg:order-1 relative space-y-3">
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">DOOR HARDWARE & SANITARY</span>
+                            <div className="lg:col-span-6 order-2 lg:order-1 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">DOOR HARDWARE & SANITARY</span>
+                                    <span className="text-4xl font-black text-slate-300">02</span>
+                                </div>
                                 <h3 className="text-3xl font-black text-slate-900">Details that perform.</h3>
                                 <p className="text-slate-600 text-xs sm:text-sm font-semibold">Eurex and Clexo.</p>
                                 <div className="pt-3">
@@ -241,11 +246,10 @@ const Home = () => {
                                         Explore range <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
-                                <span className="absolute top-0 left-0 text-6xl font-black text-slate-200 pointer-events-none">02</span>
                             </div>
                             <div className="lg:col-span-6 order-1 lg:order-2 rounded-2xl overflow-hidden h-64 sm:h-72 bg-slate-200 border border-slate-300">
                                 <img
-                                    src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80"
+                                    src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80"
                                     alt="Door Hardware & Sanitary"
                                     className="w-full h-full object-cover"
                                 />
@@ -256,13 +260,16 @@ const Home = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-50 p-6 sm:p-10 rounded-3xl border border-slate-200">
                             <div className="lg:col-span-6 rounded-2xl overflow-hidden h-64 sm:h-72 bg-slate-200 border border-slate-300">
                                 <img
-                                    src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80"
+                                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
                                     alt="Hand Tools, Paints & Safety"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="lg:col-span-6 relative space-y-3">
-                                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">HAND TOOLS, PAINTS & SAFETY</span>
+                            <div className="lg:col-span-6 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">HAND TOOLS, PAINTS & SAFETY</span>
+                                    <span className="text-4xl font-black text-slate-300">03</span>
+                                </div>
                                 <h3 className="text-3xl font-black text-slate-900">Ready for every task.</h3>
                                 <p className="text-slate-600 text-xs sm:text-sm font-semibold">Next and Mark Safety Pro.</p>
                                 <div className="pt-3">
@@ -270,7 +277,6 @@ const Home = () => {
                                         Explore range <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
-                                <span className="absolute top-0 right-0 text-6xl font-black text-slate-200 pointer-events-none">03</span>
                             </div>
                         </div>
 
