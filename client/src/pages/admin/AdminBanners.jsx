@@ -16,7 +16,7 @@ const GRADIENT_PRESETS = [
     { label: 'Green → Teal', value: 'from-emerald-700 to-teal-800' },
 ];
 
-const ACCENT_PRESETS = ['#007AFF', '#22C55E', '#A78BFA', '#3B82F6', '#EF4444', '#F59E0B'];
+const ACCENT_PRESETS = ['#B15E2B', '#2E4046', '#22C55E', '#A78BFA', '#3B82F6', '#EF4444', '#F59E0B'];
 
 const EMPTY_FORM = {
     label: '',
@@ -24,8 +24,8 @@ const EMPTY_FORM = {
     subtitle: '',
     buttonText: 'Shop Now',
     buttonLink: '/products',
-    bgGradient: 'from-[#0F172A] to-[#1E3A5F]',
-    accentColor: '#007AFF',
+    bgGradient: 'from-[#1C1B17] to-[#2E4046]',
+    accentColor: '#B15E2B',
     image: '',
     isActive: true,
     order: 0,
@@ -218,7 +218,7 @@ const AdminBanners = () => {
                 </div>
                 {!showForm && (
                     <button onClick={openAdd}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-[#007AFF] hover:bg-blue-700 text-white font-bold rounded-xl transition-all hover:scale-105 shadow-lg shadow-slate-200 text-sm">
+                        className="flex items-center gap-2 px-5 py-2.5 bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold rounded-xl transition-all hover:scale-105 shadow-md text-sm">
                         <Plus className="w-4 h-4" /> New Banner
                     </button>
                 )}
@@ -283,12 +283,12 @@ const AdminBanners = () => {
                                     {[
                                         { id: 'category', icon: List, label: 'Category' },
                                         { id: 'product', icon: Package, label: 'Product' },
-                                        { id: 'custom', icon: Link, label: 'Custom' },
+                                        { id: 'custom', icon: LinkIcon, label: 'Custom' },
                                     ].map(({ id, icon: Icon, label }) => (
                                         <button key={id} type="button"
                                             onClick={() => setLinkTab(id)}
                                             className={`flex items-center gap-1 flex-1 justify-center py-1.5 rounded-md text-xs font-bold transition-all ${linkTab === id
-                                                ? 'bg-white shadow text-[#007AFF]'
+                                                ? 'bg-white shadow text-[#B15E2B]'
                                                 : 'text-slate-500 hover:text-slate-700'
                                                 }`}>
                                             <Icon className="w-3 h-3" />{label}
@@ -457,7 +457,7 @@ const AdminBanners = () => {
 
                             <div className="flex gap-3 pt-2">
                                 <button type="submit" disabled={saving}
-                                    className="flex items-center gap-2 px-5 py-2.5 bg-[#007AFF] hover:bg-blue-700 text-white font-bold rounded-xl transition-all text-sm disabled:opacity-60">
+                                    className="flex items-center gap-2 px-5 py-2.5 bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold rounded-xl transition-all text-sm disabled:opacity-60">
                                     {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                                     {saving ? 'Saving…' : (editId ? 'Update Banner' : 'Create Banner')}
                                 </button>
@@ -491,7 +491,7 @@ const AdminBanners = () => {
                     <p className="text-slate-500 font-semibold mb-1">No banners yet</p>
                     <p className="text-slate-400 text-sm mb-5">Add your first banner to display it on the homepage carousel.</p>
                     <button onClick={openAdd}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#007AFF] text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition-all">
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B15E2B] text-white font-bold rounded-xl text-sm hover:bg-[#8E4920] transition-all">
                         <Plus className="w-4 h-4" /> Add First Banner
                     </button>
                 </div>

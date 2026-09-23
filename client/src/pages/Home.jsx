@@ -96,16 +96,16 @@ const Home = () => {
     return (
         <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans overflow-x-hidden w-full">
 
-            {/* ══ 1. HERO BANNER (Refined Lulu Rayyan Style Structure) ════════════ */}
+            {/* ══ 1. HERO BANNER (Refined Corporate Structure) ════════════════════ */}
             <section className="px-3 sm:px-6 lg:px-8 pt-4 pb-6">
-                <div className="max-w-7xl mx-auto bg-[#1C1B17] rounded-3xl overflow-hidden relative text-white p-6 sm:p-12 min-h-[460px] flex flex-col justify-between shadow-xl border border-[#2E4046]">
+                <div className="max-w-7xl mx-auto bg-[#2E4046] rounded-3xl overflow-hidden relative text-white p-6 sm:p-12 min-h-[460px] flex flex-col justify-between shadow-xl border border-[#3E5259]">
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10 gap-2">
-                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
+                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white/10 px-3 py-1 rounded-full border border-white/10">
                             BUILDING MATERIALS WHOLESALE • QATAR
                         </span>
-                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 text-right">
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200 text-right">
                             ESTABLISHED 2009 • DIVISION OF SANA GROUP
                         </span>
                     </div>
@@ -113,20 +113,20 @@ const Home = () => {
                     {/* Main Hero Content & Photography */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-4 z-10">
                         <div className="lg:col-span-7 space-y-4">
-                            <span className="inline-block px-3 py-1 rounded-md bg-[#2E4046] text-[#E5E0D8] text-[10px] font-bold uppercase tracking-wider">
+                            <span className="inline-block px-3 py-1 rounded-md bg-[#B15E2B] text-white text-[10px] font-bold uppercase tracking-wider shadow-xs">
                                 15+ Years in the Qatar Market
                             </span>
                             <h1 className="text-3xl sm:text-5xl font-serif font-bold leading-tight text-white tracking-tight">
                                 Your trusted partner in quality building materials & reliable supply.
                             </h1>
-                            <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed max-w-lg">
+                            <p className="text-slate-200 text-xs sm:text-sm font-normal leading-relaxed max-w-lg">
                                 Jaza Trading W.L.L provides premium electricals, door hardware, lock cylinders, hand tools, welders, sanitaryware, and PPE safety gear to contractors across the State of Qatar.
                             </p>
                             
                             <div className="flex flex-wrap items-center gap-3 pt-2">
                                 <Link
                                     to="/products"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white font-bold text-xs transition-all shadow-sm group"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-all shadow-md group"
                                 >
                                     <span>Explore Products Catalog</span>
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -136,7 +136,7 @@ const Home = () => {
                                     href="/catalog.pdf"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-600 hover:border-white text-white font-bold text-xs transition-all"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 hover:border-white text-white font-bold text-xs transition-all bg-white/5 hover:bg-white/10"
                                 >
                                     <Download className="w-4 h-4 text-[#B15E2B]" />
                                     <span>Download PDF Catalog</span>
@@ -146,35 +146,35 @@ const Home = () => {
 
                         {/* Right Photography Frame */}
                         <div className="lg:col-span-5 relative flex justify-center items-center">
-                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-slate-700/60 relative bg-[#2E4046]">
+                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-white/20 relative bg-[#2E4046]">
                                 <img
                                     src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1000&q=80"
                                     alt="Industrial Building Materials Qatar"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1B17]/90 via-transparent to-transparent" />
-                                <div className="absolute bottom-3 left-3 right-3 bg-[#1C1B17]/80 backdrop-blur-md p-3 rounded-xl border border-white/10 flex items-center justify-between text-xs text-white">
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#2E4046]/90 via-transparent to-transparent" />
+                                <div className="absolute bottom-3 left-3 right-3 bg-[#2E4046]/90 backdrop-blur-md p-3 rounded-xl border border-white/20 flex items-center justify-between text-xs text-white">
                                     <div>
                                         <p className="font-bold text-xs text-white">Jaza Trading W.L.L</p>
-                                        <p className="text-[10px] text-slate-400">Street 5, Industrial Area, Doha</p>
+                                        <p className="text-[10px] text-slate-200">Street 5, Industrial Area, Doha</p>
                                     </div>
-                                    <span className="text-[10px] font-bold text-[#B15E2B] bg-[#B15E2B]/20 px-2 py-0.5 rounded border border-[#B15E2B]/40">QATAR</span>
+                                    <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-2.5 py-1 rounded shadow-xs">QATAR</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Bottom Core Values Strip */}
-                    <div className="z-10 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-300 gap-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">CORE VALUES</span>
+                    <div className="z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-between text-xs text-slate-200 gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">CORE VALUES</span>
                         <div className="flex flex-wrap items-center gap-4 font-serif font-bold text-white text-xs">
-                            <span className="text-[#B15E2B]">Reliability</span>
+                            <span className="text-white">Reliability</span>
                             <span>•</span>
-                            <span className="text-[#B15E2B]">Quality</span>
+                            <span className="text-white">Quality</span>
                             <span>•</span>
-                            <span className="text-[#B15E2B]">Value</span>
+                            <span className="text-white">Value</span>
                             <span>•</span>
-                            <span className="text-[#B15E2B]">Service</span>
+                            <span className="text-white">Service</span>
                         </div>
                     </div>
                 </div>
@@ -226,7 +226,7 @@ const Home = () => {
                                 alt="Building Construction Materials Qatar"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute bottom-3 left-3 bg-[#1C1B17]/90 backdrop-blur-sm px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-slate-700">
+                            <div className="absolute bottom-3 left-3 bg-[#2E4046] backdrop-blur-sm px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-[#3E5259]">
                                 SANA GROUP DIVISION • QATAR
                             </div>
                         </div>
@@ -259,15 +259,15 @@ const Home = () => {
                             <div className="pt-2 flex flex-wrap items-center gap-3">
                                 <Link
                                     to="/about"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1C1B17] hover:bg-[#2E4046] text-white font-bold text-xs transition-all shadow-xs"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-all shadow-xs"
                                 >
                                     <span>Read Complete Company Profile</span>
-                                    <ArrowRight className="w-4 h-4 text-[#B15E2B]" />
+                                    <ArrowRight className="w-4 h-4 text-white" />
                                 </Link>
 
                                 <a
                                     href="tel:+97470605494"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#D5CFCE] hover:border-[#1C1B17] text-[#1C1B17] font-bold text-xs transition-all"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#D5CFCE] hover:border-[#B15E2B] text-[#1C1B17] font-bold text-xs transition-all bg-white"
                                 >
                                     <Phone className="w-3.5 h-3.5 text-[#B15E2B]" />
                                     <span>Call Sales: +974 7060 5494</span>
@@ -306,7 +306,7 @@ const Home = () => {
                                         alt={cat.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <span className="absolute top-3 left-3 bg-[#1C1B17]/90 text-[#B15E2B] font-bold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider">
+                                    <span className="absolute top-3 left-3 bg-[#2E4046] text-[#E5E0D8] font-bold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">
                                         {cat.brandTag}
                                     </span>
                                 </div>
@@ -458,43 +458,43 @@ const Home = () => {
                             <div className="pt-2">
                                 <Link
                                     to="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1C1B17] hover:bg-[#2E4046] text-white font-bold text-xs transition-all shadow-xs"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-all shadow-sm"
                                 >
                                     <span>Contact & Showroom Directions</span>
-                                    <ArrowRight className="w-4 h-4 text-[#B15E2B]" />
+                                    <ArrowRight className="w-4 h-4 text-white" />
                                 </Link>
                             </div>
                         </div>
 
                         {/* Visual Map Representation Frame */}
-                        <div className="lg:col-span-6 bg-[#2E4046] rounded-3xl p-6 text-white space-y-4 border border-slate-700 shadow-lg relative overflow-hidden">
-                            <div className="flex items-center justify-between border-b border-slate-600 pb-3">
+                        <div className="lg:col-span-6 bg-[#2E4046] rounded-3xl p-6 text-white space-y-4 border border-[#3E5259] shadow-lg relative overflow-hidden">
+                            <div className="flex items-center justify-between border-b border-white/20 pb-3">
                                 <div>
                                     <h3 className="font-serif font-bold text-lg text-white">Doha Central Warehouse</h3>
-                                    <p className="text-[10px] text-slate-300">Street 5, Industrial Area, Qatar</p>
+                                    <p className="text-[10px] text-slate-200">Street 5, Industrial Area, Qatar</p>
                                 </div>
-                                <span className="text-[10px] font-bold text-[#B15E2B] bg-[#1C1B17] px-3 py-1 rounded-full border border-[#B15E2B]/40">
+                                <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-3 py-1 rounded-full shadow-xs">
                                     OPEN FOR PICKUP
                                 </span>
                             </div>
 
-                            <div className="h-52 rounded-2xl overflow-hidden relative bg-[#1C1B17] border border-slate-700 flex items-center justify-center text-center p-6">
+                            <div className="h-52 rounded-2xl overflow-hidden relative bg-[#233338] border border-white/10 flex items-center justify-center text-center p-6">
                                 <div className="space-y-2">
                                     <MapPin className="w-10 h-10 text-[#B15E2B] mx-auto animate-bounce" />
                                     <p className="text-xs font-bold text-white">Industrial Area Street 5 Pin</p>
-                                    <p className="text-[11px] text-slate-400">Serving Lusail, Doha, Al Wakrah & all Qatar project sites</p>
+                                    <p className="text-[11px] text-slate-300">Serving Lusail, Doha, Al Wakrah & all Qatar project sites</p>
                                 </div>
                             </div>
 
                             <div className="flex items-center justify-between text-xs pt-1">
-                                <span className="text-slate-300 text-[11px]">Working Hours: Sat - Thu (7:00 AM - 7:00 PM)</span>
+                                <span className="text-slate-200 text-[11px]">Working Hours: Sat - Thu (7:00 AM - 7:00 PM)</span>
                                 <a
                                     href="https://maps.google.com"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="text-[#B15E2B] hover:text-white font-bold text-xs inline-flex items-center gap-1"
+                                    className="text-[#E5DACE] hover:text-white font-bold text-xs inline-flex items-center gap-1"
                                 >
-                                    Google Maps <ArrowRight className="w-3.5 h-3.5" />
+                                    Google Maps <ArrowRight className="w-3.5 h-3.5 text-[#B15E2B]" />
                                 </a>
                             </div>
                         </div>

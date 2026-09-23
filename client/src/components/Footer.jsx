@@ -46,11 +46,11 @@ const Footer = () => {
 
                 {/* ══ 2. MAIN FOOTER CONTENT GRID ═════════════════════ */}
                 <div className="pt-8 border-t border-slate-800 relative">
-                    
+
                     {/* Background Subtle Watermark Text */}
                     <div className="absolute bottom-2 left-0 right-0 pointer-events-none select-none overflow-hidden opacity-5 text-center">
                         <span className="text-[100px] sm:text-[160px] font-black text-white tracking-tighter uppercase leading-none block">
-                            JAZA TRADING
+                            JAZA
                         </span>
                     </div>
 
@@ -59,7 +59,7 @@ const Footer = () => {
                         {/* Brand Column */}
                         <div className="lg:col-span-4 space-y-4">
                             <JtLogo dark={true} />
-                            
+
                             <p className="text-xs text-slate-300 font-medium leading-relaxed max-w-sm">
                                 "Your trusted partner in quality building materials, reliable supply, and lasting partnerships."
                             </p>
