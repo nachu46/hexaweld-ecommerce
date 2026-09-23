@@ -47,6 +47,8 @@ app.use('/api/announcement', require('./routes/announcementRoutes'));
 
 // New Enterprise Routes
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
+app.use('/api/reviews', require('./routes/reviewRoutes'));
+app.use('/', require('./routes/seoRoutes'));
 
 // Global error handler
 app.use((err, req, res, next) => {

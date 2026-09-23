@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, User } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ArrowRight, User, ShoppingBag, Layers, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import JtLogo from './JtLogo';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { user } = useAuth();
+    const { cartCount, setIsCartOpen } = useCart();
     const location = useLocation();
 
     useEffect(() => {
@@ -29,7 +31,7 @@ const Header = () => {
                 </Link>
 
                 {/* 2. Nav Menu Right Center */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-7">
                     <Link
                         to="/about"
                         className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/about' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
@@ -43,10 +45,22 @@ const Header = () => {
                         Products
                     </Link>
                     <Link
-                        to="/products"
-                        className="text-xs font-bold text-slate-600 hover:text-[#0B132B] tracking-wide transition-colors"
+                        to="/categories"
+                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/categories' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
+                    >
+                        Categories
+                    </Link>
+                    <Link
+                        to="/brands"
+                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/brands' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
                     >
                         Brands
+                    </Link>
+                    <Link
+                        to="/services"
+                        className={`text-xs font-bold tracking-wide transition-colors ${location.pathname === '/services' ? 'text-[#0B132B]' : 'text-slate-600 hover:text-[#0B132B]'}`}
+                    >
+                        Services
                     </Link>
                     <Link
                         to="/contact"
@@ -57,13 +71,31 @@ const Header = () => {
                 </nav>
 
                 {/* 3. Action Circle Button Far Right */}
-                <div className="flex items-center gap-3">
-                    {user && (
-                        <Link to={user.isAdmin ? "/admin/dashboard" : "/profile"} className="p-2 text-slate-700 hover:text-black">
-                            <User className="w-4 h-4" />
-                        </Link>
-                    )}
+                <div className="flex items-center gap-2.5">
+                    {/* Cart Trigger */}
+                    <button
+                        onClick={() => setIsCartOpen(true)}
+                        className="relative p-2.5 text-slate-700 hover:text-black hover:bg-slate-100 rounded-full transition-colors"
+                        title="Shopping Cart"
+                    >
+                        <ShoppingBag className="w-5 h-5 text-slate-800" />
+                        {cartCount > 0 && (
+                            <span className="absolute top-1 right-1 bg-[#0B132B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                {cartCount}
+                            </span>
+                        )}
+                    </button>
 
+                    {/* User Account / Profile */}
+                    <Link
+                        to={user ? (user.isAdmin ? "/admin/dashboard" : "/account") : "/login"}
+                        className="p-2.5 text-slate-700 hover:text-black hover:bg-slate-100 rounded-full transition-colors"
+                        title={user ? user.name : "Sign In Account"}
+                    >
+                        <User className="w-5 h-5 text-slate-800" />
+                    </Link>
+
+                    {/* Quick Action RFQ */}
                     <Link
                         to="/contact"
                         className="w-10 h-10 rounded-full bg-[#0B132B] hover:bg-slate-800 text-white flex items-center justify-center transition-transform hover:scale-105 shadow-sm"

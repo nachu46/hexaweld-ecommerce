@@ -13,13 +13,20 @@ const getBrands = asyncHandler(async (req, res) => {
 // @route   GET /api/brands/:id
 // @access  Public
 const getBrandById = asyncHandler(async (req, res) => {
-    const isObjectId = req.params.id.match(/^[0-[#a-fA-[#F0-9]{24}$/);
+    const param = req.params.id.trim();
+    const isObjectId = param.match(/^[0-9a-fA-F]{24}$/);
     let brand;
 
     if (isObjectId) {
-        brand = await Brand.findById(req.params.id);
-    } else {
-        brand = await Brand.findOne({ slug: req.params.id.toLowerCase() });
+        brand = await Brand.findById(param);
+    }
+
+    if (!brand) {
+        brand = await Brand.findOne({ slug: param.toLowerCase() });
+    }
+
+    if (!brand) {
+        brand = await Brand.findOne({ name: { $regex: new RegExp(`^${param}$`, 'i') } });
     }
 
     if (brand) {
