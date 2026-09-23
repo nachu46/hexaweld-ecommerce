@@ -54,6 +54,7 @@ const ProductEdit = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [brand, setBrand] = useState('');
+    const [availableBrands, setAvailableBrands] = useState([]);
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
     const [sku, setSku] = useState('');
@@ -85,12 +86,16 @@ const ProductEdit = () => {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
 
-    // ── Load categories + product (edit mode) ──────────────────────────────
+    // ── Load categories + brands + product (edit mode) ──────────────────────
     useEffect(() => {
         axios.get('/api/categories').then(({ data }) => {
             setCategories(data);
             if (data.length > 0 && !category) setCategory(data[0]._id);
         });
+
+        axios.get('/api/brands').then(({ data }) => {
+            if (Array.isArray(data)) setAvailableBrands(data);
+        }).catch(err => console.error('Failed loading brands in edit form', err));
 
         if (isEditMode) {
             axios.get(`/api/products/${id}`).then(({ data }) => {
@@ -288,8 +293,20 @@ const ProductEdit = () => {
                                 <textarea required rows={4} className={textareaCls} value={description} onChange={e => setDescription(e.target.value)} placeholder="Describe the product..." />
                             </Field>
                             <div className="grid grid-cols-2 gap-4">
-                                <Field label="Brand">
-                                    <input type="text" className={inputCls} value={brand} onChange={e => setBrand(e.target.value)} placeholder="e.g. Tork" />
+                                <Field label="Brand" hint="Select registered brand or type custom">
+                                    <input
+                                        type="text"
+                                        list="brands-list"
+                                        className={inputCls}
+                                        value={brand}
+                                        onChange={e => setBrand(e.target.value)}
+                                        placeholder="e.g. TORK"
+                                    />
+                                    <datalist id="brands-list">
+                                        {availableBrands.map((b) => (
+                                            <option key={b._id || b.name || b} value={b.name || b} />
+                                        ))}
+                                    </datalist>
                                 </Field>
                                 <Field label="Category" hint="required">
                                     <select required className={inputCls} value={category} onChange={e => setCategory(e.target.value)}>

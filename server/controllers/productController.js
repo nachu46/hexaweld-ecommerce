@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Product = require('../models/productModel');
+const Brand = require('../models/brandModel');
 const XLSX = require('xlsx');
 const multer = require('multer');
 const path = require('path');
@@ -55,9 +56,15 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access  Public
 // ─────────────────────────────────────────────────────────────────────────────
 const getBrands = asyncHandler(async (req, res) => {
-    const brands = await Product.distinct('brand');
-    const filteredBrands = brands.filter(b => b && b.trim() !== '');
-    res.json(filteredBrands);
+    const productBrands = await Product.distinct('brand');
+    const dbBrands = await Brand.find({}).select('name');
+    const dbBrandNames = dbBrands.map(b => b.name);
+
+    const merged = Array.from(new Set([
+        ...dbBrandNames.filter(b => b && b.trim() !== ''),
+        ...productBrands.filter(b => b && b.trim() !== '')
+    ]));
+    res.json(merged);
 });
 
 
