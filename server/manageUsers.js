@@ -6,7 +6,7 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 /**
- * Robust User Management CLI for HexaWeld
+ * Robust User Management CLI for Jaza Trading W.L.L
  * Usage: node manageUsers.js --email=admin@example.com --password=newpass --role=admin --name="User Name"
  */
 
@@ -27,7 +27,7 @@ const manageUser = async () => {
         const { email, password, role, name } = getArgs();
 
         if (!email) {
-            console.log('\n--- HexaWeld User Management CLI ---');
+            console.log('\n--- Jaza Trading W.L.L User Management CLI ---');
             console.log('Usage: node manageUsers.js --email=user@example.com [--password=...] [--role=...] [--name=...]\n');
             process.exit(1);
         }

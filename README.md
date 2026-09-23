@@ -132,7 +132,7 @@ node seeder.js        # Seed all data & brands
 node seeder.js -d     # Clear all database collections
 ```
 
-> **Default Admin Credentials:** `admin@hexaweld.com` / `password123`
+> **Default Admin Credentials:** `admin@jazatrading.com` / `password123`
 
 ---
 
