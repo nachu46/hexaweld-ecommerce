@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Search, SlidersHorizontal, X, ChevronRight, Grid3x3, List, Package } from 'lucide-react';
+import { Search, SlidersHorizontal, X, ChevronRight, Grid3x3, List, Package, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import QuickPreviewModal from '../components/QuickPreviewModal';
