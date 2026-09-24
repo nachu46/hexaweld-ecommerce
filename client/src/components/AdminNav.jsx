@@ -1,8 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
 import { 
     LayoutDashboard, Package, Tag, ShieldCheck, 
     Image, Megaphone, MessageSquare, BarChart3, 
-    Users, ExternalLink, Plus
+    Users, ExternalLink, Plus, LogOut
 } from 'lucide-react';
 
 const ADMIN_LINKS = [
@@ -19,6 +21,14 @@ const ADMIN_LINKS = [
 
 const AdminNav = ({ title, subtitle, actionLink, actionLabel, actionIcon: ActionIcon = Plus }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { logout, user } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        toast.success('Logged out successfully');
+        navigate('/admin/login');
+    };
 
     return (
         <div className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs mb-6">
@@ -31,6 +41,11 @@ const AdminNav = ({ title, subtitle, actionLink, actionLabel, actionIcon: Action
                             <span className="text-[10px] font-bold uppercase tracking-widest text-[#B15E2B] bg-[#ECE8E0] px-2.5 py-1 rounded-md border border-[#D5CFCE]">
                                 Jaza Admin Portal
                             </span>
+                            {user?.name && (
+                                <span className="text-xs text-slate-500 font-medium">
+                                    • Logged in as <strong className="text-[#1C1B17]">{user.name}</strong>
+                                </span>
+                            )}
                         </div>
                         <h1 className="text-2xl font-serif font-bold text-[#1C1B17] tracking-tight mt-1">
                             {title || 'Admin Management'}
@@ -60,6 +75,15 @@ const AdminNav = ({ title, subtitle, actionLink, actionLabel, actionIcon: Action
                                 <span>{actionLabel}</span>
                             </Link>
                         )}
+
+                        <button
+                            onClick={handleLogout}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-rose-200 hover:bg-rose-50 text-rose-700 font-bold text-xs transition-all shadow-xs"
+                            title="Sign Out of Admin"
+                        >
+                            <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                            <span>Log Out</span>
+                        </button>
                     </div>
                 </div>
 
