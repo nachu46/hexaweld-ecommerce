@@ -3,11 +3,15 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const path = require('path');
+const autoMigrateSupabase = require('./utils/autoMigrateSupabase');
+const startSupabaseHeartbeat = require('./utils/supabasePing');
 
 dotenv.config();
 
-// Connect to database
+// Connect & Auto-Migrate Supabase Database Tables on boot
 connectDB();
+autoMigrateSupabase();
+startSupabaseHeartbeat();
 
 const app = express();
 
@@ -33,6 +37,16 @@ app.use(cors({
 
 // Serve static files (uploads)
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+// Anti-Pause / Keep-Alive ping route for external uptime monitors
+app.get('/api/ping', (req, res) => {
+    res.json({
+        status: 'online',
+        database: 'Supabase PostgreSQL',
+        timestamp: new Date().toISOString(),
+        message: 'Jaza Trading API and Supabase Database are awake & active.'
+    });
+});
 
 // Routes
 app.use('/api/products', require('./routes/productRoutes'));
@@ -60,7 +74,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Jaza Trading W.L.L API is running...');
+    res.send('Jaza Trading W.L.L API is running on Supabase Database...');
 });
 
 const PORT = process.env.PORT || 5000;
