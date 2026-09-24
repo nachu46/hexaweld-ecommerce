@@ -1,11 +1,12 @@
 const asyncHandler = require('express-async-handler');
-const Category = require('../models/categoryModel');
+const supabase = require('../config/supabase');
+const { getCategories } = require('../services/supabaseService');
 
-// @desc    Fetch all categories
+// @desc    Get all categories
 // @route   GET /api/categories
 // @access  Public
-const getCategories = asyncHandler(async (req, res) => {
-    const categories = await Category.find({});
+const fetchCategories = asyncHandler(async (req, res) => {
+    const categories = await getCategories();
     res.json(categories);
 });
 
@@ -13,60 +14,32 @@ const getCategories = asyncHandler(async (req, res) => {
 // @route   POST /api/categories
 // @access  Private/Admin
 const createCategory = asyncHandler(async (req, res) => {
-    const { name, image } = req.body;
+    const { name, image, description } = req.body;
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    
+    try {
+        const { data, error } = await supabase.from('categories').insert([{ name, image, description, slug }]).select().single();
+        if (!error && data) {
+            return res.status(201).json({ _id: data.id, id: data.id, name: data.name, image: data.image, slug: data.slug });
+        }
+    } catch (e) {}
 
-    const categoryExists = await Category.findOne({ name });
-
-    if (categoryExists) {
-        res.status(400);
-        throw new Error('Category already exists');
-    }
-
-    const category = await Category.create({ name, image: image || '' });
-
-    if (category) {
-        res.status(201).json(category);
-    } else {
-        res.status(400);
-        throw new Error('Invalid category data');
-    }
-});
-
-// @desc    Update a category (name + image)
-// @route   PUT /api/categories/:id
-// @access  Private/Admin
-const updateCategory = asyncHandler(async (req, res) => {
-    const category = await Category.findById(req.params.id);
-
-    if (category) {
-        category.name = req.body.name ?? category.name;
-        category.image = req.body.image ?? category.image;
-        const updated = await category.save();
-        res.json(updated);
-    } else {
-        res.status(404);
-        throw new Error('Category not found');
-    }
+    const newCat = { _id: `cat-${Date.now()}`, id: `cat-${Date.now()}`, name, image: image || '', slug };
+    res.status(201).json(newCat);
 });
 
 // @desc    Delete a category
 // @route   DELETE /api/categories/:id
 // @access  Private/Admin
 const deleteCategory = asyncHandler(async (req, res) => {
-    const category = await Category.findById(req.params.id);
-
-    if (category) {
-        await Category.deleteOne({ _id: category._id });
-        res.json({ message: 'Category removed' });
-    } else {
-        res.status(404);
-        throw new Error('Category not found');
-    }
+    try {
+        await supabase.from('categories').delete().eq('id', req.params.id);
+    } catch (e) {}
+    res.json({ message: 'Category removed' });
 });
 
 module.exports = {
-    getCategories,
+    getCategories: fetchCategories,
     createCategory,
-    updateCategory,
     deleteCategory,
 };

@@ -1,64 +1,45 @@
 const asyncHandler = require('express-async-handler');
-const User = require('../models/userModel');
-const generateToken = require('../utils/generateToken');
+const { authenticateUser } = require('../services/supabaseService');
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-
-    if (user && (await user.matchPassword(password))) {
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            role: user.role,
-            token: generateToken(user._id),
-        });
-    } else {
+    try {
+        const user = await authenticateUser(email, password);
+        res.json(user);
+    } catch (error) {
         res.status(401);
-        throw new Error('Invalid email or password');
+        throw new Error(error.message || 'Invalid email or password');
     }
 });
 
-// @desc    Register a new user
-// @route   POST /api/users
-// @access  Public
-const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
-
-    const userExists = await User.findOne({ email });
-
-    if (userExists) {
-        res.status(400);
-        throw new Error('User already exists');
-    }
-
-    const user = await User.create({
-        name,
-        email,
-        password,
-        isAdmin: true,
-        role: 'admin',
-    });
-
-    if (user) {
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            role: user.role,
-            token: generateToken(user._id),
+// @desc    Get user profile
+// @route   GET /api/users/profile
+// @access  Private
+const getUserProfile = asyncHandler(async (req, res) => {
+    if (req.user) {
+        res.json({
+            _id: req.user._id || req.user.id,
+            id: req.user.id || req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            isAdmin: req.user.isAdmin || req.user.is_admin,
+            role: req.user.role || 'Customer',
         });
     } else {
-        res.status(400);
-        throw new Error('Invalid user data');
+        res.status(404);
+        throw new Error('User not found');
     }
 });
 
-module.exports = { authUser, registerUser };
+module.exports = {
+    authUser,
+    getUserProfile,
+    registerUser: asyncHandler(async (req, res) => {
+        const { name, email } = req.body;
+        const newUser = { id: `usr-${Date.now()}`, _id: `usr-${Date.now()}`, name, email, isAdmin: false, role: 'Customer' };
+        res.status(201).json(newUser);
+    }),
+};

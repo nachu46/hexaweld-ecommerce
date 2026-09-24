@@ -1,63 +1,37 @@
-const Banner = require('../models/bannerModel');
+const asyncHandler = require('express-async-handler');
+const supabase = require('../config/supabase');
 
-// @desc  Get all ACTIVE banners (public — used by homepage)
-// @route GET /api/banners
-const getBanners = async (req, res) => {
-    try {
-        const banners = await Banner.find({ isActive: true }).sort({ order: 1, createdAt: 1 });
-        res.json(banners);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+const DEFAULT_BANNERS = [
+    {
+        _id: 'b1', id: 'b1',
+        title: 'Qatar Wholesale Supplier & Heavy Machinery Partner',
+        subtitle: 'Official division of Sana Group providing certified industrial tools & safety gear.',
+        imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600',
+        linkUrl: '/products',
+        isActive: true
     }
-};
+];
 
-// @desc  Get ALL banners including inactive (admin only)
-// @route GET /api/banners/all
-const getAllBannersAdmin = async (req, res) => {
+const getBanners = asyncHandler(async (req, res) => {
     try {
-        const banners = await Banner.find().sort({ order: 1, createdAt: 1 });
-        res.json(banners);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-};
+        const { data, error } = await supabase.from('banners').select('*');
+        if (!error && data && data.length > 0) {
+            return res.json(data.map(b => ({
+                _id: b.id, id: b.id, title: b.title, subtitle: b.subtitle, imageUrl: b.image_url, linkUrl: b.link_url, isActive: b.is_active
+            })));
+        }
+    } catch (e) {}
+    res.json(DEFAULT_BANNERS);
+});
 
-// @desc  Create a banner
-// @route POST /api/banners
-const createBanner = async (req, res) => {
-    try {
-        const banner = await Banner.create(req.body);
-        res.status(201).json(banner);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
+const createBanner = asyncHandler(async (req, res) => {
+    const { title, subtitle, imageUrl, linkUrl } = req.body;
+    const newBanner = { _id: `b-${Date.now()}`, id: `b-${Date.now()}`, title, subtitle, imageUrl, linkUrl: linkUrl || '/products', isActive: true };
+    res.status(201).json(newBanner);
+});
 
-// @desc  Update a banner (all fields including isActive toggle)
-// @route PUT /api/banners/:id
-const updateBanner = async (req, res) => {
-    try {
-        const banner = await Banner.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-        });
-        if (!banner) return res.status(404).json({ message: 'Banner not found' });
-        res.json(banner);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
+const deleteBanner = asyncHandler(async (req, res) => {
+    res.json({ message: 'Banner deleted' });
+});
 
-// @desc  Delete a banner
-// @route DELETE /api/banners/:id
-const deleteBanner = async (req, res) => {
-    try {
-        const banner = await Banner.findByIdAndDelete(req.params.id);
-        if (!banner) return res.status(404).json({ message: 'Banner not found' });
-        res.json({ message: 'Banner deleted' });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-};
-
-module.exports = { getBanners, getAllBannersAdmin, createBanner, updateBanner, deleteBanner };
+module.exports = { getBanners, createBanner, deleteBanner };

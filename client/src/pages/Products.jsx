@@ -282,12 +282,14 @@ const Products = () => {
                             </motion.div>
                         ) : (
                             <div className="text-center py-24 flex flex-col items-center">
-                                <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-4 text-4xl">🔍</div>
-                                <h3 className="text-xl font-bold text-[#0F172A] mb-2">No products found</h3>
-                                <p className="text-slate-500 mb-6">Try adjusting your search or filter to find what you're looking for.</p>
+                                <div className="w-16 h-16 rounded-2xl bg-[#ECE8E0] border border-[#E5E0D8] flex items-center justify-center mb-4 text-[#B15E2B]">
+                                    <Search className="w-8 h-8 text-[#B15E2B]" />
+                                </div>
+                                <h3 className="text-xl font-bold text-[#1C1B17] mb-2 font-serif">No products found</h3>
+                                <p className="text-slate-600 text-xs font-medium mb-6">Try adjusting your search or filter to find what you're looking for.</p>
                                 <button
                                     onClick={() => { setSearchTerm(''); handleCategoryClick(''); }}
-                                    className="btn-dark !px-6 !py-3 !rounded-full"
+                                    className="px-5 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-all flex items-center gap-2"
                                 >
                                     <X className="w-4 h-4" /> Clear Filters
                                 </button>

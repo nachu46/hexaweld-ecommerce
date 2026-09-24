@@ -319,9 +319,14 @@ const ProductEdit = () => {
                                 <Field label="Category" hint="required">
                                     <select required className={inputCls} value={category} onChange={e => setCategory(e.target.value)}>
                                         <option value="">Select category</option>
-                                        {categories.map(c => (
-                                            <option key={c._id} value={c._id}>{c.name}</option>
-                                        ))}
+                                        {categories.map(c => {
+                                            const val = c._id || c.id || c.name;
+                                            return (
+                                                <option key={val} value={val}>
+                                                    {c.name}
+                                                </option>
+                                            );
+                                        })}
                                     </select>
                                 </Field>
                             </div>
