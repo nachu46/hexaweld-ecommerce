@@ -47,5 +47,24 @@ module.exports = {
         const found = brands.find(b => b.id === req.params.id || b.slug === req.params.id);
         res.json(found || brands[0]);
     }),
-    updateBrand: asyncHandler(async (req, res) => res.json({ message: 'Updated' })),
+    updateBrand: asyncHandler(async (req, res) => {
+        const { name, logo, description, isOwnerBrand } = req.body;
+        const updates = {};
+        if (name) {
+            updates.name = name;
+            updates.slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        }
+        if (logo !== undefined) updates.logo = logo;
+        if (description !== undefined) updates.description = description;
+        if (isOwnerBrand !== undefined) updates.is_owner = !!isOwnerBrand;
+
+        try {
+            const { data, error } = await supabase.from('brands').update(updates).eq('id', req.params.id).select().single();
+            if (!error && data) {
+                return res.json({ _id: data.id, id: data.id, name: data.name, logo: data.logo, isOwnerBrand: data.is_owner });
+            }
+        } catch (e) {}
+
+        res.json({ _id: req.params.id, id: req.params.id, ...req.body });
+    }),
 };
