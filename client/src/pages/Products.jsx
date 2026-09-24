@@ -166,23 +166,23 @@ const Products = () => {
         <div className="bg-[#F6F4EE] min-h-screen">
 
             {/* ── Page Header Band ── */}
-            <div className="bg-[#1C1B17] text-white py-8 px-4 border-b border-[#2E4046]/40">
+            <div className="bg-[#ECE8E0] text-[#1C1B17] py-8 px-4 border-b border-[#E5E0D8]">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-2 flex-wrap">
-                        <Link to="/" className="hover:text-white transition-colors">Home</Link>
+                    <div className="flex items-center gap-1.5 text-xs text-[#2E4046] mb-2 flex-wrap font-medium">
+                        <Link to="/" className="hover:text-[#B15E2B] transition-colors">Home</Link>
                         <ChevronRight className="w-3 h-3 text-[#B15E2B]" />
-                        <span className="text-white font-semibold">Products</span>
+                        <span className="text-[#1C1B17] font-semibold">Products</span>
                         {selectedCatName && (
                             <>
                                 <ChevronRight className="w-3 h-3 text-[#B15E2B]" />
-                                <span className="text-[#B15E2B] font-semibold">{selectedCatName}</span>
+                                <span className="text-[#B15E2B] font-bold">{selectedCatName}</span>
                             </>
                         )}
                     </div>
-                    <h1 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight">
+                    <h1 className="text-3xl md:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight">
                         {selectedCatName ? selectedCatName : 'Building Materials Wholesale Products'}
                     </h1>
-                    <p className="text-slate-300 mt-2 text-xs md:text-sm">
+                    <p className="text-slate-700 mt-2 text-xs md:text-sm font-medium">
                         {loading ? 'Loading products...' : `${filtered.length} ${filtered.length === 1 ? 'item' : 'items'} available for Qatar wholesale distribution`}
                     </p>
                 </div>

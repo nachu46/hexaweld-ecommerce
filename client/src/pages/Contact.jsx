@@ -46,28 +46,28 @@ const Contact = () => {
 
             {/* ══ 1. HERO BANNER ARCH ═══════════════════════════════════════════ */}
             <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-                <div className="max-w-7xl mx-auto bg-[#1C1B17] rounded-3xl overflow-hidden relative text-white p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-2xl border border-[#2E4046]/40">
+                <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
                     <div className="flex items-center justify-between z-10">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
                             CONTACT & ENQUIRIES • QATAR
                         </span>
-                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046]">
                             JAZA TRADING W.L.L
                         </span>
                     </div>
 
                     <div className="my-6 z-10 max-w-2xl">
-                        <h1 className="text-4xl sm:text-6xl font-serif font-bold text-white leading-tight tracking-tight mb-4">
+                        <h1 className="text-4xl sm:text-6xl font-serif font-bold text-[#1C1B17] leading-tight tracking-tight mb-4">
                             Let’s build<br />
-                            <span className="text-[#E5DACE]">something together.</span>
+                            <span className="text-[#B15E2B]">something together.</span>
                         </h1>
-                        <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
                             Have a project in mind or bulk building material requirements? Send us your enquiry and our Qatar sales team will get back to you promptly.
                         </p>
                     </div>
 
-                    <div className="z-10 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-bold uppercase tracking-wider">
-                        <span>FAST WHOLESALE QUOTES</span>
+                    <div className="z-10 pt-4 border-t border-[#D5CFCE] flex items-center justify-between text-xs text-slate-700 font-bold uppercase tracking-wider">
+                        <span className="text-[#B15E2B]">FAST WHOLESALE QUOTES</span>
                         <span>WE RESPOND WITHIN 1 BUSINESS DAY</span>
                     </div>
                 </div>
@@ -185,6 +185,39 @@ const Contact = () => {
                             )}
                         </div>
 
+                    </div>
+                </div>
+            </section>
+
+            {/* ══ 3. INTERACTIVE GOOGLE MAP SECTION ════════════════════════════ */}
+            <section className="pb-14 bg-[#F6F4EE]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="bg-[#ECE8E0] rounded-3xl p-6 sm:p-8 border border-[#E5E0D8] shadow-sm space-y-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D5CFCE] pb-4">
+                            <div>
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] block mb-1">VISIT WAREHOUSE & SHOWROOM</span>
+                                <h3 className="font-serif font-bold text-xl text-[#1C1B17]">Doha Central Warehouse & Distribution Location</h3>
+                                <p className="text-xs text-slate-600 font-medium mt-0.5">Al Kassarat Street, Industrial Area, Street 5, Doha, Qatar</p>
+                            </div>
+                            <a
+                                href="https://maps.google.com/maps?q=Street%205%2C%20Industrial%20Area%2C%20Doha%2C%20Qatar"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="px-5 py-2.5 rounded-full bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs inline-flex items-center gap-2 self-start sm:self-auto transition-colors shadow-xs"
+                            >
+                                Open in Google Maps <ArrowRight className="w-4 h-4 text-white" />
+                            </a>
+                        </div>
+                        <div className="h-80 sm:h-96 rounded-2xl overflow-hidden relative border border-[#D5CFCE] shadow-xs">
+                            <iframe
+                                title="Jaza Trading Warehouse Location Map"
+                                src="https://maps.google.com/maps?q=Street%205%2C%20Industrial%20Area%2C%20Doha%2C%20Qatar&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                                className="w-full h-full border-0"
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>

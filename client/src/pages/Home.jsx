@@ -96,16 +96,16 @@ const Home = () => {
     return (
         <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans overflow-x-hidden w-full">
 
-            {/* ══ 1. HERO BANNER (Refined Corporate Structure) ════════════════════ */}
+            {/* ══ 1. HERO BANNER (Bright Corporate Warm Theme) ════════════════════ */}
             <section className="px-3 sm:px-6 lg:px-8 pt-4 pb-6">
-                <div className="max-w-7xl mx-auto bg-[#2E4046] rounded-3xl overflow-hidden relative text-white p-6 sm:p-12 min-h-[460px] flex flex-col justify-between shadow-xl border border-[#3E5259]">
+                <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-6 sm:p-12 min-h-[460px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10 gap-2">
-                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white/10 px-3 py-1 rounded-full border border-white/10">
+                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
                             BUILDING MATERIALS WHOLESALE • QATAR
                         </span>
-                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200 text-right">
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046] text-right">
                             ESTABLISHED 2009 • DIVISION OF SANA GROUP
                         </span>
                     </div>
@@ -116,10 +116,10 @@ const Home = () => {
                             <span className="inline-block px-3 py-1 rounded-md bg-[#B15E2B] text-white text-[10px] font-bold uppercase tracking-wider shadow-xs">
                                 15+ Years in the Qatar Market
                             </span>
-                            <h1 className="text-3xl sm:text-5xl font-serif font-bold leading-tight text-white tracking-tight">
+                            <h1 className="text-3xl sm:text-5xl font-serif font-bold leading-tight text-[#1C1B17] tracking-tight">
                                 Your trusted partner in quality building materials & reliable supply.
                             </h1>
-                            <p className="text-slate-200 text-xs sm:text-sm font-normal leading-relaxed max-w-lg">
+                            <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed max-w-lg">
                                 Jaza Trading W.L.L provides premium electricals, door hardware, lock cylinders, hand tools, welders, sanitaryware, and PPE safety gear to contractors across the State of Qatar.
                             </p>
                             
@@ -136,7 +136,7 @@ const Home = () => {
                                     href="/catalog.pdf"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 hover:border-white text-white font-bold text-xs transition-all bg-white/5 hover:bg-white/10"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[#D5CFCE] hover:border-[#B15E2B] text-[#1C1B17] font-bold text-xs transition-all bg-white hover:bg-[#F6F4EE]"
                                 >
                                     <Download className="w-4 h-4 text-[#B15E2B]" />
                                     <span>Download PDF Catalog</span>
@@ -146,17 +146,17 @@ const Home = () => {
 
                         {/* Right Photography Frame */}
                         <div className="lg:col-span-5 relative flex justify-center items-center">
-                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-white/20 relative bg-[#2E4046]">
+                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-white">
                                 <img
                                     src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1000&q=80"
                                     alt="Industrial Building Materials Qatar"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#2E4046]/90 via-transparent to-transparent" />
-                                <div className="absolute bottom-3 left-3 right-3 bg-[#2E4046]/90 backdrop-blur-md p-3 rounded-xl border border-white/20 flex items-center justify-between text-xs text-white">
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#ECE8E0]/90 via-transparent to-transparent" />
+                                <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-[#E5E0D8] flex items-center justify-between text-xs text-[#1C1B17] shadow-sm">
                                     <div>
-                                        <p className="font-bold text-xs text-white">Jaza Trading W.L.L</p>
-                                        <p className="text-[10px] text-slate-200">Street 5, Industrial Area, Doha</p>
+                                        <p className="font-serif font-bold text-xs text-[#1C1B17]">Jaza Trading W.L.L</p>
+                                        <p className="text-[10px] text-slate-600 font-medium">Street 5, Industrial Area, Doha</p>
                                     </div>
                                     <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-2.5 py-1 rounded shadow-xs">QATAR</span>
                                 </div>
@@ -165,16 +165,16 @@ const Home = () => {
                     </div>
 
                     {/* Bottom Core Values Strip */}
-                    <div className="z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-between text-xs text-slate-200 gap-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">CORE VALUES</span>
-                        <div className="flex flex-wrap items-center gap-4 font-serif font-bold text-white text-xs">
-                            <span className="text-white">Reliability</span>
+                    <div className="z-10 pt-4 border-t border-[#D5CFCE] flex flex-wrap items-center justify-between text-xs text-slate-700 gap-2 font-medium">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#B15E2B]">CORE VALUES</span>
+                        <div className="flex flex-wrap items-center gap-4 font-serif font-bold text-[#1C1B17] text-xs">
+                            <span className="text-[#B15E2B]">Reliability</span>
                             <span>•</span>
-                            <span className="text-white">Quality</span>
+                            <span className="text-[#B15E2B]">Quality</span>
                             <span>•</span>
-                            <span className="text-white">Value</span>
+                            <span className="text-[#B15E2B]">Value</span>
                             <span>•</span>
-                            <span className="text-white">Service</span>
+                            <span className="text-[#B15E2B]">Service</span>
                         </div>
                     </div>
                 </div>
@@ -467,32 +467,35 @@ const Home = () => {
                         </div>
 
                         {/* Visual Map Representation Frame */}
-                        <div className="lg:col-span-6 bg-[#2E4046] rounded-3xl p-6 text-white space-y-4 border border-[#3E5259] shadow-lg relative overflow-hidden">
-                            <div className="flex items-center justify-between border-b border-white/20 pb-3">
+                        <div className="lg:col-span-6 bg-[#ECE8E0] rounded-3xl p-6 text-[#1C1B17] space-y-4 border border-[#E5E0D8] shadow-md relative overflow-hidden">
+                            <div className="flex items-center justify-between border-b border-[#D5CFCE] pb-3">
                                 <div>
-                                    <h3 className="font-serif font-bold text-lg text-white">Doha Central Warehouse</h3>
-                                    <p className="text-[10px] text-slate-200">Street 5, Industrial Area, Qatar</p>
+                                    <h3 className="font-serif font-bold text-lg text-[#1C1B17]">Doha Central Warehouse</h3>
+                                    <p className="text-[10px] text-slate-600 font-medium">Street 5, Industrial Area, Qatar</p>
                                 </div>
                                 <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-3 py-1 rounded-full shadow-xs">
                                     OPEN FOR PICKUP
                                 </span>
                             </div>
 
-                            <div className="h-52 rounded-2xl overflow-hidden relative bg-[#233338] border border-white/10 flex items-center justify-center text-center p-6">
-                                <div className="space-y-2">
-                                    <MapPin className="w-10 h-10 text-[#B15E2B] mx-auto animate-bounce" />
-                                    <p className="text-xs font-bold text-white">Industrial Area Street 5 Pin</p>
-                                    <p className="text-[11px] text-slate-300">Serving Lusail, Doha, Al Wakrah & all Qatar project sites</p>
-                                </div>
+                            <div className="h-52 rounded-2xl overflow-hidden relative border border-[#D5CFCE] shadow-xs">
+                                <iframe
+                                    title="Doha Central Warehouse Location"
+                                    src="https://maps.google.com/maps?q=Street%205%2C%20Industrial%20Area%2C%20Doha%2C%20Qatar&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                                    className="w-full h-full border-0"
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                />
                             </div>
 
-                            <div className="flex items-center justify-between text-xs pt-1">
-                                <span className="text-slate-200 text-[11px]">Working Hours: Sat - Thu (7:00 AM - 7:00 PM)</span>
+                            <div className="flex items-center justify-between text-xs pt-1 font-medium">
+                                <span className="text-slate-700 text-[11px]">Working Hours: Sat - Thu (7:00 AM - 7:00 PM)</span>
                                 <a
                                     href="https://maps.google.com"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="text-[#E5DACE] hover:text-white font-bold text-xs inline-flex items-center gap-1"
+                                    className="text-[#B15E2B] hover:underline font-bold text-xs inline-flex items-center gap-1"
                                 >
                                     Google Maps <ArrowRight className="w-3.5 h-3.5 text-[#B15E2B]" />
                                 </a>

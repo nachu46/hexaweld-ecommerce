@@ -21,14 +21,14 @@ const About = () => {
 
             {/* ══ 1. HERO ARCH BANNER ═══════════════════════════════════════════ */}
             <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-                <div className="max-w-7xl mx-auto bg-[#1C1B17] rounded-3xl overflow-hidden relative text-white p-8 sm:p-14 min-h-[420px] flex flex-col justify-between shadow-2xl border border-[#2E4046]/40">
+                <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-8 sm:p-14 min-h-[420px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
                             COMPANY OVERVIEW • JAZA TRADING W.L.L
                         </span>
-                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300 text-right">
+                        <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046] text-right">
                             SUPPLYING PROGRESS IN QATAR<br />DIVISION OF SANA GROUP
                         </span>
                     </div>
@@ -36,30 +36,30 @@ const About = () => {
                     {/* Main Content */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-6 z-10">
                         <div className="lg:col-span-8 max-w-2xl">
-                            <h1 className="text-4xl sm:text-6xl font-serif font-bold leading-tight text-white tracking-tight mb-4">
+                            <h1 className="text-4xl sm:text-6xl font-serif font-bold leading-tight text-[#1C1B17] tracking-tight mb-4">
                                 Materials. Expertise.<br />
-                                <span className="text-[#E5DACE]">A partner you can trust.</span>
+                                <span className="text-[#B15E2B]">A partner you can trust.</span>
                             </h1>
-                            <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                            <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-8 font-medium">
                                 Established in Qatar in 2009, Jaza Trading W.L.L (Division of Sana Group) is a premier building materials wholesaler committed to providing top-quality industrial hardware, electricals, safety boots, door locks, and sanitaryware.
                             </p>
                             <Link
                                 to="/contact"
-                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs sm:text-sm transition-all shadow-lg group"
+                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs sm:text-sm transition-all shadow-md group"
                             >
                                 Request a Wholesale Quote <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
 
                         <div className="lg:col-span-4 flex justify-end">
-                            <div className="w-full max-w-sm h-64 rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative bg-slate-900">
+                            <div className="w-full max-w-sm h-64 rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-white">
                                 <img
                                     src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80"
                                     alt="Jaza Trading Qatar Wholesale Facility"
-                                    className="w-full h-full object-cover opacity-85"
+                                    className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1B17]/90 via-transparent to-transparent" />
-                                <div className="absolute bottom-3 left-3 right-3 text-center bg-[#1C1B17]/80 backdrop-blur-md p-2.5 rounded-xl border border-white/10 text-xs font-bold text-[#F6F4EE]">
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#ECE8E0]/90 via-transparent to-transparent" />
+                                <div className="absolute bottom-3 left-3 right-3 text-center bg-white/95 backdrop-blur-md p-2.5 rounded-xl border border-[#E5E0D8] text-xs font-bold text-[#1C1B17] shadow-sm">
                                     Serving Qatar Since 2009 · 15+ Years
                                 </div>
                             </div>
@@ -67,8 +67,8 @@ const About = () => {
                     </div>
 
                     {/* Bottom Badge */}
-                    <div className="z-10 pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">QUALIFIED BUILDING MATERIALS WHOLESALER</span>
+                    <div className="z-10 pt-4 border-t border-[#D5CFCE] flex items-center justify-between text-xs font-medium">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#2E4046]">QUALIFIED BUILDING MATERIALS WHOLESALER</span>
                         <span className="text-lg font-serif font-bold text-[#B15E2B]">2009 — 2026</span>
                     </div>
                 </div>
@@ -89,7 +89,7 @@ const About = () => {
                                 alt="Supplying Progress in Qatar"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute bottom-4 left-4 bg-[#1C1B17]/90 text-white backdrop-blur-sm px-3.5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-[#2E4046]">
+                            <div className="absolute bottom-4 left-4 bg-white/95 text-[#1C1B17] backdrop-blur-sm px-3.5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-[#E5E0D8] shadow-sm">
                                 ESTABLISHED IN DOHA, QATAR (2009)
                             </div>
                         </div>
@@ -231,9 +231,9 @@ const About = () => {
                         <div className="w-12 h-px bg-[#D5CFCE]" />
                     </div>
 
-                    <div className="bg-[#1C1B17] text-white p-8 sm:p-14 rounded-3xl border border-[#2E4046] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
+                    <div className="bg-[#ECE8E0] text-[#1C1B17] p-8 sm:p-14 rounded-3xl border border-[#E5E0D8] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-md">
                         <div className="lg:col-span-8 space-y-6">
-                            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight leading-tight">
                                 Partner with Jaza Trading.<br />
                                 <span className="text-[#B15E2B]">Request wholesale pricing today.</span>
                             </h2>
@@ -246,7 +246,7 @@ const About = () => {
                                     Contact Wholesale Team <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                                 </Link>
 
-                                <div className="text-xs text-slate-300 font-medium space-y-1">
+                                <div className="text-xs text-slate-700 font-medium space-y-1">
                                     <div className="flex items-center gap-2">
                                         <Phone className="w-3.5 h-3.5 text-[#B15E2B]" />
                                         <span>+974 7060 5494 / +974 7408 0005</span>
@@ -266,7 +266,7 @@ const About = () => {
                             >
                                 <ArrowRight className="w-10 h-10 text-white" />
                             </Link>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#2E4046]">
                                 AL KASSARAT ST, STREET 5, DOHA, QATAR
                             </span>
                         </div>
