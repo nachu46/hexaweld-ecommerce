@@ -70,92 +70,92 @@ const Dashboard = () => {
                 {/* ══ 1. METRICS CARDS GRID ════════════════════════════ */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <Link to="/admin/products" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/products" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-blue-50 text-[#007AFF]">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <Package className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 Manage <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.products}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.products}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Total Listed Products</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/brands" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/brands" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-amber-50 text-amber-600">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <ShieldCheck className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 Brand Studio <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.brands}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.brands}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Partner & Registered Brands</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/categories" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/categories" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <Tag className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 View <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.categories}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.categories}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Product Categories</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/enquiries" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/enquiries" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-rose-50 text-rose-600">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <MessageSquare className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 Inbox <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.enquiries}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.enquiries}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Customer RFQs & Messages</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/banners" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/banners" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-purple-50 text-purple-600">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <Image className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 Configure <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.banners}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.banners}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Active Slider Banners</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/announcement" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 transition-all shadow-xs group">
+                    <Link to="/admin/announcement" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-indigo-50 text-indigo-600">
+                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
                                 <Megaphone className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-400 group-hover:text-slate-900 flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
                                 Edit Promos <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-black text-slate-900">{stats.announcements}</h3>
+                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.announcements}</h3>
                             <p className="text-xs font-bold text-slate-500 mt-0.5">Top Banner Announcements</p>
                         </div>
                     </Link>
@@ -163,26 +163,26 @@ const Dashboard = () => {
                 </div>
 
                 {/* ══ 2. QUICK ACTIONS TOOLBAR ════════════════════════ */}
-                <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs">
-                    <h2 className="text-sm font-black text-slate-900 uppercase tracking-wider mb-4">Quick Content Management Actions</h2>
+                <div className="p-6 rounded-2xl bg-white border border-[#E5E0D8] shadow-xs">
+                    <h2 className="text-sm font-serif font-bold text-[#1C1B17] uppercase tracking-wider mb-4">Quick Content Management Actions</h2>
                     <div className="flex flex-wrap gap-2.5">
-                        <Link to="/admin/product/create" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition-colors">
-                            <Plus className="w-4 h-4 text-blue-400" /> Add New Product
+                        <Link to="/admin/product/create" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                            <Plus className="w-4 h-4 text-white" /> Add New Product
                         </Link>
-                        <Link to="/admin/brands/new" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors">
-                            <Plus className="w-4 h-4" /> Add New Brand & Images
+                        <Link to="/admin/brands/new" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                            <Plus className="w-4 h-4 text-white" /> Add New Brand & Images
                         </Link>
-                        <Link to="/admin/categories" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-colors">
-                            <Tag className="w-4 h-4" /> Manage Categories
+                        <Link to="/admin/categories" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                            <Tag className="w-4 h-4 text-white" /> Manage Categories
                         </Link>
-                        <Link to="/admin/banners" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-xs transition-colors">
-                            <Image className="w-4 h-4" /> Upload Banners
+                        <Link to="/admin/banners" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                            <Image className="w-4 h-4 text-white" /> Upload Banners
                         </Link>
-                        <Link to="/admin/announcement" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs transition-colors">
-                            <Megaphone className="w-4 h-4" /> Set Promos
+                        <Link to="/admin/announcement" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                            <Megaphone className="w-4 h-4 text-white" /> Set Promos
                         </Link>
-                        <Link to="/admin/admins" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 transition-colors">
-                            <Users className="w-4 h-4" /> Manage Admin Accounts
+                        <Link to="/admin/admins" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#D5CFCE] hover:bg-[#ECE8E0] text-[#1C1B17] font-bold text-xs shadow-xs transition-colors">
+                            <Users className="w-4 h-4 text-[#B15E2B]" /> Manage Admin Accounts
                         </Link>
                     </div>
                 </div>

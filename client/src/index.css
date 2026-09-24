@@ -53,6 +53,19 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #8E4920;
   }
+
+  /* Hide scrollbars on horizontal filter sliders */
+  .no-scrollbar::-webkit-scrollbar,
+  .scrollbar-none::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .no-scrollbar,
+  .scrollbar-none {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
 }
 
 @layer components {

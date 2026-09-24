@@ -76,15 +76,15 @@ const BrandDirectory = () => {
                     </div>
 
                     {/* Category Filter Chips */}
-                    <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+                    <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto no-scrollbar scrollbar-none py-1">
                         {categories.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setSelectedCat(cat)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                                     selectedCat === cat
-                                        ? 'bg-[#B15E2B] text-white shadow-sm'
-                                        : 'bg-[#ECE8E0] text-slate-700 hover:bg-[#E5E0D8]'
+                                        ? 'bg-[#B15E2B] text-white shadow-xs'
+                                        : 'bg-[#F6F4EE] text-[#1C1B17] hover:bg-[#ECE8E0] border border-[#D5CFCE]'
                                 }`}
                             >
                                 {cat}
