@@ -1,32 +1,47 @@
-# Jaza Trading W.L.L — Industrial Tools & Safety Equipment E-Commerce
+# Jaza Trading W.L.L — Industrial Tools & Safety Equipment Platform
 
-A full-stack B2B e-commerce platform for industrial tools, welding equipment, safety gear, and building materials for **Jaza Trading W.L.L** (Division of Sana Group, Qatar). Built with **React + Vite** and **Express 5 + MongoDB**. Operates on an enquiry-only model — customers browse products, view brand catalogs, and request quotes directly via WhatsApp or quick inquiry forms.
+A high-performance corporate B2B trading and catalog platform for **Jaza Trading W.L.L** (Division of Sana Group, Qatar). Built with **React 18 + Vite** and **Express 5 + Supabase PostgreSQL REST Engine**. Features a unified editorial corporate design system, pure database-driven catalog, official trademark accreditations, and direct RFQ quotation routing via WhatsApp and database logging.
+
+* **Live Website:** [https://jazatrading.vercel.app/](https://jazatrading.vercel.app/)
+* **Admin Portal:** [https://jazatrading.vercel.app/login](https://jazatrading.vercel.app/login) (or `/admin/dashboard`)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?logo=supabase&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
 
 ---
 
-## ✨ Features
+## ✨ Key Platform Features
 
-- **Brand Image Management Module** — Complete backend & admin management for brand logos, banner images, and gallery photos with format/file-size validation (`PNG`, `JPG`, `JPEG`, `WEBP`, max 5MB).
-- **Enquiry-Only Catalog** — Direct "Contact for Price" & instant WhatsApp inquiry routing for all products.
-- **Rich Product Engine** — Product SKU, variants, specifications, key features, tags, category hierarchy, and multi-image media gallery.
-- **Full Admin Control Panel** — Comprehensive admin management for:
-  - Products (CRUD + Excel Import/Export)
-  - Categories (CRUD + Category Images)
-  - Partner Brands (CRUD + Logo & Banner Image Management)
-  - Promotional Banners & Top Announcements
-  - Customer Enquiries & Lead Management
-  - Analytics & Visitor View Tracking
-  - Admin User Management (Role-Based Access Control)
-- **Role-Based Access Control (RBAC)** — Three-tier permissions: `superadmin` > `admin` > `editor`.
-- **Seamless Brand Synchronization** — Automatic sync between registered DB brands, client homepage logo grid, product filters, and admin product auto-suggestions.
-- **Multi-Image Storage & CDN** — Production-ready file storage supporting Cloudinary CDN and local disk fallback.
-- **SEO & Responsive UI** — Fast rendering, meta tag optimization via `react-helmet-async`, mobile-first responsive drawers, and Framer Motion micro-interactions.
+- **Unified JAZA Corporate Design System**:
+  - Consistent visual identity: Warm cream (`#F6F4EE`), Dark Charcoal (`#1C1B17`), JAZA Orange (`#B15E2B`), and subtle beige borders (`#E5E0D8`).
+  - Typography: Refined editorial serif (**DM Serif Display**) for primary headings and **Plus Jakarta Sans** for body, forms, navigation, and badges.
+- **Pure Database-Driven Catalog (No Demo Mockups)**:
+  - 100% database-driven architecture using **Supabase REST Engine**.
+  - All categories, brands, products, and customer enquiries are stored and managed directly in Supabase PostgreSQL tables.
+- **Brand Management & Registered Trademarks**:
+  - Complete management for partner and proprietary brands (TORK®, EUREX®, NEXT®, MARK SAFETY PRO®, CLEXO®, EDON®, TENZO®).
+  - Dedicated **Certificates & Trademark Page** showcasing official Qatar Ministry of Commerce & Industry registered trademarks with high-res zoom and download support.
+- **Quotation & Commercial Inquiries (RFQ)**:
+  - Direct WhatsApp commercial routing (`+974 7060 5494` / `+974 7408 0005`).
+  - Official RFQ form submission with database storage, company attribution, and customer lead tracking.
+- **Full Admin Control Panel**:
+  - **Products**: Complete CRUD, image galleries, variants, specs, and Excel (.xlsx) bulk import/export.
+  - **Categories**: Create, edit, and delete building material categories.
+  - **Partner Brands**: Manage authorized brands, logos, descriptions, and ownership tags.
+  - **Banners & Promos**: Update homepage carousel banners, promotional badges, and site announcements.
+  - **Enquiries**: Real-time inbox for wholesale price quotes, order submissions, and job applications.
+  - **Commercial Analytics**: Real-time platform metrics, total inventory count, and customer product interest.
+  - **Admin Users**: Role-based access control (`superadmin` > `admin` > `editor`).
+- **Dynamic SEO & Search Compliance**:
+  - Dynamic real-time XML sitemap (`/sitemap.xml`) indexing all products, brands, and categories.
+  - Configured `robots.txt` protecting administrative routes while directing search engines to the sitemap.
+  - Rich social preview meta tags via `react-helmet-async`.
+- **Anti-Pause Keep-Alive Engine**:
+  - Built-in ping scheduler (`/api/ping`) running every 6 hours to keep the Supabase database awake and active.
 
 ---
 
@@ -35,25 +50,25 @@ A full-stack B2B e-commerce platform for industrial tools, welding equipment, sa
 ```
 hexaweld/
 ├── client/                    # React Frontend (Vite)
-│   └── src/
-│       ├── components/        # Header, Footer, ProductCard, JtLogo, WhatsAppFloat, Layout
-│       ├── context/           # AuthContext (JWT + LocalStorage session)
-│       ├── pages/             # Public pages (Home, Products, ProductDetails, About, Contact)
-│       │   └── admin/         # Admin Panel (Dashboard, ProductList, ProductEdit, CategoryList, BrandList, BrandEdit, Analytics, AdminBanners, AdminAnnouncement, AdminManagement, Login)
-│       ├── utils/             # Image URL & helper functions
-│       ├── App.jsx            # Application Router
-│       └── main.jsx           # React Entry Point
+│   ├── src/
+│   │   ├── components/        # Header, Footer, AdminNav, ProductCard, JtLogo, WhatsAppFloat
+│   │   ├── context/           # AuthContext (JWT session), CartContext
+│   │   ├── pages/             # Home, About, Products, ProductDetails, Categories, Brands, Certificates, Services, Career, Contact, Checkout
+│   │   │   └── admin/         # Dashboard, ProductList, ProductEdit, CategoryList, BrandList, BrandEdit, Analytics, AdminBanners, AdminAnnouncement, AdminManagement, Login
+│   │   ├── utils/             # Image URL & helper functions
+│   │   ├── App.jsx            # Application Router
+│   │   └── main.jsx           # React Entry Point
+│   └── dist/                  # Production Compiled Assets
 │
-└── server/                    # Express Backend
-    ├── config/                # db.js, cloudinary.js, supabase.js
-    ├── controllers/           # brandController, productController, categoryController, userController, etc.
+└── server/                    # Express Backend (Supabase Engine)
+    ├── config/                # supabase.js, db.js, cloudinary.js
+    ├── controllers/           # productController, categoryController, brandController, enquiryController, analyticsController, bannerController, etc.
     ├── middleware/            # JWT auth, admin authorization, upload handling
-    ├── models/                # brandModel, productModel, categoryModel, userModel, enquiryModel, etc.
-    ├── routes/                # brandRoutes, productRoutes, categoryRoutes, uploadRoutes, etc.
-    ├── data/                  # Seed data (brands.js, products.js, categories.js, users.js)
+    ├── routes/                # productRoutes, categoryRoutes, brandRoutes, enquiryRoutes, analyticsRoutes, seoRoutes, uploadRoutes, etc.
+    ├── services/              # supabaseService.js (pure database-driven data layer)
+    ├── utils/                 # autoMigrateSupabase.js, supabasePing.js
     ├── server.js              # Server Entry Point
-    ├── seeder.js              # Database seed & reset CLI script
-    └── manageUsers.js         # Admin user creation & role management CLI
+    └── clearProducts.js       # Database cleanup utility
 ```
 
 ---
@@ -63,8 +78,7 @@ hexaweld/
 ### Prerequisites
 
 - **Node.js** ≥ 18
-- **MongoDB** (Atlas cluster or local MongoDB instance)
-- **Cloudinary Account** (optional for image CDN storage)
+- **Supabase Project** (PostgreSQL Database & API Keys)
 
 ### 1. Clone Repository
 
@@ -85,73 +99,43 @@ Create a `.env` file inside `server/`:
 ```env
 NODE_ENV=development
 PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>
 JWT_SECRET=your_jwt_secret_key
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLIENT_URL=http://localhost:5173
+
+# Supabase PostgreSQL & API Configuration
+SUPABASE_URL=https://<your-project-id>.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+DATABASE_URL=postgresql://postgres.<project>:<password>@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true
+DIRECT_URL=postgresql://postgres.<project>:<password>@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres
 ```
 
-Start the backend development server:
+Start the backend server:
 
 ```bash
 npm run dev
 ```
+
+*The backend will automatically connect to Supabase, auto-migrate database tables, and seed the default administrator.*
 
 ### 3. Setup Client Frontend
 
 ```bash
-cd client
+cd ../client
 npm install
-```
-
-Create a `.env` file inside `client/` (optional for local dev):
-
-```env
-VITE_API_URL=http://localhost:5000
-```
-
-Start the frontend development server:
-
-```bash
 npm run dev
 ```
 
-- Public Site: `http://localhost:5173`
-- API Base: `http://localhost:5000`
+- Public Storefront: `http://localhost:5173`
+- Backend API Base: `http://localhost:5000`
 
 ---
 
-## 🗄️ Database Seeding
+## 🔐 Default Admin Credentials
 
-Populate the database with sample categories, partner brands (TORK®, EUREX®, NEXT®, MARK SAFETY PRO®, CLEXO®, EDON®, TENZO®), products, and default admin user:
-
-```bash
-cd server
-node seeder.js        # Seed all data & brands
-node seeder.js -d     # Clear all database collections
-```
-
-> **Default Admin Credentials:**
-> - Email: `admin@jazatrading.com` (or `admin@example.com`)
-> - Password: `password123` (or `SecurePass123` / `admin123`)
-
----
-
-## 👤 User Management CLI
-
-Manage administrative access directly from the terminal:
-
-```bash
-# Create a new admin
-node manageUsers.js --email=admin@example.com --password=SecurePass123 --name="Jaza Admin" --role=admin
-
-# Promote user to superadmin
-node manageUsers.js --email=admin@example.com --role=superadmin
-
-# Reset user password
-node manageUsers.js --email=admin@example.com --password=NewPassword123
-```
+* **Admin Login Route:** `/login` or `/admin/dashboard`
+* **Email:** `admin@jazatrading.com`
+* **Password:** `password123`
 
 ---
 
@@ -159,33 +143,37 @@ node manageUsers.js --email=admin@example.com --password=NewPassword123
 
 | Module | Route | Methods | Access | Description |
 |---|---|---|---|---|
-| **Brands** | `/api/brands` | GET, POST | Public / Admin | List all brands / Create brand with logo upload |
-| **Brands** | `/api/brands/:id` | GET, PUT, DELETE | Public / Admin | Get details / Update images & info / Delete brand |
-| **Products** | `/api/products` | GET, POST | Public / Admin | List & search products / Create product |
-| **Products** | `/api/products/:id` | GET, PUT, DELETE | Public / Admin | Get product / Edit product / Delete product |
-| **Products** | `/api/products/brands` | GET | Public | Get list of all available product brand names |
+| **Products** | `/api/products` | GET, POST | Public / Admin | List & search products / Create product in Supabase |
+| **Products** | `/api/products/:id` | GET, PUT, DELETE | Public / Admin | Get product details / Update product / Delete product |
 | **Products** | `/api/products/import` | POST | Admin | Bulk import products from Excel (`.xlsx`) |
 | **Products** | `/api/products/export` | GET | Admin | Export product catalog to Excel |
-| **Categories**| `/api/categories` | GET, POST, PUT, DELETE | Public / Admin | Manage category hierarchy & category icons |
-| **Uploads** | `/api/upload` | POST | Admin | Single & multi-file image upload endpoint |
-| **Enquiries** | `/api/enquiries` | GET, POST | Public / Admin | Submit quote request / Admin lead tracking |
+| **Categories** | `/api/categories` | GET, POST, PUT, DELETE | Public / Admin | Full CRUD for building material categories |
+| **Brands** | `/api/brands` | GET, POST, PUT, DELETE | Public / Admin | Full CRUD for partner & registered brands |
+| **Enquiries** | `/api/enquiries` | GET, POST | Public / Admin | Submit quote request / Admin lead inbox |
+| **Analytics** | `/api/admin/analytics` | GET | Admin | Real inventory count, enquiries count, traffic metrics |
+| **Banners** | `/api/banners` | GET, POST, PUT, DELETE | Public / Admin | Homepage carousel & promotional banners |
+| **Announcements**| `/api/announcement` | GET, POST, PUT, DELETE | Public / Admin | Top header announcement ticker |
+| **Uploads** | `/api/upload` | POST | Admin | Single & multi-file upload for images and PDFs |
 | **Auth** | `/api/users/login` | POST | Public | User authentication & JWT issuance |
 | **Admin** | `/api/admin/list-admins` | GET | SuperAdmin | Manage system administrators |
-| **Analytics** | `/api/admin/analytics` | GET | Admin | Product views, enquiry counts & traffic metrics |
+| **SEO** | `/sitemap.xml` | GET | Public | Dynamic XML sitemap generation |
+| **SEO** | `/robots.txt` | GET | Public | Search crawler rules & sitemap pointer |
+| **Keep-Alive**| `/api/ping` | GET | Public | Database wake-up & uptime monitor endpoint |
 
 ---
 
-## 🏗️ Tech Stack
+## 🏗️ Production Tech Stack
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | React 18, Vite 5, TailwindCSS 3.4, Lucide Icons, Framer Motion, Axios |
+| **Frontend** | React 18, Vite 5, TailwindCSS 3.4, Lucide Icons, Framer Motion, Recharts, Axios |
 | **Backend** | Node.js, Express 5, JWT, Express Async Handler, Multer |
 | **Database** | Supabase Cloud Database (PostgreSQL REST Engine) |
-| **Media Storage** | Cloudinary CDN / Local Static File Server |
+| **Typography** | DM Serif Display (Editorial Headings), Plus Jakarta Sans (Body & UI) |
+| **Deployment** | Vercel (Frontend & Serverless API Proxies) |
 
 ---
 
 ## 📄 License
 
-Proprietary software for **Jaza Trading W.L.L** (Division of Sana Group, Qatar). All rights reserved.
+Proprietary commercial software for **Jaza Trading W.L.L** (Division of Sana Group, State of Qatar). All rights reserved.

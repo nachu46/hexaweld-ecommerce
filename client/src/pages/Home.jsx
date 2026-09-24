@@ -146,17 +146,17 @@ const Home = () => {
 
                         {/* Right Photography Frame */}
                         <div className="lg:col-span-5 relative flex justify-center items-center">
-                            <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-white">
+                            <div className="w-full max-w-md h-72 sm:h-80 md:h-[370px] rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-[#1C1B17]">
                                 <img
-                                    src="/hero_building_materials.jpg"
-                                    alt="Jaza Trading W.L.L Industrial Building Materials & Showroom Qatar"
-                                    className="w-full h-full object-cover"
+                                    src="/jaza_office_reception.jpg"
+                                    alt="Jaza Trading W.L.L Corporate Office & Reception Qatar"
+                                    className="w-full h-full object-cover object-center"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#ECE8E0]/90 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1B17]/70 via-transparent to-transparent" />
                                 <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-[#E5E0D8] flex items-center justify-between text-xs text-[#1C1B17] shadow-sm">
                                     <div>
-                                        <p className="font-serif font-bold text-xs text-[#1C1B17]">Jaza Trading W.L.L</p>
-                                        <p className="text-[10px] text-slate-600 font-medium">Street 5, Industrial Area, Doha</p>
+                                        <p className="font-serif font-bold text-xs text-[#1C1B17]">Jaza Trading Head Office</p>
+                                        <p className="text-[10px] text-slate-600 font-medium">Division Of Sana Group • Doha, Qatar</p>
                                     </div>
                                     <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-2.5 py-1 rounded shadow-xs">QATAR</span>
                                 </div>
@@ -222,12 +222,12 @@ const Home = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-xs border border-[#E5E0D8] bg-white h-64 sm:h-80">
                             <img
-                                src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=800&q=80"
-                                alt="Building Construction Materials Qatar"
-                                className="w-full h-full object-cover"
+                                src="/qatar_katara_towers.png"
+                                alt="Qatar Lusail Iconic Architecture Katara Towers"
+                                className="w-full h-full object-cover object-top"
                             />
-                            <div className="absolute bottom-3 left-3 bg-[#2E4046] backdrop-blur-sm px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-[#3E5259]">
-                                SANA GROUP DIVISION • QATAR
+                            <div className="absolute bottom-3 left-3 bg-[#1C1B17]/90 backdrop-blur-sm px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">
+                                STATE OF QATAR • SANA GROUP DIVISION
                             </div>
                         </div>
 

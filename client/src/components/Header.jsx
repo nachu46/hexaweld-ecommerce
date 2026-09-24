@@ -40,7 +40,7 @@ const Header = () => {
 
                     {/* Logo - Centered on Mobile, Left on Desktop */}
                     <Link to="/" className="flex items-center justify-center md:justify-start flex-1 md:flex-none">
-                        <JtLogo className="h-11 sm:h-12 md:h-11" dark={false} />
+                        <JtLogo className="h-12 sm:h-12 md:h-12" dark={false} />
                     </Link>
 
                     {/* Nav Links Center (Desktop) */}

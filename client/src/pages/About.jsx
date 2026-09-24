@@ -79,9 +79,9 @@ const About = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                         <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-md border border-[#E5E0D8] bg-white h-80">
                             <img
-                                src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=800&q=80"
-                                alt="Supplying Progress in Qatar"
-                                className="w-full h-full object-cover"
+                                src="/jaza_executive_office.jpg"
+                                alt="Jaza Trading Corporate Office Doha Qatar"
+                                className="w-full h-full object-cover object-center"
                             />
                             <div className="absolute bottom-4 left-4 bg-white/95 text-[#1C1B17] backdrop-blur-sm px-3.5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-[#E5E0D8] shadow-sm">
                                 ESTABLISHED IN DOHA, QATAR (2009)

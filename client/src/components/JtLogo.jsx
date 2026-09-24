@@ -1,12 +1,12 @@
 import React from 'react';
 
-const JtLogo = ({ className = "h-9 sm:h-11", dark = false }) => {
+const JtLogo = ({ className = "h-11 sm:h-12", dark = false }) => {
     return (
         <div className={`inline-flex items-center select-none ${className}`}>
             <img
                 src="/logo.png"
-                alt="Jaza Trading W.L.L Logo"
-                className={`h-9 sm:h-11 w-auto max-w-[180px] sm:max-w-[220px] object-contain transition-all ${dark ? "brightness-0 invert" : ""}`}
+                alt="Jaza Trading W.L.L"
+                className={`h-full w-auto max-w-[220px] sm:max-w-[260px] object-contain transition-all duration-200 ${dark ? "brightness-0 invert" : ""}`}
                 onError={(e) => {
                     e.target.onerror = null;
                     e.target.style.display = 'none';
