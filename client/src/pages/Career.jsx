@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { Briefcase, Send, CheckCircle2, AlertCircle, MapPin, Mail, Phone, Upload, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -40,16 +41,27 @@ const Career = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         
-        setTimeout(() => {
-            setLoading(false);
+        try {
+            await axios.post('/api/enquiries', {
+                customerName: form.name,
+                customerEmail: form.email,
+                customerPhone: form.phone,
+                productName: `Career Application: ${form.position}`,
+                message: `Years of Qatar Experience: ${form.experience}\n\nCover Letter / Background:\n${form.coverLetter}`,
+                source: 'career_application'
+            });
             setSuccess(true);
             setForm({ name: '', email: '', phone: '', position: 'B2B Sales Engineer', experience: '', coverLetter: '' });
-        }, 1000);
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to submit application. Please contact our HR team via WhatsApp.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -62,8 +74,8 @@ const Career = () => {
             <div className="max-w-7xl mx-auto space-y-10">
 
                 {/* Hero Header */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-14 shadow-md border border-[#E5E0D8] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div className="space-y-4 max-w-xl z-10">
+                <div className="pb-8 border-b border-[#E5E0D8] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                    <div className="space-y-4 max-w-xl">
                         <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest">
                             <Briefcase className="w-4 h-4 text-[#B15E2B]" />
                             <span>CAREERS AT JAZA TRADING</span>
@@ -76,7 +88,7 @@ const Career = () => {
                         </p>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-[#E5E0D8] shrink-0 text-center text-xs space-y-2 z-10 w-full sm:w-auto shadow-sm">
+                    <div className="bg-white p-6 rounded-2xl border border-[#E5E0D8] shrink-0 text-center text-xs space-y-2 w-full sm:w-auto shadow-xs">
                         <p className="text-[#B15E2B] font-bold uppercase tracking-wider text-[10px]">Headquarters</p>
                         <p className="font-bold text-sm text-[#1C1B17]">Industrial Area, Street 5, Doha</p>
                         <p className="text-slate-600 font-medium">State of Qatar</p>

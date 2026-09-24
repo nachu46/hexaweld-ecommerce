@@ -16,8 +16,8 @@ const CategoryDirectory = () => {
         const fetchCategoriesAndProducts = async () => {
             try {
                 const [cRes, pRes] = await Promise.all([
-                    axios.get(`${API_URL}/api/categories`),
-                    axios.get(`${API_URL}/api/products`),
+                    axios.get('/api/categories'),
+                    axios.get('/api/products'),
                 ]);
                 setCategories(cRes.data);
                 setProducts(pRes.data);
@@ -39,7 +39,7 @@ const CategoryDirectory = () => {
 
             <div className="max-w-7xl mx-auto">
                 {/* Header Banner */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 mb-10 shadow-md relative overflow-hidden border border-[#E5E0D8]">
+                <div className="mb-10 pb-6 border-b border-[#E5E0D8]">
                     <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
                         <Layers className="w-4 h-4 text-[#B15E2B]" />
                         <span>INDUSTRIAL & BUILDING SUPPLIES CATALOG</span>
@@ -49,7 +49,7 @@ const CategoryDirectory = () => {
                         Explore Our Product Categories
                     </h1>
 
-                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl leading-relaxed">
                         Select from specialized industrial categories engineered for construction sites, fabrication workshops, and infrastructure projects across Qatar.
                     </p>
                 </div>

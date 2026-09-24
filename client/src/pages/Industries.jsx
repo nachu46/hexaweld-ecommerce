@@ -45,14 +45,14 @@ const Industries = () => {
 
             <div className="max-w-7xl mx-auto space-y-12">
                 {/* Header */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-14 shadow-md border border-[#E5E0D8] text-center max-w-4xl mx-auto relative overflow-hidden">
+                <div className="pb-8 border-b border-[#E5E0D8]">
                     <span className="text-[#B15E2B] text-xs font-bold uppercase tracking-widest block mb-3">
                         SECTOR-SPECIFIC EXPERTISE
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] mb-4">
                         Industries We Serve in Qatar
                     </h1>
-                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
                         Delivering tailored equipment, bulk wholesale supplies, and safety compliance across Qatar’s key commercial and industrial sectors.
                     </p>
                 </div>

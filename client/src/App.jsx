@@ -16,6 +16,7 @@ import CategoryDetailsPage from './pages/CategoryDetailsPage';
 
 // Business & Legal Pages
 import Services from './pages/Services';
+import Certificates from './pages/Certificates';
 import Industries from './pages/Industries';
 import FAQ from './pages/FAQ';
 import Career from './pages/Career';
@@ -65,6 +66,7 @@ function App() {
 
                     {/* Brand & Category Public Routes */}
                     <Route path="/brands" element={<BrandDirectory />} />
+                    <Route path="/certificates" element={<Certificates />} />
                     <Route path="/brand/:slug" element={<BrandDetailsPage />} />
                     <Route path="/categories" element={<CategoryDirectory />} />
                     <Route path="/category/:slug" element={<CategoryDetailsPage />} />

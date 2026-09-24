@@ -16,7 +16,7 @@ const BrandDirectory = () => {
     useEffect(() => {
         const fetchBrands = async () => {
             try {
-                const { data } = await axios.get(`${API_URL}/api/brands`);
+                const { data } = await axios.get('/api/brands');
                 setBrands(data);
             } catch (err) {
                 console.error('Error loading brand directory:', err);
@@ -46,34 +46,27 @@ const BrandDirectory = () => {
 
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* ══ 1. HERO BANNER SECTION ══════════════════════════════════ */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden border border-[#E5E0D8]">
-                    {/* Background Subtle Watermark */}
-                    <div className="absolute right-4 -bottom-10 pointer-events-none select-none opacity-5">
-                        <span className="font-serif font-bold text-[140px] text-[#1C1B17] leading-none uppercase">BRANDS</span>
+                <div className="pb-8 border-b border-[#E5E0D8] space-y-4">
+                    <div className="inline-flex items-center gap-2 text-[#B15E2B] bg-white px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-[#E5E0D8]">
+                        <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
+                        <span>OFFICIAL DISTRIBUTOR & PROPRIETARY BRANDS</span>
                     </div>
 
-                    <div className="relative z-10 max-w-3xl space-y-4">
-                        <div className="inline-flex items-center gap-2 text-[#B15E2B] bg-white/70 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-[#D5CFCE]">
-                            <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
-                            <span>OFFICIAL DISTRIBUTOR & PROPRIETARY BRANDS</span>
-                        </div>
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] leading-tight">
+                        Our World-Class Product Brands
+                    </h1>
 
-                        <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] leading-tight">
-                            Our World-Class Product Brands
-                        </h1>
+                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-3xl">
+                        Authorized importer and supplier of premium certified brands including <strong>TORK®</strong>, <strong>EUREX®</strong>, <strong>NEXT®</strong>, <strong>MARK SAFETY PRO®</strong>, <strong>CLEXO®</strong>, <strong>TENZO®</strong>, and international industrial partners in Qatar.
+                    </p>
 
-                        <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed">
-                            Authorized importer and supplier of premium certified brands including <strong>TORK®</strong>, <strong>EUREX®</strong>, <strong>NEXT®</strong>, <strong>MARK SAFETY PRO®</strong>, <strong>CLEXO®</strong>, <strong>TENZO®</strong>, and international industrial partners in Qatar.
-                        </p>
-
-                        <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-bold text-[#2E4046]">
-                            <span className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-xl border border-[#D5CFCE]">
-                                <Sparkles className="w-3.5 h-3.5 text-[#B15E2B]" /> 100% Original Manufacturer Warranties
-                            </span>
-                            <span className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-xl border border-[#D5CFCE]">
-                                <ShieldCheck className="w-3.5 h-3.5 text-[#B15E2B]" /> Qatar Industrial Area Ready Stock
-                            </span>
-                        </div>
+                    <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-bold text-[#2E4046]">
+                        <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-[#E5E0D8]">
+                            <Sparkles className="w-3.5 h-3.5 text-[#B15E2B]" /> 100% Original Manufacturer Warranties
+                        </span>
+                        <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-[#E5E0D8]">
+                            <ShieldCheck className="w-3.5 h-3.5 text-[#B15E2B]" /> Qatar Industrial Area Ready Stock
+                        </span>
                     </div>
                 </div>
 

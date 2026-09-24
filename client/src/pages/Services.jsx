@@ -39,14 +39,14 @@ const Services = () => {
 
             <div className="max-w-7xl mx-auto space-y-12">
                 {/* Header */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-14 shadow-md border border-[#E5E0D8] relative overflow-hidden text-center max-w-4xl mx-auto">
+                <div className="pb-8 border-b border-[#E5E0D8]">
                     <span className="text-[#B15E2B] text-xs font-bold uppercase tracking-widest block mb-3">
                         COMPREHENSIVE B2B SOLUTIONS
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] mb-4">
                         Industrial Services & Equipment Maintenance
                     </h1>
-                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
                         Beyond supplying top-tier equipment, Jaza Trading W.L.L provides certified technical maintenance, calibration, and safety support for Qatar’s infrastructure.
                     </p>
                 </div>

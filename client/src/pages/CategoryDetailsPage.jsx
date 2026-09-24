@@ -24,7 +24,7 @@ const CategoryDetailsPage = () => {
             setNotFound(false);
             try {
                 // Fetch categories
-                const { data: catList } = await axios.get(`${API_URL}/api/categories`);
+                const { data: catList } = await axios.get('/api/categories');
                 const param = slug.trim().toLowerCase();
                 const matchedCat = catList.find(c =>
                     c._id === slug ||
@@ -40,7 +40,7 @@ const CategoryDetailsPage = () => {
                 setCategory(matchedCat);
 
                 // Fetch products for category
-                const { data: allProducts } = await axios.get(`${API_URL}/api/products`);
+                const { data: allProducts } = await axios.get('/api/products');
                 const catProducts = allProducts.filter(p =>
                     p.category?._id === matchedCat._id ||
                     p.category?.name === matchedCat.name ||

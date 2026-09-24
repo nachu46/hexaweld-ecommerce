@@ -44,10 +44,10 @@ const Contact = () => {
     return (
         <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans min-h-screen">
 
-            {/* ══ 1. HERO BANNER ARCH ═══════════════════════════════════════════ */}
-            <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-                <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
-                    <div className="flex items-center justify-between z-10">
+            {/* ══ 1. HERO HEADER ═══════════════════════════════════════════ */}
+            <section className="px-4 sm:px-6 lg:px-8 pt-6 pb-8">
+                <div className="max-w-7xl mx-auto pb-8 border-b border-[#E5E0D8] space-y-6">
+                    <div className="flex items-center justify-between">
                         <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             CONTACT & ENQUIRIES • QATAR
                         </span>
@@ -56,17 +56,16 @@ const Contact = () => {
                         </span>
                     </div>
 
-                    <div className="my-6 z-10 max-w-2xl">
+                    <div className="max-w-3xl">
                         <h1 className="text-4xl sm:text-6xl font-serif font-bold text-[#1C1B17] leading-tight tracking-tight mb-4">
-                            Let’s build<br />
-                            <span className="text-[#B15E2B]">something together.</span>
+                            Let’s build <span className="text-[#B15E2B]">something together.</span>
                         </h1>
                         <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
                             Have a project in mind or bulk building material requirements? Send us your enquiry and our Qatar sales team will get back to you promptly.
                         </p>
                     </div>
 
-                    <div className="z-10 pt-4 border-t border-[#D5CFCE] flex items-center justify-between text-xs text-slate-700 font-bold uppercase tracking-wider">
+                    <div className="pt-4 border-t border-[#E5E0D8] flex items-center justify-between text-xs text-slate-700 font-bold uppercase tracking-wider">
                         <span className="text-[#B15E2B]">FAST WHOLESALE QUOTES</span>
                         <span>WE RESPOND WITHIN 1 BUSINESS DAY</span>
                     </div>

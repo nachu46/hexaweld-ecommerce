@@ -23,11 +23,11 @@ const BrandDetailsPage = () => {
             setNotFound(false);
             try {
                 // 1. Fetch Brand Data
-                const { data: brandData } = await axios.get(`${API_URL}/api/brands/${slug}`);
+                const { data: brandData } = await axios.get(`/api/brands/${slug}`);
                 setBrand(brandData);
 
                 // 2. Fetch Products for Brand
-                const { data: allProducts } = await axios.get(`${API_URL}/api/products`);
+                const { data: allProducts } = await axios.get('/api/products');
                 const brandProducts = allProducts.filter(p =>
                     p.brand && p.brand.trim().toLowerCase() === brandData.name.trim().toLowerCase()
                 );

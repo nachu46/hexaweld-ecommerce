@@ -30,14 +30,14 @@ if (useCloudinary) {
 }
 
 const checkFileType = (file, cb) => {
-    const filetypes = /jpg|jpeg|png|webp/;
+    const filetypes = /jpg|jpeg|png|webp|pdf/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
+    const mimetype = /image\/(jpeg|jpg|png|webp)|application\/pdf/.test(file.mimetype);
 
     if (extname && mimetype) {
         return cb(null, true);
     } else {
-        cb('Images only!');
+        cb('Images & PDFs only!');
     }
 };
 

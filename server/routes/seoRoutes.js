@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/productModel');
-const Brand = require('../models/brandModel');
-const Category = require('../models/categoryModel');
+const { getProducts, getBrands, getCategories } = require('../services/supabaseService');
 
 // @desc    Generate dynamic robots.txt
 // @route   GET /robots.txt
@@ -28,9 +26,9 @@ router.get('/sitemap.xml', async (req, res) => {
         const baseUrl = process.env.CLIENT_URL || 'https://hexaweld-ecommerce.vercel.app';
 
         const [products, brands, categories] = await Promise.all([
-            Product.find({}).select('_id updatedAt'),
-            Brand.find({}).select('_id slug updatedAt'),
-            Category.find({}).select('_id slug updatedAt'),
+            getProducts({}),
+            getBrands(),
+            getCategories(),
         ]);
 
         const staticUrls = [
@@ -56,16 +54,16 @@ router.get('/sitemap.xml', async (req, res) => {
             xml += `  <url>\n    <loc>${baseUrl}${url}</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
         });
 
-        products.forEach((p) => {
-            xml += `  <url>\n    <loc>${baseUrl}/product/${p._id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`;
+        (products || []).forEach((p) => {
+            xml += `  <url>\n    <loc>${baseUrl}/product/${p._id || p.id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`;
         });
 
-        brands.forEach((b) => {
-            xml += `  <url>\n    <loc>${baseUrl}/brand/${b.slug || b._id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+        (brands || []).forEach((b) => {
+            xml += `  <url>\n    <loc>${baseUrl}/brand/${b.slug || b._id || b.id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
         });
 
-        categories.forEach((c) => {
-            xml += `  <url>\n    <loc>${baseUrl}/category/${c.slug || c._id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+        (categories || []).forEach((c) => {
+            xml += `  <url>\n    <loc>${baseUrl}/category/${c.slug || c._id || c.id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
         });
 
         xml += `</urlset>`;

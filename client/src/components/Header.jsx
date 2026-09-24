@@ -25,22 +25,34 @@ const Header = () => {
         <header className="w-full z-50 sticky top-0 shadow-xs font-sans">
             {/* Main Header Bar */}
             <div className={`w-full bg-[#F6F4EE] border-b border-[#E5E0D8] transition-all duration-300 ${scrolled ? 'py-3 shadow-sm' : 'py-4'}`}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
                     
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center">
-                        <JtLogo dark={false} />
+                    {/* Mobile Menu Button (Left on Mobile) */}
+                    <div className="flex items-center md:hidden w-10">
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="p-2 text-[#1C1B17] hover:bg-[#EAE6DF] rounded-xl transition-colors"
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
+
+                    {/* Logo - Centered on Mobile, Left on Desktop */}
+                    <Link to="/" className="flex items-center justify-center md:justify-start flex-1 md:flex-none">
+                        <JtLogo className="h-11 sm:h-12 md:h-11" dark={false} />
                     </Link>
 
-                    {/* Nav Links Center */}
+                    {/* Nav Links Center (Desktop) */}
                     <nav className="hidden md:flex items-center gap-6 lg:gap-8">
                         {[
                             { label: 'Home', path: '/' },
                             { label: 'About Us', path: '/about' },
                             { label: 'Products', path: '/products' },
                             { label: 'Categories', path: '/categories' },
+                            { label: 'Brands', path: '/brands' },
+                            { label: 'Certificates', path: '/certificates' },
                             { label: 'Services', path: '/services' },
-                            { label: 'Careers', path: '/career' },
                             { label: 'Contact', path: '/contact' },
                         ].map((link) => {
                             const isActive = location.pathname === link.path;
@@ -59,7 +71,7 @@ const Header = () => {
                     </nav>
 
                     {/* Right Action Icons */}
-                    <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="flex items-center justify-end gap-1.5 sm:gap-3 w-10 md:w-auto">
                         
                         {/* Cart Trigger */}
                         <button
@@ -85,14 +97,6 @@ const Header = () => {
                                 <User className="w-5 h-5 text-[#B15E2B]" />
                             </Link>
                         )}
-
-                        {/* Mobile Menu Toggle */}
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="md:hidden p-2 text-[#1C1B17] hover:bg-[#EAE6DF] rounded-xl"
-                        >
-                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -113,7 +117,7 @@ const Header = () => {
                         >
                             <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E5E0D8]">
                                 <Link to="/" onClick={() => setIsOpen(false)}>
-                                    <JtLogo dark={false} />
+                                    <JtLogo className="h-10" dark={false} />
                                 </Link>
                                 <button onClick={() => setIsOpen(false)} className="p-2 bg-[#EAE6DF] rounded-full text-[#1C1B17]">
                                     <X className="w-5 h-5" />
@@ -127,8 +131,8 @@ const Header = () => {
                                     { label: 'Products Catalog', path: '/products' },
                                     { label: 'Product Categories', path: '/categories' },
                                     { label: 'Our Brands', path: '/brands' },
+                                    { label: 'Certificates & Accreditation', path: '/certificates' },
                                     { label: 'Services', path: '/services' },
-                                    { label: 'Careers in Qatar', path: '/career' },
                                     { label: 'Contact & RFQ', path: '/contact' },
                                 ].map((link) => (
                                     <Link

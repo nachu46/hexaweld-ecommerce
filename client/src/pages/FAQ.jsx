@@ -43,8 +43,8 @@ const FAQ = () => {
 
             <div className="max-w-4xl mx-auto space-y-10">
                 {/* Header */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-md border border-[#E5E0D8] text-center relative overflow-hidden">
-                    <div className="flex items-center justify-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
+                <div className="pb-8 border-b border-[#E5E0D8]">
+                    <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
                         <HelpCircle className="w-4 h-4 text-[#B15E2B]" />
                         <span>GOT QUESTIONS? WE’VE GOT ANSWERS</span>
                     </div>
@@ -53,7 +53,7 @@ const FAQ = () => {
                         Frequently Asked Questions
                     </h1>
 
-                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-xl mx-auto leading-relaxed">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl leading-relaxed">
                         Find everything you need to know about our industrial products, B2B quotation process, Qatar deliveries, and brand warranties.
                     </p>
                 </div>

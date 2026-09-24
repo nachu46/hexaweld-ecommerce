@@ -19,22 +19,22 @@ const About = () => {
     return (
         <div className="flex flex-col bg-[#F6F4EE] text-[#1C1B17] font-sans">
 
-            {/* ══ 1. HERO ARCH BANNER ═══════════════════════════════════════════ */}
-            <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-                <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-8 sm:p-14 min-h-[420px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
+            {/* ══ 1. HERO HEADER ═══════════════════════════════════════════ */}
+            <section className="px-4 sm:px-6 lg:px-8 pt-6 pb-8">
+                <div className="max-w-7xl mx-auto pb-8 border-b border-[#E5E0D8] space-y-6">
                     
                     {/* Top Tagline */}
-                    <div className="flex items-center justify-between z-10">
+                    <div className="flex items-center justify-between">
                         <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             COMPANY OVERVIEW • JAZA TRADING W.L.L
                         </span>
                         <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046] text-right">
-                            SUPPLYING PROGRESS IN QATAR<br />DIVISION OF SANA GROUP
+                            SUPPLYING PROGRESS IN QATAR • DIVISION OF SANA GROUP
                         </span>
                     </div>
 
                     {/* Main Content */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-6 z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-4">
                         <div className="lg:col-span-8 max-w-2xl">
                             <h1 className="text-4xl sm:text-6xl font-serif font-bold leading-tight text-[#1C1B17] tracking-tight mb-4">
                                 Materials. Expertise.<br />
@@ -52,24 +52,18 @@ const About = () => {
                         </div>
 
                         <div className="lg:col-span-4 flex justify-end">
-                            <div className="w-full max-w-sm h-64 rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-white">
+                            <div className="w-full max-w-sm h-64 rounded-2xl overflow-hidden shadow-md border border-[#E5E0D8] relative bg-white">
                                 <img
-                                    src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80"
+                                    src="/hero_building_materials.jpg"
                                     alt="Jaza Trading Qatar Wholesale Facility"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#ECE8E0]/90 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#F6F4EE]/80 via-transparent to-transparent" />
                                 <div className="absolute bottom-3 left-3 right-3 text-center bg-white/95 backdrop-blur-md p-2.5 rounded-xl border border-[#E5E0D8] text-xs font-bold text-[#1C1B17] shadow-sm">
                                     Serving Qatar Since 2009 · 15+ Years
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Bottom Badge */}
-                    <div className="z-10 pt-4 border-t border-[#D5CFCE] flex items-center justify-between text-xs font-medium">
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#2E4046]">QUALIFIED BUILDING MATERIALS WHOLESALER</span>
-                        <span className="text-lg font-serif font-bold text-[#B15E2B]">2009 — 2026</span>
                     </div>
                 </div>
             </section>

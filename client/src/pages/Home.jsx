@@ -72,7 +72,7 @@ const Home = () => {
     useEffect(() => {
         const fetchBrands = async () => {
             try {
-                const { data } = await axios.get(`${API_URL}/api/brands`);
+                const { data } = await axios.get('/api/brands');
                 if (Array.isArray(data) && data.length > 0) {
                     setDynamicBrands(data);
                 }
@@ -148,8 +148,8 @@ const Home = () => {
                         <div className="lg:col-span-5 relative flex justify-center items-center">
                             <div className="w-full max-w-md h-60 sm:h-72 rounded-2xl overflow-hidden shadow-md border border-[#D5CFCE] relative bg-white">
                                 <img
-                                    src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1000&q=80"
-                                    alt="Industrial Building Materials Qatar"
+                                    src="/hero_building_materials.jpg"
+                                    alt="Jaza Trading W.L.L Industrial Building Materials & Showroom Qatar"
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#ECE8E0]/90 via-transparent to-transparent" />

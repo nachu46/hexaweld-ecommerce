@@ -81,11 +81,11 @@ const NotFound = () => {
                             Products
                         </Link>
                         <Link
-                            to="/brands"
+                            to="/certificates"
                             className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 hover:bg-[#0B132B] hover:text-white border border-slate-200 transition-all text-slate-700 font-bold text-xs gap-1.5 group shadow-sm"
                         >
                             <ShieldCheck className="w-5 h-5 text-slate-500 group-hover:text-white" />
-                            Brands
+                            Certificates
                         </Link>
                         <Link
                             to="/contact"

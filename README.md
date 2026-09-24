@@ -132,7 +132,9 @@ node seeder.js        # Seed all data & brands
 node seeder.js -d     # Clear all database collections
 ```
 
-> **Default Admin Credentials:** `admin@jazatrading.com` / `password123`
+> **Default Admin Credentials:**
+> - Email: `admin@jazatrading.com` (or `admin@example.com`)
+> - Password: `password123` (or `SecurePass123` / `admin123`)
 
 ---
 
@@ -178,8 +180,8 @@ node manageUsers.js --email=admin@example.com --password=NewPassword123
 | Layer | Technologies |
 |---|---|
 | **Frontend** | React 18, Vite 5, TailwindCSS 3.4, Lucide Icons, Framer Motion, Axios |
-| **Backend** | Node.js, Express 5, Mongoose 9, JWT, Express Async Handler, Multer |
-| **Database** | MongoDB Atlas |
+| **Backend** | Node.js, Express 5, JWT, Express Async Handler, Multer |
+| **Database** | Supabase Cloud Database (PostgreSQL REST Engine) |
 | **Media Storage** | Cloudinary CDN / Local Static File Server |
 
 ---

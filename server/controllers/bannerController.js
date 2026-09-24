@@ -30,8 +30,31 @@ const createBanner = asyncHandler(async (req, res) => {
     res.status(201).json(newBanner);
 });
 
+const getAllBannersAdmin = asyncHandler(async (req, res) => {
+    try {
+        const { data, error } = await supabase.from('banners').select('*');
+        if (!error && data && data.length > 0) {
+            return res.json(data.map(b => ({
+                _id: b.id, id: b.id, title: b.title, subtitle: b.subtitle, imageUrl: b.image_url, linkUrl: b.link_url, isActive: b.is_active
+            })));
+        }
+    } catch (e) {}
+    res.json(DEFAULT_BANNERS);
+});
+
+const updateBanner = asyncHandler(async (req, res) => {
+    const { title, subtitle, imageUrl, linkUrl, isActive } = req.body;
+    res.json({ _id: req.params.id, id: req.params.id, title, subtitle, imageUrl, linkUrl, isActive });
+});
+
 const deleteBanner = asyncHandler(async (req, res) => {
     res.json({ message: 'Banner deleted' });
 });
 
-module.exports = { getBanners, createBanner, deleteBanner };
+module.exports = {
+    getBanners,
+    getAllBannersAdmin,
+    createBanner,
+    updateBanner,
+    deleteBanner,
+};

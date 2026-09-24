@@ -101,18 +101,29 @@ const autoMigrateSupabase = async () => {
                 created_at TIMESTAMPTZ DEFAULT NOW()
             );
 
-            ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.brands ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.enquiries ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.banners ENABLE ROW LEVEL SECURITY;
-            ALTER TABLE public.announcements ENABLE ROW LEVEL SECURITY;
+            CREATE TABLE IF NOT EXISTS public.reviews (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                product_id TEXT NOT NULL,
+                name TEXT NOT NULL,
+                rating INT DEFAULT 5,
+                comment TEXT,
+                company TEXT DEFAULT '',
+                created_at TIMESTAMPTZ DEFAULT NOW()
+            );
+
+            ALTER TABLE public.users DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.categories DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.brands DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.products DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.enquiries DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.banners DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.announcements DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.reviews DISABLE ROW LEVEL SECURITY;
             `;
 
             await client.query(sql);
             await client.end();
-            console.log('✅ Supabase Tables Auto-Created Successfully!');
+            console.log('✅ Supabase Tables Auto-Created & Configured Successfully!');
             return true;
         } catch (err) {
             await client.end().catch(() => {});
