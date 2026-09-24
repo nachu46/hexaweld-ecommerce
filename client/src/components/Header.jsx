@@ -23,38 +23,6 @@ const Header = () => {
 
     return (
         <header className="w-full z-50 sticky top-0 shadow-xs font-sans">
-            
-            {/* Top Contact Bar */}
-            <div className="bg-[#ECE8E0] text-[#1C1B17] text-[11px] py-2 border-b border-[#E5E0D8] font-medium no-scrollbar overflow-x-hidden">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-4 sm:gap-6 shrink-0">
-                        <a href="tel:+97470605494" className="flex items-center gap-1.5 hover:text-[#B15E2B] transition-colors font-semibold">
-                            <Phone className="w-3.5 h-3.5 text-[#B15E2B]" />
-                            <span>+974 7060 5494</span>
-                        </a>
-                        <a href="mailto:jazatrading@gmail.com" className="hidden md:flex items-center gap-1.5 hover:text-[#B15E2B] transition-colors">
-                            <Mail className="w-3.5 h-3.5 text-[#B15E2B]" />
-                            <span>jazatrading@gmail.com</span>
-                        </a>
-                    </div>
-
-                    <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-                        <a
-                            href="/catalog.pdf"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-[10px] font-bold text-[#B15E2B] hover:text-[#8E4920] transition-colors"
-                            title="Download Product Catalog PDF"
-                        >
-                            <Download className="w-3 h-3" />
-                            <span>PDF Catalog</span>
-                        </a>
-                        <span className="text-[#D5CFCE] hidden sm:inline">|</span>
-                        <span className="text-[10px] font-bold text-[#2E4046] hidden sm:inline">Qatar Wholesale Supplier</span>
-                    </div>
-                </div>
-            </div>
-
             {/* Main Header Bar */}
             <div className={`w-full bg-[#F6F4EE] border-b border-[#E5E0D8] transition-all duration-300 ${scrolled ? 'py-3 shadow-sm' : 'py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
