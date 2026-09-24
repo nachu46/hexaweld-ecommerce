@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { Mail, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
 
@@ -21,15 +22,17 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const { data } = await axios.post(`${API_URL}/api/users/login`, { email, password });
-            login(data);
-            if (data.isAdmin) {
+            const userData = await login(email, password);
+            toast.success('Signed in successfully!');
+            if (userData && userData.isAdmin) {
                 navigate('/admin/dashboard');
             } else {
                 navigate('/account');
             }
         } catch (err) {
-            setError(err.response?.data?.message || 'Invalid email or password');
+            const msg = typeof err === 'string' ? err : (err.response?.data?.message || 'Invalid email or password');
+            setError(msg);
+            toast.error(msg);
         } finally {
             setLoading(false);
         }

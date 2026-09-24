@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 const CartContext = createContext();
 
@@ -34,11 +35,13 @@ export const CartProvider = ({ children }) => {
             }
             return [...prev, { ...product, quantity }];
         });
+        toast.success(`Added "${product.name || 'Item'}" to RFQ list!`);
         setIsCartOpen(true);
     };
 
     const removeFromCart = (productId) => {
         setCartItems(prev => prev.filter(item => item._id !== productId));
+        toast.success('Item removed from RFQ list');
     };
 
     const updateQuantity = (productId, quantity) => {

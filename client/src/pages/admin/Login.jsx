@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Lock, Mail, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 import JtLogo from '../../components/JtLogo';
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const navigate = useNavigate();
     const { login, user } = useAuth();
 
@@ -20,17 +22,30 @@ const Login = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setError('');
+        setSubmitting(true);
         try {
-            await login(email, password);
+            const loggedUser = await login(email, password);
+            if (!loggedUser || !loggedUser.isAdmin) {
+                setError('Access denied. Administrator privileges required.');
+                toast.error('Access denied. Admin account required.');
+                setSubmitting(false);
+                return;
+            }
+            toast.success('Welcome back to Jaza Admin Portal!');
             navigate('/admin/dashboard');
         } catch (err) {
-            setError(err);
+            const msg = typeof err === 'string' ? err : 'Invalid email or password';
+            setError(msg);
+            toast.error(msg);
+        } finally {
+            setSubmitting(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
-            <div className="max-w-md w-full bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+        <div className="min-h-screen flex items-center justify-center bg-[#F6F4EE] py-12 px-4 sm:px-6 lg:px-8 font-sans">
+            <div className="max-w-md w-full bg-white p-8 sm:p-10 rounded-3xl border border-[#E5E0D8] shadow-sm space-y-6">
                 
                 {/* Header Logo & Title */}
                 <div className="text-center space-y-3">
@@ -38,10 +53,10 @@ const Login = () => {
                         <JtLogo className="h-10 mx-auto" />
                     </div>
                     <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-[#007AFF] bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
-                            Authorized Access
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[#B15E2B] bg-[#ECE8E0] px-3 py-1 rounded-md border border-[#E5E0D8]">
+                            Authorized Personnel Only
                         </span>
-                        <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-2">
+                        <h2 className="font-serif text-2xl font-bold text-[#1C1B17] tracking-tight mt-3">
                             Admin Portal Sign In
                         </h2>
                         <p className="text-slate-500 text-xs font-medium mt-1">
@@ -58,7 +73,7 @@ const Login = () => {
 
                 <form className="space-y-4" onSubmit={submitHandler}>
                     <div>
-                        <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#1C1B17] uppercase tracking-wider mb-1.5">
                             Admin Email
                         </label>
                         <div className="relative">
@@ -66,7 +81,7 @@ const Login = () => {
                             <input
                                 type="email"
                                 required
-                                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:border-slate-900 focus:outline-none bg-slate-50/50"
+                                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#D5CFCE] text-xs font-medium focus:border-[#B15E2B] focus:outline-none bg-white text-[#1C1B17]"
                                 placeholder="admin@jazatrading.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -75,7 +90,7 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#1C1B17] uppercase tracking-wider mb-1.5">
                             Password
                         </label>
                         <div className="relative">
@@ -83,7 +98,7 @@ const Login = () => {
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 required
-                                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:border-slate-900 focus:outline-none bg-slate-50/50"
+                                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#D5CFCE] text-xs font-medium focus:border-[#B15E2B] focus:outline-none bg-white text-[#1C1B17]"
                                 placeholder="••••••••"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -100,9 +115,11 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 px-4 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-colors shadow-sm mt-2 flex items-center justify-center gap-2"
+                        disabled={submitting}
+                        className="w-full py-3 px-4 rounded-xl text-xs font-bold text-white bg-[#B15E2B] hover:bg-[#9A5023] transition-colors shadow-sm mt-2 flex items-center justify-center gap-2 disabled:opacity-50"
                     >
-                        <ShieldCheck className="w-4 h-4 text-blue-400" /> Sign In to Admin Panel
+                        <ShieldCheck className="w-4 h-4 text-white" />
+                        {submitting ? 'Authenticating...' : 'Sign In to Admin Panel'}
                     </button>
                 </form>
             </div>
