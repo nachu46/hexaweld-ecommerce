@@ -157,7 +157,7 @@ const Footer = () => {
                         <span>
                             Developed by{' '}
                             <a
-                                href="https://khaititsolution.com"
+                                href="https://khairitsolution.com"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="font-bold text-[#B15E2B] hover:underline transition-colors"

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { Search, ShieldCheck, Tag, ExternalLink, ArrowRight, Package } from 'lucide-react';
+import { Search, ShieldCheck, Tag, ArrowRight, Package, Sparkles, Filter, X } from 'lucide-react';
 import { getImageUrl } from '../utils/getImageUrl';
 
 const API_URL = import.meta.env.VITE_API_URL || '';
@@ -38,83 +38,114 @@ const BrandDirectory = () => {
     });
 
     return (
-        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans">
             <Helmet>
-                <title>Brands Directory | Jaza Trading W.L.L Qatar</title>
-                <meta name="description" content="Explore our complete directory of authorized industrial brands, tools, PPE safety products, and door locks in Qatar." />
+                <title>Our Product Brands | Jaza Trading W.L.L Qatar</title>
+                <meta name="description" content="Explore our complete directory of authorized industrial brands, welding machines, PPE safety products, and door hardware in Qatar." />
             </Helmet>
 
-            <div className="max-w-7xl mx-auto">
-                {/* Header Banner */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 mb-10 shadow-md relative overflow-hidden border border-[#E5E0D8]">
-                    <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
-                        <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
-                        <span>PROPRIETARY & DISTRIBUTED BRANDS</span>
+            <div className="max-w-7xl mx-auto space-y-8">
+                {/* ══ 1. HERO BANNER SECTION ══════════════════════════════════ */}
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden border border-[#E5E0D8]">
+                    {/* Background Subtle Watermark */}
+                    <div className="absolute right-4 -bottom-10 pointer-events-none select-none opacity-5">
+                        <span className="font-serif font-bold text-[140px] text-[#1C1B17] leading-none uppercase">BRANDS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight text-[#1C1B17]">
-                        Our World-Class Product Brands
-                    </h1>
+                    <div className="relative z-10 max-w-3xl space-y-4">
+                        <div className="inline-flex items-center gap-2 text-[#B15E2B] bg-white/70 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-[#D5CFCE]">
+                            <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
+                            <span>OFFICIAL DISTRIBUTOR & PROPRIETARY BRANDS</span>
+                        </div>
 
-                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl">
-                        Discover Tork®, Eurex®, NexT®, Mark Safety Pro®, Clexo®, Tenzo®, and our international partner brands in Qatar.
-                    </p>
+                        <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] leading-tight">
+                            Our World-Class Product Brands
+                        </h1>
+
+                        <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed">
+                            Authorized importer and supplier of premium certified brands including <strong>TORK®</strong>, <strong>EUREX®</strong>, <strong>NEXT®</strong>, <strong>MARK SAFETY PRO®</strong>, <strong>CLEXO®</strong>, <strong>TENZO®</strong>, and international industrial partners in Qatar.
+                        </p>
+
+                        <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-bold text-[#2E4046]">
+                            <span className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-xl border border-[#D5CFCE]">
+                                <Sparkles className="w-3.5 h-3.5 text-[#B15E2B]" /> 100% Original Manufacturer Warranties
+                            </span>
+                            <span className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-xl border border-[#D5CFCE]">
+                                <ShieldCheck className="w-3.5 h-3.5 text-[#B15E2B]" /> Qatar Industrial Area Ready Stock
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Filter & Search Bar */}
-                <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-[#E5E0D8] mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-                    {/* Search Bar */}
-                    <div className="relative flex-1 w-full">
-                        <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                        <input
-                            type="text"
-                            className="w-full pl-10 pr-4 py-2.5 bg-[#F6F4EE] border border-[#D5CFCE] rounded-xl text-xs sm:text-sm font-medium text-[#1C1B17] focus:outline-none focus:border-[#B15E2B] transition-colors"
-                            placeholder="Search brand by name, category or tag..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+                {/* ══ 2. SEARCH & CATEGORY FILTER BAR ══════════════════════════ */}
+                <div className="bg-white p-4 sm:p-6 rounded-3xl shadow-xs border border-[#E5E0D8] space-y-4">
+                    <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                        {/* Search Input */}
+                        <div className="relative flex-1 w-full">
+                            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <input
+                                type="text"
+                                className="w-full pl-11 pr-10 py-3 bg-[#F6F4EE] border border-[#D5CFCE] rounded-2xl text-xs sm:text-sm font-medium text-[#1C1B17] placeholder:text-slate-400 focus:outline-none focus:border-[#B15E2B] focus:ring-2 focus:ring-[#B15E2B]/20 transition-all"
+                                placeholder="Search brand by name, category, or product specification..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            {searchTerm && (
+                                <button onClick={() => setSearchTerm('')} className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-[#1C1B17]">
+                                    <X className="w-4 h-4" />
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Category Filter Title / Count */}
+                        <div className="flex items-center gap-2 text-xs font-bold text-slate-500 shrink-0">
+                            <Filter className="w-4 h-4 text-[#B15E2B]" />
+                            <span>Showing {filteredBrands.length} Brands</span>
+                        </div>
                     </div>
 
                     {/* Category Filter Chips */}
-                    <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto no-scrollbar scrollbar-none py-1">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setSelectedCat(cat)}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                                    selectedCat === cat
-                                        ? 'bg-[#B15E2B] text-white shadow-xs'
-                                        : 'bg-[#F6F4EE] text-[#1C1B17] hover:bg-[#ECE8E0] border border-[#D5CFCE]'
-                                }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
+                    {categories.length > 1 && (
+                        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scrollbar-none pt-2 border-t border-slate-100">
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setSelectedCat(cat)}
+                                    className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                                        selectedCat === cat
+                                            ? 'bg-[#B15E2B] text-white shadow-xs'
+                                            : 'bg-[#F6F4EE] text-[#1C1B17] hover:bg-[#ECE8E0] border border-[#E5E0D8]'
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                {/* Brand Cards Grid */}
+                {/* ══ 3. BRAND CARDS GRID ═════════════════════════════════════ */}
                 {loading ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[1, 2, 3, 4, 5, 6].map((n) => (
-                            <div key={n} className="h-64 bg-white rounded-2xl border border-slate-200 animate-pulse p-6" />
+                            <div key={n} className="h-64 bg-white rounded-3xl border border-[#E5E0D8] animate-pulse p-6" />
                         ))}
                     </div>
                 ) : filteredBrands.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredBrands.map((b) => {
-                            const brandSlug = b.slug || b._id;
+                            const brandSlug = b.slug || b._id || b.id;
                             const logoUrl = getImageUrl(b.logo);
                             const bannerUrl = getImageUrl(b.banner);
 
                             return (
                                 <Link
-                                    key={b._id}
+                                    key={b._id || b.id || b.name}
                                     to={`/brand/${brandSlug}`}
-                                    className="bg-white rounded-2xl border border-slate-200 hover:border-slate-900 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative"
+                                    className="bg-white rounded-3xl border border-[#E5E0D8] hover:border-[#B15E2B] hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative"
                                 >
                                     {/* Banner Image Preview */}
-                                    <div className="h-32 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                                    <div className="h-32 w-full bg-[#ECE8E0] relative overflow-hidden border-b border-[#E5E0D8]">
                                         {bannerUrl ? (
                                             <img
                                                 src={bannerUrl}
@@ -122,55 +153,55 @@ const BrandDirectory = () => {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
                                         ) : (
-                                            <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-900 flex items-center justify-center">
-                                                <span className="text-white/20 font-black text-2xl uppercase tracking-widest">{b.name}</span>
+                                            <div className="w-full h-full bg-gradient-to-r from-[#2E4046] to-[#1C1B17] flex items-center justify-center p-4">
+                                                <span className="text-[#ECE8E0]/40 font-serif font-bold text-2xl uppercase tracking-widest">{b.name}</span>
                                             </div>
                                         )}
 
-                                        {b.isRegistered !== false && (
-                                            <span className="absolute top-3 right-3 bg-[#B15E2B] text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-xs">
+                                        {b.isOwnerBrand || b.isRegistered !== false ? (
+                                            <span className="absolute top-3 right-3 bg-[#B15E2B] text-white text-[9px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">
                                                 REGISTERED®
                                             </span>
-                                        )}
+                                        ) : null}
                                     </div>
 
-                                    {/* Brand Content */}
+                                    {/* Brand Body Content */}
                                     <div className="p-6 flex-1 flex flex-col pt-12 relative">
-                                        {/* Logo Badge Overlay */}
-                                        <div className="absolute -top-10 left-6 w-20 h-20 bg-white rounded-2xl border-2 border-slate-100 shadow-md p-2 flex items-center justify-center overflow-hidden">
+                                        {/* Logo Container Overlay */}
+                                        <div className="absolute -top-10 left-6 w-20 h-20 bg-white rounded-2xl border-2 border-[#E5E0D8] shadow-md p-2 flex items-center justify-center overflow-hidden">
                                             {logoUrl ? (
                                                 <img src={logoUrl} alt={b.name} className="max-h-full max-w-full object-contain" />
                                             ) : (
-                                                <span className="font-black text-xs text-slate-800 text-center">{b.name}</span>
+                                                <span className="font-serif font-bold text-sm text-[#1C1B17] text-center">{b.name}</span>
                                             )}
                                         </div>
 
                                         <div className="flex items-center justify-between mb-2">
-                                            <h2 className="text-xl font-black text-slate-900 group-hover:text-slate-700 transition-colors">
+                                            <h2 className="text-xl font-serif font-bold text-[#1C1B17] group-hover:text-[#B15E2B] transition-colors">
                                                 {b.name}
                                             </h2>
                                             {b.category && (
-                                                <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+                                                <span className="text-[10px] font-bold text-[#B15E2B] bg-[#ECE8E0] px-2.5 py-1 rounded-md border border-[#E5E0D8]">
                                                     {b.category}
                                                 </span>
                                             )}
                                         </div>
 
                                         {b.badgeTag && (
-                                            <p className="text-xs font-bold text-slate-700 mb-3 flex items-center gap-1">
-                                                <Tag className="w-3 h-3 text-slate-500" />
-                                                {b.badgeTag}
+                                            <p className="text-xs font-bold text-slate-700 mb-2 flex items-center gap-1">
+                                                <Tag className="w-3.5 h-3.5 text-[#B15E2B]" />
+                                                <span>{b.badgeTag}</span>
                                             </p>
                                         )}
 
                                         <p className="text-xs text-slate-600 line-clamp-2 mb-6 font-medium leading-relaxed">
-                                            {b.description || 'Authorized quality product manufacturer and equipment supplier in Qatar.'}
+                                            {b.description || 'Authorized industrial equipment manufacturer & certified Qatar product line.'}
                                         </p>
 
-                                        {/* Bottom Action */}
-                                        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-900 group-hover:text-slate-700">
-                                            <span>View Products & Catalog</span>
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        {/* Bottom Card Footer */}
+                                        <div className="mt-auto pt-4 border-t border-[#E5E0D8] flex items-center justify-between text-xs font-bold text-[#1C1B17] group-hover:text-[#B15E2B] transition-colors">
+                                            <span>Explore {b.name} Products</span>
+                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#B15E2B]" />
                                         </div>
                                     </div>
                                 </Link>
@@ -178,13 +209,17 @@ const BrandDirectory = () => {
                         })}
                     </div>
                 ) : (
-                    <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-md mx-auto">
-                        <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                        <h3 className="text-lg font-bold text-slate-900 mb-1">No Brands Found</h3>
-                        <p className="text-xs text-slate-500 mb-4">No partner brands matching your search criteria.</p>
+                    <div className="bg-white rounded-3xl border border-[#E5E0D8] p-12 text-center max-w-md mx-auto shadow-xs space-y-4">
+                        <div className="w-16 h-16 rounded-2xl bg-[#ECE8E0] border border-[#E5E0D8] flex items-center justify-center mx-auto text-[#B15E2B]">
+                            <Package className="w-8 h-8 text-[#B15E2B]" />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-serif font-bold text-[#1C1B17]">No Brands Found</h3>
+                            <p className="text-xs text-slate-500 font-medium mt-1">No partner brands matching "{searchTerm}".</p>
+                        </div>
                         <button
                             onClick={() => { setSearchTerm(''); setSelectedCat('ALL'); }}
-                            className="bg-[#0B132B] text-white px-4 py-2 rounded-xl text-xs font-bold"
+                            className="px-5 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-all shadow-xs"
                         >
                             Reset Search Filters
                         </button>

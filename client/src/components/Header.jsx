@@ -39,7 +39,6 @@ const Header = () => {
                             { label: 'About Us', path: '/about' },
                             { label: 'Products', path: '/products' },
                             { label: 'Categories', path: '/categories' },
-                            { label: 'Our Brands', path: '/brands' },
                             { label: 'Services', path: '/services' },
                             { label: 'Careers', path: '/career' },
                             { label: 'Contact', path: '/contact' },
