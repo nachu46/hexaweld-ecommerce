@@ -306,9 +306,6 @@ const Home = () => {
                                         alt={cat.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <span className="absolute top-3 left-3 bg-[#2E4046] text-[#E5E0D8] font-bold text-[9px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-xs">
-                                        {cat.brandTag}
-                                    </span>
                                 </div>
 
                                 <div className="p-5 flex-1 flex flex-col justify-between space-y-3">

@@ -42,25 +42,6 @@ const ProductCard = ({ product, onQuickView }) => {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="group flex flex-col h-full bg-white rounded-[24px] shadow-sm hover:shadow-xl transition-shadow duration-300 relative p-4"
         >
-            {/* Top Badges */}
-            <div className="absolute top-6 left-6 right-6 flex items-start justify-between z-10 pointer-events-none">
-                {product.category?.name && (
-                    <div className="bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm flex items-center justify-center max-w-[60%]">
-                        <span className="text-[10px] font-black text-gray-900 uppercase tracking-widest truncate">
-                            {product.category.name}
-                        </span>
-                    </div>
-                )}
-                {/* We always show Enquire Only for this styling, or conditionally if you prefer. We'll show it if enquiryOnly is true or price is 0 */}
-                {(product.enquiryOnly || !product.price) && (
-                    <div className="bg-blue-100/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-blue-200/50 shadow-sm flex items-center justify-center shrink-0 ml-auto">
-                        <span className="text-[10px] font-bold text-blue-600">
-                            Enquire Only
-                        </span>
-                    </div>
-                )}
-            </div>
-
             {/* Image Zone */}
             <Link to={`/product/${product._id}`} className="relative h-[220px] w-full flex flex-col items-center justify-center rounded-2xl mb-4 overflow-hidden">
                 <img
