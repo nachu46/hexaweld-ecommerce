@@ -369,7 +369,7 @@ const AdminBanners = () => {
 
                                 {/* Always show current value */}
                                 <div className="flex items-center gap-1.5 mt-1.5 px-2 py-1.5 bg-slate-50 rounded-lg border border-slate-100">
-                                    <Link className="w-3 h-3 text-slate-400 shrink-0" />
+                                    <LinkIcon className="w-3 h-3 text-slate-400 shrink-0" />
                                     <span className="text-[11px] text-slate-500 font-mono truncate">{form.buttonLink || '/products'}</span>
                                 </div>
                             </div>
