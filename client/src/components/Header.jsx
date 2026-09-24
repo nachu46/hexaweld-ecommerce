@@ -87,15 +87,6 @@ const Header = () => {
                             </Link>
                         )}
 
-                        {/* RFQ Quote Button */}
-                        <Link
-                            to="/contact"
-                            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white text-xs font-bold transition-all shadow-xs"
-                        >
-                            <span>Get Quote</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-
                         {/* Mobile Menu Toggle */}
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -149,13 +140,6 @@ const Header = () => {
                                         {link.label}
                                     </Link>
                                 ))}
-                            </div>
-
-                            <div className="mt-auto space-y-2 pt-4">
-                                <Link to="/contact" className="w-full py-3 rounded-xl bg-[#B15E2B] text-white text-center font-bold text-xs flex items-center justify-center gap-2 shadow-sm">
-                                    <span>Request a Quote</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </Link>
                             </div>
                         </motion.div>
                     </>

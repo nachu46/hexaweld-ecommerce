@@ -21,22 +21,22 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
 
                 {/* ══ 1. TOP B2B QUOTE BANNER ════════════════════════ */}
-                <div className="bg-[#2E4046] p-6 sm:p-10 rounded-2xl border border-slate-700/50 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div className="bg-[#ECE8E0] p-6 sm:p-10 rounded-2xl border border-[#D5CFCE] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[#1C1B17]">
                     <div>
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B] block mb-1">
                             WHOLESALE & PROJECT SUPPLY QATAR
                         </span>
-                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight leading-snug">
+                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1B17] tracking-tight leading-snug">
                             Need expert guidance or a custom bulk quote?
                         </h3>
-                        <p className="text-slate-300 text-xs sm:text-sm font-medium mt-1">
+                        <p className="text-slate-600 text-xs sm:text-sm font-medium mt-1">
                             Our Qatar technical sales team is ready to assist with material specifications and commercial pricing.
                         </p>
                     </div>
                     <div className="shrink-0">
                         <Link
                             to="/contact"
-                            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white text-xs font-bold transition-all shadow-sm group"
+                            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white text-xs font-bold transition-all shadow-xs group"
                         >
                             <span>Get Quotation</span>
                             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
