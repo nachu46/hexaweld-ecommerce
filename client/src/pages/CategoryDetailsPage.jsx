@@ -88,7 +88,7 @@ const CategoryDetailsPage = () => {
                     </p>
                     <Link
                         to="/categories"
-                        className="inline-flex items-center justify-center gap-2 bg-[#0B132B] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm"
+                        className="inline-flex items-center justify-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Explore All Categories
@@ -101,7 +101,7 @@ const CategoryDetailsPage = () => {
     const catImage = getImageUrl(category.image);
 
     return (
-        <div className="bg-slate-50 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-8 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
             <Helmet>
                 <title>{`${category.name} Range | Jaza Trading W.L.L Qatar`}</title>
                 <meta name="description" content={category.description || `Browse quality ${category.name} tools and industrial products at Jaza Trading W.L.L in Qatar.`} />
@@ -111,34 +111,34 @@ const CategoryDetailsPage = () => {
                 {/* Back Link */}
                 <Link
                     to="/categories"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#B15E2B] transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to All Categories
                 </Link>
 
                 {/* Category Banner */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-md border border-[#E5E0D8] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="space-y-3 z-10 max-w-xl">
-                        <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest">
-                            <Layers className="w-4 h-4" />
+                        <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest">
+                            <Layers className="w-4 h-4 text-[#B15E2B]" />
                             <span>CATEGORY RANGE</span>
                         </div>
-                        <h1 className="text-3xl sm:text-5xl font-black tracking-tight">{category.name}</h1>
-                        <p className="text-slate-300 text-sm font-medium leading-relaxed">
+                        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight">{category.name}</h1>
+                        <p className="text-slate-700 text-sm font-medium leading-relaxed">
                             {category.description || 'Explore commercial-grade products tested for reliability and safety.'}
                         </p>
                     </div>
 
                     {catImage && (
-                        <div className="w-36 h-36 sm:w-48 sm:h-48 bg-white/10 rounded-2xl p-3 border border-white/20 shrink-0 overflow-hidden backdrop-blur-md">
+                        <div className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl p-3 border border-[#E5E0D8] shrink-0 overflow-hidden shadow-sm">
                             <img src={catImage} alt={category.name} className="w-full h-full object-cover rounded-xl" />
                         </div>
                     )}
                 </div>
 
                 {/* Filter & Product Count Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E5E0D8] shadow-xs">
                     <div className="relative w-full sm:w-80">
                         <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                         <input
@@ -146,12 +146,12 @@ const CategoryDetailsPage = () => {
                             placeholder={`Search in ${category.name}...`}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-[#0B132B]"
+                            className="w-full pl-10 pr-4 py-2 bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] rounded-xl text-xs font-medium focus:outline-none focus:border-[#B15E2B]"
                         />
                     </div>
 
                     <span className="text-xs font-bold text-slate-600">
-                        Showing <strong className="text-slate-900">{filteredProducts.length}</strong> products
+                        Showing <strong className="text-[#1C1B17]">{filteredProducts.length}</strong> products
                     </span>
                 </div>
 
@@ -163,13 +163,13 @@ const CategoryDetailsPage = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 max-w-lg mx-auto">
+                    <div className="bg-white rounded-3xl p-12 text-center border border-[#E5E0D8] max-w-lg mx-auto">
                         <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                        <h3 className="text-lg font-bold text-slate-900 mb-1">No Matching Products</h3>
+                        <h3 className="text-lg font-serif font-bold text-[#1C1B17] mb-1">No Matching Products</h3>
                         <p className="text-xs text-slate-500 mb-4">No products found matching your search term within this category.</p>
                         <button
                             onClick={() => setSearchQuery('')}
-                            className="bg-[#0B132B] text-white px-5 py-2.5 rounded-xl font-bold text-xs"
+                            className="bg-[#B15E2B] hover:bg-[#8E4920] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-xs"
                         >
                             Reset Search
                         </button>

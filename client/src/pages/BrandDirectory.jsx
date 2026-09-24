@@ -46,19 +46,17 @@ const BrandDirectory = () => {
 
             <div className="max-w-7xl mx-auto">
                 {/* Header Banner */}
-                <div className="bg-[#1C1B17] text-white rounded-3xl p-8 sm:p-12 mb-10 shadow-2xl relative overflow-hidden border border-[#2E4046]/40">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#B15E2B]/10 rounded-full blur-3xl pointer-events-none" />
-                    
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 mb-10 shadow-md relative overflow-hidden border border-[#E5E0D8]">
                     <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
                         <ShieldCheck className="w-4 h-4 text-[#B15E2B]" />
                         <span>PROPRIETARY & DISTRIBUTED BRANDS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight">
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight text-[#1C1B17]">
                         Our World-Class Product Brands
                     </h1>
 
-                    <p className="text-slate-300 text-sm sm:text-base font-medium max-w-2xl">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl">
                         Discover Tork®, Eurex®, NexT®, Mark Safety Pro®, Clexo®, Tenzo®, and our international partner brands in Qatar.
                     </p>
                 </div>
@@ -129,9 +127,8 @@ const BrandDirectory = () => {
                                             </div>
                                         )}
 
-                                        {/* Registered Tag */}
                                         {b.isRegistered !== false && (
-                                            <span className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                                            <span className="absolute top-3 right-3 bg-[#B15E2B] text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-xs">
                                                 REGISTERED®
                                             </span>
                                         )}

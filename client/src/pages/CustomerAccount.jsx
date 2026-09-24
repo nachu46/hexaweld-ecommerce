@@ -30,23 +30,23 @@ const CustomerAccount = () => {
     };
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
             <Helmet>
                 <title>My Account Dashboard | Jaza Trading W.L.L</title>
             </Helmet>
 
             <div className="max-w-5xl mx-auto space-y-8">
                 {/* Header */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-10 shadow-md border border-[#E5E0D8] flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-2xl bg-amber-400 text-slate-900 flex items-center justify-center font-black text-2xl shadow-md shrink-0">
+                        <div className="w-16 h-16 rounded-2xl bg-[#B15E2B] text-white flex items-center justify-center font-serif font-bold text-2xl shadow-sm shrink-0">
                             {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                         </div>
                         <div>
-                            <h1 className="text-2xl font-black">{user.name}</h1>
-                            <p className="text-xs text-slate-300 font-medium">{user.email}</p>
+                            <h1 className="text-2xl font-serif font-bold text-[#1C1B17]">{user.name}</h1>
+                            <p className="text-xs text-slate-600 font-medium">{user.email}</p>
                             {user.isAdmin && (
-                                <span className="inline-block mt-1 bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-400/30">
+                                <span className="inline-block mt-1 bg-[#B15E2B]/10 text-[#B15E2B] text-[10px] font-bold px-2 py-0.5 rounded border border-[#B15E2B]/20">
                                     ADMINISTRATOR PORTAL ACTIVE
                                 </span>
                             )}
@@ -55,15 +55,15 @@ const CustomerAccount = () => {
 
                     <div className="flex items-center gap-3">
                         {user.isAdmin && (
-                            <Link to="/admin/dashboard" className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2.5 rounded-xl font-bold text-xs shadow-md">
+                            <Link to="/admin/dashboard" className="bg-[#B15E2B] hover:bg-[#8E4920] text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-xs transition-colors">
                                 Open Admin Panel
                             </Link>
                         )}
                         <button
                             onClick={handleLogout}
-                            className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-700"
+                            className="bg-white hover:bg-[#F6F4EE] text-[#1C1B17] px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 border border-[#D5CFCE] shadow-xs transition-colors"
                         >
-                            <LogOut className="w-4 h-4" /> Sign Out
+                            <LogOut className="w-4 h-4 text-[#B15E2B]" /> Sign Out
                         </button>
                     </div>
                 </div>
@@ -71,11 +71,11 @@ const CustomerAccount = () => {
                 {/* Dashboard Tabs & Content */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                     {/* Navigation Sidebar */}
-                    <div className="md:col-span-4 bg-white rounded-3xl p-4 border border-slate-200 shadow-sm space-y-1">
+                    <div className="md:col-span-4 bg-white rounded-3xl p-4 border border-[#E5E0D8] shadow-xs space-y-1">
                         <button
                             onClick={() => setActiveTab('profile')}
                             className={`w-full p-3 rounded-2xl text-left text-xs font-bold flex items-center gap-3 transition-colors ${
-                                activeTab === 'profile' ? 'bg-[#0B132B] text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+                                activeTab === 'profile' ? 'bg-[#B15E2B] text-white shadow-xs' : 'text-[#1C1B17] hover:bg-[#ECE8E0]'
                             }`}
                         >
                             <User className="w-4 h-4" /> Profile Details
@@ -83,7 +83,7 @@ const CustomerAccount = () => {
                         <button
                             onClick={() => setActiveTab('addresses')}
                             className={`w-full p-3 rounded-2xl text-left text-xs font-bold flex items-center gap-3 transition-colors ${
-                                activeTab === 'addresses' ? 'bg-[#0B132B] text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+                                activeTab === 'addresses' ? 'bg-[#B15E2B] text-white shadow-xs' : 'text-[#1C1B17] hover:bg-[#ECE8E0]'
                             }`}
                         >
                             <MapPin className="w-4 h-4" /> Saved Delivery Addresses
@@ -91,7 +91,7 @@ const CustomerAccount = () => {
                         <button
                             onClick={() => setActiveTab('history')}
                             className={`w-full p-3 rounded-2xl text-left text-xs font-bold flex items-center gap-3 transition-colors ${
-                                activeTab === 'history' ? 'bg-[#0B132B] text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100'
+                                activeTab === 'history' ? 'bg-[#B15E2B] text-white shadow-xs' : 'text-[#1C1B17] hover:bg-[#ECE8E0]'
                             }`}
                         >
                             <Package className="w-4 h-4" /> Quotation & Order History

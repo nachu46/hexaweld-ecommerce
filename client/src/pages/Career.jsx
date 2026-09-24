@@ -53,7 +53,7 @@ const Career = () => {
     };
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans text-[#1C1B17]">
             <Helmet>
                 <title>Careers & Opportunities | Jaza Trading W.L.L Qatar</title>
                 <meta name="description" content="Join the team at Jaza Trading W.L.L, a premier building materials wholesaler in Doha, Qatar. Explore open job positions and apply online." />
@@ -62,49 +62,49 @@ const Career = () => {
             <div className="max-w-7xl mx-auto space-y-10">
 
                 {/* Hero Header */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-14 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-14 shadow-md border border-[#E5E0D8] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-4 max-w-xl z-10">
-                        <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest">
-                            <Briefcase className="w-4 h-4 text-amber-400" />
+                        <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest">
+                            <Briefcase className="w-4 h-4 text-[#B15E2B]" />
                             <span>CAREERS AT JAZA TRADING</span>
                         </div>
-                        <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight leading-tight">
                             Build Your Future With Us in Qatar.
                         </h1>
-                        <p className="text-slate-300 text-sm font-medium leading-relaxed">
+                        <p className="text-slate-700 text-sm font-medium leading-relaxed">
                             Join a leading building materials supplier and division of Sana Group. We offer rewarding career paths, competitive packages, and professional growth in Qatar.
                         </p>
                     </div>
 
-                    <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shrink-0 text-center text-xs space-y-2 z-10 w-full sm:w-auto">
-                        <p className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">Headquarters</p>
-                        <p className="font-bold text-sm">Industrial Area, Street 5, Doha</p>
-                        <p className="text-slate-300">State of Qatar</p>
+                    <div className="bg-white p-6 rounded-2xl border border-[#E5E0D8] shrink-0 text-center text-xs space-y-2 z-10 w-full sm:w-auto shadow-sm">
+                        <p className="text-[#B15E2B] font-bold uppercase tracking-wider text-[10px]">Headquarters</p>
+                        <p className="font-bold text-sm text-[#1C1B17]">Industrial Area, Street 5, Doha</p>
+                        <p className="text-slate-600 font-medium">State of Qatar</p>
                     </div>
                 </div>
 
                 {/* Open Positions Grid */}
                 <div className="space-y-6">
                     <div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">CURRENT OPPORTUNITIES</span>
-                        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">Open Job Positions</h2>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B15E2B]">CURRENT OPPORTUNITIES</span>
+                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1B17] mt-1">Open Job Positions</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {OPEN_POSITIONS.map((pos) => (
-                            <div key={pos.title} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4">
+                            <div key={pos.title} className="bg-white rounded-2xl border border-[#E5E0D8] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4">
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className="text-[10px] font-bold text-[#007AFF] bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100 uppercase tracking-wider">
+                                        <span className="text-[10px] font-bold text-[#B15E2B] bg-[#F6F4EE] px-2.5 py-1 rounded-md border border-[#D5CFCE] uppercase tracking-wider">
                                             {pos.dept}
                                         </span>
-                                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                                        <span className="text-[10px] font-bold text-slate-600 bg-[#ECE8E0] px-2 py-0.5 rounded-md">
                                             {pos.type}
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-black text-slate-900">{pos.title}</h3>
+                                    <h3 className="text-lg font-serif font-bold text-[#1C1B17]">{pos.title}</h3>
                                     <p className="text-xs text-slate-500 flex items-center gap-1 font-semibold">
-                                        <MapPin className="w-3.5 h-3.5 text-slate-400" /> {pos.location}
+                                        <MapPin className="w-3.5 h-3.5 text-[#B15E2B]" /> {pos.location}
                                     </p>
                                     <p className="text-xs text-slate-600 leading-relaxed font-medium pt-1">
                                         {pos.desc}
@@ -116,10 +116,10 @@ const Career = () => {
                                         setForm(f => ({ ...f, position: pos.title }));
                                         window.scrollTo({ top: document.getElementById('apply-form').offsetTop - 100, behavior: 'smooth' });
                                     }}
-                                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors shadow-xs"
+                                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs transition-colors shadow-xs"
                                 >
                                     <span>Apply For Position</span>
-                                    <ArrowRight className="w-3.5 h-3.5" />
+                                    <ArrowRight className="w-3.5 h-3.5 text-white" />
                                 </button>
                             </div>
                         ))}
@@ -242,9 +242,9 @@ const Career = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                                className="w-full py-3.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
                             >
-                                <Send className="w-4 h-4 text-blue-400" />
+                                <Send className="w-4 h-4 text-white" />
                                 {loading ? 'Submitting Application...' : 'Submit Application'}
                             </button>
                         </form>

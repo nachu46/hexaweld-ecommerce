@@ -25,7 +25,7 @@ const About = () => {
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             COMPANY OVERVIEW • JAZA TRADING W.L.L
                         </span>
                         <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046] text-right">

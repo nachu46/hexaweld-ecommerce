@@ -102,7 +102,7 @@ const Home = () => {
                     
                     {/* Top Tagline */}
                     <div className="flex items-center justify-between z-10 gap-2">
-                        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             BUILDING MATERIALS WHOLESALE • QATAR
                         </span>
                         <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046] text-right">
@@ -113,9 +113,9 @@ const Home = () => {
                     {/* Main Hero Content & Photography */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-4 z-10">
                         <div className="lg:col-span-7 space-y-4">
-                            <span className="inline-block px-3 py-1 rounded-md bg-[#B15E2B] text-white text-[10px] font-bold uppercase tracking-wider shadow-xs">
+                            <p className="text-xs font-bold text-[#B15E2B] uppercase tracking-widest">
                                 15+ Years in the Qatar Market
-                            </span>
+                            </p>
                             <h1 className="text-3xl sm:text-5xl font-serif font-bold leading-tight text-[#1C1B17] tracking-tight">
                                 Your trusted partner in quality building materials & reliable supply.
                             </h1>
@@ -473,8 +473,9 @@ const Home = () => {
                                     <h3 className="font-serif font-bold text-lg text-[#1C1B17]">Doha Central Warehouse</h3>
                                     <p className="text-[10px] text-slate-600 font-medium">Street 5, Industrial Area, Qatar</p>
                                 </div>
-                                <span className="text-[10px] font-bold text-white bg-[#B15E2B] px-3 py-1 rounded-full shadow-xs">
-                                    OPEN FOR PICKUP
+                                <span className="text-xs font-bold text-[#B15E2B] flex items-center gap-1.5 uppercase tracking-wider">
+                                    <span className="w-2 h-2 rounded-full bg-[#B15E2B] animate-pulse" />
+                                    Open for Pickup
                                 </span>
                             </div>
 

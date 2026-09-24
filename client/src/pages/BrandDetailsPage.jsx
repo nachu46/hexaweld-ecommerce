@@ -68,7 +68,7 @@ const BrandDetailsPage = () => {
                     </p>
                     <Link
                         to="/brands"
-                        className="inline-flex items-center justify-center gap-2 bg-[#0B132B] text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-slate-800 transition-colors shadow-sm"
+                        className="inline-flex items-center justify-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-6 py-3 rounded-xl font-bold text-xs transition-colors shadow-sm"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         View All Partner Brands
@@ -82,7 +82,7 @@ const BrandDetailsPage = () => {
     const bannerUrl = getImageUrl(brand.banner);
 
     return (
-        <div className="bg-slate-50 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-8 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
             <Helmet>
                 <title>{`${brand.name} Products & Equipment | Jaza Trading W.L.L Qatar`}</title>
                 <meta name="description" content={brand.description || `Browse authorized ${brand.name} products, equipment, and specs available from Jaza Trading W.L.L in Qatar.`} />
@@ -94,24 +94,23 @@ const BrandDetailsPage = () => {
                 {/* Back Link */}
                 <Link
                     to="/brands"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#B15E2B] transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to All Brands
                 </Link>
 
                 {/* Brand Hero Header */}
-                <div className="bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden relative">
+                <div className="bg-white rounded-3xl border border-[#E5E0D8] shadow-md overflow-hidden relative">
                     {/* Top Banner Image */}
-                    <div className="h-48 sm:h-64 w-full bg-slate-900 relative">
+                    <div className="h-48 sm:h-64 w-full bg-[#ECE8E0] relative">
                         {bannerUrl ? (
                             <img src={bannerUrl} alt={brand.name} className="w-full h-full object-cover" />
                         ) : (
-                            <div className="w-full h-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-                                <span className="text-white/10 font-black text-4xl uppercase tracking-widest">{brand.name}</span>
+                            <div className="w-full h-full bg-[#ECE8E0] flex items-center justify-center">
+                                <span className="text-[#1C1B17]/20 font-serif font-bold text-4xl uppercase tracking-widest">{brand.name}</span>
                             </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     </div>
 
                     {/* Brand Details Bar */}
@@ -121,23 +120,23 @@ const BrandDetailsPage = () => {
                             {logoUrl ? (
                                 <img src={logoUrl} alt={brand.name} className="max-h-full max-w-full object-contain" />
                             ) : (
-                                <span className="font-black text-lg text-slate-900">{brand.name}</span>
+                                <span className="font-serif font-bold text-lg text-[#1C1B17]">{brand.name}</span>
                             )}
                         </div>
 
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                             <div>
                                 <div className="flex items-center gap-3 flex-wrap mb-1">
-                                    <h1 className="text-3xl sm:text-4xl font-black text-slate-900">{brand.name}</h1>
+                                    <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#1C1B17]">{brand.name}</h1>
                                     {brand.isRegistered !== false && (
-                                        <span className="bg-amber-100 border border-amber-200 text-amber-900 text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                                            <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
+                                        <span className="bg-[#ECE8E0] border border-[#D5CFCE] text-[#B15E2B] text-[10px] font-bold px-3 py-1 rounded flex items-center gap-1">
+                                            <ShieldCheck className="w-3.5 h-3.5 text-[#B15E2B]" />
                                             REGISTERED TRADEMARK®
                                         </span>
                                     )}
                                 </div>
                                 {brand.badgeTag && (
-                                    <p className="text-sm font-bold text-blue-600 flex items-center gap-1.5">
+                                    <p className="text-sm font-bold text-[#B15E2B] flex items-center gap-1.5">
                                         <Tag className="w-4 h-4" />
                                         {brand.badgeTag}
                                     </p>
@@ -203,7 +202,7 @@ const BrandDetailsPage = () => {
                             <p className="text-xs text-slate-500 mb-4">
                                 Specific catalog items for {brand.name} are currently being added. Contact our sales office for inquiries.
                             </p>
-                            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0B132B] text-white px-5 py-2.5 rounded-xl font-bold text-xs">
+                            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-xs transition-colors">
                                 Request Quote for {brand.name}
                             </Link>
                         </div>

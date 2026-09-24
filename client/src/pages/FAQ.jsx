@@ -35,7 +35,7 @@ const FAQ = () => {
     ];
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
             <Helmet>
                 <title>Frequently Asked Questions (FAQ) | Jaza Trading W.L.L</title>
                 <meta name="description" content="Find answers to common questions about ordering, delivery times in Qatar, product warranties, payment methods, and technical support." />
@@ -43,17 +43,17 @@ const FAQ = () => {
 
             <div className="max-w-4xl mx-auto space-y-10">
                 {/* Header */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-12 shadow-xl text-center relative overflow-hidden">
-                    <div className="flex items-center justify-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-3">
-                        <HelpCircle className="w-4 h-4 text-amber-400" />
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-md border border-[#E5E0D8] text-center relative overflow-hidden">
+                    <div className="flex items-center justify-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
+                        <HelpCircle className="w-4 h-4 text-[#B15E2B]" />
                         <span>GOT QUESTIONS? WE’VE GOT ANSWERS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4">
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight mb-4">
                         Frequently Asked Questions
                     </h1>
 
-                    <p className="text-slate-300 text-sm sm:text-base font-medium max-w-xl mx-auto leading-relaxed">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-xl mx-auto leading-relaxed">
                         Find everything you need to know about our industrial products, B2B quotation process, Qatar deliveries, and brand warranties.
                     </p>
                 </div>
@@ -65,27 +65,27 @@ const FAQ = () => {
                         return (
                             <div
                                 key={idx}
-                                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all"
+                                className="bg-white rounded-2xl border border-[#E5E0D8] overflow-hidden shadow-xs transition-all"
                             >
                                 <button
                                     onClick={() => setOpenIndex(isOpen ? -1 : idx)}
-                                    className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors"
+                                    className="w-full p-6 text-left flex items-center justify-between gap-4 font-serif font-bold text-[#1C1B17] hover:text-[#B15E2B] transition-colors"
                                 >
                                     <div className="flex flex-col gap-1">
-                                        <span className="text-[10px] uppercase font-black tracking-widest text-amber-600">
+                                        <span className="text-[10px] uppercase font-bold tracking-widest text-[#B15E2B]">
                                             {faq.category}
                                         </span>
                                         <span className="text-base sm:text-lg">{faq.question}</span>
                                     </div>
                                     <ChevronDown
                                         className={`w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${
-                                            isOpen ? 'rotate-180 text-[#0B132B]' : ''
+                                            isOpen ? 'rotate-180 text-[#B15E2B]' : ''
                                         }`}
                                     />
                                 </button>
 
                                 {isOpen && (
-                                    <div className="px-6 pb-6 text-xs sm:text-sm text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                                    <div className="px-6 pb-6 text-xs sm:text-sm text-slate-600 font-medium leading-relaxed border-t border-[#F6F4EE] pt-4">
                                         {faq.answer}
                                     </div>
                                 )}
@@ -95,14 +95,14 @@ const FAQ = () => {
                 </div>
 
                 {/* Contact Help CTA */}
-                <div className="bg-white rounded-3xl p-8 border border-slate-200 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+                <div className="bg-white rounded-3xl p-8 border border-[#E5E0D8] text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
                     <div className="text-left">
-                        <h3 className="text-lg font-black text-slate-900 mb-1">Still have a specific question?</h3>
-                        <p className="text-xs text-slate-500 font-medium">Our sales team is ready to assist your procurement needs in Qatar.</p>
+                        <h3 className="text-lg font-serif font-bold text-[#1C1B17] mb-1">Still have a specific question?</h3>
+                        <p className="text-xs text-slate-600 font-medium">Our sales team is ready to assist your procurement needs in Qatar.</p>
                     </div>
                     <Link
                         to="/contact"
-                        className="inline-flex items-center gap-2 bg-[#0B132B] hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm shrink-0"
+                        className="inline-flex items-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-xs shrink-0 transition-colors"
                     >
                         <PhoneCall className="w-4 h-4" />
                         Contact Support Team

@@ -90,7 +90,7 @@ const Products = () => {
                 >
                     <Package className={`w-4 h-4 shrink-0 ${!selectedCategory ? 'text-white' : 'text-[#B15E2B]'}`} />
                     <span className="flex-1 text-left truncate">All Categories</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${!selectedCategory ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${!selectedCategory ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
                         {products.length}
                     </span>
                 </button>
@@ -114,7 +114,7 @@ const Products = () => {
                                 <Package className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                             )}
                             <span className="flex-1 text-left truncate">{cat.name}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
                                 {count}
                             </span>
                         </button>
@@ -151,7 +151,7 @@ const Products = () => {
                         >
                             <Tag className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                             <span className="flex-1 text-left truncate capitalize">{b}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${isActive ? 'bg-white/20 text-white' : 'bg-[#ECE8E0] text-slate-700'}`}>
                                 {count}
                             </span>
                         </button>

@@ -48,7 +48,7 @@ const Contact = () => {
             <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-8">
                 <div className="max-w-7xl mx-auto bg-[#ECE8E0] rounded-3xl overflow-hidden relative text-[#1C1B17] p-8 sm:p-14 min-h-[380px] flex flex-col justify-between shadow-md border border-[#E5E0D8]">
                     <div className="flex items-center justify-between z-10">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15E2B] bg-white px-3 py-1 rounded-full border border-[#D5CFCE] shadow-xs">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B15E2B]">
                             CONTACT & ENQUIRIES • QATAR
                         </span>
                         <span className="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#2E4046]">

@@ -31,7 +31,7 @@ const CategoryDirectory = () => {
     }, []);
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
             <Helmet>
                 <title>Product Categories | Jaza Trading W.L.L Qatar</title>
                 <meta name="description" content="Browse comprehensive product categories: Welding Machines, Safety Boots, Lock Cylinders, Hand Tools, Sanitary Wares, and Power Tools." />
@@ -39,19 +39,17 @@ const CategoryDirectory = () => {
 
             <div className="max-w-7xl mx-auto">
                 {/* Header Banner */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-12 mb-10 shadow-xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-                    
-                    <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-3">
-                        <Layers className="w-4 h-4 text-amber-400" />
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 mb-10 shadow-md relative overflow-hidden border border-[#E5E0D8]">
+                    <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
+                        <Layers className="w-4 h-4 text-[#B15E2B]" />
                         <span>INDUSTRIAL & BUILDING SUPPLIES CATALOG</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4 leading-tight">
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight mb-4 leading-tight text-[#1C1B17]">
                         Explore Our Product Categories
                     </h1>
 
-                    <p className="text-slate-300 text-sm sm:text-base font-medium max-w-2xl">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl">
                         Select from specialized industrial categories engineered for construction sites, fabrication workshops, and infrastructure projects across Qatar.
                     </p>
                 </div>
@@ -76,7 +74,7 @@ const CategoryDirectory = () => {
                                 <Link
                                     key={cat._id}
                                     to={`/category/${catSlug}`}
-                                    className="bg-white rounded-3xl border border-slate-200 hover:border-[#0B132B] hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group relative"
+                                    className="bg-white rounded-3xl border border-slate-200 hover:border-[#B15E2B] hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group relative"
                                 >
                                     {/* Image Top */}
                                     <div className="h-44 w-full bg-slate-100 relative overflow-hidden">
@@ -87,11 +85,11 @@ const CategoryDirectory = () => {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
                                         ) : (
-                                            <div className="w-full h-full bg-slate-900 flex items-center justify-center">
-                                                <Package className="w-12 h-12 text-slate-700" />
+                                            <div className="w-full h-full bg-[#ECE8E0] flex items-center justify-center">
+                                                <Package className="w-12 h-12 text-[#B15E2B]" />
                                             </div>
                                         )}
-                                        <span className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full border border-white/20">
+                                        <span className="absolute top-4 right-4 bg-[#B15E2B] text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-xs">
                                             {count} Products
                                         </span>
                                     </div>

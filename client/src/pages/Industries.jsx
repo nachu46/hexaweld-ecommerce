@@ -37,7 +37,7 @@ const Industries = () => {
     ];
 
     return (
-        <div className="bg-slate-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
             <Helmet>
                 <title>Industries We Serve | Jaza Trading W.L.L Qatar</title>
                 <meta name="description" content="Industrial equipment supplier for Construction, Oil & Gas, Marine, Fabrication, and Manufacturing sectors in Qatar." />
@@ -45,14 +45,14 @@ const Industries = () => {
 
             <div className="max-w-7xl mx-auto space-y-12">
                 {/* Header */}
-                <div className="bg-[#0B132B] text-white rounded-3xl p-8 sm:p-14 shadow-xl text-center max-w-4xl mx-auto relative overflow-hidden">
-                    <span className="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-3">
+                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-14 shadow-md border border-[#E5E0D8] text-center max-w-4xl mx-auto relative overflow-hidden">
+                    <span className="text-[#B15E2B] text-xs font-bold uppercase tracking-widest block mb-3">
                         SECTOR-SPECIFIC EXPERTISE
                     </span>
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight mb-4">
+                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] mb-4">
                         Industries We Serve in Qatar
                     </h1>
-                    <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
                         Delivering tailored equipment, bulk wholesale supplies, and safety compliance across Qatar’s key commercial and industrial sectors.
                     </p>
                 </div>
@@ -64,14 +64,14 @@ const Industries = () => {
                         return (
                             <div
                                 key={i}
-                                className="bg-white rounded-3xl p-8 border border-slate-200 hover:border-[#0B132B] hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                                className="bg-white rounded-3xl p-8 border border-[#E5E0D8] hover:border-[#B15E2B] hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                             >
                                 <div>
                                     <div className="flex items-center justify-between mb-6">
-                                        <div className="w-12 h-12 rounded-2xl bg-slate-100 text-[#0B132B] flex items-center justify-center">
-                                            <IconComponent className="w-6 h-6 text-[#0B132B]" />
+                                        <div className="w-12 h-12 rounded-2xl bg-[#ECE8E0] text-[#B15E2B] flex items-center justify-center border border-[#E5E0D8]">
+                                            <IconComponent className="w-6 h-6 text-[#B15E2B]" />
                                         </div>
-                                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
+                                        <span className="text-[10px] font-bold text-[#B15E2B] bg-[#F6F4EE] px-2.5 py-1 rounded border border-[#D5CFCE]">
                                             {ind.tag}
                                         </span>
                                     </div>
