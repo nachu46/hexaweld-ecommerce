@@ -76,14 +76,16 @@ const Header = () => {
                             )}
                         </button>
 
-                        {/* Account */}
-                        <Link
-                            to={user ? (user.isAdmin ? "/admin/dashboard" : "/account") : "/login"}
-                            className="p-2.5 text-[#1C1B17] hover:text-[#B15E2B] hover:bg-[#EAE6DF] rounded-full transition-colors"
-                            title={user ? user.name : "Sign In Account"}
-                        >
-                            <User className="w-5 h-5 text-[#1C1B17]" />
-                        </Link>
+                        {/* Admin Portal Shortcut (Hidden for public visitors) */}
+                        {user && user.isAdmin && (
+                            <Link
+                                to="/admin/dashboard"
+                                className="p-2.5 text-[#B15E2B] hover:bg-[#EAE6DF] rounded-full transition-colors"
+                                title="Admin Portal Dashboard"
+                            >
+                                <User className="w-5 h-5 text-[#B15E2B]" />
+                            </Link>
+                        )}
 
                         {/* RFQ Quote Button */}
                         <Link
