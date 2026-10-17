@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import WhatsAppFloat from './WhatsAppFloat';
 import { Toaster } from 'react-hot-toast';
+import ApiProgress from './ApiProgress';
 
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
     if (isAdminRoute) {
         return (
             <div className="min-h-screen bg-[#F5F5F5] text-[#111111] font-sans">
+                <ApiProgress />
                 <Toaster
                     position="top-right"
                     toastOptions={{
@@ -45,6 +47,7 @@ const Layout = ({ children }) => {
 
     return (
         <div className="min-h-screen bg-white flex flex-col relative overflow-hidden font-sans">
+            <ApiProgress />
             <Toaster
                 position="top-right"
                 toastOptions={{

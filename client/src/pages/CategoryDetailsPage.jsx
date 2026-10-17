@@ -67,7 +67,7 @@ const CategoryDetailsPage = () => {
         return (
             <div className="min-h-[70vh] flex items-center justify-center bg-neutral-50">
                 <div className="flex flex-col items-center gap-3">
-                    <div className="w-10 h-10 border-4 border-[#111111] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-40 h-[3px] rounded-full bg-neutral-200 overflow-hidden mx-auto"><div className="h-full w-2/5 bg-[#111111] rounded-full animate-[loadbar_1.2s_ease-in-out_infinite]" /></div>
                     <p className="text-xs font-bold text-neutral-500">Loading Category Products...</p>
                 </div>
             </div>
