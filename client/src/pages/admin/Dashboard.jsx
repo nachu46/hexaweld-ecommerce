@@ -57,7 +57,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+        <div className="min-h-screen bg-neutral-50 font-sans pb-12">
             <AdminNav 
                 title="Admin Overview" 
                 subtitle="Control catalog, brand images, announcements, RFQ enquiries, and site content."
@@ -70,119 +70,119 @@ const Dashboard = () => {
                 {/* ══ 1. METRICS CARDS GRID ════════════════════════════ */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <Link to="/admin/products" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/products" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <Package className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 Manage <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.products}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Total Listed Products</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.products}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Total Listed Products</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/brands" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/brands" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <ShieldCheck className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 Brand Studio <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.brands}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Partner & Registered Brands</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.brands}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Partner & Registered Brands</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/categories" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/categories" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <Tag className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 View <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.categories}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Product Categories</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.categories}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Product Categories</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/enquiries" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/enquiries" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <MessageSquare className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 Inbox <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.enquiries}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Customer RFQs & Messages</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.enquiries}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Customer RFQs & Messages</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/banners" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/banners" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <Image className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 Configure <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.banners}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Active Slider Banners</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.banners}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Active Slider Banners</p>
                         </div>
                     </Link>
 
-                    <Link to="/admin/announcement" className="p-5 rounded-2xl bg-white border border-[#E5E0D8] hover:border-[#B15E2B] transition-all shadow-xs group">
+                    <Link to="/admin/announcement" className="p-5 rounded bg-white border border-[#E5E5E5] hover:border-[#111111] transition-all group">
                         <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-[#ECE8E0] text-[#B15E2B] border border-[#D5CFCE]">
+                            <div className="p-3 rounded bg-[#EDEDED] text-[#111111] border border-[#D4D4D4]">
                                 <Megaphone className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 group-hover:text-[#B15E2B] flex items-center gap-1 transition-colors">
+                            <span className="text-xs font-bold text-neutral-500 group-hover:text-[#111111] flex items-center gap-1 transition-colors">
                                 Edit Promos <ArrowUpRight className="w-3.5 h-3.5" />
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h3 className="text-3xl font-serif font-bold text-[#1C1B17]">{stats.announcements}</h3>
-                            <p className="text-xs font-bold text-slate-500 mt-0.5">Top Banner Announcements</p>
+                            <h3 className="text-3xl font-serif font-bold text-[#111111]">{stats.announcements}</h3>
+                            <p className="text-xs font-bold text-neutral-500 mt-0.5">Top Banner Announcements</p>
                         </div>
                     </Link>
 
                 </div>
 
                 {/* ══ 2. QUICK ACTIONS TOOLBAR ════════════════════════ */}
-                <div className="p-6 rounded-2xl bg-white border border-[#E5E0D8] shadow-xs">
-                    <h2 className="text-sm font-serif font-bold text-[#1C1B17] uppercase tracking-wider mb-4">Quick Content Management Actions</h2>
+                <div className="p-6 rounded bg-white border border-[#E5E5E5]">
+                    <h2 className="text-sm font-serif font-bold text-[#111111] uppercase tracking-wider mb-4">Quick Content Management Actions</h2>
                     <div className="flex flex-wrap gap-2.5">
-                        <Link to="/admin/product/create" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                        <Link to="/admin/product/create" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#111111] hover:bg-[#333333] text-white font-bold text-xs transition-colors">
                             <Plus className="w-4 h-4 text-white" /> Add New Product
                         </Link>
-                        <Link to="/admin/brands/new" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                        <Link to="/admin/brands/new" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#111111] hover:bg-[#333333] text-white font-bold text-xs transition-colors">
                             <Plus className="w-4 h-4 text-white" /> Add New Brand & Images
                         </Link>
-                        <Link to="/admin/categories" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                        <Link to="/admin/categories" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#111111] hover:bg-[#333333] text-white font-bold text-xs transition-colors">
                             <Tag className="w-4 h-4 text-white" /> Manage Categories
                         </Link>
-                        <Link to="/admin/banners" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                        <Link to="/admin/banners" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#111111] hover:bg-[#333333] text-white font-bold text-xs transition-colors">
                             <Image className="w-4 h-4 text-white" /> Upload Banners
                         </Link>
-                        <Link to="/admin/announcement" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B15E2B] hover:bg-[#8E4920] text-white font-bold text-xs shadow-xs transition-colors">
+                        <Link to="/admin/announcement" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#111111] hover:bg-[#333333] text-white font-bold text-xs transition-colors">
                             <Megaphone className="w-4 h-4 text-white" /> Set Promos
                         </Link>
-                        <Link to="/admin/admins" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#D5CFCE] hover:bg-[#ECE8E0] text-[#1C1B17] font-bold text-xs shadow-xs transition-colors">
-                            <Users className="w-4 h-4 text-[#B15E2B]" /> Manage Admin Accounts
+                        <Link to="/admin/admins" className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-white border border-[#D4D4D4] hover:bg-[#EDEDED] text-[#111111] font-bold text-xs transition-colors">
+                            <Users className="w-4 h-4 text-[#111111]" /> Manage Admin Accounts
                         </Link>
                     </div>
                 </div>
@@ -191,31 +191,31 @@ const Dashboard = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
                     {/* Recent Products */}
-                    <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+                    <div className="p-6 rounded bg-white border border-neutral-200 space-y-4">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-base font-black text-slate-900">Recent Products</h3>
-                            <Link to="/admin/products" className="text-xs font-bold text-[#007AFF] hover:underline">View All</Link>
+                            <h3 className="text-base font-black text-neutral-900">Recent Products</h3>
+                            <Link to="/admin/products" className="text-xs font-bold text-[#111111] hover:underline">View All</Link>
                         </div>
                         {recentProducts.length === 0 ? (
-                            <p className="text-xs text-slate-400 py-4">No products available.</p>
+                            <p className="text-xs text-neutral-400 py-4">No products available.</p>
                         ) : (
-                            <div className="divide-y divide-slate-100">
+                            <div className="divide-y divide-neutral-100">
                                 {recentProducts.map((p) => (
                                     <div key={p._id} className="py-3 flex items-center justify-between gap-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
+                                            <div className="w-10 h-10 rounded bg-neutral-100 border border-neutral-200 flex items-center justify-center shrink-0 overflow-hidden">
                                                 {p.image || p.images?.[0] ? (
                                                     <img src={p.image || p.images[0]} alt={p.name} className="w-full h-full object-cover" />
                                                 ) : (
-                                                    <Package className="w-4 h-4 text-slate-400" />
+                                                    <Package className="w-4 h-4 text-neutral-400" />
                                                 )}
                                             </div>
                                             <div>
-                                                <p className="text-xs font-bold text-slate-900 line-clamp-1">{p.name}</p>
-                                                <p className="text-[10px] text-slate-400 font-mono">SKU: {p.SKU || 'N/A'}</p>
+                                                <p className="text-xs font-bold text-neutral-900 line-clamp-1">{p.name}</p>
+                                                <p className="text-[10px] text-neutral-400 font-mono">SKU: {p.SKU || 'N/A'}</p>
                                             </div>
                                         </div>
-                                        <Link to={`/admin/product/${p._id}/edit`} className="p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" title="Edit">
+                                        <Link to={`/admin/product/${p._id}/edit`} className="p-2 rounded hover:bg-neutral-100 text-neutral-600 transition-colors" title="Edit">
                                             <Eye className="w-4 h-4" />
                                         </Link>
                                     </div>
@@ -225,22 +225,22 @@ const Dashboard = () => {
                     </div>
 
                     {/* Recent Enquiries */}
-                    <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+                    <div className="p-6 rounded bg-white border border-neutral-200 space-y-4">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-base font-black text-slate-900">Recent RFQs & Enquiries</h3>
-                            <Link to="/admin/enquiries" className="text-xs font-bold text-[#007AFF] hover:underline">View All</Link>
+                            <h3 className="text-base font-black text-neutral-900">Recent RFQs & Enquiries</h3>
+                            <Link to="/admin/enquiries" className="text-xs font-bold text-[#111111] hover:underline">View All</Link>
                         </div>
                         {recentEnquiries.length === 0 ? (
-                            <p className="text-xs text-slate-400 py-4">No recent enquiries.</p>
+                            <p className="text-xs text-neutral-400 py-4">No recent enquiries.</p>
                         ) : (
-                            <div className="divide-y divide-slate-100">
+                            <div className="divide-y divide-neutral-100">
                                 {recentEnquiries.map((e) => (
                                     <div key={e._id} className="py-3 flex items-center justify-between gap-3">
                                         <div>
-                                            <p className="text-xs font-bold text-slate-900">{e.customerName || 'Website Visitor'}</p>
-                                            <p className="text-[11px] text-slate-500 line-clamp-1">{e.message || e.customerEmail}</p>
+                                            <p className="text-xs font-bold text-neutral-900">{e.customerName || 'Website Visitor'}</p>
+                                            <p className="text-[11px] text-neutral-500 line-clamp-1">{e.message || e.customerEmail}</p>
                                         </div>
-                                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-blue-50 text-[#007AFF] border border-blue-100 shrink-0">
+                                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-neutral-50 text-[#111111] border border-neutral-100 shrink-0">
                                             {e.status || 'NEW'}
                                         </span>
                                     </div>

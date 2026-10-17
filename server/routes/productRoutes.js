@@ -7,6 +7,8 @@ const {
     getBrands,
     getProductById,
     deleteProduct,
+    addDemoProducts,
+    removeDemoProducts,
     updateProduct,
     createProduct,
     exportProducts,
@@ -34,6 +36,11 @@ const upload = multer({
 
 // Export — must come BEFORE /:id routes so "export" isn't treated as an id
 router.get('/export', protect, admin, exportProducts);
+
+// Demo products — before /:id so "demo" isn't treated as an id
+router.route('/demo')
+    .post(protect, admin, addDemoProducts)
+    .delete(protect, admin, removeDemoProducts);
 
 // Brands list route
 router.get('/brands', getBrands);

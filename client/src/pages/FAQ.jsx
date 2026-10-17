@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { ChevronDown, HelpCircle, PhoneCall } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import PageBanner from '../components/PageBanner';
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState(0);
 
@@ -35,57 +36,42 @@ const FAQ = () => {
     ];
 
     return (
-        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
+        <div className="bg-white min-h-screen text-[#111111]">
             <Helmet>
                 <title>Frequently Asked Questions (FAQ) | Jaza Trading W.L.L</title>
                 <meta name="description" content="Find answers to common questions about ordering, delivery times in Qatar, product warranties, payment methods, and technical support." />
             </Helmet>
-
+            <PageBanner page="faq" title="Frequently Asked Questions" subtitle="Answers about quotations, delivery across Qatar, payment and warranties." />
+            <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto space-y-10">
-                {/* Header */}
-                <div className="pb-8 border-b border-[#E5E0D8]">
-                    <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest mb-3">
-                        <HelpCircle className="w-4 h-4 text-[#B15E2B]" />
-                        <span>GOT QUESTIONS? WE’VE GOT ANSWERS</span>
-                    </div>
-
-                    <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight mb-4">
-                        Frequently Asked Questions
-                    </h1>
-
-                    <p className="text-slate-700 text-sm sm:text-base font-medium max-w-2xl leading-relaxed">
-                        Find everything you need to know about our industrial products, B2B quotation process, Qatar deliveries, and brand warranties.
-                    </p>
-                </div>
-
-                {/* FAQ Accordion List */}
+{/* FAQ Accordion List */}
                 <div className="space-y-4">
                     {faqs.map((faq, idx) => {
                         const isOpen = openIndex === idx;
                         return (
                             <div
                                 key={idx}
-                                className="bg-white rounded-2xl border border-[#E5E0D8] overflow-hidden shadow-xs transition-all"
+                                className="bg-white rounded-xl border border-[#E5E5E5] overflow-hidden transition-all"
                             >
                                 <button
                                     onClick={() => setOpenIndex(isOpen ? -1 : idx)}
-                                    className="w-full p-6 text-left flex items-center justify-between gap-4 font-serif font-bold text-[#1C1B17] hover:text-[#B15E2B] transition-colors"
+                                    className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-[#111111] hover:text-[#111111] transition-colors"
                                 >
                                     <div className="flex flex-col gap-1">
-                                        <span className="text-[10px] uppercase font-bold tracking-widest text-[#B15E2B]">
+                                        <span className="text-xs font-bold text-[#111111]">
                                             {faq.category}
                                         </span>
                                         <span className="text-base sm:text-lg">{faq.question}</span>
                                     </div>
                                     <ChevronDown
-                                        className={`w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${
-                                            isOpen ? 'rotate-180 text-[#B15E2B]' : ''
+                                        className={`w-5 h-5 text-neutral-400 transition-transform duration-300 shrink-0 ${
+                                            isOpen ? 'rotate-180 text-[#111111]' : ''
                                         }`}
                                     />
                                 </button>
 
                                 {isOpen && (
-                                    <div className="px-6 pb-6 text-xs sm:text-sm text-slate-600 font-medium leading-relaxed border-t border-[#F6F4EE] pt-4">
+                                    <div className="px-6 pb-6 text-xs sm:text-sm text-neutral-600 font-medium leading-relaxed border-t border-[#F5F5F5] pt-4">
                                         {faq.answer}
                                     </div>
                                 )}
@@ -95,20 +81,21 @@ const FAQ = () => {
                 </div>
 
                 {/* Contact Help CTA */}
-                <div className="bg-white rounded-3xl p-8 border border-[#E5E0D8] text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+                <div className="bg-white rounded-xl p-8 border border-[#E5E5E5] text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
                     <div className="text-left">
-                        <h3 className="text-lg font-serif font-bold text-[#1C1B17] mb-1">Still have a specific question?</h3>
-                        <p className="text-xs text-slate-600 font-medium">Our sales team is ready to assist your procurement needs in Qatar.</p>
+                        <h3 className="text-lg font-bold text-[#111111] mb-1">Still have a specific question?</h3>
+                        <p className="text-xs text-neutral-600 font-medium">Our sales team is ready to assist your procurement needs in Qatar.</p>
                     </div>
                     <Link
                         to="/contact"
-                        className="inline-flex items-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-xs shrink-0 transition-colors"
+                        className="inline-flex items-center gap-2 bg-[#111111] hover:bg-[#333333] text-white px-6 py-3 rounded font-bold text-xs shrink-0 transition-colors"
                     >
                         <PhoneCall className="w-4 h-4" />
                         Contact Support Team
                     </Link>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -56,7 +56,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/50 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#111111]/50"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.92, y: 12 }}
@@ -64,14 +64,14 @@ const QuickPreviewModal = ({ product, onClose }) => {
                         exit={{ opacity: 0, scale: 0.92, y: 12 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 28 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E2E8F0]"
+                        className="bg-white rounded max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E5E5E5]"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E2E8F0]">
-                            <p className="text-xs font-bold text-[#64748B] uppercase tracking-wider">Quick View</p>
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E5E5]">
+                            <p className="text-xs font-bold text-[#737373]">Quick View</p>
                             <button
                                 onClick={onClose}
-                                className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-[#64748B] hover:text-[#0F172A] transition-all"
+                                className="w-8 h-8 rounded hover:bg-neutral-100 flex items-center justify-center text-[#737373] hover:text-[#111111] transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -79,7 +79,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
                             {/* Image */}
-                            <div className="bg-[#F8FAFC] flex items-center justify-center p-8 border-r border-[#E2E8F0]" style={{ minHeight: '280px' }}>
+                            <div className="bg-[#FAFAFA] flex items-center justify-center p-8 border-r border-[#E5E5E5]" style={{ minHeight: '280px' }}>
                                 <img
                                     src={imageSrc}
                                     alt={product.name}
@@ -95,36 +95,36 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                         <span className="badge-orange self-start">{product.category.name}</span>
                                     )}
                                     {product.SKU && (
-                                        <span className="text-[10px] font-mono text-[#64748B] bg-gray-100 px-2 py-0.5 rounded self-start">
+                                        <span className="text-[10px] font-mono text-[#737373] bg-neutral-100 px-2 py-0.5 rounded self-start">
                                             {product.SKU}
                                         </span>
                                     )}
                                 </div>
 
-                                <h2 className="text-lg font-black text-[#0F172A] mb-2 leading-tight">
+                                <h2 className="text-lg font-semibold text-[#111111] mb-2 leading-tight">
                                     {product.name}
                                 </h2>
 
                                 {/* Price or contact for price */}
                                 {showPrice ? (
                                     <div className="flex items-baseline gap-2 mb-3">
-                                        <span className="text-[#007AFF] font-bold text-lg">QAR {product.price.toLocaleString()}</span>
+                                        <span className="text-[#111111] font-bold text-lg">QAR {product.price.toLocaleString()}</span>
                                         {hasDiscount && (
                                             <>
-                                                <span className="text-[#94A3B8] line-through text-sm">QAR {product.comparePrice.toLocaleString()}</span>
-                                                <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">{discountPct}% OFF</span>
+                                                <span className="text-[#A3A3A3] line-through text-sm">QAR {product.comparePrice.toLocaleString()}</span>
+                                                <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded">{discountPct}% OFF</span>
                                             </>
                                         )}
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-2 mb-3">
-                                        <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                                        <span className="text-xs font-bold text-neutral-900 bg-neutral-50 px-3 py-1 rounded border border-neutral-100">
                                             Contact for Price
                                         </span>
                                     </div>
                                 )}
 
-                                <p className="text-[#64748B] text-sm leading-relaxed mb-3 line-clamp-3">
+                                <p className="text-[#737373] text-sm leading-relaxed mb-3 line-clamp-3">
                                     {product.description}
                                 </p>
 
@@ -132,7 +132,7 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 {product.tags?.length > 0 && (
                                     <div className="flex flex-wrap gap-1 mb-3">
                                         {product.tags.slice(0, 4).map(t => (
-                                            <span key={t} className="inline-flex items-center gap-0.5 text-[10px] bg-slate-50 border border-slate-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                                            <span key={t} className="inline-flex items-center gap-0.5 text-[10px] bg-neutral-50 border border-neutral-100 text-neutral-900 px-1.5 py-0.5 rounded">
                                                 <Tag className="w-2 h-2" />{t}
                                             </span>
                                         ))}
@@ -142,10 +142,10 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 {/* Variants */}
                                 {product.variants?.length > 0 && (
                                     <div className="mb-3">
-                                        <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1.5">Options</p>
+                                        <p className="text-xs font-semibold text-[#737373] mb-1.5">Options</p>
                                         <div className="flex flex-wrap gap-1.5">
                                             {product.variants.map((v, i) => (
-                                                <span key={i} className="px-3 py-1 bg-slate-100 text-[#64748B] text-xs font-medium rounded-lg border border-slate-200">
+                                                <span key={i} className="px-3 py-1 bg-neutral-100 text-[#737373] text-xs font-medium rounded border border-neutral-200">
                                                     {v.value}
                                                 </span>
                                             ))}
@@ -155,13 +155,13 @@ const QuickPreviewModal = ({ product, onClose }) => {
 
                                 {/* Specs preview */}
                                 {specsEntries.length > 0 && (
-                                    <div className="mb-3 border-t border-[#E2E8F0] pt-3">
-                                        <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-2">Specifications</p>
+                                    <div className="mb-3 border-t border-[#E5E5E5] pt-3">
+                                        <p className="text-xs font-semibold text-[#737373] mb-2">Specifications</p>
                                         <ul className="space-y-1">
                                             {specsEntries.map(([k, v], i) => (
                                                 <li key={i} className="flex items-start gap-2">
                                                     <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                                                    <span className="text-[#64748B] text-xs"><span className="font-medium text-[#0F172A]">{k}:</span> {v}</span>
+                                                    <span className="text-[#737373] text-xs"><span className="font-medium text-[#111111]">{k}:</span> {v}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -172,14 +172,14 @@ const QuickPreviewModal = ({ product, onClose }) => {
                                 <div className="mt-auto space-y-2 pt-2">
                                     <button
                                         onClick={handleWhatsApp}
-                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm font-semibold rounded-xl transition-all duration-200 hover:shadow-md"
+                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#25D366] hover:bg-[#20BA5A] text-white text-sm font-semibold rounded transition-all duration-200"
                                     >
                                         <img src="/whatsapp.png" alt="WhatsApp" className="w-auto h-7 object-contain drop-shadow-sm" />
                                     </button>
                                     <Link
                                         to={`/product/${product._id}`}
                                         onClick={onClose}
-                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-[#E2E8F0] hover:border-[#007AFF] text-[#64748B] hover:text-[#007AFF] text-sm font-semibold rounded-xl transition-all duration-200"
+                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-[#E5E5E5] hover:border-[#111111] text-[#737373] hover:text-[#111111] text-sm font-semibold rounded transition-all duration-200"
                                     >
                                         View Full Details <ExternalLink className="w-3.5 h-3.5" />
                                     </Link>

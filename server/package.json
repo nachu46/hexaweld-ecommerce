@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "demo:add": "node demoProducts.js add",
+    "demo:remove": "node demoProducts.js remove",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

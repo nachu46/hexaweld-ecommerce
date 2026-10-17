@@ -1,53 +1,112 @@
 const asyncHandler = require('express-async-handler');
 const supabase = require('../config/supabase');
 
-const DEFAULT_BANNERS = [
-    {
-        _id: 'b1', id: 'b1',
-        title: 'Qatar Wholesale Supplier & Heavy Machinery Partner',
-        subtitle: 'Official division of Sana Group providing certified industrial tools & safety gear.',
-        imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600',
-        linkUrl: '/products',
-        isActive: true
-    }
-];
+// Home page slider. Rows live in the `banners` table; when there are none the
+// site shows its own built-in slides.
 
+const toClient = (b) => ({
+    _id: b.id,
+    id: b.id,
+    title: b.title,
+    subtitle: b.subtitle || '',
+    image: b.image_url || '',
+    imageUrl: b.image_url || '',
+    buttonText: b.button_text || 'View Products',
+    buttonLink: b.link_url || '/products',
+    linkUrl: b.link_url || '/products',
+    isActive: b.is_active !== false,
+    order: b.sort_order || 0,
+});
+
+// Accepts the admin form fields (image/buttonLink) and the older names (imageUrl/linkUrl).
+// Only fields that are present in the request are included, so partial updates work.
+const toRow = (body) => {
+    const row = {};
+    if (body.title !== undefined) row.title = String(body.title).trim();
+    if (body.subtitle !== undefined) row.subtitle = body.subtitle;
+    const image = body.image ?? body.imageUrl;
+    if (image !== undefined) row.image_url = image || '';
+    const link = body.buttonLink ?? body.linkUrl;
+    if (link !== undefined) row.link_url = link || '/products';
+    if (body.buttonText !== undefined) row.button_text = body.buttonText;
+    if (body.isActive !== undefined) row.is_active = Boolean(body.isActive);
+    if (body.order !== undefined) row.sort_order = parseInt(body.order, 10) || 0;
+    return row;
+};
+
+const fetchAll = async (activeOnly) => {
+    let query = supabase.from('banners').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true });
+    if (activeOnly) query = query.eq('is_active', true);
+    const { data, error } = await query;
+    if (error) throw new Error(error.message);
+    return (data || []).map(toClient);
+};
+
+// @route GET /api/banners  (public — active slides only)
 const getBanners = asyncHandler(async (req, res) => {
     try {
-        const { data, error } = await supabase.from('banners').select('*');
-        if (!error && data && data.length > 0) {
-            return res.json(data.map(b => ({
-                _id: b.id, id: b.id, title: b.title, subtitle: b.subtitle, imageUrl: b.image_url, linkUrl: b.link_url, isActive: b.is_active
-            })));
-        }
-    } catch (e) {}
-    res.json(DEFAULT_BANNERS);
+        res.json(await fetchAll(true));
+    } catch (e) {
+        res.json([]); // home page falls back to its built-in slides
+    }
 });
 
-const createBanner = asyncHandler(async (req, res) => {
-    const { title, subtitle, imageUrl, linkUrl } = req.body;
-    const newBanner = { _id: `b-${Date.now()}`, id: `b-${Date.now()}`, title, subtitle, imageUrl, linkUrl: linkUrl || '/products', isActive: true };
-    res.status(201).json(newBanner);
-});
-
+// @route GET /api/banners/all  (admin)
 const getAllBannersAdmin = asyncHandler(async (req, res) => {
     try {
-        const { data, error } = await supabase.from('banners').select('*');
-        if (!error && data && data.length > 0) {
-            return res.json(data.map(b => ({
-                _id: b.id, id: b.id, title: b.title, subtitle: b.subtitle, imageUrl: b.image_url, linkUrl: b.link_url, isActive: b.is_active
-            })));
-        }
-    } catch (e) {}
-    res.json(DEFAULT_BANNERS);
+        res.json(await fetchAll(false));
+    } catch (e) {
+        res.status(500);
+        throw new Error(`Could not load banners: ${e.message}`);
+    }
 });
 
+// @route POST /api/banners  (admin)
+const createBanner = asyncHandler(async (req, res) => {
+    const row = toRow(req.body);
+    if (!row.title) {
+        res.status(400);
+        throw new Error('Title is required');
+    }
+    if (row.image_url === undefined) row.image_url = '';
+    const { data, error } = await supabase.from('banners').insert([row]).select().single();
+    if (error) {
+        res.status(500);
+        throw new Error(`Could not save banner: ${error.message}`);
+    }
+    res.status(201).json(toClient(data));
+});
+
+// @route PUT /api/banners/:id  (admin)
 const updateBanner = asyncHandler(async (req, res) => {
-    const { title, subtitle, imageUrl, linkUrl, isActive } = req.body;
-    res.json({ _id: req.params.id, id: req.params.id, title, subtitle, imageUrl, linkUrl, isActive });
+    const row = toRow(req.body);
+    if (row.title === '') {
+        res.status(400);
+        throw new Error('Title is required');
+    }
+    const { data, error } = await supabase.from('banners').update(row).eq('id', req.params.id).select();
+    if (error) {
+        res.status(500);
+        throw new Error(`Could not update banner: ${error.message}`);
+    }
+    if (!data || data.length === 0) {
+        res.status(404);
+        throw new Error('Banner not found');
+    }
+    res.json(toClient(data[0]));
 });
 
+// @route DELETE /api/banners/:id  (admin)
 const deleteBanner = asyncHandler(async (req, res) => {
+    const { data, error } = await supabase.from('banners').delete().eq('id', req.params.id).select('id');
+    if (error) {
+        res.status(500);
+        throw new Error(`Could not delete banner: ${error.message}`);
+    }
+    if (!data || data.length === 0) {
+        res.status(404);
+        throw new Error('Banner not found');
+    }
     res.json({ message: 'Banner deleted' });
 });
 

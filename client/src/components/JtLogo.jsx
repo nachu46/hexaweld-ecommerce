@@ -14,13 +14,13 @@ const JtLogo = ({ className = "h-11 sm:h-12", dark = false }) => {
                 }}
             />
             <div className="hidden flex-col justify-center text-left">
-                <div className={`font-serif font-bold text-lg sm:text-xl tracking-tight leading-tight flex items-center gap-1.5 ${dark ? "text-white" : "text-[#1C1B17]"}`}>
+                <div className={`font-serif font-bold text-lg sm:text-xl tracking-tight leading-tight flex items-center gap-1.5 ${dark ? "text-white" : "text-[#111111]"}`}>
                     <span>JAZA TRADING</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#B15E2B] text-white uppercase tracking-wider">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-[#111111] text-white">
                         W.L.L
                     </span>
                 </div>
-                <div className={`text-[10px] font-medium tracking-wide ${dark ? "text-slate-300" : "text-slate-600"}`}>
+                <div className={`text-[10px] font-medium tracking-wide ${dark ? "text-neutral-300" : "text-neutral-600"}`}>
                     Division Of Sana Group
                 </div>
             </div>

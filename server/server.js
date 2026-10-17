@@ -57,6 +57,7 @@ app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/enquiries', require('./routes/enquiryRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/banners', require('./routes/bannerRoutes'));
+app.use('/api/page-banners', require('./routes/pageBannerRoutes'));
 app.use('/api/announcement', require('./routes/announcementRoutes'));
 
 // New Enterprise Routes

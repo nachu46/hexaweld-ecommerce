@@ -6,33 +6,29 @@ export default {
   ],
   theme: {
     extend: {
+      // Monochrome palette taken from the Jaza Trading logo (black on white)
       colors: {
-        'brand-primary': '#007AFF', // Apple Blue
-        'brand-hover': '#005BB5',
-        'brand-dark': '#1D1D1F',
-        'brand-text': '#86868B',
-        'brand-border': '#D2D2D7',
-        'brand-bg': '#F5F5F7',
-        'hex-dark': '#0F172A',
-        'hex-text': '#64748B',
+        'brand-primary': '#111111',
+        'brand-hover': '#333333',
+        'brand-dark': '#111111',
+        'brand-text': '#737373',
+        'brand-border': '#E5E5E5',
+        'brand-bg': '#F5F5F5',
+        'hex-dark': '#111111',
+        'hex-text': '#737373',
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'sans-serif'],
+        sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        serif: ['Poppins', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+      },
+      borderRadius: {
+        DEFAULT: '0.5rem',
       },
       boxShadow: {
-        'card': '0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05)',
-        'card-lg': '0 10px 40px rgba(0,0,0,0.10)',
-        'nav': '0 1px 0 #E2E8F0, 0 4px 20px rgba(0,0,0,0.04)',
-        'orange': '0 4px 14px rgba(249,115,22,0.35)',
-      },
-      animation: {
-        'float': 'float 5s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
-        },
+        'card': '0 1px 2px rgba(0,0,0,0.06)',
+        'card-lg': '0 8px 24px rgba(0,0,0,0.08)',
+        'nav': '0 1px 0 #E5E5E5',
+        'orange': '0 1px 2px rgba(0,0,0,0.12)',
       },
     },
   },

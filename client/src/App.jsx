@@ -45,6 +45,7 @@ import AdminManagement from './pages/admin/AdminManagement';
 import AdminEnquiries from './pages/admin/AdminEnquiries';
 import AdminBanners from './pages/admin/AdminBanners';
 import AdminAnnouncement from './pages/admin/AdminAnnouncement';
+import AdminPageBanners from './pages/admin/AdminPageBanners';
 import BrandList from './pages/admin/BrandList';
 import BrandEdit from './pages/admin/BrandEdit';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -128,6 +129,7 @@ function App() {
                         <ProtectedRoute requireAdmin><AdminBanners /></ProtectedRoute>
                     } />
                     <Route path="/admin/announcement" element={<ProtectedRoute requireAdmin><AdminAnnouncement /></ProtectedRoute>} />
+                    <Route path="/admin/page-banners" element={<ProtectedRoute requireAdmin><AdminPageBanners /></ProtectedRoute>} />
 
                     {/* Catch-all 404 Route */}
                     <Route path="/404" element={<NotFound />} />

@@ -1,174 +1,98 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Phone, Mail, MapPin, Send, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import JtLogo from './JtLogo';
 
 const Footer = () => {
-    const [newsletterEmail, setNewsletterEmail] = useState('');
-    const [subscribed, setSubscribed] = useState(false);
-
-    const handleNewsletter = (e) => {
-        e.preventDefault();
-        if (newsletterEmail.trim()) {
-            setSubscribed(true);
-            setNewsletterEmail('');
-        }
-    };
-
     return (
-        <footer className="bg-[#1C1B17] text-[#E5E0D8] pt-14 pb-8 border-t border-[#2E4046] relative overflow-hidden font-sans">
+        <footer className="bg-[#111111] text-neutral-400 font-sans">
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
-
-                {/* ══ 1. TOP B2B QUOTE BANNER ════════════════════════ */}
-                <div className="bg-[#ECE8E0] p-6 sm:p-10 rounded-2xl border border-[#D5CFCE] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[#1C1B17]">
+            {/* Quote band */}
+            <div className="border-b border-white/10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#B15E2B] block mb-1">
-                            WHOLESALE & PROJECT SUPPLY QATAR
-                        </span>
-                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1B17] tracking-tight leading-snug">
-                            Need expert guidance or a custom bulk quote?
-                        </h3>
-                        <p className="text-slate-600 text-xs sm:text-sm font-medium mt-1">
-                            Our Qatar technical sales team is ready to assist with material specifications and commercial pricing.
-                        </p>
+                        <h3 className="text-xl sm:text-2xl font-semibold text-white">Need a bulk or project quotation?</h3>
+                        <p className="text-sm mt-1">Send us your material list and our sales team will get back to you with pricing and availability.</p>
                     </div>
-                    <div className="shrink-0">
-                        <Link
-                            to="/contact"
-                            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#B15E2B] hover:bg-[#9A5023] text-white text-xs font-bold transition-all shadow-xs group"
-                        >
-                            <span>Get Quotation</span>
-                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                    </div>
+                    <Link
+                        to="/contact"
+                        className="shrink-0 inline-flex items-center justify-center px-7 py-3 rounded-lg bg-white text-[#111111] text-sm font-semibold hover:bg-neutral-200 transition-colors"
+                    >
+                        Request a Quote
+                    </Link>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 text-sm">
+
+                <div className="col-span-2 lg:col-span-1 space-y-4">
+                    <JtLogo dark />
+                    <p className="leading-relaxed">
+                        Wholesale supplier of building materials, tools, door hardware, sanitaryware and safety products in Qatar since 2009. A division of Sana Group.
+                    </p>
                 </div>
 
-                {/* ══ 2. MAIN FOOTER CONTENT GRID ═════════════════════ */}
-                <div className="pt-8 border-t border-slate-800 relative">
-
-                    {/* Background Subtle Watermark Text */}
-                    <div className="absolute bottom-2 left-0 right-0 pointer-events-none select-none overflow-hidden opacity-5 text-center">
-                        <span className="text-[100px] sm:text-[160px] font-black text-white tracking-tighter uppercase leading-none block">
-                            JAZA
-                        </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
-
-                        {/* Brand Column */}
-                        <div className="lg:col-span-4 space-y-4">
-                            <JtLogo dark={true} />
-
-                            <p className="text-xs text-slate-300 font-medium leading-relaxed max-w-sm">
-                                "Your trusted partner in quality building materials, reliable supply, and lasting partnerships."
-                            </p>
-
-                            <p className="text-[11px] text-slate-400 font-medium">
-                                <strong>Established 2009</strong> · Division of Sana Group · 15+ Years Serving Qatar Construction & Industry.
-                            </p>
-
-                            {/* Newsletter */}
-                            <div className="pt-2">
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Subscribe to Catalog Updates</p>
-                                {subscribed ? (
-                                    <p className="text-xs font-bold text-emerald-400 bg-emerald-900/30 p-2.5 rounded-xl border border-emerald-800 inline-block">
-                                        ✓ Thank you for subscribing to Jaza Trading!
-                                    </p>
-                                ) : (
-                                    <form onSubmit={handleNewsletter} className="max-w-sm relative flex items-center border-b border-slate-700 pb-1.5 focus-within:border-[#B15E2B]">
-                                        <input
-                                            type="email"
-                                            required
-                                            placeholder="Enter your email address..."
-                                            value={newsletterEmail}
-                                            onChange={(e) => setNewsletterEmail(e.target.value)}
-                                            className="w-full bg-transparent text-white text-xs font-medium placeholder:text-slate-500 focus:outline-none"
-                                        />
-                                        <button type="submit" className="p-1 text-[#B15E2B] hover:text-white transition-colors" title="Subscribe">
-                                            <ArrowUpRight className="w-4 h-4" />
-                                        </button>
-                                    </form>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Quick Navigation Links */}
-                        <div className="lg:col-span-4 space-y-3 text-xs font-medium text-slate-300">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Sitemap & Quick Navigation</p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <ul className="space-y-2">
-                                    <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-                                    <li><Link to="/about" className="hover:text-white transition-colors">About Company</Link></li>
-                                    <li><Link to="/products" className="hover:text-white transition-colors">Products Catalog</Link></li>
-                                    <li><Link to="/categories" className="hover:text-white transition-colors">Product Categories</Link></li>
-                                </ul>
-                                <ul className="space-y-2">
-                                    <li><Link to="/brands" className="hover:text-white transition-colors">Our Brands</Link></li>
-                                    <li><Link to="/certificates" className="hover:text-white transition-colors">Certificates & Accreditation</Link></li>
-                                    <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
-                                    <li><Link to="/career" className="hover:text-white transition-colors">Careers in Qatar</Link></li>
-                                    <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                                </ul>
-                            </div>
-
-                            <div className="pt-3 flex flex-wrap items-center gap-3 text-[11px] text-slate-400 border-t border-slate-800">
-                                <Link to="/privacy-policy" className="hover:text-slate-200">Privacy Policy</Link>
-                                <span>•</span>
-                                <Link to="/terms-and-conditions" className="hover:text-slate-200">Terms</Link>
-                                <span>•</span>
-                                <Link to="/shipping-policy" className="hover:text-slate-200">Shipping</Link>
-                                <span>•</span>
-                                <Link to="/return-policy" className="hover:text-slate-200">Returns</Link>
-                            </div>
-                        </div>
-
-                        {/* Contact Information */}
-                        <div className="lg:col-span-4 space-y-3 text-xs font-medium text-slate-300">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Headquarters & Contact</p>
-                            <div className="space-y-3">
-                                <div className="flex items-start gap-3">
-                                    <MapPin className="w-4 h-4 text-[#B15E2B] shrink-0 mt-0.5" />
-                                    <span>Al Kassarat Street, Industrial Area, Street 5, P.O. Box 31221, Doha, State of Qatar</span>
-                                </div>
-                                <a href="tel:+97470605494" className="flex items-center gap-3 hover:text-white transition-colors">
-                                    <Phone className="w-4 h-4 text-emerald-500 shrink-0" />
-                                    <span>+974 7060 5494 / +974 7408 0005</span>
-                                </a>
-                                <a href="mailto:jazatrading@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
-                                    <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                                    <span>jazatrading@gmail.com</span>
-                                </a>
-                                <a href="https://wa.me/97470605494" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                                    <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4 object-contain shrink-0" />
-                                    <span>+974 7060 5494 (WhatsApp Sales)</span>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
+                <div>
+                    <h4 className="text-white text-base font-semibold mb-4">Company</h4>
+                    <ul className="space-y-2.5">
+                        <li><Link to="/about" className="hover:text-white">About Us</Link></li>
+                        <li><Link to="/services" className="hover:text-white">Services</Link></li>
+                        <li><Link to="/certificates" className="hover:text-white">Certificates</Link></li>
+                        <li><Link to="/career" className="hover:text-white">Careers</Link></li>
+                        <li><Link to="/contact" className="hover:text-white">Contact Us</Link></li>
+                    </ul>
                 </div>
 
-                {/* ══ 3. BOTTOM BAR (Credit & Rights) ═════════════════ */}
-                <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] font-medium text-slate-400 gap-3">
-                    <div>
-                        <span>© {new Date().getFullYear()} Jaza Trading W.L.L. All rights reserved.</span>
-                    </div>
-                    <div>
+                <div>
+                    <h4 className="text-white text-base font-semibold mb-4">Products</h4>
+                    <ul className="space-y-2.5">
+                        <li><Link to="/products" className="hover:text-white">All Products</Link></li>
+                        <li><Link to="/categories" className="hover:text-white">Categories</Link></li>
+                        <li><Link to="/brands" className="hover:text-white">Our Brands</Link></li>
+                        <li><Link to="/faq" className="hover:text-white">FAQ</Link></li>
+                    </ul>
+                </div>
+
+                <div className="col-span-2 lg:col-span-1">
+                    <h4 className="text-white text-base font-semibold mb-4">Head Office</h4>
+                    <ul className="space-y-3">
+                        <li className="flex gap-3">
+                            <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-white" />
+                            <span>Al Kassarat Street, Industrial Area, Street 5, P.O. Box 31221, Doha, Qatar</span>
+                        </li>
+                        <li>
+                            <a href="tel:+97470605494" className="flex gap-3 hover:text-white">
+                                <Phone className="w-4 h-4 shrink-0 mt-0.5 text-white" />
+                                <span>+974 7060 5494<br />+974 7408 0005</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:jazatrading@gmail.com" className="flex gap-3 hover:text-white">
+                                <Mail className="w-4 h-4 shrink-0 mt-0.5 text-white" />
+                                <span>jazatrading@gmail.com</span>
+                            </a>
+                        </li>
+                        <li className="flex gap-3">
+                            <Clock className="w-4 h-4 shrink-0 mt-0.5 text-white" />
+                            <span>Sat – Thu, 7:00 AM – 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="border-t border-white/10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24 sm:pb-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-center sm:text-left">
+                    <span>© {new Date().getFullYear()} Jaza Trading W.L.L. All rights reserved.</span>
+                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+                        <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+                        <Link to="/terms-and-conditions" className="hover:text-white">Terms</Link>
+                        <Link to="/shipping-policy" className="hover:text-white">Shipping</Link>
+                        <Link to="/return-policy" className="hover:text-white">Returns</Link>
                         <span>
                             Developed by{' '}
-                            <a
-                                href="https://khairitsolution.com"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="font-bold text-[#B15E2B] hover:underline transition-colors"
-                            >
-                                Khair.it
-                            </a>
+                            <a href="https://khairitsolution.com" target="_blank" rel="noreferrer" className="text-white hover:underline">Khair.it</a>
                         </span>
                     </div>
                 </div>
-
             </div>
         </footer>
     );

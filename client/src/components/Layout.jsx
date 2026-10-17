@@ -10,23 +10,23 @@ const Layout = ({ children }) => {
 
     if (isAdminRoute) {
         return (
-            <div className="min-h-screen bg-[#F6F4EE] text-[#1C1B17] font-sans">
+            <div className="min-h-screen bg-[#F5F5F5] text-[#111111] font-sans">
                 <Toaster
                     position="top-right"
                     toastOptions={{
                         duration: 3500,
                         style: {
-                            background: '#1C1B17',
+                            background: '#111111',
                             color: '#FFFFFF',
-                            borderRadius: '12px',
+                            borderRadius: '4px',
                             fontSize: '13px',
                             fontWeight: '600',
-                            border: '1px solid #2E4046',
-                            boxShadow: '0 10px 25px rgba(28, 27, 23, 0.25)',
+                            border: '1px solid #3F3F3F',
+                            
                         },
                         success: {
                             iconTheme: {
-                                primary: '#B15E2B',
+                                primary: '#111111',
                                 secondary: '#FFFFFF',
                             },
                         },
@@ -44,23 +44,23 @@ const Layout = ({ children }) => {
     }
 
     return (
-        <div className="min-h-screen bg-[#F6F4EE] flex flex-col relative overflow-hidden font-sans">
+        <div className="min-h-screen bg-white flex flex-col relative overflow-hidden font-sans">
             <Toaster
                 position="top-right"
                 toastOptions={{
                     duration: 3500,
                     style: {
-                        background: '#1C1B17',
+                        background: '#111111',
                         color: '#FFFFFF',
-                        borderRadius: '12px',
+                        borderRadius: '4px',
                         fontSize: '13px',
                         fontWeight: '600',
-                        border: '1px solid #2E4046',
-                        boxShadow: '0 10px 25px rgba(28, 27, 23, 0.25)',
+                        border: '1px solid #3F3F3F',
+                        
                     },
                     success: {
                         iconTheme: {
-                            primary: '#B15E2B',
+                            primary: '#111111',
                             secondary: '#FFFFFF',
                         },
                     },

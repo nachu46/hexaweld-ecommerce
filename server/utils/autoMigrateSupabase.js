@@ -111,6 +111,15 @@ const autoMigrateSupabase = async () => {
                 created_at TIMESTAMPTZ DEFAULT NOW()
             );
 
+            CREATE TABLE IF NOT EXISTS public.page_banners (
+                page_key TEXT PRIMARY KEY,
+                image TEXT NOT NULL DEFAULT '',
+                updated_at TIMESTAMPTZ DEFAULT NOW()
+            );
+
+            ALTER TABLE public.banners ADD COLUMN IF NOT EXISTS button_text TEXT DEFAULT 'View Products';
+            ALTER TABLE public.banners ADD COLUMN IF NOT EXISTS sort_order INT DEFAULT 0;
+
             ALTER TABLE public.users DISABLE ROW LEVEL SECURITY;
             ALTER TABLE public.categories DISABLE ROW LEVEL SECURITY;
             ALTER TABLE public.brands DISABLE ROW LEVEL SECURITY;
@@ -119,6 +128,7 @@ const autoMigrateSupabase = async () => {
             ALTER TABLE public.banners DISABLE ROW LEVEL SECURITY;
             ALTER TABLE public.announcements DISABLE ROW LEVEL SECURITY;
             ALTER TABLE public.reviews DISABLE ROW LEVEL SECURITY;
+            ALTER TABLE public.page_banners DISABLE ROW LEVEL SECURITY;
             `;
 
             await client.query(sql);

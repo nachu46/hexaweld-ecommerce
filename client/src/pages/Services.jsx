@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Wrench, ShieldCheck, Cpu, Headphones, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import PageBanner from '../components/PageBanner';
 const Services = () => {
     const services = [
         {
@@ -31,48 +32,36 @@ const Services = () => {
     ];
 
     return (
-        <div className="bg-[#F6F4EE] min-h-screen py-10 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
+        <div className="bg-white min-h-screen text-[#111111]">
             <Helmet>
                 <title>Industrial Services & Repair | Jaza Trading W.L.L Qatar</title>
                 <meta name="description" content="Professional welding equipment repair, machine calibration, PPE safety consulting, and technical support in Qatar." />
             </Helmet>
-
+            <PageBanner page="services" title="Our Services" subtitle="Alongside supply, we support our customers with maintenance, calibration and safety advice." />
+            <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto space-y-12">
-                {/* Header */}
-                <div className="pb-8 border-b border-[#E5E0D8]">
-                    <span className="text-[#B15E2B] text-xs font-bold uppercase tracking-widest block mb-3">
-                        COMPREHENSIVE B2B SOLUTIONS
-                    </span>
-                    <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-[#1C1B17] mb-4">
-                        Industrial Services & Equipment Maintenance
-                    </h1>
-                    <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
-                        Beyond supplying top-tier equipment, Jaza Trading W.L.L provides certified technical maintenance, calibration, and safety support for Qatar’s infrastructure.
-                    </p>
-                </div>
-
-                {/* Services Grid */}
+{/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {services.map((s, i) => {
                         const IconComponent = s.icon;
                         return (
                             <div
                                 key={i}
-                                className="bg-white rounded-3xl p-8 border border-[#E5E0D8] hover:border-[#B15E2B] hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                                className="bg-white rounded-xl p-8 border border-[#E5E5E5] hover:border-[#111111] transition-all duration-300 flex flex-col justify-between"
                             >
                                 <div>
-                                    <div className="w-14 h-14 rounded-2xl bg-[#ECE8E0] text-[#B15E2B] flex items-center justify-center mb-6 shadow-xs border border-[#E5E0D8]">
-                                        <IconComponent className="w-7 h-7 text-[#B15E2B]" />
+                                    <div className="w-14 h-14 rounded bg-[#EDEDED] text-[#111111] flex items-center justify-center mb-6 border border-[#E5E5E5]">
+                                        <IconComponent className="w-7 h-7 text-[#111111]" />
                                     </div>
-                                    <h2 className="text-2xl font-serif font-bold text-[#1C1B17] mb-3">{s.title}</h2>
-                                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed mb-6">
+                                    <h2 className="text-2xl font-bold text-[#111111] mb-3">{s.title}</h2>
+                                    <p className="text-xs sm:text-sm text-neutral-600 font-medium leading-relaxed mb-6">
                                         {s.desc}
                                     </p>
 
                                     <div className="space-y-2 mb-8">
                                         {s.highlights.map((h, idx) => (
-                                            <div key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                                                <CheckCircle2 className="w-4 h-4 text-[#B15E2B] shrink-0" />
+                                            <div key={idx} className="flex items-center gap-2 text-xs font-bold text-neutral-700">
+                                                <CheckCircle2 className="w-4 h-4 text-[#111111] shrink-0" />
                                                 <span>{h}</span>
                                             </div>
                                         ))}
@@ -81,16 +70,17 @@ const Services = () => {
 
                                 <Link
                                     to="/contact"
-                                    className="inline-flex items-center justify-between w-full p-4 rounded-2xl bg-[#F6F4EE] hover:bg-[#B15E2B] hover:text-white border border-[#D5CFCE] font-bold text-xs transition-all group"
+                                    className="inline-flex items-center justify-between w-full p-4 rounded bg-[#F5F5F5] hover:bg-[#111111] hover:text-white border border-[#D4D4D4] font-bold text-xs transition-all group"
                                 >
                                     <span>Request Service Consultation</span>
-                                    <ArrowRight className="w-4 h-4 text-[#B15E2B] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                                    <ArrowRight className="w-4 h-4 text-[#111111] group-hover:text-white group-hover:translate-x-1 transition-all" />
                                 </Link>
                             </div>
                         );
                     })}
                 </div>
             </div>
+        </div>
         </div>
     );
 };

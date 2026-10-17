@@ -12,21 +12,21 @@ import AdminNav from '../../components/AdminNav';
 const Section = ({ icon: Icon, title, children, defaultOpen = true }) => {
     const [open, setOpen] = useState(defaultOpen);
     return (
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-5">
+        <div className="bg-white border border-neutral-200 rounded shadow-sm overflow-hidden mb-5">
             <button
                 type="button"
                 onClick={() => setOpen(o => !o)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition"
+                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-neutral-50 transition"
             >
                 <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+                    <span className="w-8 h-8 rounded bg-neutral-50 flex items-center justify-center">
                         <Icon className="w-4 h-4 text-brand-primary" />
                     </span>
-                    <span className="font-semibold text-gray-800">{title}</span>
+                    <span className="font-semibold text-neutral-800">{title}</span>
                 </div>
-                {open ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
+                {open ? <ChevronUp className="w-4 h-4 text-neutral-400" /> : <ChevronDown className="w-4 h-4 text-neutral-400" />}
             </button>
-            {open && <div className="px-6 pb-6 pt-2 border-t border-gray-100">{children}</div>}
+            {open && <div className="px-6 pb-6 pt-2 border-t border-neutral-100">{children}</div>}
         </div>
     );
 };
@@ -34,15 +34,15 @@ const Section = ({ icon: Icon, title, children, defaultOpen = true }) => {
 // ── Input component ──────────────────────────────────────────────────────────
 const Field = ({ label, hint, children }) => (
     <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
             {label}
-            {hint && <span className="ml-1 text-xs font-normal text-gray-400">({hint})</span>}
+            {hint && <span className="ml-1 text-xs font-normal text-neutral-400">({hint})</span>}
         </label>
         {children}
     </div>
 );
 
-const inputCls = "w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-brand-primary transition";
+const inputCls = "w-full px-3 py-2 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300 focus:border-brand-primary transition";
 const textareaCls = `${inputCls} resize-none`;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -250,7 +250,7 @@ const ProductEdit = () => {
 
     // ─────────────────────────────────────────────────────────────────────────
     return (
-        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+        <div className="min-h-screen bg-neutral-50 font-sans pb-12">
             <AdminNav 
                 title={isEditMode ? 'Edit Product Details' : 'Add New Catalog Product'}
                 subtitle={isEditMode ? 'Update images, pricing, specs, tags, and category assignment.' : 'Fill in the form to publish a new product to the store.'}
@@ -262,14 +262,14 @@ const ProductEdit = () => {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
-                        <Link to="/admin/products" className="p-2 rounded-lg hover:bg-white border border-transparent hover:border-gray-200 transition">
-                            <ArrowLeft className="w-5 h-5 text-gray-600" />
+                        <Link to="/admin/products" className="p-2 rounded hover:bg-white border border-transparent hover:border-neutral-200 transition">
+                            <ArrowLeft className="w-5 h-5 text-neutral-600" />
                         </Link>
                         <div>
-                            <h1 className="text-2xl font-bold text-gray-900">
+                            <h1 className="text-2xl font-bold text-neutral-900">
                                 {isEditMode ? 'Edit Product' : 'Add New Product'}
                             </h1>
-                            <p className="text-sm text-gray-500 mt-0.5">
+                            <p className="text-sm text-neutral-500 mt-0.5">
                                 {isEditMode ? 'Update product information' : 'Fill in the details below'}
                             </p>
                         </div>
@@ -278,14 +278,14 @@ const ProductEdit = () => {
                         type="button"
                         onClick={submitHandler}
                         disabled={saving}
-                        className="bg-brand-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl transition flex items-center gap-2 shadow-sm disabled:opacity-60"
+                        className="bg-brand-primary hover:bg-neutral-900 text-white font-semibold py-2.5 px-6 rounded transition flex items-center gap-2 shadow-sm disabled:opacity-60"
                     >
                         {saving ? 'Saving...' : (isEditMode ? 'Update Product' : 'Save Product')}
                     </button>
                 </div>
 
                 {error && (
-                    <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                    <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
                         {error}
                     </div>
                 )}
@@ -345,24 +345,24 @@ const ProductEdit = () => {
                     <Section icon={ImageIcon} title="Images">
                         {/* Drop zone */}
                         <div
-                            className={`mt-2 border-2 border-dashed rounded-xl p-6 text-center transition cursor-pointer ${dragOver ? 'border-brand-primary bg-slate-50' : 'border-gray-300 hover:border-blue-500 hover:bg-gray-50'}`}
+                            className={`mt-2 border-2 border-dashed rounded p-6 text-center transition cursor-pointer ${dragOver ? 'border-brand-primary bg-neutral-50' : 'border-neutral-300 hover:border-neutral-800 hover:bg-neutral-50'}`}
                             onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                             onDragLeave={() => setDragOver(false)}
                             onDrop={handleDrop}
                             onClick={() => document.getElementById('multi-img-input').click()}
                         >
-                            <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                            <p className="text-sm font-medium text-gray-600">Drag & drop images or <span className="text-brand-primary">browse</span></p>
-                            <p className="text-xs text-gray-400 mt-1">JPG, PNG, WebP — up to 10 images</p>
+                            <Upload className="w-8 h-8 mx-auto text-neutral-400 mb-2" />
+                            <p className="text-sm font-medium text-neutral-600">Drag & drop images or <span className="text-brand-primary">browse</span></p>
+                            <p className="text-xs text-neutral-400 mt-1">JPG, PNG, WebP — up to 10 images</p>
                             <input id="multi-img-input" type="file" className="hidden" multiple accept="image/*" onChange={handleFilePick} />
                         </div>
-                        {uploading && <p className="text-sm text-slate-500 mt-2 animate-pulse">Uploading images...</p>}
+                        {uploading && <p className="text-sm text-neutral-500 mt-2">Uploading images...</p>}
 
                         {/* Image grid */}
                         {images.length > 0 && (
                             <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
                                 {images.map((url, idx) => (
-                                    <div key={idx} className="relative group aspect-square rounded-lg overflow-hidden border border-gray-200 bg-gray-100">
+                                    <div key={idx} className="relative group aspect-square rounded overflow-hidden border border-neutral-200 bg-neutral-100">
                                         <img src={url} alt={`img-${idx}`} className="w-full h-full object-cover" />
                                         {idx === 0 && (
                                             <span className="absolute bottom-0 left-0 right-0 bg-brand-primary text-white text-[10px] font-bold text-center py-0.5">MAIN</span>
@@ -370,7 +370,7 @@ const ProductEdit = () => {
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-1">
                                             {idx > 0 && (
                                                 <button type="button" onClick={() => moveImage(idx, idx - 1)}
-                                                    className="p-1 bg-white rounded text-gray-700 hover:bg-gray-100 text-xs">◀</button>
+                                                    className="p-1 bg-white rounded text-neutral-700 hover:bg-neutral-100 text-xs">◀</button>
                                             )}
                                             <button type="button" onClick={() => removeImage(idx)}
                                                 className="p-1 bg-red-500 rounded text-white hover:bg-red-600">
@@ -378,7 +378,7 @@ const ProductEdit = () => {
                                             </button>
                                             {idx < images.length - 1 && (
                                                 <button type="button" onClick={() => moveImage(idx, idx + 1)}
-                                                    className="p-1 bg-white rounded text-gray-700 hover:bg-gray-100 text-xs">▶</button>
+                                                    className="p-1 bg-white rounded text-neutral-700 hover:bg-neutral-100 text-xs">▶</button>
                                             )}
                                         </div>
                                     </div>
@@ -392,19 +392,19 @@ const ProductEdit = () => {
                         <div className="grid grid-cols-3 gap-4 mt-2">
                             <Field label="Price (QAR)">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-xs font-bold">QAR</span>
                                     <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={price} onChange={e => setPrice(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
                             <Field label="Compare at Price" hint="original">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-xs font-bold">QAR</span>
                                     <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={comparePrice} onChange={e => setComparePrice(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
                             <Field label="Cost per Item" hint="internal">
                                 <div className="relative">
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-bold">QAR</span>
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-xs font-bold">QAR</span>
                                     <input type="number" min="0" step="0.01" className={`${inputCls} pl-12`} value={costPerItem} onChange={e => setCostPerItem(e.target.value)} placeholder="0.00" />
                                 </div>
                             </Field>
@@ -426,30 +426,30 @@ const ProductEdit = () => {
                                 <label className="flex items-center gap-3 mt-2 cursor-pointer">
                                     <div
                                         onClick={() => setTrackInventory(v => !v)}
-                                        className={`relative w-11 h-6 rounded-full transition-colors ${trackInventory ? 'bg-brand-primary' : 'bg-gray-300'}`}
+                                        className={`relative w-11 h-6 rounded-full transition-colors ${trackInventory ? 'bg-brand-primary' : 'bg-neutral-300'}`}
                                     >
                                         <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${trackInventory ? 'translate-x-5' : ''}`} />
                                     </div>
-                                    <span className="text-sm text-gray-600">{trackInventory ? 'Tracking enabled' : 'Not tracking'}</span>
+                                    <span className="text-sm text-neutral-600">{trackInventory ? 'Tracking enabled' : 'Not tracking'}</span>
                                 </label>
                             </Field>
                         </div>
 
                         {/* Enquiry Only toggle */}
-                        <div className="mt-4 pt-4 border-t border-gray-100">
+                        <div className="mt-4 pt-4 border-t border-neutral-100">
                             <label className="flex items-start gap-4 cursor-pointer group">
                                 <div
                                     onClick={() => setEnquiryOnly(v => !v)}
-                                    className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 mt-0.5 ${enquiryOnly ? 'bg-blue-600' : 'bg-gray-300'}`}
+                                    className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 mt-0.5 ${enquiryOnly ? 'bg-neutral-900' : 'bg-neutral-300'}`}
                                 >
                                     <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${enquiryOnly ? 'translate-x-5' : ''}`} />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                                    <p className="text-sm font-semibold text-neutral-800 flex items-center gap-2">
                                         Enquiry Only Mode
-                                        {enquiryOnly && <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">ON</span>}
+                                        {enquiryOnly && <span className="text-[10px] font-bold bg-neutral-100 text-neutral-900 px-2 py-0.5 rounded-full">ON</span>}
                                     </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
+                                    <p className="text-xs text-neutral-500 mt-0.5">
                                         When enabled, price is hidden and customers see "Contact for Price" with WhatsApp &amp; Request Quote buttons only.
                                     </p>
                                 </div>
@@ -460,7 +460,7 @@ const ProductEdit = () => {
 
                     {/* ── VARIANTS ── */}
                     <Section icon={Layers} title="Variants" defaultOpen={false}>
-                        <p className="text-xs text-gray-500 mb-3 mt-2">e.g. Capacity: 300A, Size: Large, Model: MIG-250</p>
+                        <p className="text-xs text-neutral-500 mb-3 mt-2">e.g. Capacity: 300A, Size: Large, Model: MIG-250</p>
                         <div className="space-y-2">
                             {variants.map((v, i) => (
                                 <div key={i} className="flex gap-2 items-center">
@@ -478,20 +478,20 @@ const ProductEdit = () => {
                                         value={v.value}
                                         onChange={e => updateVariant(i, 'value', e.target.value)}
                                     />
-                                    <button type="button" onClick={() => removeVariant(i)} className="p-2 rounded-lg hover:bg-red-50 text-red-400 hover:text-red-600 transition">
+                                    <button type="button" onClick={() => removeVariant(i)} className="p-2 rounded hover:bg-red-50 text-red-400 hover:text-red-600 transition">
                                         <X className="w-4 h-4" />
                                     </button>
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addVariant} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
+                        <button type="button" onClick={addVariant} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-neutral-900 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Variant
                         </button>
                     </Section>
 
                     {/* ── FEATURES ── */}
                     <Section icon={FileText} title="Features" defaultOpen={false}>
-                        <p className="text-xs text-gray-500 mb-3 mt-2">Key selling points shown as bullet points on the product page</p>
+                        <p className="text-xs text-neutral-500 mb-3 mt-2">Key selling points shown as bullet points on the product page</p>
                         <div className="space-y-2">
                             {features.map((f, i) => (
                                 <div key={i} className="flex gap-2 items-center">
@@ -502,20 +502,20 @@ const ProductEdit = () => {
                                         value={f}
                                         onChange={e => updateFeature(i, e.target.value)}
                                     />
-                                    <button type="button" onClick={() => removeFeature(i)} className="p-2 rounded-lg hover:bg-red-50 text-red-400 hover:text-red-600 transition">
+                                    <button type="button" onClick={() => removeFeature(i)} className="p-2 rounded hover:bg-red-50 text-red-400 hover:text-red-600 transition">
                                         <X className="w-4 h-4" />
                                     </button>
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addFeature} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
+                        <button type="button" onClick={addFeature} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-neutral-900 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Feature
                         </button>
                     </Section>
 
                     {/* ── SPECIFICATIONS ── */}
                     <Section icon={FileText} title="Specifications" defaultOpen={false}>
-                        <p className="text-xs text-gray-500 mb-3 mt-2">Technical specs shown in a table on the product page</p>
+                        <p className="text-xs text-neutral-500 mb-3 mt-2">Technical specs shown in a table on the product page</p>
                         <div className="space-y-2">
                             {specs.map((s, i) => (
                                 <div key={i} className="flex gap-2 items-center">
@@ -533,23 +533,23 @@ const ProductEdit = () => {
                                         value={s.value}
                                         onChange={e => updateSpec(i, 'value', e.target.value)}
                                     />
-                                    <button type="button" onClick={() => removeSpec(i)} className="p-2 rounded-lg hover:bg-red-50 text-red-400 hover:text-red-600 transition">
+                                    <button type="button" onClick={() => removeSpec(i)} className="p-2 rounded hover:bg-red-50 text-red-400 hover:text-red-600 transition">
                                         <X className="w-4 h-4" />
                                     </button>
                                 </div>
                             ))}
                         </div>
-                        <button type="button" onClick={addSpec} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-blue-700 font-medium transition">
+                        <button type="button" onClick={addSpec} className="mt-3 flex items-center gap-1.5 text-sm text-brand-primary hover:text-neutral-900 font-medium transition">
                             <Plus className="w-4 h-4" /> Add Specification
                         </button>
                     </Section>
 
                     {/* ── TAGS ── */}
                     <Section icon={Tag} title="Tags" defaultOpen={false}>
-                        <p className="text-xs text-gray-500 mb-3 mt-2">Press Enter or comma to add a tag. Used for search and related products.</p>
+                        <p className="text-xs text-neutral-500 mb-3 mt-2">Press Enter or comma to add a tag. Used for search and related products.</p>
                         <div className="flex flex-wrap gap-2 mb-3">
                             {tags.map(t => (
-                                <span key={t} className="flex items-center gap-1 bg-slate-50 border border-slate-200 text-slate-800 text-sm px-3 py-1 rounded-full">
+                                <span key={t} className="flex items-center gap-1 bg-neutral-50 border border-neutral-200 text-neutral-800 text-sm px-3 py-1 rounded-full">
                                     {t}
                                     <button type="button" onClick={() => removeTag(t)} className="hover:text-red-500 transition">
                                         <X className="w-3 h-3" />
@@ -572,19 +572,19 @@ const ProductEdit = () => {
                         <div className="grid grid-cols-1 gap-4 mt-2">
                             <Field label="SEO Title">
                                 <input type="text" className={inputCls} value={seoTitle} onChange={e => setSeoTitle(e.target.value)} placeholder={name || 'Product title for search engines'} />
-                                <p className="text-xs text-gray-400 mt-1">{seoTitle.length}/60 characters recommended</p>
+                                <p className="text-xs text-neutral-400 mt-1">{seoTitle.length}/60 characters recommended</p>
                             </Field>
                             <Field label="SEO Description">
                                 <textarea rows={3} className={textareaCls} value={seoDescription} onChange={e => setSeoDescription(e.target.value)} placeholder="Brief description for search engine results..." />
-                                <p className="text-xs text-gray-400 mt-1">{seoDescription.length}/160 characters recommended</p>
+                                <p className="text-xs text-neutral-400 mt-1">{seoDescription.length}/160 characters recommended</p>
                             </Field>
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="SEO Keywords" hint="comma-separated">
                                     <input type="text" className={inputCls} value={seoKeywords} onChange={e => setSeoKeywords(e.target.value)} placeholder="welding machine, MIG, industrial" />
                                 </Field>
                                 <Field label="URL Slug">
-                                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-slate-300 focus-within:border-brand-primary transition">
-                                        <span className="px-3 py-2 bg-gray-50 text-gray-400 text-sm border-r border-gray-300">/product/</span>
+                                    <div className="flex items-center border border-neutral-300 rounded overflow-hidden focus-within:ring-2 focus-within:ring-neutral-300 focus-within:border-brand-primary transition">
+                                        <span className="px-3 py-2 bg-neutral-50 text-neutral-400 text-sm border-r border-neutral-300">/product/</span>
                                         <input type="text" className="flex-1 px-3 py-2 text-sm focus:outline-none" value={slug} onChange={e => setSlug(e.target.value)} />
                                     </div>
                                 </Field>
@@ -592,11 +592,11 @@ const ProductEdit = () => {
                         </div>
                         {/* Preview */}
                         {(seoTitle || name) && (
-                            <div className="mt-4 border border-gray-200 rounded-xl p-4 bg-gray-50">
-                                <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">Search Preview</p>
-                                <p className="text-blue-700 text-base font-medium hover:underline cursor-pointer">{seoTitle || name}</p>
+                            <div className="mt-4 border border-neutral-200 rounded p-4 bg-neutral-50">
+                                <p className="text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Search Preview</p>
+                                <p className="text-neutral-900 text-base font-medium hover:underline cursor-pointer">{seoTitle || name}</p>
                                 <p className="text-emerald-700 text-xs mt-0.5">jazatrading.com/product/{slug}</p>
-                                <p className="text-gray-600 text-sm mt-1 line-clamp-2">{seoDescription || description}</p>
+                                <p className="text-neutral-600 text-sm mt-1 line-clamp-2">{seoDescription || description}</p>
                             </div>
                         )}
                     </Section>
@@ -606,7 +606,7 @@ const ProductEdit = () => {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="bg-brand-primary hover:bg-blue-700 text-white font-semibold py-3 px-10 rounded-xl transition shadow-md hover:shadow-lg disabled:opacity-60 text-base"
+                            className="bg-brand-primary hover:bg-neutral-900 text-white font-semibold py-3 px-10 rounded transition disabled:opacity-60 text-base"
                         >
                             {saving ? 'Saving...' : (isEditMode ? 'Update Product' : 'Create Product')}
                         </button>

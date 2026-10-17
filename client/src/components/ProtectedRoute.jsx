@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children, requireAdmin = false, adminOnly = false }) =
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#F6F4EE] text-[#1C1B17] font-semibold text-xs">
+            <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] text-[#111111] font-semibold text-xs">
                 Loading Jaza Trading Portal...
             </div>
         );

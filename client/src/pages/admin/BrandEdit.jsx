@@ -197,13 +197,13 @@ const BrandEdit = () => {
     if (loading && isEdit) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-[#007AFF] animate-spin" />
+                <Loader2 className="w-8 h-8 text-[#111111] animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+        <div className="min-h-screen bg-neutral-50 font-sans pb-12">
             <AdminNav 
                 title={isEdit ? `Edit Brand: ${name}` : 'Create New Brand'} 
                 subtitle="Configure logos, banner image, gallery, tag, description, and website URL."
@@ -214,22 +214,22 @@ const BrandEdit = () => {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             {/* Back Header */}
             <div className="flex items-center justify-between mb-8">
-                <Link to="/admin/brands" className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900">
+                <Link to="/admin/brands" className="inline-flex items-center gap-2 text-xs font-bold text-neutral-600 hover:text-neutral-900">
                     <ArrowLeft className="w-4 h-4" /> Back to Brands List
                 </Link>
-                <h1 className="text-xl font-black text-[#0F172A]">
+                <h1 className="text-xl font-black text-[#111111]">
                     {isEdit ? `Edit Brand: ${name}` : 'Create New Brand'}
                 </h1>
             </div>
 
             {/* Alerts */}
             {error && (
-                <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+                <div className="mb-6 p-4 rounded bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0" /> {error}
                 </div>
             )}
             {success && (
-                <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2">
+                <div className="mb-6 p-4 rounded bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 shrink-0" /> {success}
                 </div>
             )}
@@ -237,14 +237,14 @@ const BrandEdit = () => {
             <form onSubmit={handleSubmit} className="space-y-8">
                 
                 {/* Section 1: Basic Brand Details */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <h2 className="text-base font-bold text-slate-900 border-b border-slate-100 pb-3">
+                <div className="bg-white p-6 rounded border border-neutral-200 shadow-sm space-y-4">
+                    <h2 className="text-base font-bold text-neutral-900 border-b border-neutral-100 pb-3">
                         Basic Brand Information
                     </h2>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Brand Name *</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Brand Name *</label>
                             <input
                                 required
                                 type="text"
@@ -253,18 +253,18 @@ const BrandEdit = () => {
                                     setName(e.target.value);
                                     if (!isEdit) setSlug(e.target.value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-'));
                                 }}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none"
                                 placeholder="e.g. Tork®"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Slug URL</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Slug URL</label>
                             <input
                                 type="text"
                                 value={slug}
                                 onChange={(e) => setSlug(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none bg-slate-50"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none bg-neutral-50"
                                 placeholder="e.g. tork"
                             />
                         </div>
@@ -272,11 +272,11 @@ const BrandEdit = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Category</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Category</label>
                             <select
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none bg-white"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none bg-white"
                             >
                                 <option value="">Select Category...</option>
                                 {CATEGORY_OPTIONS.map(c => (
@@ -286,11 +286,11 @@ const BrandEdit = () => {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Badge Tag</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Badge Tag</label>
                             <select
                                 value={badgeTag}
                                 onChange={(e) => setBadgeTag(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none bg-white"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none bg-white"
                             >
                                 {BADGE_OPTIONS.map(b => (
                                     <option key={b} value={b}>{b}</option>
@@ -299,36 +299,36 @@ const BrandEdit = () => {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Display Order</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Display Order</label>
                             <input
                                 type="number"
                                 value={displayOrder}
                                 onChange={(e) => setDisplayOrder(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none"
                                 placeholder="0"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Description</label>
+                        <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Description</label>
                         <textarea
                             rows={3}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs resize-none focus:border-[#007AFF] outline-none"
+                            className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs resize-none focus:border-[#111111] outline-none"
                             placeholder="Enter short description of brand offerings..."
                         />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                         <div>
-                            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Official Website</label>
+                            <label className="block text-xs font-bold text-neutral-700 uppercase mb-1">Official Website</label>
                             <input
                                 type="url"
                                 value={website}
                                 onChange={(e) => setWebsite(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-xs focus:border-[#007AFF] outline-none"
+                                className="w-full px-4 py-2.5 rounded border border-neutral-200 text-neutral-900 text-xs focus:border-[#111111] outline-none"
                                 placeholder="https://..."
                             />
                         </div>
@@ -339,9 +339,9 @@ const BrandEdit = () => {
                                 id="isRegistered"
                                 checked={isRegistered}
                                 onChange={(e) => setIsRegistered(e.target.checked)}
-                                className="w-4 h-4 text-[#007AFF] rounded focus:ring-0"
+                                className="w-4 h-4 text-[#111111] rounded focus:ring-0"
                             />
-                            <label htmlFor="isRegistered" className="text-xs font-bold text-slate-800 cursor-pointer">
+                            <label htmlFor="isRegistered" className="text-xs font-bold text-neutral-800 cursor-pointer">
                                 Registered Trademark (IPR Protection)
                             </label>
                         </div>
@@ -349,19 +349,19 @@ const BrandEdit = () => {
                 </div>
 
                 {/* Section 2: Brand Logo & Banner Images */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                    <h2 className="text-base font-bold text-slate-900 border-b border-slate-100 pb-3">
+                <div className="bg-white p-6 rounded border border-neutral-200 shadow-sm space-y-6">
+                    <h2 className="text-base font-bold text-neutral-900 border-b border-neutral-100 pb-3">
                         Brand Logo & Banner Images
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
                         {/* 1. Brand Logo */}
-                        <div className="space-y-3 p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <label className="block text-xs font-bold text-slate-800 uppercase">Brand Logo</label>
+                        <div className="space-y-3 p-4 rounded bg-neutral-50 border border-neutral-200">
+                            <label className="block text-xs font-bold text-neutral-800 uppercase">Brand Logo</label>
                             
                             <div className="flex items-center gap-4">
-                                <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden p-2 relative group">
+                                <div className="w-24 h-24 rounded bg-white border border-neutral-200 shadow-sm flex items-center justify-center overflow-hidden p-2 relative group">
                                     {logo ? (
                                         <>
                                             <img src={logo} alt="Logo Preview" className="w-full h-full object-contain" />
@@ -374,7 +374,7 @@ const BrandEdit = () => {
                                             </button>
                                         </>
                                     ) : (
-                                        <ImageIcon className="w-8 h-8 text-slate-300" />
+                                        <ImageIcon className="w-8 h-8 text-neutral-300" />
                                     )}
                                 </div>
 
@@ -390,7 +390,7 @@ const BrandEdit = () => {
                                         type="button"
                                         disabled={logoUploading}
                                         onClick={() => logoRef.current.click()}
-                                        className="w-full py-2 px-3 rounded-lg border border-slate-300 bg-white hover:border-[#007AFF] text-xs font-bold text-slate-700 flex items-center justify-center gap-2 transition-colors shadow-sm"
+                                        className="w-full py-2 px-3 rounded border border-neutral-300 bg-white hover:border-[#111111] text-xs font-bold text-neutral-700 flex items-center justify-center gap-2 transition-colors shadow-sm"
                                     >
                                         <Upload className="w-3.5 h-3.5" />
                                         {logoUploading ? 'Uploading...' : 'Upload Logo (PNG/JPG)'}
@@ -401,18 +401,18 @@ const BrandEdit = () => {
                                         value={logo}
                                         onChange={(e) => setLogo(e.target.value)}
                                         placeholder="Or enter logo URL..."
-                                        className="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white text-slate-800 focus:border-[#007AFF] outline-none"
+                                        className="w-full px-3 py-1.5 rounded border border-neutral-200 text-xs bg-white text-neutral-800 focus:border-[#111111] outline-none"
                                     />
                                 </div>
                             </div>
                         </div>
 
                         {/* 2. Brand Banner */}
-                        <div className="space-y-3 p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <label className="block text-xs font-bold text-slate-800 uppercase">Brand Banner Image</label>
+                        <div className="space-y-3 p-4 rounded bg-neutral-50 border border-neutral-200">
+                            <label className="block text-xs font-bold text-neutral-800 uppercase">Brand Banner Image</label>
                             
                             <div className="space-y-3">
-                                <div className="w-full h-24 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden relative group">
+                                <div className="w-full h-24 rounded bg-white border border-neutral-200 shadow-sm flex items-center justify-center overflow-hidden relative group">
                                     {banner ? (
                                         <>
                                             <img src={banner} alt="Banner Preview" className="w-full h-full object-cover" />
@@ -425,7 +425,7 @@ const BrandEdit = () => {
                                             </button>
                                         </>
                                     ) : (
-                                        <span className="text-xs text-slate-400 font-medium">No Banner Image</span>
+                                        <span className="text-xs text-neutral-400 font-medium">No Banner Image</span>
                                     )}
                                 </div>
 
@@ -441,7 +441,7 @@ const BrandEdit = () => {
                                         type="button"
                                         disabled={bannerUploading}
                                         onClick={() => bannerRef.current.click()}
-                                        className="flex-1 py-2 px-3 rounded-lg border border-slate-300 bg-white hover:border-[#007AFF] text-xs font-bold text-slate-700 flex items-center justify-center gap-2 transition-colors shadow-sm"
+                                        className="flex-1 py-2 px-3 rounded border border-neutral-300 bg-white hover:border-[#111111] text-xs font-bold text-neutral-700 flex items-center justify-center gap-2 transition-colors shadow-sm"
                                     >
                                         <Upload className="w-3.5 h-3.5" />
                                         {bannerUploading ? 'Uploading...' : 'Upload Banner File'}
@@ -452,7 +452,7 @@ const BrandEdit = () => {
                                     value={banner}
                                     onChange={(e) => setBanner(e.target.value)}
                                     placeholder="Or enter banner image URL..."
-                                    className="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white text-slate-800 focus:border-[#007AFF] outline-none"
+                                    className="w-full px-3 py-1.5 rounded border border-neutral-200 text-xs bg-white text-neutral-800 focus:border-[#111111] outline-none"
                                 />
                             </div>
                         </div>
@@ -461,13 +461,13 @@ const BrandEdit = () => {
                 </div>
 
                 {/* Section 3: Additional Brand Images / Gallery */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="bg-white p-6 rounded border border-neutral-200 shadow-sm space-y-4">
+                    <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
                         <div>
-                            <h2 className="text-base font-bold text-slate-900">
+                            <h2 className="text-base font-bold text-neutral-900">
                                 Additional Brand Gallery Images
                             </h2>
-                            <p className="text-xs text-slate-500">Upload multiple photos showcasing brand products and certificates</p>
+                            <p className="text-xs text-neutral-500">Upload multiple photos showcasing brand products and certificates</p>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -483,7 +483,7 @@ const BrandEdit = () => {
                                 type="button"
                                 disabled={galleryUploading}
                                 onClick={() => galleryRef.current.click()}
-                                className="px-4 py-2 rounded-xl bg-[#007AFF] text-white text-xs font-bold flex items-center gap-1.5 hover:bg-[#0066CC] transition-colors shadow-sm"
+                                className="px-4 py-2 rounded bg-[#111111] text-white text-xs font-bold flex items-center gap-1.5 hover:bg-[#333333] transition-colors shadow-sm"
                             >
                                 <Upload className="w-3.5 h-3.5" />
                                 {galleryUploading ? 'Uploading Gallery...' : 'Upload Files'}
@@ -498,12 +498,12 @@ const BrandEdit = () => {
                             value={customUrlInput}
                             onChange={(e) => setCustomUrlInput(e.target.value)}
                             placeholder="Add direct image URL to gallery..."
-                            className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs focus:border-[#007AFF] outline-none"
+                            className="flex-1 px-3 py-2 rounded border border-neutral-200 text-xs focus:border-[#111111] outline-none"
                         />
                         <button
                             type="button"
                             onClick={handleAddCustomUrl}
-                            className="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors"
+                            className="px-4 py-2 rounded bg-neutral-900 text-white text-xs font-bold hover:bg-neutral-800 transition-colors"
                         >
                             Add URL
                         </button>
@@ -511,19 +511,19 @@ const BrandEdit = () => {
 
                     {/* Gallery Thumbnails Grid */}
                     {images.length === 0 ? (
-                        <div className="p-8 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50">
-                            <ImageIcon className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                            <p className="text-xs font-medium text-slate-500">No additional gallery images added yet</p>
+                        <div className="p-8 text-center border-2 border-dashed border-neutral-200 rounded bg-neutral-50">
+                            <ImageIcon className="w-8 h-8 text-neutral-300 mx-auto mb-2" />
+                            <p className="text-xs font-medium text-neutral-500">No additional gallery images added yet</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 pt-2">
                             {images.map((imgUrl, idx) => (
-                                <div key={idx} className="relative rounded-xl border border-slate-200 bg-slate-50 overflow-hidden h-28 group shadow-sm">
+                                <div key={idx} className="relative rounded border border-neutral-200 bg-neutral-50 overflow-hidden h-28 group shadow-sm">
                                     <img src={imgUrl} alt={`Gallery ${idx}`} className="w-full h-full object-cover" />
                                     <button
                                         type="button"
                                         onClick={() => handleRemoveGalleryImage(idx)}
-                                        className="absolute top-1.5 right-1.5 p-1.5 rounded-lg bg-red-600 text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+                                        className="absolute top-1.5 right-1.5 p-1.5 rounded bg-red-600 text-white opacity-0 group-hover:opacity-100 transition-opacity"
                                         title="Remove photo"
                                     >
                                         <Trash2 className="w-3.5 h-3.5" />
@@ -536,13 +536,13 @@ const BrandEdit = () => {
 
                 {/* Submit Action */}
                 <div className="flex items-center justify-end gap-3 pt-4">
-                    <Link to="/admin/brands" className="px-6 py-3 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+                    <Link to="/admin/brands" className="px-6 py-3 rounded border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-50 transition-colors">
                         Cancel
                     </Link>
                     <button
                         type="submit"
                         disabled={loading}
-                        className="px-8 py-3 rounded-xl bg-[#007AFF] hover:bg-[#0066CC] text-white text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                        className="px-8 py-3 rounded bg-[#111111] hover:bg-[#333333] text-white text-xs font-bold flex items-center gap-2 transition-all"
                     >
                         <Save className="w-4 h-4" />
                         {loading ? 'Saving Brand...' : isEdit ? 'Update Brand & Images' : 'Save Brand'}

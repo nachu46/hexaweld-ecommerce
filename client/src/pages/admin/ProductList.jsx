@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
     Edit, Trash2, Plus, Download, Upload,
-    Package, Search, Tag, AlertCircle, CheckCircle, X
+    Package, Search, Tag, AlertCircle, CheckCircle, X, Database
 } from 'lucide-react';
 import AdminNav from '../../components/AdminNav';
 
 const Toast = ({ message, type, onClose }) => (
-    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-xl text-white text-xs font-bold animate-fade-in-up ${type === 'success' ? 'bg-emerald-600' : 'bg-rose-600'}`}>
+    <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded  text-white text-xs font-bold animate-fade-in-up ${type === 'success' ? 'bg-emerald-600' : 'bg-rose-600'}`}>
         {type === 'success' ? <CheckCircle className="w-4 h-4 flex-shrink-0" /> : <AlertCircle className="w-4 h-4 flex-shrink-0" />}
         <span>{message}</span>
         <button onClick={onClose} className="ml-2 hover:opacity-70 transition"><X className="w-3.5 h-3.5" /></button>
@@ -21,6 +21,7 @@ const ProductList = () => {
     const [search, setSearch] = useState('');
     const [importing, setImporting] = useState(false);
     const [exporting, setExporting] = useState(false);
+    const [demoBusy, setDemoBusy] = useState(false);
     const [toast, setToast] = useState(null);
     const fileRef = useRef();
 
@@ -56,6 +57,37 @@ const ProductList = () => {
             } catch (error) {
                 showToast(error.response?.data?.message || 'Error deleting product', 'error');
             }
+        }
+    };
+
+    // ── Demo products ───────────────────────────────────────────────────────
+    const isDemo = (p) => (p.SKU || '').startsWith('DEMO-');
+    const demoCount = products.filter(isDemo).length;
+
+    const addDemoHandler = async () => {
+        setDemoBusy(true);
+        try {
+            const { data } = await axios.post('/api/products/demo');
+            showToast(data.message);
+            fetchProducts();
+        } catch (error) {
+            showToast(error.response?.data?.message || 'Could not add demo products', 'error');
+        } finally {
+            setDemoBusy(false);
+        }
+    };
+
+    const removeDemoHandler = async () => {
+        if (!window.confirm(`Delete all ${demoCount} demo products? Your own products will not be touched.`)) return;
+        setDemoBusy(true);
+        try {
+            const { data } = await axios.delete('/api/products/demo');
+            showToast(data.message);
+            fetchProducts();
+        } catch (error) {
+            showToast(error.response?.data?.message || 'Could not delete demo products', 'error');
+        } finally {
+            setDemoBusy(false);
         }
     };
 
@@ -109,7 +141,7 @@ const ProductList = () => {
     );
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans pb-12">
+        <div className="min-h-screen bg-neutral-50 font-sans pb-12">
             <AdminNav 
                 title="Product Catalog Management" 
                 subtitle={`Total ${products.length} products available in store.`}
@@ -120,24 +152,45 @@ const ProductList = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
                 {/* Import / Export & Search Controls */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                <div className="bg-white p-5 rounded border border-neutral-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
                     
                     {/* Search bar */}
                     <div className="relative flex-1 max-w-md">
-                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
                         <input
                             type="text"
                             placeholder="Search by product name or SKU..."
-                            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-slate-900 bg-slate-50/50"
+                            className="w-full pl-10 pr-4 py-2.5 border border-neutral-200 rounded text-xs font-medium focus:outline-none focus:border-neutral-900 bg-neutral-50/50"
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                         />
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
+                        {/* Demo products */}
+                        {demoCount > 0 ? (
+                            <button
+                                onClick={removeDemoHandler}
+                                disabled={demoBusy}
+                                className="inline-flex items-center gap-2 px-4 py-2.5 border border-rose-200 bg-white text-rose-600 rounded text-xs font-bold hover:bg-rose-50 transition disabled:opacity-60"
+                            >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                {demoBusy ? 'Deleting...' : `Delete All Demo Products (${demoCount})`}
+                            </button>
+                        ) : (
+                            <button
+                                onClick={addDemoHandler}
+                                disabled={demoBusy}
+                                className="inline-flex items-center gap-2 px-4 py-2.5 border border-neutral-200 bg-white text-neutral-700 rounded text-xs font-bold hover:bg-neutral-50 transition disabled:opacity-60"
+                            >
+                                <Database className="w-3.5 h-3.5 text-neutral-500" />
+                                {demoBusy ? 'Adding...' : 'Load Demo Products'}
+                            </button>
+                        )}
+
                         {/* Import */}
-                        <label className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 border border-slate-200 bg-white text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition shadow-xs ${importing ? 'opacity-60 pointer-events-none' : ''}`}>
-                            <Upload className="w-3.5 h-3.5 text-slate-500" />
+                        <label className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 border border-neutral-200 bg-white text-neutral-700 rounded text-xs font-bold hover:bg-neutral-50 transition  ${importing ? 'opacity-60 pointer-events-none' : ''}`}>
+                            <Upload className="w-3.5 h-3.5 text-neutral-500" />
                             {importing ? 'Importing...' : 'Import Excel'}
                             <input
                                 ref={fileRef}
@@ -152,55 +205,55 @@ const ProductList = () => {
                         <button
                             onClick={handleExport}
                             disabled={exporting}
-                            className="inline-flex items-center gap-2 px-4 py-2.5 border border-slate-200 bg-white text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition shadow-xs disabled:opacity-60"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 border border-neutral-200 bg-white text-neutral-700 rounded text-xs font-bold hover:bg-neutral-50 transition disabled:opacity-60"
                         >
-                            <Download className="w-3.5 h-3.5 text-slate-500" />
+                            <Download className="w-3.5 h-3.5 text-neutral-500" />
                             {exporting ? 'Exporting...' : 'Export Excel'}
                         </button>
                     </div>
                 </div>
 
                 {/* Import Tip */}
-                <div className="bg-blue-50/70 border border-blue-100 rounded-xl p-3.5 text-xs text-blue-800 flex items-start gap-2.5">
-                    <AlertCircle className="w-4 h-4 text-[#007AFF] shrink-0 mt-0.5" />
+                <div className="bg-neutral-50/70 border border-neutral-100 rounded p-3.5 text-xs text-neutral-900 flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-[#111111] shrink-0 mt-0.5" />
                     <span>
                         <strong>Excel Sync Tip:</strong> Updating an existing SKU overwrites product details; new SKUs create fresh catalog items.
                     </span>
                 </div>
 
                 {/* Table Container */}
-                <div className="bg-white shadow-xs rounded-2xl border border-slate-200 overflow-hidden">
+                <div className="bg-white rounded border border-neutral-200 overflow-hidden">
                     {loading ? (
                         <div className="p-12 text-center">
-                            <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                            <p className="text-slate-500 text-xs font-bold">Loading product catalog...</p>
+                            <div className="w-8 h-8 border-4 border-neutral-900 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                            <p className="text-neutral-500 text-xs font-bold">Loading product catalog...</p>
                         </div>
                     ) : filtered.length === 0 ? (
-                        <div className="p-12 text-center text-slate-500">
-                            <Package className="w-12 h-12 mx-auto text-slate-300 mb-3" />
-                            <p className="font-bold text-slate-900 text-sm">No products found</p>
-                            <p className="text-xs text-slate-400 mt-1">Try another search keyword or create a new product.</p>
+                        <div className="p-12 text-center text-neutral-500">
+                            <Package className="w-12 h-12 mx-auto text-neutral-300 mb-3" />
+                            <p className="font-bold text-neutral-900 text-sm">No products found</p>
+                            <p className="text-xs text-neutral-400 mt-1">Try another search keyword or create a new product.</p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-slate-100">
-                                <thead className="bg-slate-50">
+                            <table className="min-w-full divide-y divide-neutral-100">
+                                <thead className="bg-neutral-50">
                                     <tr>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">Product</th>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">SKU</th>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">Category</th>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">Price (QAR)</th>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">Stock</th>
-                                        <th className="px-5 py-3 text-left text-[10px] font-black text-slate-500 uppercase tracking-wider">Tags</th>
-                                        <th className="px-5 py-3 text-right text-[10px] font-black text-slate-500 uppercase tracking-wider">Actions</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">Product</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">SKU</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">Category</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">Price (QAR)</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">Stock</th>
+                                        <th className="px-5 py-3 text-left text-[10px] font-black text-neutral-500 uppercase tracking-wider">Tags</th>
+                                        <th className="px-5 py-3 text-right text-[10px] font-black text-neutral-500 uppercase tracking-wider">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="bg-white divide-y divide-slate-100">
+                                <tbody className="bg-white divide-y divide-neutral-100">
                                     {filtered.map((product) => (
-                                        <tr key={product._id} className="hover:bg-slate-50/60 transition-colors">
+                                        <tr key={product._id} className="hover:bg-neutral-50/60 transition-colors">
                                             <td className="px-5 py-3 whitespace-nowrap">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-xl border border-slate-200 overflow-hidden bg-slate-100 flex-shrink-0">
+                                                    <div className="w-10 h-10 rounded border border-neutral-200 overflow-hidden bg-neutral-100 flex-shrink-0">
                                                         {(product.image || product.images?.[0]) ? (
                                                             <img
                                                                 src={product.image || product.images[0]}
@@ -208,37 +261,40 @@ const ProductList = () => {
                                                                 className="w-full h-full object-cover"
                                                             />
                                                         ) : (
-                                                            <Package className="w-5 h-5 text-slate-300 m-auto mt-2.5" />
+                                                            <Package className="w-5 h-5 text-neutral-300 m-auto mt-2.5" />
                                                         )}
                                                     </div>
                                                     <div>
-                                                        <div className="text-xs font-bold text-slate-900 line-clamp-1 max-w-[200px]">{product.name}</div>
-                                                        {product.brand && <div className="text-[10px] font-bold text-slate-400">{product.brand}</div>}
+                                                        <div className="text-xs font-bold text-neutral-900 line-clamp-1 max-w-[200px]">
+                                                            {product.name}
+                                                            {isDemo(product) && <span className="ml-1.5 text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">Demo</span>}
+                                                        </div>
+                                                        {product.brand && <div className="text-[10px] font-bold text-neutral-400">{product.brand}</div>}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-5 py-3 whitespace-nowrap">
-                                                <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                                                <span className="text-[10px] font-mono font-bold bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded">
                                                     {product.SKU || '—'}
                                                 </span>
                                             </td>
                                             <td className="px-5 py-3 whitespace-nowrap">
                                                 {product.category?.name ? (
-                                                    <span className="px-2.5 py-0.5 inline-flex text-[10px] font-bold rounded-full bg-blue-50 text-[#007AFF] border border-blue-100">
+                                                    <span className="px-2.5 py-0.5 inline-flex text-[10px] font-bold rounded-full bg-neutral-50 text-[#111111] border border-neutral-100">
                                                         {product.category.name}
                                                     </span>
                                                 ) : '—'}
                                             </td>
-                                            <td className="px-5 py-3 whitespace-nowrap text-xs text-slate-800 font-bold">
+                                            <td className="px-5 py-3 whitespace-nowrap text-xs text-neutral-800 font-bold">
                                                 {product.price > 0 ? (
                                                     <div>
                                                         <span>QAR {product.price.toLocaleString()}</span>
                                                         {product.comparePrice > 0 && (
-                                                            <span className="ml-1.5 text-[10px] line-through text-slate-400">QAR {product.comparePrice.toLocaleString()}</span>
+                                                            <span className="ml-1.5 text-[10px] line-through text-neutral-400">QAR {product.comparePrice.toLocaleString()}</span>
                                                         )}
                                                     </div>
                                                 ) : (
-                                                    <span className="text-slate-400 text-[10px] uppercase font-bold">RFQ / Enquiry</span>
+                                                    <span className="text-neutral-400 text-[10px] uppercase font-bold">RFQ / Enquiry</span>
                                                 )}
                                             </td>
                                             <td className="px-5 py-3 whitespace-nowrap text-xs">
@@ -247,13 +303,13 @@ const ProductList = () => {
                                                         {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
                                                     </span>
                                                 ) : (
-                                                    <span className="text-slate-400 text-[10px]">In Stock</span>
+                                                    <span className="text-neutral-400 text-[10px]">In Stock</span>
                                                 )}
                                             </td>
                                             <td className="px-5 py-3">
                                                 <div className="flex flex-wrap gap-1 max-w-[140px]">
                                                     {(product.tags || []).slice(0, 2).map(t => (
-                                                        <span key={t} className="inline-flex items-center gap-0.5 text-[9px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                        <span key={t} className="inline-flex items-center gap-0.5 text-[9px] font-bold bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded">
                                                             <Tag className="w-2.5 h-2.5" />{t}
                                                         </span>
                                                     ))}
@@ -263,14 +319,14 @@ const ProductList = () => {
                                                 <div className="flex items-center justify-end gap-1.5">
                                                     <Link
                                                         to={`/admin/product/${product._id}/edit`}
-                                                        className="p-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-900 hover:text-white transition-colors"
+                                                        className="p-1.5 rounded bg-neutral-100 text-neutral-700 hover:bg-neutral-900 hover:text-white transition-colors"
                                                         title="Edit"
                                                     >
                                                         <Edit className="w-3.5 h-3.5" />
                                                     </Link>
                                                     <button
                                                         onClick={() => deleteHandler(product._id)}
-                                                        className="p-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-rose-600 hover:text-white transition-colors"
+                                                        className="p-1.5 rounded bg-neutral-100 text-neutral-700 hover:bg-rose-600 hover:text-white transition-colors"
                                                         title="Delete"
                                                     >
                                                         <Trash2 className="w-3.5 h-3.5" />

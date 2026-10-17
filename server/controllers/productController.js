@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const supabase = require('../config/supabase');
 const { getProducts, getProductById, getBrands: getDistinctBrands } = require('../services/supabaseService');
+const { seedDemoProducts, deleteDemoProducts } = require('../services/demoProducts');
 
 // @desc    Fetch all products (with keyword, category, brand filtering)
 // @route   GET /api/products
@@ -36,12 +37,41 @@ const fetchProductById = asyncHandler(async (req, res) => {
 // @route   DELETE /api/products/:id
 // @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
+    const { data, error } = await supabase.from('products').delete().eq('id', req.params.id).select('id');
+    if (error) {
+        res.status(500);
+        throw new Error(`Could not delete product: ${error.message}`);
+    }
+    if (!data || data.length === 0) {
+        res.status(404);
+        throw new Error('Product not found');
+    }
+    res.json({ message: 'Product removed' });
+});
+
+// @desc    Add demo products
+// @route   POST /api/products/demo
+// @access  Private/Admin
+const addDemoProducts = asyncHandler(async (req, res) => {
     try {
-        const { error } = await supabase.from('products').delete().eq('id', req.params.id);
-        if (error) throw error;
-        res.json({ message: 'Product removed' });
+        const count = await seedDemoProducts();
+        res.status(201).json({ message: `Added ${count} demo products`, count });
     } catch (e) {
-        res.json({ message: 'Product removed' });
+        res.status(500);
+        throw new Error(`Could not add demo products: ${e.message}`);
+    }
+});
+
+// @desc    Delete all demo products
+// @route   DELETE /api/products/demo
+// @access  Private/Admin
+const removeDemoProducts = asyncHandler(async (req, res) => {
+    try {
+        const count = await deleteDemoProducts();
+        res.json({ message: `Deleted ${count} demo products`, count });
+    } catch (e) {
+        res.status(500);
+        throw new Error(`Could not delete demo products: ${e.message}`);
     }
 });
 
@@ -128,6 +158,8 @@ module.exports = {
     getBrands: fetchBrands,
     getProductById: fetchProductById,
     deleteProduct,
+    addDemoProducts,
+    removeDemoProducts,
     createProduct,
     updateProduct,
     exportProducts: (req, res) => res.json({ message: 'Export complete' }),

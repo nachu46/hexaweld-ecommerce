@@ -11,7 +11,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
 
     if (allImages.length === 0) {
         return (
-            <div className="h-96 bg-white/5 rounded-2xl flex items-center justify-center text-gray-500">
+            <div className="h-96 bg-white/5 rounded flex items-center justify-center text-neutral-500">
                 No images available
             </div>
         );
@@ -24,7 +24,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
         <div className="space-y-3">
             {/* Main Image */}
             <div
-                className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 cursor-zoom-in"
+                className="relative rounded-xl overflow-hidden bg-white/5 border border-white/10 cursor-zoom-in"
                 style={{ height: '400px' }}
                 onClick={() => setLightbox(true)}
             >
@@ -45,25 +45,25 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                     <>
                         <button
                             onClick={(e) => { e.stopPropagation(); prev(); }}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 backdrop-blur-sm text-white rounded-lg hover:bg-black/60 transition-colors"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 text-white rounded hover:bg-black/60 transition-colors"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 backdrop-blur-sm text-white rounded-lg hover:bg-black/60 transition-colors"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 text-white rounded hover:bg-black/60 transition-colors"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>
                     </>
                 )}
 
-                <div className="absolute top-3 right-3 p-1.5 bg-black/30 backdrop-blur-sm text-white/60 rounded-lg">
+                <div className="absolute top-3 right-3 p-1.5 bg-black/30 text-white/60 rounded">
                     <ZoomIn className="w-4 h-4" />
                 </div>
 
                 {allImages.length > 1 && (
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/40 backdrop-blur-sm text-white text-xs rounded-full">
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/40 text-white text-xs rounded">
                         {current + 1} / {allImages.length}
                     </div>
                 )}
@@ -77,7 +77,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                             key={i}
                             onClick={() => setCurrent(i)}
                             className={`flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 ${i === current
-                                ? 'border-slate-500 opacity-100'
+                                ? 'border-neutral-500 opacity-100'
                                 : 'border-white/10 opacity-50 hover:opacity-80'
                                 }`}
                         >
@@ -94,7 +94,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+                        className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
                         onClick={() => { setLightbox(false); setZoomed(false); }}
                     >
                         <button
@@ -111,7 +111,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
                             initial={{ scale: 0.85, opacity: 0 }}
                             animate={{ scale: zoomed ? 1.6 : 1, opacity: 1 }}
                             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                            className="max-w-full max-h-[85vh] object-contain rounded-xl cursor-zoom-in select-none"
+                            className="max-w-full max-h-[85vh] object-contain rounded cursor-zoom-in select-none"
                             onClick={(e) => { e.stopPropagation(); setZoomed(!zoomed); }}
                         />
 
@@ -142,7 +142,7 @@ const ImageGallery = ({ images = [], mainImage = '' }) => {
 
                         {/* Counter */}
                         {allImages.length > 1 && (
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white/10 text-white text-sm rounded-full">
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white/10 text-white text-sm rounded">
                                 {current + 1} / {allImages.length}
                             </div>
                         )}

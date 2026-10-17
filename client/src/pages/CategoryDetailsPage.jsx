@@ -65,10 +65,10 @@ const CategoryDetailsPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-[70vh] flex items-center justify-center bg-slate-50">
+            <div className="min-h-[70vh] flex items-center justify-center bg-neutral-50">
                 <div className="flex flex-col items-center gap-3">
-                    <div className="w-10 h-10 border-4 border-[#0B132B] border-t-transparent rounded-full animate-spin" />
-                    <p className="text-xs font-bold text-slate-500">Loading Category Products...</p>
+                    <div className="w-10 h-10 border-4 border-[#111111] border-t-transparent rounded-full animate-spin" />
+                    <p className="text-xs font-bold text-neutral-500">Loading Category Products...</p>
                 </div>
             </div>
         );
@@ -76,19 +76,19 @@ const CategoryDetailsPage = () => {
 
     if (notFound || !category) {
         return (
-            <div className="min-h-[70vh] flex items-center justify-center bg-slate-50 px-4 py-16">
+            <div className="min-h-[70vh] flex items-center justify-center bg-neutral-50 px-4 py-16">
                 <Helmet>
                     <title>Category Not Found | Jaza Trading W.L.L</title>
                 </Helmet>
-                <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-slate-200 text-center shadow-lg">
+                <div className="max-w-md w-full bg-white rounded-xl p-8 border border-neutral-200 text-center">
                     <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-                    <h1 className="text-2xl font-black text-slate-900 mb-2">Category Not Found</h1>
-                    <p className="text-xs text-slate-600 font-medium mb-6">
+                    <h1 className="text-2xl font-semibold text-neutral-900 mb-2">Category Not Found</h1>
+                    <p className="text-xs text-neutral-600 font-medium mb-6">
                         The category you requested could not be located.
                     </p>
                     <Link
                         to="/categories"
-                        className="inline-flex items-center justify-center gap-2 bg-[#B15E2B] hover:bg-[#8E4920] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm transition-colors"
+                        className="inline-flex items-center justify-center gap-2 bg-[#111111] hover:bg-[#333333] text-white px-6 py-3 rounded font-bold text-xs shadow-sm transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Explore All Categories
@@ -101,7 +101,7 @@ const CategoryDetailsPage = () => {
     const catImage = getImageUrl(category.image);
 
     return (
-        <div className="bg-[#F6F4EE] min-h-screen py-8 px-4 sm:px-6 lg:px-8 text-[#1C1B17]">
+        <div className="bg-[#F5F5F5] min-h-screen py-8 px-4 sm:px-6 lg:px-8 text-[#111111]">
             <Helmet>
                 <title>{`${category.name} Range | Jaza Trading W.L.L Qatar`}</title>
                 <meta name="description" content={category.description || `Browse quality ${category.name} tools and industrial products at Jaza Trading W.L.L in Qatar.`} />
@@ -111,65 +111,61 @@ const CategoryDetailsPage = () => {
                 {/* Back Link */}
                 <Link
                     to="/categories"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#B15E2B] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-bold text-neutral-700 hover:text-[#111111] transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to All Categories
                 </Link>
 
                 {/* Category Banner */}
-                <div className="bg-[#ECE8E0] text-[#1C1B17] rounded-3xl p-8 sm:p-12 shadow-md border border-[#E5E0D8] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="bg-[#111111] text-white rounded p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="space-y-3 z-10 max-w-xl">
-                        <div className="flex items-center gap-2 text-[#B15E2B] text-xs font-bold uppercase tracking-widest">
-                            <Layers className="w-4 h-4 text-[#B15E2B]" />
-                            <span>CATEGORY RANGE</span>
-                        </div>
-                        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1C1B17] tracking-tight">{category.name}</h1>
-                        <p className="text-slate-700 text-sm font-medium leading-relaxed">
+                        <h1 className="text-3xl sm:text-5xl font-semibold !text-white">{category.name}</h1>
+                        <p className="text-neutral-300 text-sm leading-relaxed">
                             {category.description || 'Explore commercial-grade products tested for reliability and safety.'}
                         </p>
                     </div>
 
                     {catImage && (
-                        <div className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl p-3 border border-[#E5E0D8] shrink-0 overflow-hidden shadow-sm">
-                            <img src={catImage} alt={category.name} className="w-full h-full object-cover rounded-xl" />
+                        <div className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-xl p-2 shrink-0 overflow-hidden">
+                            <img src={catImage} alt={category.name} className="w-full h-full object-cover rounded" />
                         </div>
                     )}
                 </div>
 
                 {/* Filter & Product Count Bar */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E5E0D8] shadow-xs">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded border border-[#E5E5E5]">
                     <div className="relative w-full sm:w-80">
-                        <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
                         <input
                             type="text"
                             placeholder={`Search in ${category.name}...`}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 bg-[#F6F4EE] border border-[#D5CFCE] text-[#1C1B17] rounded-xl text-xs font-medium focus:outline-none focus:border-[#B15E2B]"
+                            className="w-full pl-10 pr-4 py-2 bg-[#F5F5F5] border border-[#D4D4D4] text-[#111111] rounded text-xs font-medium focus:outline-none focus:border-[#111111]"
                         />
                     </div>
 
-                    <span className="text-xs font-bold text-slate-600">
-                        Showing <strong className="text-[#1C1B17]">{filteredProducts.length}</strong> products
+                    <span className="text-xs font-bold text-neutral-600">
+                        Showing <strong className="text-[#111111]">{filteredProducts.length}</strong> products
                     </span>
                 </div>
 
                 {/* Products Grid */}
                 {filteredProducts.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                         {filteredProducts.map((p) => (
                             <ProductCard key={p._id} product={p} onQuickView={setPreviewProduct} />
                         ))}
                     </div>
                 ) : (
-                    <div className="bg-white rounded-3xl p-12 text-center border border-[#E5E0D8] max-w-lg mx-auto">
-                        <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                        <h3 className="text-lg font-serif font-bold text-[#1C1B17] mb-1">No Matching Products</h3>
-                        <p className="text-xs text-slate-500 mb-4">No products found matching your search term within this category.</p>
+                    <div className="bg-white rounded-xl p-12 text-center border border-[#E5E5E5] max-w-lg mx-auto">
+                        <Package className="w-12 h-12 text-neutral-300 mx-auto mb-3" />
+                        <h3 className="text-lg font-bold text-[#111111] mb-1">No Matching Products</h3>
+                        <p className="text-xs text-neutral-500 mb-4">No products found matching your search term within this category.</p>
                         <button
                             onClick={() => setSearchQuery('')}
-                            className="bg-[#B15E2B] hover:bg-[#8E4920] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-xs"
+                            className="bg-[#111111] hover:bg-[#333333] text-white px-5 py-2.5 rounded font-bold text-xs"
                         >
                             Reset Search
                         </button>
