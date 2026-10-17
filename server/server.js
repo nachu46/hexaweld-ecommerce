@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cors({
     origin: function (origin, callback) {
         const allowed = [
+            'https://jazatrading.vercel.app',
             'https://hexaweld-ecommerce.vercel.app',
             'https://hexaweld-commerce.vercel.app',
             'http://localhost:5173',
